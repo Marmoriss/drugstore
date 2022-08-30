@@ -17,5 +17,9 @@
 <p>이거 나오면 태연코드~!!!</p>
 <!-- 태연코드 끝 -->
 
+<!-- 은미코드 시작 -->
+<span>resources파일 / META-INF / log4j.xml</span>
+<!-- 은미코드 끝 -->
+
 </body>
 </html>
