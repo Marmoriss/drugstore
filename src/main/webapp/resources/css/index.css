@@ -1,0 +1,39 @@
+@charset "UTF-8";
+/*************** 전체 적용 ***************/
+
+*{text-decoration:none;}
+body{fomnt-family:"휴먼모음T";}
+div, section, header, aside, footer {margin:0px; padding:0px;}
+body, input, textarea, select, button, table{font-size:12px;}
+input, select, textarea, button, ul, ol, li, dl, dt, dd{vertical-align: middle;}
+div{display: block;}
+a{
+	color: black;
+	text-decoration:none;
+	cursor: pointer;
+	outline:none;
+}
+a:hover{text-decoration:none; color: black;}
+img{max-width:100%}
+ul{display:block; vertical-align:middle;}
+button{border:none; cursor: pointer;}
+.relative{position: relative !important}
+.hand, .pointer{cursor: pointer !important;}
+
+/***** body *****/
+body{
+	margin: 0 auto;
+	padding-top: 340px;
+}
+/***** 사진 배너 *****/
+.carousel{
+	height: 630px;
+	width: 1920px;
+	position: relative;
+	overflow: hidden;
+	min-height: 630px;
+	background-color: #fff;
+	background-image: none;
+	margin: 0 auto;
+}
+
