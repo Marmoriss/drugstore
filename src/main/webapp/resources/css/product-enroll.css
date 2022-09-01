@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+/********** 헤더 **********/
+.product-enroll-wrap{
+	background-color: red;
+	width: 100%;
+	height: 100%;
+	display: inline-block;
+}
