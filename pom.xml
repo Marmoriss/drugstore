@@ -40,6 +40,14 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>	
 		
+		<!-- #9. AOP관련 의존 추가 -->
+		<!-- #11. 트랜잭션 처리 의존 -->
+	    <dependency>
+	        <groupId>org.aspectj</groupId>
+	        <artifactId>aspectjweaver</artifactId>
+	        <version>${org.aspectj-version}</version>
+	    </dependency>
+		
 		<!-- #5. lombok : boilerplate 대신 작성 -->
 		<dependency>
 	        <groupId>org.projectlombok</groupId>
