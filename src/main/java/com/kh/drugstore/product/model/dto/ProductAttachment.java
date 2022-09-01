@@ -16,7 +16,7 @@ public class ProductAttachment {
 /**
  * 상품 첨부파일 클래스 
  */
-	private int no;
+	private int attachNo;
 	private int pcode;
 	@NonNull
 	private String originalFilename;
