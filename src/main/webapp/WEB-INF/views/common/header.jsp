@@ -41,7 +41,7 @@
 				<ul class="header-nav-list">
 					<li class="header-nav-item"><a href="" class="header-nav-text">건강설문</a></li>
 					<li class="header-nav-item"><a href="" class="header-nav-text">정기구독</a></li>
-					<li class="header-nav-item"><a href="" class="header-nav-text">고객센터</a></li>
+					<li class="header-nav-item"><a class="header-nav-text" href="${pageContext.request.contextPath}/notice/noticeList.do">고객센터</a></li>
 					<li class="header-nav-item"><a href="" class="header-nav-text">로그인</a></li>
 				</ul>
 			</div>
