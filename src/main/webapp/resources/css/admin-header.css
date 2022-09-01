@@ -1,0 +1,121 @@
+@charset "UTF-8";
+/*************** 전체 적용 ***************/
+
+*{text-decoration:none;}
+body{fomnt-family:"휴먼모음T";}
+div, section, header, aside, footer {margin:0px; padding:0px;}
+body, input, textarea, select, button, table{font-size:12px;}
+input, select, textarea, button, ul, ol, li, dl, dt, dd{vertical-align: middle;}
+div{display: block;}
+a{
+	color: black;
+	text-decoration:none;
+	cursor: pointer;
+	outline:none;
+}
+a:hover{text-decoration:none; color: black;}
+img{max-width:100%}
+ul{display:block; vertical-align:middle; margin: 0; padding: 0;}
+button{border:none; cursor: pointer;}
+body{
+	position: relative;
+	height: 100%;
+	min-height: 100%;
+	line-height: 20px;
+	color: rgb(77, 81, 89);
+	background-color: rgb(237, 240, 245);
+	font-size: 13px;
+}
+nav{display: block;}
+ul, li{list-style: none;}
+
+/*************** header ***************/
+
+.admin-wrap{
+	position: relative;
+	height: 100%;
+	min-height: 100%;
+}
+
+.admin-inner-wrap{
+	position: relative;
+	min-height: 100%;
+	padding-left: 0;
+	background-color: #edf0f5;
+	min-width: 1200px;
+}
+
+/***** 상단바 *****/
+nav{
+	width: 100%;
+	background-color: #2d3539;
+	min-height: 55px;
+}
+
+.admin-logo{
+	color: #fff;
+	font-weight: 500;
+	font-size: 25px;
+}
+
+.nav-left{
+	display: inline-block;
+}
+
+/***** 프로필 *****/
+.admin-profile{
+	width: 210px;
+	height: auto;
+	background-color: #3f4b5c;
+	border: none;
+	color: #ffff;
+	display: flex;
+	flex-direction: column;
+    align-items: center;
+}
+
+.admin-profile i{
+	width: 50px;
+	height: 50px;
+	font-size: 50px;
+	color: #fff;
+	margin: 25px 15px;
+}
+
+.admin-profile span{
+	font-size: 15px;
+	margin-top: 5px;
+	margin-bottom: 15px;
+}
+
+/***** 아코디언 메뉴 *****/
+.accordion{
+	width: 210px;
+	height: 100%;
+	display: inline-block;
+}
+
+.card-header{
+	background-color: #3f4b5c;
+	border: none;
+}
+
+.btn-link, .btn-link:hover, .btn-link:focus{
+	text-decoration: none;
+	color: #ffff;
+	font-size: 18px;
+}
+
+.card-body{
+	font-size: 15px;
+}
+
+
+
+
+
+
+
+
+
+
