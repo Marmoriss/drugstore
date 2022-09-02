@@ -1,29 +1,38 @@
 package com.kh.drugstore.product.model.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class Product {
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
+@NoArgsConstructor
+@ToString(callSuper = true)
+public class Product extends ProductEntity {
 /**
- * - 카테고리(복합 pk) - 코드/이름으로 묶일것이고. 카테고리/상품코드 둘다 복합 pk
-	- 대분류만 영문자(enum) / 상품 코드랑 소분류코드는 숫자(int)로 
-	- 숫자는 6자리로 잡고 가기. 
+ * ProductEntity : getter/setter있는 진짜 상품 클래스
+ * Product : 보조 클래스 
  */
-	private int pcode;
-	private int category_code;
-	private String pname;
-	private String menu;
-	private int amount;
-	private String originalFilename;
-	private String renamedFilename;
-	private int stock;
-	private String ingreName;
-	private String ingreEff;
-	private String ingreSideeff;
-	private String caution;
-	private String usage;
-	private String storage;
-	private String sub_yn;
-	private Date enrollDate;
-	
+	private List<ProductAttachment> attachmentList = new ArrayList<>();
+
+	public Product(int pcode, int categoryCode, String pName, String menu, int amount, String originalFilename,
+			String renamedFilename, int stock, String ingreName, String ingreEff, String ingreSideeff, String caution,
+			String usage, String storage, String subYn, Date enrollDate) {
+		super(pcode, categoryCode, pName, menu, amount, originalFilename, renamedFilename, stock, ingreName, ingreEff,
+				ingreSideeff, caution, usage, storage, subYn, enrollDate);
+	}
+
+	public Product(List<ProductAttachment> attachmentList) {
+		super();
+		this.attachmentList = attachmentList;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [attachmentList=" + attachmentList + "]";
+	}
 	
 }
