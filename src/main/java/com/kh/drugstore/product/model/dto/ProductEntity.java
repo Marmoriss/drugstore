@@ -15,7 +15,7 @@ public class ProductEntity {
 	- 대분류만 영문자(enum) / 상품 코드랑 소분류코드는 숫자(int)로 
 	- 숫자는 6자리로 잡고 가기. 
  */
-	private int pCode;
+	private int pcode;
 	private int categoryCode;
 	private String pName;
 	private String menu;
