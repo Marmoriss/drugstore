@@ -22,7 +22,6 @@
 
 <!-- 사용자 작성 css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin-header.css"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product-enroll.css"/>
 
 <!-- 폰트어썸 -->
 <script src="https://kit.fontawesome.com/34c760bbb4.js" crossorigin="anonymous"></script>
@@ -32,106 +31,114 @@
 
 <div class="admin-wrap">
 	<div class="admin-inner-wrap">
-		<!-- 상단바 -->
-		<nav class="navbar">
-			<div class="navbar-header">
-				<span class="admin-logo">DRUG STORE ADMIN PAGE</span>
-			</div>
-		</nav>
-		<div class="nav-left">
-			<div class="admin-profile text-center">
-				<i class="fa-solid fa-user"></i>
-				<span>[ADMIN 김감자]</span>
-			</div>
-			<!-- 좌측 아코디언 메뉴 -->
-			<div class="accordion" id="accordionExample">
-				<div class="card">
-					<div class="card-header" id="headingOne">
-						<h2 class="mb-0">
-							<button class="btn btn-link btn-block text-center" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-							회원 관리
-							</button>
-						</h2>
+		<!-- 상단바 시작 -->
+		<div>
+			<nav class="navbar">
+				<div class="navbar-header">
+					<span class="admin-logo">DRUG STORE ADMIN PAGE</span>
+				</div>
+			</nav>
+		</div>
+		<!-- /상단바 끝 -->
+		<!-- 좌측 네비 메뉴 시작 -->
+		<div class="admin-side-nav">
+			<div class="nav-left">
+				<!-- 관리자 정보 시작 -->
+				<div class="admin-profile text-center">
+					<i class="fa-solid fa-user"></i>
+					<span>[ADMIN 김감자]</span>
+				</div>
+				<!-- /관리자 정보 끝 -->
+				<!-- 아코디언 메뉴 시작 -->
+				<div class="accordion" id="accordionExample">
+					<div class="card">
+						<div class="card-header" id="headingOne">
+							<h2 class="mb-0">
+								<button class="btn btn-link btn-block text-center" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								회원 관리
+								</button>
+							</h2>
+						</div>
+						<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+							<div class="card-body text-center"><a href="">회원 조회</a></div>
+						</div>
 					</div>
-					<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-						<div class="card-body text-center"><a href="">회원 조회</a></div>
+					<div class="card">
+						<div class="card-header" id="headingTwo">
+							<h2 class="mb-0">
+								<button class="btn btn-link btn-block text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+								상품 관리
+								</button>
+							</h2>
+						</div>
+						<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/product/productEnroll.do">상품 등록</a></div>
+							<div class="card-body text-center">상품 수정 / 삭제</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" id="headingThree">
+							<h2 class="mb-0">
+								<button class="btn btn-link btn-block text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+								판매 관리
+								</button>
+							</h2>
+						</div>
+						<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+							<div class="card-body text-center">주문 내역 조회</div>
+							<div class="card-body text-center">배송 현황 조회</div>
+							<div class="card-body text-center">취소 관리</div>
+							<div class="card-body text-center">반품 관리</div>
+							<div class="card-body text-center">교환 관리</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" id="headingFour">
+							<h2 class="mb-0">
+								<button class="btn btn-link btn-block text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+								문의 / 리뷰 관리
+								</button>
+							</h2>
+						</div>
+						<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+							<div class="card-body text-center">1:1 문의</div>
+							<div class="card-body text-center">FAQ</div>
+							<div class="card-body text-center">리뷰</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" id="headingFive">
+							<h2 class="mb-0">
+								<button class="btn btn-link btn-block text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+								브랜드 관리
+								</button>
+							</h2>
+						</div>
+						<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+							<div class="card-body text-center">날짜별 가입자 수</div>
+							<div class="card-body text-center">날짜별 방문자 수</div>
+							<div class="card-body text-center">날짜별 수익 추이</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" id="headingSix">
+							<h2 class="mb-0">
+								<button class="btn btn-link btn-block text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+								알림 / 메세지
+								</button>
+							</h2>
+						</div>
+						<div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+							<div class="card-body text-center">1:1 채팅</div>
+							<div class="card-body text-center">알림</div>
+						</div>
 					</div>
 				</div>
-				<div class="card">
-					<div class="card-header" id="headingTwo">
-						<h2 class="mb-0">
-							<button class="btn btn-link btn-block text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-							상품 관리
-							</button>
-						</h2>
-					</div>
-					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-						<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/product/productEnroll.do">상품 등록</a></div>
-						<div class="card-body text-center">상품 수정 / 삭제</div>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header" id="headingThree">
-						<h2 class="mb-0">
-							<button class="btn btn-link btn-block text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-							판매 관리
-							</button>
-						</h2>
-					</div>
-					<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-						<div class="card-body text-center">주문 내역 조회</div>
-						<div class="card-body text-center">배송 현황 조회</div>
-						<div class="card-body text-center">취소 관리</div>
-						<div class="card-body text-center">반품 관리</div>
-						<div class="card-body text-center">교환 관리</div>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header" id="headingFour">
-						<h2 class="mb-0">
-							<button class="btn btn-link btn-block text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-							문의 / 리뷰 관리
-							</button>
-						</h2>
-					</div>
-					<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-						<div class="card-body text-center">1:1 문의</div>
-						<div class="card-body text-center">FAQ</div>
-						<div class="card-body text-center">리뷰</div>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header" id="headingFive">
-						<h2 class="mb-0">
-							<button class="btn btn-link btn-block text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-							브랜드 관리
-							</button>
-						</h2>
-					</div>
-					<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
-						<div class="card-body text-center">날짜별 가입자 수</div>
-						<div class="card-body text-center">날짜별 방문자 수</div>
-						<div class="card-body text-center">날짜별 수익 추이</div>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header" id="headingSix">
-						<h2 class="mb-0">
-							<button class="btn btn-link btn-block text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-							알림 / 메세지
-							</button>
-						</h2>
-					</div>
-					<div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
-						<div class="card-body text-center">1:1 채팅</div>
-						<div class="card-body text-center">알림</div>
-					</div>
-				</div>
+				<!-- /아코디언 메뉴 끝 -->
 			</div>
 		</div>
-	</div>
-</div>
-
+		<!-- /좌측 네비 메뉴 끝 -->
+		
 
 
 

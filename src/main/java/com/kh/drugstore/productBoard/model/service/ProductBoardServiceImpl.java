@@ -14,7 +14,7 @@ import com.kh.drugstore.productBoard.model.dto.ProductBoard;
 import lombok.extern.slf4j.Slf4j;
 
 @Transactional(rollbackFor = Exception.class)
-@Service
+//@Service
 @Slf4j
 public class ProductBoardServiceImpl implements ProductBoardService {
 

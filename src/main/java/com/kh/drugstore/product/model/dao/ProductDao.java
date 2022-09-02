@@ -6,8 +6,8 @@ import com.kh.drugstore.product.model.dto.ProductAttachment;
 
 public class ProductDao {
 
-	public static List<ProductAttachment> findAttachmentByProductCode(int pcode) {
+//	public static List<ProductAttachment> findAttachmentByProductCode(int pcode) {
 		
-	}
+//	}
 
 }

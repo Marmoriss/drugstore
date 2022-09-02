@@ -12,7 +12,7 @@ import com.kh.drugstore.product.model.dto.ProductAttachment;
 import lombok.extern.slf4j.Slf4j;
 
 @Transactional(rollbackFor = Exception.class)
-@Service
+//@Service
 @Slf4j
 public class ProductServiceImpl implements ProductService {
 
@@ -20,7 +20,7 @@ public class ProductServiceImpl implements ProductService {
 	ProductDao productDao;
 	
 	//상품코드로 상품첨부파일 조회
-	public List<ProductAttachment> findAttachmentByProductCode(int pcode) {
-	 	return ProductDao.findAttachmentByProductCode(pcode);
-	}
+//	public List<ProductAttachment> findAttachmentByProductCode(int pcode) {
+//	 	return ProductDao.findAttachmentByProductCode(pcode);
+//	}
 }
