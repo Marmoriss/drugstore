@@ -18,11 +18,11 @@ public class Product extends ProductEntity {
  */
 	private List<ProductAttachment> attachmentList = new ArrayList<>();
 
-	public Product(int pcode, int categoryCode, String pname, String menu, int amount, String originalFilename,
+	public Product(int pcode, int categoryCode, String pName, String menu, int amount, String originalFilename,
 			String renamedFilename, int stock, String ingreName, String ingreEff, String ingreSideeff, String caution,
-			String usage, String storage, String sub_yn, Date enrollDate) {
-		super(pcode, categoryCode, pname, menu, amount, originalFilename, renamedFilename, stock, ingreName, ingreEff,
-				ingreSideeff, caution, usage, storage, sub_yn, enrollDate);
+			String usage, String storage, String subYn, Date enrollDate) {
+		super(pcode, categoryCode, pName, menu, amount, originalFilename, renamedFilename, stock, ingreName, ingreEff,
+				ingreSideeff, caution, usage, storage, subYn, enrollDate);
 	}
 
 	public Product(List<ProductAttachment> attachmentList) {
