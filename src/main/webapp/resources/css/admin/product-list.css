@@ -200,7 +200,7 @@ input[type=checkbox]{
 
 .btn-group{
 	float: none;
-	margin-left: 0;
+	margin-left: 30px;
 }
 
 .panel-footer{
@@ -238,7 +238,7 @@ input[type=checkbox]{
 }
 
 .btn-default{
-	color: rgb(224, 224, 224);
+	background-color: rgb(224, 224, 224);
 	color: #666;
 }
 

@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
 <!-- 사용자 작성 css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin-header.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/header.css"/>
 
 <!-- 폰트어썸 -->
 <script src="https://kit.fontawesome.com/34c760bbb4.js" crossorigin="anonymous"></script>
@@ -73,7 +73,7 @@
 						</div>
 						<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
 							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/product/productEnroll.do">상품 등록</a></div>
-							<div class="card-body text-center">상품 수정 / 삭제</div>
+							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/product/productList.do">상품 조회</a></div>
 						</div>
 					</div>
 					<div class="card">

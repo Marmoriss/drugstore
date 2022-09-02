@@ -25,13 +25,12 @@ public class AdminController {
 		
 	}
 	
-	@GetMapping("/product/productEnroll.do")
-	public void toProductEnroll() {
-		List<Product> list = adminService.findProduct();
-		log.debug("list = {}", list);
+	@GetMapping("/product/productList.do")
+	public void productList() {
 	}
 	
-	
+	@GetMapping("/product/productEnroll.do")
+	public void productEnroll() {}
 	
 	
 	

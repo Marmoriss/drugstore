@@ -6,6 +6,6 @@ import com.kh.drugstore.product.model.dto.Product;
 
 public interface AdminService {
 
-	List<Product> findProduct();
+	List<Product> selectProductList();
 
 }
