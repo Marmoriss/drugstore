@@ -379,3 +379,11 @@ insert into
 values(seq_product_no.nextval, '든든 철분', 'KH제약', '1500', '10');
 
 select * from product;
+
+--태연 코드--
+-- 공지사항 샘플 데이터
+insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다', '배송관련입니다', default); 
+insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다2', '배송관련입니다2', default); 
+select * from notice order by no desc;
+
+--태연 코드 끝--
