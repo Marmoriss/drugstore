@@ -10,7 +10,7 @@ import com.kh.drugstore.product.model.dto.Product;
 @Mapper
 public interface AdminDao {
 
-	@Select("select * from product")
-	List<Product> findProduct();
+	@Select("select * from product order by pcode")
+	List<Product> selectProductList();
 
 }

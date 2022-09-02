@@ -19,8 +19,8 @@ public class AdminServiceImpl implements AdminService {
 	AdminDao adminDao;
 	
 	@Override
-	public List<Product> findProduct() {
-		return adminDao.findProduct();
+	public List<Product> selectProductList() {
+		return adminDao.selectProductList();
 	}
 	
 	

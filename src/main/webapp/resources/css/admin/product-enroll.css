@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+.form-inline{
+	margin-top: 10px;
+}
+
+.price-wrap{
+	display: flex;
+}
+
+.discount-wrap{
+	display: flex;
+	margin-left: 100px;
+}
+
+.discount-price{
+	margin-top: 15px;
+}
+
+.form-group label{
+	margin-right: 15px;
+}
+.form-group input{
+	margin-left: 10px;
+}
+
+.input-group-text{
+	font-size: 15px;
+}
+
+.input-group{
+	width: 80%;
+}
+
+
+
+
+
+
+
+
+
