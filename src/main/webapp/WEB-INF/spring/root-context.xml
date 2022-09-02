@@ -19,12 +19,14 @@
 		<property name="username" value="${datasource.username}"/>
 		<property name="password" value="${datasource.password}"/>
 	</bean>
+	
 	<!-- mybatis SqlSessionFactoryBean, SqlSessionTemplate 빈등록 -->
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="classpath*:mapper/**/*-mapper.xml"/>
 		<property name="configLocation" value="classpath:mybatis-config.xml"/>
 	</bean>
+	
 	<!-- SqlSession인터페이스 구현체. Dao구현클래스에 DI되어 실행됨. -->
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactoryBean" index="0"/>
@@ -39,5 +41,8 @@
 	</bean>
 	<!-- @Transactional 어노테이션에 Transaction Advice를 적용 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	
+	
 	
 </beans>
