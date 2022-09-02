@@ -18,11 +18,11 @@ public class Product extends ProductEntity {
  */
 	private List<ProductAttachment> attachmentList = new ArrayList<>();
 
-	public Product(int pcode, int categoryCode, String pName, String menu, int amount, String originalFilename,
-			String renamedFilename, int stock, String ingreName, String ingreEff, String ingreSideeff, String caution,
-			String usage, String storage, String subYn, Date enrollDate) {
-		super(pcode, categoryCode, pName, menu, amount, originalFilename, renamedFilename, stock, ingreName, ingreEff,
-				ingreSideeff, caution, usage, storage, subYn, enrollDate);
+	public Product(int pCode, int bigCode, String smallCode, int sttenmt_no, String pName, String menu, int price,
+			int amount, String ingreName, String mainFnctn, String intakeHint1, String srvUse, String distbPd,
+			String subYn, Date enrollDate) {
+		super(pCode, bigCode, smallCode, sttenmt_no, pName, menu, price, amount, ingreName, mainFnctn, intakeHint1, srvUse,
+				distbPd, subYn, enrollDate);
 	}
 
 	public Product(List<ProductAttachment> attachmentList) {
@@ -34,5 +34,6 @@ public class Product extends ProductEntity {
 	public String toString() {
 		return "Product [attachmentList=" + attachmentList + "]";
 	}
+
 	
 }
