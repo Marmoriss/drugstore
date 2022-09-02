@@ -16,13 +16,12 @@ public class ProductAttachment {
 /**
  * 상품 첨부파일 클래스 
  */
-	private int attachNo;
-	private int pCode;
+	private int attachNo; //첨부파일 번호
+	private int pcode; //상품코드
+	@NonNull 
+	private String originalFilename; //업로드 이미지
 	@NonNull
-	private String originalFilename;
-	@NonNull
-	private String renamedFilename;
-	@NonNull
-	private LocalDateTime createdAt;
+	private String renamedFilename; //서버 저장 이미지
+	private LocalDateTime createdAt; //생성일
 	
 }
