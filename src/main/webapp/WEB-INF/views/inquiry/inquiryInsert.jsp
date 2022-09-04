@@ -12,7 +12,8 @@
 	<form action="">
 		<fieldset>
 			<legend>문의 등록하기</legend>
-			<tabel>
+			<table>
+				<thead>
 				<tr>
 					<td>분류</td>
 					<td>
@@ -26,6 +27,8 @@
 						</select>
 					</td>
 				</tr>
+				</thead>
+				<tbody>
 				<tr>
 					<td><label for="questTitle">문의 제목</label></td>
 					<td><input type="text" id="questTitle" size="50" placeholder="문의 제목을 입력하세요."/></td>
@@ -38,7 +41,8 @@
 					<td><label for="file">파일</label></td>
 					<td><input type="file" name="selectfile"/></td>
 				</tr>
-			</tabel>
+				</tbody>
+			</table>
 			<button type="button" onclick="submit('questionInsert');">제출하기</button>
 		</fieldset>	
 	</form>
