@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="utf-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="title" value="헬로우 스프링" />
+	<jsp:param name="title" value="${param.title}" />
 </jsp:include>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/index.css" />

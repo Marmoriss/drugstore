@@ -1,4 +1,4 @@
-package com.kh.drugstore.inquiry.controller;
+package com.kh.drugstore.question.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kh.drugstore.inquiry.model.service.InquiryService;
+import com.kh.drugstore.question.model.service.InquiryService;
 
 import org.springframework.web.bind.annotation.RequestMethod;
 
