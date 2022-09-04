@@ -23,7 +23,7 @@ public class Question {
 	private String content; // 내용
 	private String title; // 제목
 	private int comment_level; // 코멘트레벨
-	private Category category; // 문의 종류
+	private QuestionCategory category; // 문의 종류
 }
 
 
