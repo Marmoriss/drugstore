@@ -14,7 +14,7 @@ import com.kh.drugstore.product.model.dto.ProductAttachment;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Transactional(rollbackFor = Exception.class)
+//@Transactional(rollbackFor = Exception.class)
 //@Service
 @Slf4j
 public class ProductServiceImpl implements ProductService {

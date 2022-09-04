@@ -13,7 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Inquiry {
+public class Question {
 
 	private int no; // 번호
 	private int comment_ref; // 대댓
