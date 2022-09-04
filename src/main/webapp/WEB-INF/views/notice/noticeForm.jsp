@@ -9,30 +9,29 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="글수정" name="title" />
+	<jsp:param value="글작성" name="title" />
 </jsp:include>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/notice.css" />
 <div id="container">
-	<h2>공지사항 수정📝</h2>
+	<h2>공지사항 작성📝</h2>
 	<hr>
 	<br>
-	<form action="${pageContext.request.contextPath}/notice/noticeUpdate.do" method="post">
+	<form action="${pageContext.request.contextPath}/notice/noticeEnroll.do" method="post">
 		<div class="form-group">
-		<input type="hidden" name="no" value="${notice.no}" />
 			<label for="title">제목</label> <input type="text" class="form-control"
-				id="title" value="${notice.title}" name="title" required="required">
+				id="title" placeholder="제목 입력" name="title" required="required">
 		</div><br />
 
 		<div class="form-group">
 			<label for="writer">작성자</label> <input type="text"
-				class="form-control" value="${notice.writer}" id="writer" name="writer" readonly>
+				class="form-control" id="writer" name="writer" required>
 		</div><br />
 
 		<div class="form-group">
 			<label for="content">내용</label>
 			<textarea class="form-control" rows="10" id="content" name="content"
-				value="${notice.content}"></textarea>
+				placeholder="내용 작성"></textarea>
 		</div>
 		<button type="submit" class="btn-add">등록</button>
 	</form>

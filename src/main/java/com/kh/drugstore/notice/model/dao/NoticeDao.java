@@ -16,7 +16,7 @@ public interface NoticeDao {
 	@Select("select * from notice order by no desc")
 	List<Notice> selectNoticeList();
 
-	@Insert("insert into notice values (seq_notice_no.nextval, #{writer}, #{title}, #{content}, default)")
+	@Insert("insert into notice values (seq_notice_no.nextval, #{writer}, #{title}, #{content}, default, #{next}, #{last}, #{nexttitle}, #{lasttitle})")
 	int insertNotice(Notice notice);
 
 	@Select("select * from notice where no = #{no}")
@@ -27,6 +27,16 @@ public interface NoticeDao {
 
 	@Delete("delete from notice where no = #{no}")
 	int deleteNotice(int no);
+
+	@Select("select * from (select no, lead(no,1,9999) over(order by no) as next,\r\n"
+			+ "lag(no,1,9999) over(order by no) as last,\r\n"
+			+ "title, lead(title, 1, 9999) over(order by no) as nexttitle,\r\n"
+			+ "lag(title,1,9999) over(order by no) as lasttitle\r\n"
+			+ "from notice order by no desc) where no=#{no}")
+	Notice movePage(int no);
+	
+	
+
 
 	
 }

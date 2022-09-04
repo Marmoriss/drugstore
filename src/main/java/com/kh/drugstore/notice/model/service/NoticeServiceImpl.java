@@ -37,4 +37,10 @@ public class NoticeServiceImpl implements NoticeService {
 	public int deleteNotice(int no) {
 		return noticeDao.deleteNotice(no);
 	}
+	
+	@Override
+	public Notice movePage(int no) {
+		return noticeDao.movePage(no);
+	}
+	
 }
