@@ -384,6 +384,10 @@ select * from product;
 -- 공지사항 샘플 데이터
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다', '배송관련입니다', default); 
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다2', '배송관련입니다2', default); 
+insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다3', '배송관련입니다3', default); 
+insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다4', '배송관련입니다4', default); 
 select * from notice order by no desc;
+
+
 
 --태연 코드 끝--
