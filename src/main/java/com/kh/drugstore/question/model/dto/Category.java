@@ -1,4 +1,4 @@
-package com.kh.drugstore.inquiry.model.dto;
+package com.kh.drugstore.question.model.dto;
 
 public enum Category {
 	
