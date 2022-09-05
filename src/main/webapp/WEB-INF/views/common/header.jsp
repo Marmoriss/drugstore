@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +26,13 @@
 
 <!-- 폰트어썸 -->
 <script src="https://kit.fontawesome.com/34c760bbb4.js" crossorigin="anonymous"></script>
+
+<!-- alert 띄우기 -->
+<c:if test="${not empty msg}">
+<script>
+	alert("${msg}");
+</script>
+</c:if>
 </head>
 <body>
 
@@ -42,7 +51,19 @@
 					<li class="header-nav-item"><a href="" class="header-nav-text">건강설문</a></li>
 					<li class="header-nav-item"><a href="" class="header-nav-text">정기구독</a></li>
 					<li class="header-nav-item"><a class="header-nav-text" href="${pageContext.request.contextPath}/notice/noticeList.do">고객센터</a></li>
-					<li class="header-nav-item"><a href="" class="header-nav-text">로그인</a></li>
+					
+					<sec:authorize access="isAnonymous()">
+					<li class="header-nav-item"><a href="${pageContext.request.contextPath}/member/memberLogin.do" class="header-nav-text">로그인</a></li>
+					</sec:authorize>					
+					<sec:authorize access="isAuthenticated()">
+							<%-- <sec:authentication property="principal.username"/> --%>
+							<%-- <sec:authentication property="authorities"/> --%>
+						<li class="header-nav-item" name="logoutLink"><a href="#" class="header-nav-text" >로그아웃</a></li>
+						
+						<form action="${pageContext.request.contextPath}/member/memberLogout.do" method="POST" id="logoutFrm">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						</form>					
+					</sec:authorize>
 				</ul>
 			</div>
 		</div>
@@ -85,13 +106,21 @@
 						<p class="header-cart-count hand">0</p>
 						<!-- 호버시 장바구니 내역 보이게 작성 -->
 					</div>
-					<a href="" class="header-mypage"><i class="fa-solid fa-user"></i></a>
+					<a href="${pageContext.request.contextPath}/member/memberMyPage.do" class="header-mypage"><i class="fa-solid fa-user"></i></a>
 				</div>
 			</div>
 		</div>
 	</div>
 </header>
-
+<script>
+		document.querySelector("[name=logoutLink]").addEventListener('click',(e)=>{
+			const frm = document.querySelector("#logoutFrm");
+			console.log(frm);
+			frm.submit();
+		})
+		
+		
+	</script> 
 
 
 
