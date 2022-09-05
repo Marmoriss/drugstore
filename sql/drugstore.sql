@@ -112,7 +112,7 @@ create table servey(
     height varchar2(10) not null,
     weight varchar2(10) not null,
     body varchar2(10) not null,
-    symptom varchar2(10) not null,
+    symptom varchar2(10) not null, --alter table servey modify (symptom varchar2(500));
     constraint pk_servey_no primary key(no),
     constraint fk_servey_member_id foreign key(member_id) references member(member_id) on delete cascade,
     constraint ck_servey_gender check(gender in ('M', 'F'))
@@ -388,6 +388,11 @@ insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.ne
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다4', '배송관련입니다4', default); 
 select * from notice order by no desc;
 
+select * from member;
+select * from servey;
+insert into servey(no, member_id, gender, height, weight, body, symptom) values(seq_servey_no.nextval, 'sinsa', 'M', '189', '55', '눈', '눈이 뻑뻑해요');
+insert into servey(no, member_id, gender, height, weight, body, symptom) values(seq_servey_no.nextval, 'honggd', 'M', '170', '65', '피로감', '항상 피로해요');
+select m.member_id, name, phone, created_at, gender, body from member m join servey s on (m.member_id = s.member_id);
 
 
 --태연 코드 끝--
