@@ -17,5 +17,8 @@ public class Notice {
 	private String content;
 	private String writer;
 	private LocalDateTime regDate;
-	
+	private int next;
+	private int last;
+	private String nexttitle;
+	private String lasttitle;
 }
