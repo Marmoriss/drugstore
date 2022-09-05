@@ -1,13 +1,15 @@
 package com.kh.drugstore.product.model.dto;
 
-import java.util.Date;
+import com.kh.drugstore.common.YesNo;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductEntity {
@@ -16,8 +18,9 @@ public class ProductEntity {
 	- 대분류만 영문자(enum) / 상품 코드랑 소분류코드는 숫자(int)로 
 	- 숫자는 6자리로 잡고 가기. 
  */
+	@NonNull
 	private int pCode; //상품코드
-	private int bigCode; //대분류코드
+	private BigCode bigCode; //대분류코드
 	private String smallCode; //소분류코드
 	private int sttenmt_no; //품목제조관리 번호
 	private String pName; //상품명
@@ -32,8 +35,8 @@ public class ProductEntity {
 	private String intakeHint1; //주의사항
 	private String srvUse; //용법
 	private String distbPd; //유통기한
-	private String subYn; //구독상품 여부 
-	private Date enrollDate; //기준규격
+	private YesNo subYn; //구독상품 여부 
+	private String baseStandard; //기준규격
 	
 	
 }
