@@ -20,9 +20,8 @@ public class ProductEntity {
  */
 	@NonNull
 	private int pCode; //상품코드
-	private BigCode bigCode; //대분류코드
-	private String smallCode; //소분류코드
-	private int sttenmt_no; //품목제조관리 번호
+	private int categoryId; //대분류코드
+	private int sttenmtNo; //품목제조관리 번호
 	private String pName; //상품명
 	@NonNull
 	private String menu; //제조사

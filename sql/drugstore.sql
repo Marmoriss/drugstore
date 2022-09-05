@@ -30,11 +30,12 @@ create table member(
 
 -- 카테고리
 create table category(
-    big_code varchar2(50),
-    small_code number,
-    big_category_name varchar(10) not null,
-    small_category_name varchar(10) not null,
-    constraint pk_category primary key(big_code, small_code)
+    category_id number, -- 카테고리 코드
+    category_lev number, -- 카테고리 레벨
+    category_nm varchar2(10), -- 카테고리 이름("대분류", "소분류")
+    category_detail_name varchar2(255), -- 카테고리 이름("성분별", "비타민", "부위별", "눈")
+    category_parent_lev number,
+    constraint pk_category_id primary key(category_id)
 );
 
 -- 상품
@@ -112,7 +113,7 @@ create table servey(
     height varchar2(10) not null,
     weight varchar2(10) not null,
     body varchar2(10) not null,
-    symptom varchar2(10) not null, --alter table servey modify (symptom varchar2(500));
+    symptom varchar2(10) not null,
     constraint pk_servey_no primary key(no),
     constraint fk_servey_member_id foreign key(member_id) references member(member_id) on delete cascade,
     constraint ck_servey_gender check(gender in ('M', 'F'))
@@ -388,11 +389,31 @@ insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.ne
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다4', '배송관련입니다4', default); 
 select * from notice order by no desc;
 
-select * from member;
-select * from servey;
-insert into servey(no, member_id, gender, height, weight, body, symptom) values(seq_servey_no.nextval, 'sinsa', 'M', '189', '55', '눈', '눈이 뻑뻑해요');
-insert into servey(no, member_id, gender, height, weight, body, symptom) values(seq_servey_no.nextval, 'honggd', 'M', '170', '65', '피로감', '항상 피로해요');
-select m.member_id, name, phone, created_at, gender, body from member m join servey s on (m.member_id = s.member_id);
 
 
 --태연 코드 끝--
+
+-- 주희 코드 --
+-- 카테고리 샘플 데이터
+select * from product;
+select * from category;
+
+--insert into category
+-- values(350001, 1, '대분류', '성분', 0);
+-- values(350002, 1, '대분류', '성별', 0);
+-- values(350003, 1, '대분류', '신체', 0);
+-- values(350004, 1, '대분류', '정기구독', 0);
+-- values(350005, 2, '소분류', '비타민', 350001);
+-- values(350006, 2, '소분류', '철분', 350001);
+-- values(350007, 2, '소분류', '오메가3', 350001);
+-- values(350008, 2, '소분류', '칼슘', 350001);
+-- values(350009, 2, '소분류', '콜라겐', 350001);
+-- values(350010, 2, '소분류', '여성', 350002);
+-- values(350011, 2, '소분류', '남성', 350002);
+-- values(350012, 2, '소분류', '눈', 350003);
+-- values(350013, 2, '소분류', '소화기관', 350003);
+-- values(350014, 2, '소분류', '피로감', 350003);
+-- values(350015, 2, '소분류', '면역', 350003);
+-- values(350016, 2, '소분류', '심혈관계', 350003);
+
+
