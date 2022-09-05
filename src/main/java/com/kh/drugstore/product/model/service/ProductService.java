@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.drugstore.product.model.dto.Product;
+import com.kh.drugstore.product.model.dto.ProductAttachment;
 
 public interface ProductService {
 
@@ -11,4 +12,7 @@ public interface ProductService {
 
 	int getTotalContent();
 
+	List<ProductAttachment> findAttachmentByProductCode(int pCode);
+
+	
 }

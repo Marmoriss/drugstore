@@ -38,7 +38,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	//상품코드로 상품첨부파일 조회
+	@Override
 	public List<ProductAttachment> findAttachmentByProductCode(int pCode) {
 	 	return productDao.findAttachmentByProductCode(pCode);
 	}
+	
+	//
 }
