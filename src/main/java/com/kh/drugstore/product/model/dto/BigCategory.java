@@ -27,6 +27,9 @@ public enum BigCategory {
 		this.value = value;
 	}
 	
+	//ENUM 리스트에서 값 꺼내기 수식 
+	// https://studyandwrite.tistory.com/506 <- 해당 부분 코드 참조 
+	// 마음껏 지우고 편하게 해주세요.
 	public static BigCategory fromCode(String dbData) {
 		//정적메소드 Arrays.stream 생성. dbData와 똑같은 값만 getValue만 필터링 할것.  
 		return Arrays.stream(BigCategory.values())
