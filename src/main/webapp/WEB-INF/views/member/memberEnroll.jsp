@@ -74,7 +74,7 @@
 <script>
 
 
-document.memberEnrollFrm.addEventListener('submit', (e) => {
+/* document.memberEnrollFrm.addEventListener('submit', (e) => {
 	if(idValid.value === "0"){
 		e.preventDefault();
 		alert("유효한 아이디를 입력해주세요.");
@@ -125,7 +125,7 @@ document.querySelector("#memberId").addEventListener('keyup', (e) => {
 		error(jqxhr, statusText, err){
 			console.log(jqxhr, statusText, err);
 		}
-	});
+	}); */
 
 });
 
