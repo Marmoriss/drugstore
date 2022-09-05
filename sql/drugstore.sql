@@ -127,7 +127,7 @@ create table authority(
 );
 
 -- 1:1 문의
-create table inquiry(
+create table question(
     no number,
     comment_ref number,
     writer varchar2(50) not null,
@@ -137,9 +137,9 @@ create table inquiry(
     title varchar2(1000) not null,
     comment_level number default 1,
     category varchar2(50),
-    constraint pk_inquiry_no primary key(no),
-    constraint fk_inquiry_comment_ref foreign key(comment_ref) references inquiry(no) on delete cascade,
-    constraint fk_inquiry_writer foreign key(writer) references member(member_id) on delete cascade
+    constraint pk_question_no primary key(no),
+    constraint fk_question_comment_ref foreign key(comment_ref) references question(no) on delete cascade,
+    constraint fk_question_writer foreign key(writer) references member(member_id) on delete cascade
 );
 
 -- 섭취 체크
@@ -350,7 +350,7 @@ create sequence seq_faq_no;
 create sequence seq_notice_no;
 create sequence seq_chat_log_no;
 create sequence seq_servey_no;
-create sequence seq_inquiry_no;
+create sequence seq_question_no;
 create sequence seq_intake_check_no;
 create sequence seq_gift_no;
 create sequence seq_sub_no;
