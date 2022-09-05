@@ -102,7 +102,7 @@
 						<button type="submit" class="header-search-submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 					</form>
 					<div class="header-cart">
-						<a href="" class="header-cart-link hand"><i class="fa-solid fa-cart-shopping"></i></a>
+						<a href="${pageContext.request.contextPath}/cart/cartList.do" class="header-cart-link hand"><i class="fa-solid fa-cart-shopping"></i></a>
 						<p class="header-cart-count hand">0</p>
 						<!-- 호버시 장바구니 내역 보이게 작성 -->
 					</div>
