@@ -30,6 +30,9 @@
 		<button type="button" class="goods-list-menu item">성분</button>
 		<button type="button" class="goods-list-menu item">연령</button>
 		<button type="button" class="goods-list-menu item">신체부위</button>
+		<!-- 주희 코드 시작 -->
+		<a href="${pageContext.request.contextPath}/product/productList.do?categoryId=350005">비타민</a>
+		<!-- 주희 코드 끝 -->			
 	</div>
 	</section>
 </section>
