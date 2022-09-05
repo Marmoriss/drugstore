@@ -14,7 +14,7 @@
 
 <body>
 	<div id="enroll-container" class="mx-auto text-center">
-	<form:form name="memberEnrollFrm" action="${pageContext.request.contextPath}/member/memberEnroll.do" method="POST">
+	<form:form name="memberEnrollFrm" action="" method="POST">
 		<table class="mx-auto">
 			<tr>
 				<th>아이디</th>
@@ -70,11 +70,11 @@
 		<input type="reset" value="취소">
 	</form:form>
 </div>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
 <script>
 
 
-/* document.memberEnrollFrm.addEventListener('submit', (e) => {
+document.memberEnrollFrm.addEventListener('submit', (e) => {
 	if(idValid.value === "0"){
 		e.preventDefault();
 		alert("유효한 아이디를 입력해주세요.");
@@ -125,7 +125,7 @@ document.querySelector("#memberId").addEventListener('keyup', (e) => {
 		error(jqxhr, statusText, err){
 			console.log(jqxhr, statusText, err);
 		}
-	}); */
+	});
 
 });
 

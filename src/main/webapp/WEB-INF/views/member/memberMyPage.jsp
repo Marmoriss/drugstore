@@ -13,38 +13,41 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/memberMyPage.css" />
 <body>	
-	<div id="total-container">
-		<div id="left-container">
-			<ul>
-				<li>마이페이지</li>
-				<li><a href="${pageContext.request.contextPath}/member/updateMember.do">회원 정보 수정</a></li>
-				
-			</ul>
-			<ul>
-				<li>나의 쇼핑정보</li>
-				<li>주문 / 배송내역</li>
-				<li>취소 / 환불내역</li>
-				<li>교환 / 반품내역</li>
-				<li>찜한 상품</li>
-			</ul>
-			<ul>
-				<li>나의 활동</li>
-				<li>정기 구독</li>
-				<li>1:1 문의</li>
-				<li>상품 문의</li>
-			</ul>
-		</div>
-		<div id="right-container">
-			<div id="user-info">
-				<!-- principal은 memeber랑 같다 -->
-				<span><sec:authentication property="principal.name"/>님 환영합니다.</span>
-			</div>
-			<div id="main-container">
-				<span>block</span>
-			</div>
-		</div>
-	</div>
+<span><sec:authentication property="principal.name"/>님 환영합니다.</span>
+	
+	<div id="page-wrapper">
+  <!-- 사이드바 -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a href="#">Zeta</a>
+      </li>
+      <li><a href="#">메뉴 1</a></li>
+      <li><a href="#">메뉴 2</a></li>
+      <li><a href="#">메뉴 3</a></li>
+      <li><a href="#">메뉴 4</a></li>
+      <li><a href="#">메뉴 5</a></li>
+      <li><a href="#">메뉴 6</a></li>
+      <li><a href="#">메뉴 7</a></li>
+      <li><a href="#">메뉴 8</a></li>
+      <li><a href="#">메뉴 9</a></li>
+    </ul>
+  </div>
+  <!-- /사이드바 -->
+
+  <!-- 본문 -->
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <h1>간단한 사이드바</h1>
+      <p>메뉴가 많아서 한 페이지를 넘으면 세로 스크롤바 생김</p>
+    </div>
+  </div>
+  <!-- /본문 -->
+</div>
+	
 </body>
 
+<script>
 
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
