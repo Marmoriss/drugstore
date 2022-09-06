@@ -108,7 +108,7 @@ public class MemberController {
 		return "redirect:" + location;
 	}
 
-	@GetMapping("/memberMyPage")
+	@GetMapping("/memberMyPage.do")
 	public ModelAndView memberMyPage(Authentication authentication, ModelAndView mav) {
 
 		Object principal = authentication.getPrincipal();
@@ -142,6 +142,7 @@ public class MemberController {
 	public ResponseEntity<?> checkIdDuplicate3(@RequestParam String memberId) {
 		Member member = memberService.selectOneMember(memberId);
 		boolean available = member == null;
+		
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("memberId", memberId);
@@ -172,6 +173,12 @@ public class MemberController {
 		return "redirect:/member/memberMyPage.do";
 	}
 	
-	
+	@PostMapping("/memberDelete.do")
+	public String memberDelete(@ModelAttribute Member member, RedirectAttributes redirectAttr) {
+		
+		int result = memberService.deleteMember(member);
+		
+		return "redirect:/";
+	}
 	
 }

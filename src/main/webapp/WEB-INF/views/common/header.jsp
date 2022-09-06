@@ -62,7 +62,16 @@
 						
 						<form action="${pageContext.request.contextPath}/member/memberLogout.do" method="POST" id="logoutFrm">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-						</form>					
+						</form>
+						<script>
+							window.onload = function(){
+								document.querySelector("[name=logoutLink]").addEventListener('click',(e)=>{
+								const frm = document.querySelector("#logoutFrm");
+								console.log(frm);
+								frm.submit();
+							})		
+							}
+						</script>					
 					</sec:authorize>
 				</ul>
 			</div>
@@ -112,15 +121,8 @@
 		</div>
 	</div>
 </header>
-<script>
-		document.querySelector("[name=logoutLink]").addEventListener('click',(e)=>{
-			const frm = document.querySelector("#logoutFrm");
-			console.log(frm);
-			frm.submit();
-		})
-		
-		
-	</script> 
+
+
 
 
 

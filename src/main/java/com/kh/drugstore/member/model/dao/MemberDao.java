@@ -19,5 +19,9 @@ public interface MemberDao {
 			+ " set name = #{name}, password = #{password}, phone = #{phone}, address = #{address}, detail_address = #{detailAddress}"
 			+ " where member_id = #{memberId}")
 	int updateMember(Member member);
+	
+	// enabled 0으로 해서 컬럼에서 조회는 가능하지만 실제로 로그인 못하게 했다.
+	@Update("update member set enabled = '0' where member_id = #{memberId}")
+	int deleteMember(Member member);
 
 }

@@ -5,20 +5,29 @@
   #page-wrapper {
     padding-left: 250px;
     display: flex;
+    justify-content: space-around;
   }
   
   #sidebar-wrapper {
-    width: 20%;
+    padding: 25px 0 25px 0;
     height: 100%;
     margin-left: -250px;
-    background: #000;
+    background: #FFE1B6;
     overflow-x: hidden;
     overflow-y: auto;
   }
   
   #page-content-wrapper {
+  	border: 1px solid black;
     width: 80%;
     padding: 20px;
+  }
+  
+  .container-fluid{
+  	border : 1px solid black;
+  	height: 80px;
+  	padding : 10px;
+  	text-align: center;
   }
   /* 사이드바 스타일 */
   

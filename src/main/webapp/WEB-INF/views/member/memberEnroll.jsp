@@ -66,11 +66,10 @@
 			</tr>
 			
 		</table>
-		<input type="submit" value="가입" >
-		<input type="reset" value="취소">
+		<button type="submit" class="btn btn-success">가입</button>
+		<button type="button" class="btn btn-secondary" onclick="history.back()">취소</button>
 	</form:form>
 </div>
-<!-- <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
 <script>
 
 
