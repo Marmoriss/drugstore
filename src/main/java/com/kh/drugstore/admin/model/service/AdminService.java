@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.drugstore.member.model.dto.Member;
-<<<<<<< HEAD
+
 import com.kh.drugstore.member.model.dto.User;
-=======
+
 import com.kh.drugstore.product.model.dto.Category;
->>>>>>> branch 'master' of https://github.com/Marmoriss/drugstore.git
+
 import com.kh.drugstore.product.model.dto.Product;
 
 public interface AdminService {
