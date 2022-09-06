@@ -117,10 +117,10 @@
 			const frm = document.querySelector("#logoutFrm");
 			console.log(frm);
 			frm.submit();
-		})
+		});
+
 		
-		
-	</script> 
+</script> 
 
 
 

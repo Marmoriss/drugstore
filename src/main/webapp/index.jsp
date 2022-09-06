@@ -9,7 +9,7 @@
 </jsp:include>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/index.css" />
-<body>
+<div class="body">
 	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">
 			<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -36,7 +36,7 @@
 			<span class="sr-only">Next</span>
 		</button>
 	</div>
-</body>
+</div>
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
