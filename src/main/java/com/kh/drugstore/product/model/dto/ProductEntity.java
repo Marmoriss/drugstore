@@ -19,10 +19,10 @@ public class ProductEntity {
 	- 숫자는 6자리로 잡고 가기. 
  */
 	@NonNull
-	private int pCode; //상품코드
+	private int pcode; //상품코드
 	private int categoryId; //대분류코드
 	private int sttenmtNo; //품목제조관리 번호
-	private String pName; //상품명
+	private String pname; //상품명
 	@NonNull
 	private String menu; //제조사
 	@NonNull
@@ -36,6 +36,6 @@ public class ProductEntity {
 	private String distbPd; //유통기한
 	private YesNo subYn; //구독상품 여부 
 	private String baseStandard; //기준규격
-	
+	private YesNo saleStatus; // 판매 상태
 	
 }

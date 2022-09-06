@@ -5,8 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.session.RowBounds;
-
 import com.kh.drugstore.member.model.dto.User;
+
+import com.kh.drugstore.member.model.dto.Member;
+import com.kh.drugstore.product.model.dto.Category;
 import com.kh.drugstore.product.model.dto.Product;
 
 @Mapper
@@ -15,6 +17,9 @@ public interface AdminDao {
 // 주희코드 시작
 	@Select("select * from product order by pcode")
 	List<Product> selectProductList();
+	
+	@Select("select * from category where category_parent_lev = #{categoryId} order by category_id")
+	List<Category> selectCategoryList(int categoryId);
 // 주희코드 끝
 	
 // 태연코드 시작

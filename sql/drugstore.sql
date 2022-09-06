@@ -55,10 +55,12 @@ create table product(
     distb_pd varchar2(3000),
     sub_yn char(1) default 'N',
     base_standard varchar2(3000),
+    sale_status char(1) default 'Y',
     constraint pk_product_pcode primary key(pcode),
     constraint fk_product_category_code foreign key(big_code, small_code) references category(big_code, small_code) on delete cascade,
     constraint uq_product_pname unique(pname),
-    constraint ck_product_sub_yn check(sub_yn in ('Y', 'N'))
+    constraint ck_product_sub_yn check(sub_yn in ('Y', 'N')),
+    constraint ck_product_sale_status check(sale_status in ('Y', 'N'))
 );
 
 -- 입출고
@@ -416,4 +418,6 @@ select * from category;
 -- values(350015, 2, '소분류', '면역', 350003);
 -- values(350016, 2, '소분류', '심혈관계', 350003);
 
-
+select * from member;
+select * from authority;
+select * from product;
