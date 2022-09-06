@@ -16,13 +16,13 @@ public interface ProductDao {
 	@Select("select count(*) from product")
 	int getTotalContent();
 
-	@Select("select * from product_attachment where pCode = #{pCode}")
-	List<ProductAttachment> findAttachmentByProductCode(int pCode);
+	@Select("select * from product_attachment where pcode = #{pcode}")
+	List<ProductAttachment> findAttachmentByProductCode(int pcode);
 
 	@Select("select * from product where category_id = #{categoryId}")
 	List<Product> selectProductByCategoryId(int categoryId);
 
-	@Select("select * from product where pcode = #{pCode}")
-	List<Product> selectOneProduct(int pCode);
+	@Select("select * from product where pcode = #{pcode}")
+	List<Product> selectOneProduct(int pcode);
 
 }

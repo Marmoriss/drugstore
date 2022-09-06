@@ -8,7 +8,7 @@ import com.kh.drugstore.qna.model.dto.Qna;
 @Mapper
 public interface QnaDao {
 
-	@Select("select * from qna order by qnaId desc")
+	@Select("select * from qna order by qna_id desc")
 	public List<Qna> selectQnaList();
 
 
