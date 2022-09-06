@@ -30,6 +30,7 @@ public class CartController {
 		Member member = (Member) authentication.getPrincipal();
 		String memberId = member.getMemberId();
 		List<CartMemberProduct> list = cartService.findCartListByMemberId(memberId);
+		log.debug("list = {}", list);
 		model.addAttribute("list", list);
 		model.addAttribute("memberId", memberId);
 		

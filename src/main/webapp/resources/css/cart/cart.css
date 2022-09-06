@@ -6,6 +6,7 @@
 main {
    max-width: 1024px;
    margin:0 auto;
+   padding-top: 350px;
 }
 .title-wrap {
    margin-top:20px;

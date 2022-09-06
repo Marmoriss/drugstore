@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/memberLogin.css" />
 
-<body>
+<div class="body">
 	 <div id="login">
         <h3 class="text-center text-white pt-5">Login form</h3>
         <div class="container">
@@ -57,7 +57,7 @@
     </div>
     
    
-</body>
+</div>
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
