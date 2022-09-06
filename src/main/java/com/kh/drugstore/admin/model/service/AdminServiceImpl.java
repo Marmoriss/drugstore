@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.drugstore.admin.model.dao.AdminDao;
 import com.kh.drugstore.member.model.dto.Member;
+import com.kh.drugstore.product.model.dto.Category;
 import com.kh.drugstore.product.model.dto.Product;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,13 @@ public class AdminServiceImpl implements AdminService {
 	public List<Product> selectProductList() {
 		return adminDao.selectProductList();
 	}
+	
+	@Override
+	public List<Category> selectCategoryList(int categoryId) {
+		return adminDao.selectCategoryList(categoryId);
+	}
+	
+	
 // 주희코드 끝
 	
 //	태연코드 시작
