@@ -21,13 +21,12 @@ public class Product extends ProductEntity {
 	// 첨부파일 추가 클래스
 	private List<ProductAttachment> attachments = new ArrayList<>();
 
-	public Product(@NonNull int pCode, int categoryId, int sttenmtNo, String pName, @NonNull String menu,
+	public Product(@NonNull int pcode, int categoryId, int sttenmtNo, String pname, @NonNull String menu,
 			@NonNull int price, @NonNull int amount, String ingreName, String mainFnctn, String intakeHint1,
-			String srvUse, String distbPd, YesNo subYn, String baseStandard) {
-		super(pCode, categoryId, sttenmtNo, pName, menu, price, amount, ingreName, mainFnctn, intakeHint1, srvUse, distbPd,
-				subYn, baseStandard);
+			String srvUse, String distbPd, YesNo subYn, String baseStandard, YesNo saleStatus) {
+		super(pcode, categoryId, sttenmtNo, pname, menu, price, amount, ingreName, mainFnctn, intakeHint1, srvUse, distbPd,
+				subYn, baseStandard, saleStatus);
 	}
-	
 	
 	public void add(ProductAttachment attach) {
 		this.attachments.add(attach);
