@@ -10,7 +10,7 @@ import com.kh.drugstore.product.model.dto.ProductAttachment;
 
 public interface ProductDao {
 
-	@Select("select p.*, (select count(*) from product_attachment where pcode = p.pcode) attach_count from product p order by pcode desc")
+	@Select("select p.*, (select count(*) from product_attachment where pcode = p.pcode) attach_count from product p")
 	List<Product> findAllProduct(RowBounds rowBounds);
 
 	@Select("select count(*) from product")
@@ -18,5 +18,11 @@ public interface ProductDao {
 
 	@Select("select * from product_attachment where pCode = #{pCode}")
 	List<ProductAttachment> findAttachmentByProductCode(int pCode);
+
+	@Select("select * from product where category_id = #{categoryId}")
+	List<Product> selectProductByCategoryId(int categoryId);
+
+	@Select("select * from product where pcode = #{pCode}")
+	List<Product> selectOneProduct(int pCode);
 
 }

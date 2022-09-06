@@ -14,5 +14,9 @@ public interface ProductService {
 
 	List<ProductAttachment> findAttachmentByProductCode(int pCode);
 
+	List<Product> selectProductByCategoryId(int categoryId);
+
+	List<Product> selectOneProduct(int pCode);
+
 	
 }
