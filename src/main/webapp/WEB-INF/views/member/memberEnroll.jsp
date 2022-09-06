@@ -108,7 +108,9 @@ document.querySelector("#memberId").addEventListener('keyup', (e) => {
 		success(response){
 			console.log(response); // js object
 			
+			
 			const {available} = response;
+						
 			if(available){
 				error.style.display = "none";
 				ok.style.display = "inline";

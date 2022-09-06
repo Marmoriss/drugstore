@@ -198,6 +198,14 @@
             <version>${org.springframework.security-version}</version>        
         </dependency>  
 		
+		
+		 <!-- #12. jsonView 의존 -->
+	    <dependency>
+	        <groupId>net.sf.json-lib</groupId>
+	        <artifactId>json-lib-ext-spring</artifactId>
+	        <version>1.0.2</version>
+	    </dependency>
+		
 		<!-- #13. jackson messageConverter빈 관련 의존 -->
 		<!-- xml처리를 위한 의존 -->
 		<dependency>
