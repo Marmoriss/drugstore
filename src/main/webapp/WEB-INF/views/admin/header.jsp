@@ -60,7 +60,7 @@
 							</h2>
 						</div>
 						<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-							<div class="card-body text-center"><a href="">회원 조회</a></div>
+							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/user/userList.do">회원 조회</a></div>
 						</div>
 					</div>
 					<div class="card">

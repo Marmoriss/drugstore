@@ -23,14 +23,14 @@
 
    <br />
    <%-- 해당 게시글 작성자가(관리자)한테만 수정/삭제버튼이 보일수 있게 할 것 추가예정 --%>
-   <sec:authorize access="hasRole('ADMIN')"> 
+   <sec:authorize access="hasRole('ADMIN')">
    	<button type="button" 
 			class="btn-update"
 			onclick="location.href='${pageContext.request.contextPath}/notice/noticeUpdate.do?no=${notice.no}';">수정</button>
 	<button type="button" 
 			class="btn-delete"
 			onclick="location.href='${pageContext.request.contextPath}/notice/noticeDelete.do?no=${notice.no}';">삭제</button>   
-   </sec:authorize>
+</sec:authorize>
 <br />
 <br />
 <br />

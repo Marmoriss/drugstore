@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.session.RowBounds;
+import com.kh.drugstore.member.model.dto.User;
 
 import com.kh.drugstore.member.model.dto.Member;
 import com.kh.drugstore.product.model.dto.Category;
@@ -21,8 +23,13 @@ public interface AdminDao {
 // 주희코드 끝
 	
 // 태연코드 시작
-	@Select("select m.member_id, name, phone, created_at, gender, body from member m join servey s on (m.member_id = s.member_id)")
-	List<Member> memberList();
+	List<User> userList(RowBounds rowBounds);
+	
+	@Select("select count(*)\r\n"
+			+ "from (select\r\n"
+			+ "		m.member_id,name,phone,created_at,gender,body from member m join servey s on\r\n"
+			+ "		(m.member_id = s.member_id))")
+	int getTotalContent();
 // 태연코드 끝
 
 }
