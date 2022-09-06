@@ -21,9 +21,9 @@ button{border:none; cursor: pointer;}
 .hand, .pointer{cursor: pointer !important;}
 
 /***** body *****/
-body{
+.body{
 	margin: 0 auto;
-	padding-top: 340px;
+	padding-top: 350px;
 }
 /***** 사진 배너 *****/
 .carousel{

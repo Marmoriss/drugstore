@@ -43,5 +43,34 @@ public class ProductServiceImpl implements ProductService {
 	 	return productDao.findAttachmentByProductCode(pCode);
 	}
 	
-	//
+	@Override
+	public List<Product> selectProductByCategoryId(int categoryId) {
+		return productDao.selectProductByCategoryId(categoryId);
+	}
+	
+	@Override
+	public List<Product> selectOneProduct(int pCode) {
+		return productDao.selectOneProduct(pCode);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
