@@ -67,9 +67,9 @@ public class ProductListController {
 	
 	// 상품 코드로 상세페이지 조회
 	@GetMapping("/productDetail.do")
-	public void productDetail(@RequestParam int pCode, Model model) {
-		log.debug("pcode = {}", pCode);
-		List<Product> list = productService.selectOneProduct(pCode);
+	public void productDetail(@RequestParam int pcode, Model model) {
+		log.debug("pcode = {}", pcode);
+		List<Product> list = productService.selectOneProduct(pcode);
 		log.debug("list = {}", list);
 		model.addAttribute("list", list);
 		
