@@ -36,7 +36,7 @@
 			<tr>
 				<th>패스워드확인</th>
 				<td>	
-					<input type="password" class="form-control" id="passwordCheck" value="" required>
+					<input type="password" class="form-control" id="passwordCheck" name="passwordCheck" value="" required>
 				</td>
 			</tr>  
 			<tr>
@@ -74,9 +74,18 @@
 
 
 document.memberEnrollFrm.addEventListener('submit', (e) => {
+	const password = document.querySelector("#password");
+	const passwordCheck = document.querySelector("#passwordCheck");
+	
 	if(idValid.value === "0"){
 		e.preventDefault();
 		alert("유효한 아이디를 입력해주세요.");
+		return;
+	}
+	if(password.value != passwordCheck.value){
+		e.preventDefault();
+		alert("비밀번호가 일치하지 않습니다.");
+		passwordCheck.select();
 		return;
 	}
 }); 
@@ -110,16 +119,17 @@ document.querySelector("#memberId").addEventListener('keyup', (e) => {
 			
 			
 			const {available} = response;
-						
+			
+			console.log(available);
 			if(available){
-				error.style.display = "none";
-				ok.style.display = "inline";
-				idValid.value = "1";
-			}
-			else {
 				error.style.display = "inline";
 				ok.style.display = "none";
 				idValid.value = "0";
+			}
+			if(!available){
+				error.style.display = "none";
+				ok.style.display = "inline";
+				idValid.value = "1";
 			}
 			
 		},

@@ -142,7 +142,6 @@ public class MemberController {
 	public ResponseEntity<?> checkIdDuplicate3(@RequestParam String memberId) {
 		Member member = memberService.selectOneMember(memberId);
 		boolean available = member == null;
-		
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("memberId", memberId);

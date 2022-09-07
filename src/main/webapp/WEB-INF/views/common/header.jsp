@@ -48,7 +48,7 @@
 		<div class="wrap_inner relative header-nav-inner">
 			<div class="nav header-nav-list-wrap">
 				<ul class="header-nav-list">
-					<li class="header-nav-item"><a href="" class="header-nav-text">건강설문</a></li>
+					<li class="header-nav-item"><a href="${pageContext.request.contextPath}/servey/servey.do" class="header-nav-text">건강설문</a></li>
 					<li class="header-nav-item"><a href="" class="header-nav-text">정기구독</a></li>
 					<li class="header-nav-item"><a class="header-nav-text" href="${pageContext.request.contextPath}/notice/noticeList.do">고객센터</a></li>
 					
@@ -121,20 +121,7 @@
 		</div>
 	</div>
 </header>
-<<<<<<< HEAD
 
-
-=======
-<script>
-		document.querySelector("[name=logoutLink]").addEventListener('click',(e)=>{
-			const frm = document.querySelector("#logoutFrm");
-			console.log(frm);
-			frm.submit();
-		});
-
-		
-</script> 
->>>>>>> branch 'master' of https://github.com/Marmoriss/drugstore.git
 
 
 

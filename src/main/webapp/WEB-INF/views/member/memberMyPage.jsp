@@ -21,7 +21,7 @@
       <li><h3>마이페이지</h3></li>
       <li><a href="${pageContext.request.contextPath}/member/updateMember.do">회원정보수정</a></li>
       <li><h3>나의 쇼핑정보</h3></li>
-      <li><a href="#">주문 / 배송내역</a></li>
+      <li><a href="">주문 / 배송내역</a></li>
       <li><a href="#">최소 / 환불내역</a></li>
       <li><a href="#">교환 / 반품내역</a></li>
       <li><h3>나의 활동</h3></li>
@@ -42,9 +42,9 @@
   <!-- /본문 -->
 </div>
 	
-</body>
 
 <script>
-
+	
 </script>
+</body>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+span{
+	font-size : 22px;
+}
+#container{
+	background-color: pink;
+	height: 600px;
+}
+form{
+	padding : 20px;
+}
+#main, .qBox div{
+	background-color: whitesmoke;
+	width: 50%;
+	height : 580px;
+	padding : 10px;
+    text-align: center;
+}
+#main div, .qBox div{
+	padding-top: 200px;
+}
+
+/* input radio,number 크기 조절 */
+.qBox div label{
+	    margin: 20px 20px;
+	    font-size: 23px;
+}
+.qBox div input[type=radio]{
+	width: 30px;
+	height: 30px;
+}
+.qBox div input[type=number]{
+	margin-top : 10px;
+	width: 300px;
+	height: 50px;
+}
+.btn{
+	width: 80px;
+	height: 50px;
+    padding: 10px;
+    margin-top: 70px;
+}
+button{
+	color : white;
+}
+
+@Keyframes fadeIn{
+	from {opacity : 0;}
+	to {opacity : 1;}
+}
+
+@Keyframes fadeOut{
+	from {opacity : 1;}
+	to {opacity : 0;}
+}
+
+@-webkit-Keyframes fadeIn{
+	from {opacity : 0;}
+	to {opacity : 1;}
+}
+
+@-webkit-Keyframes fadeOut{
+	from {opacity : 1;}
+	to {opacity : 0;}
+}
