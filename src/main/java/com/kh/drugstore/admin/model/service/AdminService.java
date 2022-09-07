@@ -16,6 +16,10 @@ public interface AdminService {
 	List<Product> selectProductList();
 	
 	List<Category> selectCategoryList(int categoryId);
+	
+	List<String> autocompletePname(String pname);
+	
+	List<String> autocompleteManu(String manu);
 // 주희코드 끝
 
 // 태연코드 시작
@@ -24,8 +28,5 @@ public interface AdminService {
 
 
 // 태연코드 끝
-
-
-
 
 }
