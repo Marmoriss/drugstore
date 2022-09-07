@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.drugstore.admin.model.dao.AdminDao">
+	<resultMap
+		type="com.kh.drugstore.member.model.dto.MemberEntity" id="memberMap">
+		<id property="memberId" column="member_id" />
+		<id property="name" column="name" />
+		<id property="password" column="password" />
+		<id property="phone" column="phone" />
+		<id property="createdAt" column="created_at" />
+		<id property="updatedAt" column="updated_at" />
+		<id property="enabled" column="enabled" />
+		<id property="recipient" column="recipient" />
+		<id property="postCode" column="post_code" />
+		<id property="address" column="address" />
+		<id property="detailAddress" column="detail_address" />
+		<id property="memo" column="memo" />
+	</resultMap>
+
+	<resultMap type="com.kh.drugstore.servey.model.dto.Servey"
+		id="serveyMap">
+		<id property="no" column="no" />
+		<id property="memberId" column="member_id" />
+		<id property="gender" column="gender" />
+		<id property="height" column="height" />
+		<id property="weight" column="weight" />
+		<id property="body" column="body" />
+		<id property="symptom" column="symptom" />
+
+	</resultMap>
+
+	<resultMap type="com.kh.drugstore.member.model.dto.User"
+		id="userMap">
+		<collection property="member" resultMap="memberMap" />
+		<collection property="servey" resultMap="serveyMap" />
+	</resultMap>
+
+	<select id="userList" resultMap="userMap">
+		select
+		m.member_id,name,phone,created_at,gender,body from member m join servey s on
+		(m.member_id = s.member_id)
+	</select>
+</mapper>

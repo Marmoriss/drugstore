@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.drugstore.qna.model.dao.QnaDao">
+
+	<resultMap type="com.kh.drugstore.qna.model.dto.Qna"
+		id="qnaMap">
+		<id property="qnaId" column="qna_id" />
+		<id property="commentRef" column="comment_ref" />
+		<id property="pCode" column="pcode" />
+		<id property="writer" column="writer" />
+		<id property="answered" column="answered" />
+		<id property="regDate" column="reg_date" />
+		<id property="content" column="content" />
+		<id property="secertPassword" column="secret_password" />
+		<id property="commentLevel" column="comment_level" />
+
+	</resultMap>
+
+</mapper>
