@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -85,6 +86,25 @@ public class AdminController {
 				.body(categoryList);
 	}
 	
+	@GetMapping("/autocompletePname.do")
+	public ResponseEntity<?> autocompletePname(@RequestParam String term){
+		List<String> resultList = adminService.autocompletePname(term);
+		log.debug("resultList = {}", resultList);
+		
+		return ResponseEntity.status(HttpStatus.OK)
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+				.body(resultList);
+	}
+	
+	@GetMapping("/autocompleteManu.do")
+	public ResponseEntity<?> autocompleteManu(@RequestParam String term){
+		List<String> resultList = adminService.autocompleteManu(term);
+		log.debug("resultList = {}", resultList);
+		
+		return ResponseEntity.status(HttpStatus.OK)
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+				.body(resultList);
+	}
 // 주희코드 끝	
 
 	
