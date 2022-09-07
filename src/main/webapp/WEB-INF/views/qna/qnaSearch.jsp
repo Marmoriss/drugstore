@@ -36,7 +36,7 @@
 						<button 
 						type="button" 
 						class="btn-search" id="btn-search"
-						onclick="location.href='${pageContext.request.contextPath}/qna/qnaList.do?no=${qna.writer}';">내 Q&A 조회하기</button>
+						onclick="location.href='${pageContext.request.contextPath}/qna/qnaList.do?no=${qna.qnaId}';">내 Q&A 조회하기</button>
 					</c:if>
 				</div>
 					<div class="dropdown">

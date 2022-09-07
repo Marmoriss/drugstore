@@ -2,12 +2,17 @@ package com.kh.drugstore.qna.controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.drugstore.member.model.service.MemberService;
 import com.kh.drugstore.qna.model.dto.Qna;
 import com.kh.drugstore.qna.model.service.QnaService;
 
@@ -21,10 +26,16 @@ public class QnaController {
 	@Autowired
 	QnaService qnaService;
 	
+	@Autowired
+	ServletContext application;
+	
+	@Autowired
+	MemberService memberService;
+	
 	//전체조회, 비밀글상태(비밀번호입력 숫자4자리), 대댓글, qna 작성(등록)
 	//qna 전체조회
 	@GetMapping("/qnaList.do")
-	public void qnaList(Model model) {
+	public void qnaList(@RequestParam(defaultValue = "1") int cPage, Model model, HttpServletRequest request) {
 		List<Qna> list = qnaService.selectQnaList();
 		model.addAttribute("list", list);
 	}
