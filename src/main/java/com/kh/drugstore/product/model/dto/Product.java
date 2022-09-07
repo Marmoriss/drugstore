@@ -1,5 +1,6 @@
 package com.kh.drugstore.product.model.dto;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +24,16 @@ public class Product extends ProductEntity {
 
 	public Product(@NonNull int pcode, int categoryId, int sttenmtNo, String pname, @NonNull String menu,
 			@NonNull int price, @NonNull int amount, String ingreName, String mainFnctn, String intakeHint1,
-			String srvUse, String distbPd, YesNo subYn, String baseStandard, YesNo saleStatus) {
+			String srvUse, String distbPd, YesNo subYn, String baseStandard, SaleStatus saleStatus, LocalDate createdAt,
+			LocalDate updatedAt) {
 		super(pcode, categoryId, sttenmtNo, pname, menu, price, amount, ingreName, mainFnctn, intakeHint1, srvUse, distbPd,
-				subYn, baseStandard, saleStatus);
+				subYn, baseStandard, saleStatus, createdAt, updatedAt);
+		// TODO Auto-generated constructor stub
 	}
 	
 	public void add(ProductAttachment attach) {
 		this.attachments.add(attach);
 	}
+
 
 }
