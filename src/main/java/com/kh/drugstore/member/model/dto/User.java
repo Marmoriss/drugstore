@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class User {
 	private MemberEntity member;
 	private Servey servey;
+	
 }

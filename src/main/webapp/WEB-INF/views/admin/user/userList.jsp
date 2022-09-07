@@ -16,36 +16,126 @@
 	margin-left: 450px;
 }
 
+.pagebar {
+	background-color: transparent;
+	margin-top: 200px;
+}
+
+.page-item.active .page-link {
+	border-color: rgb(65, 88, 101);
+	background-color: rgb(65, 88, 101);
+}
+div#search-name {
+	display: ${searchType == 'name' ? "inline-block" : "none" };
+}
+div#search-gender {
+	display: ${searchType == 'gender' ? "inline-block" : "none" };
+}
+div#search-memberId {
+	display: ${searchType == 'member_id' ? "inline-block" : "none" };
+}
+div#search-body {
+	display: ${searchType == 'body' ? "inline-block" : "none" };
+}
+
+.btn-search{
+	background-color: rgb(122, 158, 177);
+	color:white;
+}
+.stext{
+	width:200px;
+}
 </style>
 
+<script>
+window.addEventListener('load', (e) => {
+	document.querySelector("select#searchType").onchange = (e) => {
+		document.querySelectorAll(".search-type").forEach((div, index) => {
+			div.style.display = "none";			
+		});
+		let id;
+		switch(e.target.value){
+		case "name" : id = "name"; break;
+		case "gender" : id = "gender"; break;
+		case "member_id" : id = "memberId"; break;
+		case "body" : id = "body"; break;
+		}
+		document.querySelector(`#search-\${id}`).style.display = "inline-block";
+	}
+});
+</script> 
+
 <nav class="navbar navbar-light bg-light">
-	<div class="container-fluid">
 		<a class="navbar-brand">회원 조회</a>
-		<form class="d-flex">
-		<select id="searchType" name="searchType">
-		<option value="">검색조건</option>
-		<option value="name">이름</option> 
-		<option value="gender">성별</option>
-		<option value="member_id">아이디</option>
-		<option value="body">고민부위</option>
-	</select>&nbsp;&nbsp;
-	
-			<input id="searchType" name="searchType" class="form-control me-2" type="text">&nbsp;&nbsp;
-			<button class="btn btn-outline-success" type="submit">검색</button>
-		</form>
+
+		<div id="search-form">
+			<label for="searchType">검색타입 :</label> 
+			<select id="searchType">
+				<option value="name" <c:if test="${searchType eq 'name'}">selected</c:if>>이름</option>
+				<option value="gender" <c:if test="${searchType eq 'gender'}">selected</c:if>>성별</option>
+				<option value="member_id" <c:if test="${searchType eq 'member_id'}">selected</c:if>>아이디</option>
+				<option value="body" <c:if test="${searchType eq 'body'}">selected</c:if>>고민부위</option>
+			</select>&nbsp;&nbsp;
+
+			<div id="search-name" class="search-type">
+					<input type="hidden" name="searchType" value="name" /> 
+					<input type="text" name="keyword" class="stext"
+						placeholder="검색할 이름을 입력하세요."
+						value="${searchType eq 'name' ? keyword : '' }" />
+					<button id="searchBtn" class="btn-search">검색</button>
+			</div>
+			
+			<div id="search-gender" class="search-type">
+					<input type="hidden" name="searchType" value="gender" /> 
+					<input type="radio" name="keyword" value="M" >남 ${searchType eq 'gender' && keyword eq "M" ? 'checked' : '' }
+					<input type="radio" name="keyword" value="F">여 ${searchType eq 'gender' && keyword eq "F" ? 'checked' : '' }
+					<button id="searchBtn" class="btn-search">검색</button>
+			</div>
+			
+			<div id="search-memberId" class="search-type">
+					<input type="hidden" name="searchType" value="member_id" /> 
+					<input type="text" name="keyword" class="stext"
+						placeholder="검색할 아이디를 입력하세요."
+						value="${searchType eq 'member_id' ? keyword : '' }" />
+					<button id="searchBtn" class="btn-search">검색</button>
+			</div>
+			
+			<div id="search-body" class="search-type">
+					<input type="hidden" name="searchType" value="body" /> 
+					<input type="text" name="keyword" class="stext"
+						placeholder="검색할 부위를 입력하세요."
+						value="${searchType eq 'body' ? keyword : '' }" />
+					<button id="searchBtn" class="btn-search">검색</button>
+			</div>
+
 	</div>
-</nav>
+</nav>	
+<script>
+	document.getElementById("searchBtn").onclick = function() {
 
-<table id="userList" class="table table-bordered w-50">
+		let searchType = document.getElementsByName("searchType")[0].value;
+		let keyword = document.getElementsByName("keyword")[0].value;
 
-	<tr>
-		<th>아이디</th>
-		<th>이름</th>
-		<th>연락처</th>
-		<th>가입일</th>
-		<th>성별</th>
-		<th>고민부위</th>
-	</tr>
+		
+		 console.log(searchType)
+		 console.log(keyword)
+
+		location.href = "${pageContext.request.contextPath}/admin/user/userList.do?"
+				+ "&searchType=" + searchType + "&keyword=" + keyword;
+	};
+</script>
+
+<table id="userList" class="table table-striped table-hover w-50">
+	<thead class="table-light">
+		<tr>
+			<th>아이디</th>
+			<th>이름</th>
+			<th>연락처</th>
+			<th>가입일</th>
+			<th>성별</th>
+			<th>고민부위</th>
+		</tr>
+	</thead>
 	<c:if test="${empty list}">
 		<tr>
 			<td colspan="6" class="text-center">해당 회원이 존재하지 않습니다.</td>
@@ -54,7 +144,7 @@
 	<c:if test="${not empty list}">
 		<c:forEach items="${list}" var="user">
 			<tr>${user.servey.no}</tr>
-			<td>${user.member.memberId}</td>
+			<th scope="row">${user.member.memberId}</th>
 			<td>${user.member.name}</td>
 			<td>${user.member.phone}</td>
 			<td>${user.member.createdAt}</td>
@@ -65,12 +155,11 @@
 	</c:if>
 
 </table>
-	<nav>
-		${pagebar}
-	</nav>
 
-</div>
-</div>
+<nav class="pagebar">${pagebar}</nav>
+
+
+
 
 </body>
 </html>

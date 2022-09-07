@@ -39,27 +39,23 @@ public class AdminServiceImpl implements AdminService {
 	
 //	태연코드 시작
 	@Override
-	public List<User> userList(Map<String, Integer> param) {
+	public List<User> userList(Map<String, Integer> param,String searchType, String keyword) {
 		int limit = param.get("limit");
 		int offset = (param.get("cPage") - 1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		return adminDao.userList(rowBounds);
+		return adminDao.userList(rowBounds,searchType,keyword);
 	}
 	
 	@Override
 	public int getTotalContent() {
 		return adminDao.getTotalContent();
 	}
+	
+	
 // 태연코드 끝
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
+	
+	
+	
+	
+	

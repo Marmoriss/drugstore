@@ -19,8 +19,13 @@ public interface AdminService {
 // 주희코드 끝
 
 // 태연코드 시작
-	List<User> userList(Map<String, Integer> param);
+	List<User> userList(Map<String, Integer> param, String searchType, String keyword);
 	int getTotalContent();
+
+
 // 태연코드 끝
+
+
+
 
 }
