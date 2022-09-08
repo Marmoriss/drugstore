@@ -1,5 +1,7 @@
 package com.kh.drugstore.product.model.dto;
 
+import java.time.LocalDate;
+
 import com.kh.drugstore.common.YesNo;
 
 import lombok.AllArgsConstructor;
@@ -36,6 +38,8 @@ public class ProductEntity {
 	private String distbPd; //유통기한
 	private YesNo subYn; //구독상품 여부 
 	private String baseStandard; //기준규격
-	private YesNo saleStatus; // 판매 상태
+	private SaleStatus saleStatus; // 판매 상태
+	private LocalDate createdAt; // 제품 등록일
+	private LocalDate updatedAt; // 최종 수정일
 	
 }

@@ -37,9 +37,31 @@
 		<collection property="servey" resultMap="serveyMap" />
 	</resultMap>
 
-	<select id="userList" resultMap="userMap">
+<!-- <select id="userList" resultMap="userMap">
 		select
 		m.member_id,name,phone,created_at,gender,body from member m join servey s on
 		(m.member_id = s.member_id)
-	</select>
+		
+		
+</select> -->
+
+<select id="userList" resultMap="userMap" parameterType="map">
+		select
+		m.member_id,name,phone,created_at,gender,body from member m left join servey s on
+		(m.member_id = s.member_id)
+		
+ 		<if test='searchType.equals("name")'>
+		where name like concat('%' || #{keyword},'%')
+		</if> 
+		<if test='searchType.equals("gender")'>
+		where gender like concat('%' || #{keyword},'%')
+		</if>
+		<if test='searchType.equals("member_id")'>
+		where m.member_id like concat('%' || #{keyword},'%')
+		</if>
+		<if test='searchType.equals("body")'>
+		where body like concat('%' || #{keyword},'%')
+		</if> 
+</select>	
+	
 </mapper>
