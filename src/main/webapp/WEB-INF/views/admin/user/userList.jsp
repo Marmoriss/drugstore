@@ -25,17 +25,18 @@
 	border-color: rgb(65, 88, 101);
 	background-color: rgb(65, 88, 101);
 }
+
 div#search-name {
-	display: ${searchType == 'name' ? "inline-block" : "none" };
+	display: ${searchType == null || searchType == "name" ? "inline-block" : "none"};
 }
 div#search-gender {
-	display: ${searchType == 'gender' ? "inline-block" : "none" };
+	display: ${searchType == "gender" ? "inline-block" : "none"};
 }
 div#search-memberId {
-	display: ${searchType == 'member_id' ? "inline-block" : "none" };
+	display: ${searchType == "member_id" ? "inline-block" : "none"};
 }
 div#search-body {
-	display: ${searchType == 'body' ? "inline-block" : "none" };
+	display: ${searchType == "body" ? "inline-block" : "none"};
 }
 
 .btn-search{
@@ -78,39 +79,47 @@ window.addEventListener('load', (e) => {
 			</select>&nbsp;&nbsp;
 
 			<div id="search-name" class="search-type">
-					<input type="hidden" name="searchType" value="name" /> 
-					<input type="text" name="keyword" class="stext"
-						placeholder="검색할 이름을 입력하세요."
-						value="${searchType eq 'name' ? keyword : '' }" />
-					<button id="searchBtn" class="btn-search">검색</button>
+				<form action="${pageContext.request.contextPath}/admin/user/userList.do"> 
+				<input type="hidden" name="searchType" value="name" /> 
+				<input type="text" name="keyword" class="stext"
+					placeholder="검색할 이름을 입력하세요."
+					value="${searchType eq 'name' ? keyword : '' }" />
+				<button id="searchBtn" class="btn-search">검색</button>
+				</form>
 			</div>
 			
 			<div id="search-gender" class="search-type">
+			<form action="${pageContext.request.contextPath}/admin/user/userList.do">
 					<input type="hidden" name="searchType" value="gender" /> 
-					<input type="radio" name="keyword" value="M" >남 ${searchType eq 'gender' && keyword eq "M" ? 'checked' : '' }
-					<input type="radio" name="keyword" value="F">여 ${searchType eq 'gender' && keyword eq "F" ? 'checked' : '' }
+					<input type="radio" name="keyword" value="M" <c:if test="${searchType eq 'gender' && keyword eq 'M' }">checked</c:if>>남 
+					<input type="radio" name="keyword" value="F" <c:if test="${searchType eq 'gender' && keyword eq 'F' }">checked</c:if>>여 
 					<button id="searchBtn" class="btn-search">검색</button>
+			</form>
 			</div>
 			
 			<div id="search-memberId" class="search-type">
+			<form action="${pageContext.request.contextPath}/admin/user/userList.do">
 					<input type="hidden" name="searchType" value="member_id" /> 
 					<input type="text" name="keyword" class="stext"
 						placeholder="검색할 아이디를 입력하세요."
 						value="${searchType eq 'member_id' ? keyword : '' }" />
 					<button id="searchBtn" class="btn-search">검색</button>
+			</form>
 			</div>
 			
 			<div id="search-body" class="search-type">
+			<form action="${pageContext.request.contextPath}/admin/user/userList.do">
 					<input type="hidden" name="searchType" value="body" /> 
 					<input type="text" name="keyword" class="stext"
 						placeholder="검색할 부위를 입력하세요."
 						value="${searchType eq 'body' ? keyword : '' }" />
 					<button id="searchBtn" class="btn-search">검색</button>
+			</form>
 			</div>
 
 	</div>
 </nav>	
-<script>
+<!-- <script>
 	document.getElementById("searchBtn").onclick = function() {
 
 		let searchType = document.getElementsByName("searchType")[0].value;
@@ -123,7 +132,7 @@ window.addEventListener('load', (e) => {
 		location.href = "${pageContext.request.contextPath}/admin/user/userList.do?"
 				+ "&searchType=" + searchType + "&keyword=" + keyword;
 	};
-</script>
+</script> -->
 
 <table id="userList" class="table table-striped table-hover w-50">
 	<thead class="table-light">
@@ -136,7 +145,7 @@ window.addEventListener('load', (e) => {
 			<th>고민부위</th>
 		</tr>
 	</thead>
-	<c:if test="${empty list}">
+	<c:if test="${empty list}"><br />
 		<tr>
 			<td colspan="6" class="text-center">해당 회원이 존재하지 않습니다.</td>
 		</tr>
