@@ -417,7 +417,17 @@ select * from category;
 -- values(350014, 2, '소분류', '피로감', 350003);
 -- values(350015, 2, '소분류', '면역', 350003);
 -- values(350016, 2, '소분류', '심혈관계', 350003);
+-- values(350017, 2, '소분류', '정기구독', 350004);
 
 select * from member;
 select * from authority;
 select * from product;
+
+-- product 테이블에 상품 등록일, 최종 수정일 컬럼 추가
+alter table product add (
+    created_at date default sysdate,
+    updated_at date
+);
+
+
+select * from product where pname like '%' || '비타' || '%' ;
