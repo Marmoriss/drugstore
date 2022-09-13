@@ -1,5 +1,6 @@
 package com.kh.drugstore.admin.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +40,34 @@ public interface AdminDao {
 			+ "		(m.member_id = s.member_id))")
 	int getTotalContent();
 
+	@Select("select count(*) from member where to_char(created_at, 'yymmdd') = to_char(sysdate-1,'yymmdd')")
+	int getMinus1Mem();
+
+	@Select("select count(*) from member where to_char(created_at, 'yymmdd') = to_char(sysdate-2,'yymmdd')")
+	int getMinus2Mem();
+	
+	@Select("select count(*) from member where to_char(created_at, 'yymmdd') = to_char(sysdate-3,'yymmdd')")
+	int getMinus3Mem();
+	
+	@Select("select count(*) from member where to_char(created_at, 'yymmdd') = to_char(sysdate-4,'yymmdd')")
+	int getMinus4Mem();
+	
+	@Select("select count(*) from member where to_char(created_at, 'yymmdd') = to_char(sysdate-5,'yymmdd')")
+	int getMinus5Mem();
+	
+	@Select("select count(*) from member where to_char(created_at, 'yymmdd') = to_char(sysdate-6,'yymmdd')")
+	int getMinus6Mem();
+	
+	@Select("select count(*) from member where to_char(created_at, 'yymmdd') = to_char(sysdate-7,'yymmdd')")
+	int getMinus7Mem();
+	
+	@Select("select count(*) from member where to_char(created_at, 'yymmdd') = to_char(sysdate,'yymmdd')")
+	int getMemToday();
+
+
+	
+	
+	
 	
 // 태연코드 끝
 
