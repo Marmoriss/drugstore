@@ -1,5 +1,6 @@
 package com.kh.drugstore.admin.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,6 +60,47 @@ public class AdminServiceImpl implements AdminService {
 	public int getTotalContent() {
 		return adminDao.getTotalContent();
 	}
+	
+	@Override
+	public int getMinus1Mem() {
+		return adminDao.getMinus1Mem(); 
+	}
+	
+	@Override
+	public int getMinus2Mem() {
+		return adminDao.getMinus2Mem(); 
+	}
+	
+	@Override
+	public int getMinus3Mem() {
+		return adminDao.getMinus3Mem(); 
+	}
+	@Override
+	public int getMinus4Mem() {
+		return adminDao.getMinus4Mem(); 
+	}
+	@Override
+	public int getMinus5Mem() {
+		return adminDao.getMinus5Mem(); 
+	}
+	@Override
+	public int getMinus6Mem() {
+		return adminDao.getMinus6Mem(); 
+	}
+	@Override
+	public int getMinus7Mem() {
+		return adminDao.getMinus7Mem(); 
+	}
+
+	@Override
+	public int getMemToday() {
+		return adminDao.getMemToday(); 
+	}
+	
+
+	
+	
+	
 	
 	
 // 태연코드 끝

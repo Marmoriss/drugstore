@@ -253,11 +253,8 @@ create table user_by_date(
 );
 
 -- 날짜별 방문자 수
-create table visitor_by_date(
-    no number,
-    by_date date default sysdate,
-    by_visitor number default 0,
-    constraint pk_visitor_by_date_no primary key(no)
+create table visit(
+    v_date date
 );
 
 -- 날짜별 판매량
@@ -390,7 +387,16 @@ insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.ne
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다3', '배송관련입니다3', default); 
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다4', '배송관련입니다4', default); 
 select * from notice order by no desc;
-
+delete from member where member_id='suga';
+select * from member;
+insert into member(member_id, name, password, phone, created_at,enabled,address) values('coco','코코','$2a$12$VlgIh/h3UCLgEb4ut13.h.zgQRjDawQbG5zb6T.O.I.JWVt1R0/m.','01045656589',default,default,'경기도 성남');
+insert into member(member_id, name, password, phone, created_at,enabled,address) values('cat','냥','$2a$12$.JOab1o7xFS9IgFYMMMTU.R0ZUMVePALlw.ZavbkA2ZnAT6XVxxf2','01012376859',default,default,'경기도 이천');
+insert into member(member_id, name, password, phone, created_at,enabled,address) values('cotton','코튼','$2a$12$.JOab1o7xFS9IgFYMMMTU.R0ZUMVePALlw.ZavbkA2ZnAT6XVxxf4','01012456859','22/09/07',default,'경기도 성남');
+insert into member(member_id, name, password, phone, created_at,enabled,address) values('aaa123','김에이','$2a$12$.JOab1o7xFS9IgFYMMMTU.R0ZUMVePALlw.ZavbkA2ZnAT6XVxxf4','01012477859','22/09/09',default,'경기도 성남');
+insert into member(member_id, name, password, phone, created_at,enabled,address) values('vppqmflw','김모씨','$2a$12$.JOab1o7xFS9IgFYMMMTU.R0ZUMVePALlw.ZavbkA2ZnAT6XVxxf4','01047856859','22/09/10',default,'경기도 성남');
+insert into member(member_id, name, password, phone, created_at,enabled,address) values('dd89','이모씨','$2a$12$.JOab1o7xFS9IgFYMMMTU.R0ZUMVePALlw.ZavbkA2ZnAT6XVxxf4','01089656859','22/09/11',default,'경기도 성남');
+insert into member(member_id, name, password, phone, created_at,enabled,address) values('tae','신모씨','$2a$12$.JOab1o7xFS9IgFYMMMTU.R0ZUMVePALlw.ZavbkA2ZnAT6XVxxf4','01072456859','22/09/11',default,'경기도 성남');
+insert into member(member_id, name, password, phone, created_at,enabled,address) values('cat','냥','$2a$12$.JOab1o7xFS9IgFYMMMTU.R0ZUMVePALlw.ZavbkA2ZnAT6XVxxf2','01012376859',default,default,'경기도 이천');
 
 
 --태연 코드 끝--

@@ -3,22 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%
+	String searchType = request.getParameter("searchType");
+	String keyword = request.getParameter("keyword");
+%>
 <jsp:include page="/WEB-INF/views/admin/header.jsp">
 	<jsp:param name="회원목록" value="헬로우 스프링" />
 </jsp:include>
 <style>
 .navbar-brand {
-	margin-left: 220px;
+	margin-left: 250px;
 }
-
+ 
 #userList {
 	margin-left: 450px;
 }
 
 .pagebar {
 	background-color: transparent;
-	margin-top: 200px;
+	margin-top: 150px;
+	justify-content: center;
 }
 
 .page-item.active .page-link {
@@ -27,16 +31,16 @@
 }
 
 div#search-name {
-	display: ${searchType == null || searchType == "name" ? "inline-block" : "none"};
+	display: <%= searchType == null || "name".equals(searchType) ? "inline-block" : "none" %>;
 }
 div#search-gender {
-	display: ${searchType == "gender" ? "inline-block" : "none"};
+	display: <%= "gender".equals(searchType) ? "inline-block" : "none" %>;
 }
 div#search-memberId {
-	display: ${searchType == "member_id" ? "inline-block" : "none"};
+	display: <%= "member_id".equals(searchType) ? "inline-block" : "none" %>;
 }
 div#search-body {
-	display: ${searchType == "body" ? "inline-block" : "none"};
+	display: <%= "body".equals(searchType) ? "inline-block" : "none" %>;
 }
 
 .btn-search{

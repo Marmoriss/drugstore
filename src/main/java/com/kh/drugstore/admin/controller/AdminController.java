@@ -3,6 +3,7 @@ package com.kh.drugstore.admin.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,13 +15,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.drugstore.admin.model.service.AdminService;
 import com.kh.drugstore.common.DrugstoreUtils;
+import com.kh.drugstore.member.model.dto.Member;
 import com.kh.drugstore.member.model.dto.User;
 import com.kh.drugstore.product.model.dto.Category;
 import com.kh.drugstore.product.model.dto.Product;
@@ -135,16 +135,17 @@ public class AdminController {
 		
 		
 	}
+	
+	@GetMapping("/statis/enrollStatis.do")
+	public void enrollStatis(Model model) {
+			model.addAttribute("memMinus1", adminService.getMinus1Mem());
+			model.addAttribute("memMinus2", adminService.getMinus2Mem());
+			model.addAttribute("memMinus3", adminService.getMinus3Mem());
+			model.addAttribute("memMinus4", adminService.getMinus4Mem());
+			model.addAttribute("memMinus5", adminService.getMinus5Mem());
+			model.addAttribute("memMinus6", adminService.getMinus6Mem());
+			model.addAttribute("memMinus7", adminService.getMinus7Mem());
+			model.addAttribute("memToday", adminService.getMemToday());
+	}
 // 태연코드 끝
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-}
+}	

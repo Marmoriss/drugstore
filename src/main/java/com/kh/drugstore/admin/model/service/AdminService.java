@@ -1,5 +1,6 @@
 package com.kh.drugstore.admin.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,25 @@ public interface AdminService {
 	int getTotalContent();
 
 
+	int getMinus1Mem();
+	int getMinus2Mem();	
+	int getMinus3Mem();
+	int getMinus4Mem();
+	int getMinus5Mem();
+	int getMinus6Mem();
+	int getMinus7Mem();
+	int getMemToday();
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
 // 태연코드 끝
 
 }
