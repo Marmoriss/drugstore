@@ -62,6 +62,34 @@
 		<if test='searchType.equals("body")'>
 		where body like concat('%' || #{keyword},'%')
 		</if> 
-</select>
+    
+</select>	
+
+	
+	
+	<!-- 주희 코드 -->
+	<update id="updateProduct">
+		update
+			product
+		set
+			pname = #{pname},
+			manu = #{manu},
+			amount = #{amount},
+			price = #{price},
+			discount = #{discount},
+			sale_status = #{saleStatus},
+			category_id = #{categoryId},
+			updated_at = sysdate
+		where
+			pcode = #{pcode}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+
 
 </mapper>
