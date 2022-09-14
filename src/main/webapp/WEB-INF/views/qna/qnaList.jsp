@@ -27,7 +27,7 @@
 				<div class="qna-enroll">
 					<sec:authorize access="isAuthenticated()">
 						<input type="button" value="상품 Q&A 작성하기" id="btn-write" class="btn-write" 
-							onclick="location.href='${pageContext.request.contextPath}/qna/qnaUpdateForm.do';"/>
+							onclick="location.href='${pageContext.request.contextPath}/qna/qnaForm.do';"/>
 					</sec:authorize>
 				</div>
 			<div class="content-myQna-wrap">
