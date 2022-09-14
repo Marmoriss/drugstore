@@ -62,6 +62,7 @@
 		<if test='searchType.equals("body")'>
 		where body like concat('%' || #{keyword},'%')
 		</if> 
+    
 </select>	
 
 	
@@ -89,13 +90,6 @@
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
 </mapper>
