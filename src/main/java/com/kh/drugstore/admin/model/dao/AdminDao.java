@@ -1,17 +1,21 @@
-package com.kh.drugstore.admin.model.dao;
+  package com.kh.drugstore.admin.model.dao;
 
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.session.RowBounds;
 import com.kh.drugstore.member.model.dto.User;
 
 import com.kh.drugstore.member.model.dto.Member;
 import com.kh.drugstore.product.model.dto.Category;
 import com.kh.drugstore.product.model.dto.Product;
+import com.kh.drugstore.product.model.dto.ProductAttachment;
 
 @Mapper
 public interface AdminDao {
@@ -28,6 +32,32 @@ public interface AdminDao {
 	
 	@Select("select manu from product where manu like '%' || #{menu} || '%' ")
 	List<String> autocompleteManu(String manu);
+	
+	@Insert("insert into product(pcode, category_id, pname, manu, price, amount) values(seq_product_no.nextval, #{categoryId}, #{pname}, #{manu}, #{price}, #{amount})")
+	@SelectKey(statement = "select seq_product_no.currval from dual", before = false, keyProperty = "pcode", resultType = int.class)
+	int insertProduct(Product product);
+	
+	@Insert("insert into product_attachment values(seq_product_attach_no.nextval, #{pcode}, #{originalFilename}, #{renamedFilename}, default)")
+	int insertAttachment(ProductAttachment attach);
+	
+	@Insert("insert into product values(seq_product_no.nextval, #{sttenmtNo}, #{pname}, #{manu}, 0, 0, null, #{mainFnctn}, #{intakeHint1}, #{srvUse}, #{distbPd}, default, #{baseStandard}, null, default, default, null)")
+	int insertOpenApi(Map<String, Object> map);
+	
+	@Select("select * from category where category_id = #{categoryId}")
+	Category getCategoryParentLevel(int categoryId);
+	
+	@Select("select * from product_attachment where attach_no = #{attachNo}")
+	ProductAttachment selectOneAttachment(int attachNo);
+	
+	@Delete("delete from product_attachment where attach_no = #{attachNo}")
+	int deleteAttachment(int attachNo);
+	
+	int updateProduct(Product product);
+	
+	
+	
+	
+	
 // 주희코드 끝
 	
 // 태연코드 시작
@@ -38,6 +68,13 @@ public interface AdminDao {
 			+ "		m.member_id,name,phone,created_at,gender,body from member m join servey s on\r\n"
 			+ "		(m.member_id = s.member_id))")
 	int getTotalContent();
+
+
+
+
+
+
+
 
 	
 // 태연코드 끝

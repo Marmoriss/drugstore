@@ -149,11 +149,16 @@ create table question(
 create table intake_check(
     no number,
     member_id varchar2(50),
-    check_list varchar2(200),
+    pcode number,
+    intake_day varchar2(10), -- 섭취 요일 월요일 - 일요일
+    alarm_time number, -- 알림 시간 20, 16
+    intake_yn char(1) default 'N',
     created_at date default sysdate,
-    completed_at date,
-    constraint pk_intake_check primary key(no),
-    constraint fk_intake_check foreign key(member_id) references member(member_id) on delete cascade
+    deleted_at date,
+    constraint pk_intake_check_no primary key(no),
+    constraint fk_intake_check_member_id foreign key(member_id) references member(member_id) on delete cascade,
+    constraint fk_intake_check_pcode foreign key(pcode) references product(pcode) on delete cascade,
+    constraint ck_intake_check_intake_yn check(intake_yn in ('Y', 'N'))
 );
 
 -- 리뷰
@@ -421,13 +426,30 @@ select * from category;
 
 select * from member;
 select * from authority;
-select * from product;
+select * from product where pcode = 45 order by pcode;
+select * from product p
+    left join product_attachment a
+        on p.pcode = a.pcode;
+select * from product_attachment;
+select
+			p.*,
+			a.*
+		from
+			product p
+				left join product_attachment a
+					on p.pcode = a.pcode
+		where
+			p.pcode = 45;
 
 -- product 테이블에 상품 등록일, 최종 수정일 컬럼 추가
 alter table product add (
-    created_at date default sysdate,
-    updated_at date
+    discount number default 0
 );
 
+--  product 테이블 sale_status 컬럼 제약조건 변경
+alter table product add constraint ck_product_sale_status check(sale_status in ('Y', 'N', 'S'));
 
+alter table product modify(sale_status varchar2(7));
+select to_date('2022/09/08', 'yyyy/mm/dd') from dual;
+select * from product where created_at between to_date('2022/09/01', 'yyyy/mm/dd') and to_date('2022/09/08', 'yyyy/mm/dd');
 select * from product where pname like '%' || '비타' || '%' ;
