@@ -35,6 +35,7 @@
 				value="${notice.content}"></textarea>
 		</div>
 		<button type="submit" class="btn-add">등록</button>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	</form>
 </div>
 

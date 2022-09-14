@@ -57,7 +57,7 @@ public class ServeyController {
 		double bmi = Math.round(bmiOrigin * 100) / 100;
 		
 		
-		List<?> serveyProductList = productService.findServeyProduct(servey.getBody());
+//		List<?> serveyProductList = productService.findServeyProduct(servey.getBody());
 		
 		model.addAttribute("servey", servey);
 		model.addAttribute("bmi", bmi);

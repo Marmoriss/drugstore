@@ -5,13 +5,34 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import com.kh.drugstore.cart.model.dto.CartMemberProduct;
+import com.kh.drugstore.cart.model.dto.Cart;
+import com.kh.drugstore.product.model.dto.Product;
 
 @Mapper
 public interface CartDao {
 
-	@Select("select c.*, p.*, m.* from cart c, product p, member m where c.pcode = p.pcode and c.member_id = #{memberId} and m.member_id = #{memberId}")
-	List<CartMemberProduct> findCartListByMemberId(String memberId);
+	//@Select("select * from cart where member_id = #{memberId}")
+	List<Cart> findCartListByMemberId(String memberId);
+
+	@Select("select * from product where pcode = #{pcode}")
+	List<Product> findProductByPcode(String pcode);
+
+	
+	int deleteCart(int[] cartNo);
+
+	int cartDelete(int[] cartNo);
+
+	
+	int updateCart(int amount, int pcode);
+
+	List<Cart> findOrderListByCartNo(int[] checkbox);
+	
+	
+//	List<Cart> findCartListByMemberId(String memberId);
+//	
+//	List<Product> findProductByCartList(List<Cart> cartList);
+
+
 
 	
 }

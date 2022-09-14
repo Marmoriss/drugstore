@@ -15,7 +15,6 @@
 		<article>
 	<div class="content-wrap">
 		<form action="${pageContext.request.contextPath}/cart/cartOrder" name="memberOrderFrm" method="post">
-			
 	<div class="cart-product-header">장바구니</div>
 		<table class="cart-product">
 			<thead>
@@ -28,50 +27,77 @@
 					<th>판매가</th>
 					<th>수량</th>
 					<th>배송구분</th>
-					<th>배송비</th>
 					<th>합계</th>
-					<th>선택</th>
 				</tr>
 			</thead>
 			<tbody>
+		
+			
 			  	<c:if test="${empty list}">
 					<tr>
-						<td colspan="9" class="text-center">장바구니에 상품이 없습니다.<br><button type='button'>쇼핑하러 가기</button></td>
+						<td colspan="8" class="text-center">장바구니에 상품이 없습니다.<br><button type='button'>쇼핑하러 가기</button></td>
 					</tr>
 				</c:if>
 				<c:if test="${not empty list}">
-					<c:forEach items="${list}" var="cartList">
-						<tr data-no="${cartList.cart.cartNo}">
+					
+					<c:forEach items="${list}" var="cartlist">
+						<tr>
 							<td class="checkbox">
 									<span>
-										<input type="checkbox" name="checkbox" id="selectOrder" value="${cartList.cart.cartNo}"/>
+										<input type="checkbox" name="checkbox" id="selectOrder" value="${cartlist.cartNo}"/>
 									</span>						
 							</td>
 							<td id="productImg">
 									<div id="product-img-wrap">
-										<img src="${pageContext.request.contextPath}/upload/admin/${cartList.productAttachment.renamedFilename}" alt="" />
 										
+									<!--  	<img src="${pageContext.request.contextPath}/upload/admin/${cartList.productAttachment.renamedFilename}" alt="" />
+										-->
 									</div>
 								</td>
 							<td id="productInfo">
-									<div class="productName" class="strong">${cartList.product.pName}</div>
-									<input type="hidden" name="productCode" value="${cartList.product.pCode}" />
-									<input type="hidden" name="cartNo" value="${cartList.cart.cartNo}" />
+							   
+									<div class="productName" class="strong">${cartlist.product.pname}</div>
+									<input type="hidden" name="productCode" value="${cartlist.product.pcode}" />
+									<input type="hidden" name="cartNo" value="${cartlist.cartNo}" />
+							
 							</td>
-							<td><span><span>${cartList.product.price}</span>원</span></td>
+							<td>  <span><span><fmt:formatNumber value="${cartlist.product.price}" type="number"/></span>원</span> </td>
 							<td>
-								<span>${cartList.cart.amount}</span>
-								<input type="hidden" name="cartAmount" value="${cartList.cart.amount}" />
+								<span class=""> <span class="df-base-qty">
+												<input 
+												id="amount_id_0" name="${cartlist.product.pcode}amount" size="2" value="${cartlist.amount}"
+												type="text" />
+												<!--  name="${cartlist.pcode}"-->
+												<a href="javascript:;" style="margin-left: 0px !important;"
+												
+												onclick="amount_change(${cartlist.product.pcode},1)" >
+												<img
+													src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif"
+													alt="증가" class="up" /></a>
+													
+												<a href="javascript:;" style="margin: 0 !important;" 
+												
+												onclick="amount_change(${cartlist.product.pcode},-1)" >
+												<img
+													src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif"
+													alt="감소" class="down" /></a>
+												</span>
+												
+												<a href="javascript:;"
+												onclick="button_change_amount(${cartlist.cartNo})" 
+												class="df-btn light tiny ml-2">변경</a>
+												</span> 
+								<input type="hidden" name="cartAmount" value="${cartList.amount}" />
 							</td>
 							<td><span>기본</span></td>
-							<td><span><span id="productPrice">${cartList.product.price}*${cartList.cart.amount}</span>원</span></td>
+							<td>  <span><span id="productPrice"><fmt:formatNumber value="${cartList.product.price*cartList.amount}" type="number"/></span>원</span></td>
 						</tr>
 					</c:forEach>
 				</c:if>
 			</tbody>
 			<tfoot>
 				<tr>
-				<td colspan="9" id="orderProductPrice">총 금액<span id="productTotalPrice"></span>원 + 배송비 <span id="fee">3,000</span> = 합계 : <span id="totalPrice" class="strong"></span>원</td>
+				<td colspan="8" id="orderProductPrice">총 금액<span id="productTotalPrice"></span>원 + 배송비 <span id="fee">3,000</span> = 합계 : <span id="totalPrice" class="strong"></span>원</td>
 				</tr>
 			</tfoot>
 		</table>
@@ -107,8 +133,8 @@
 </main>
 <script>
 const select = document.querySelectorAll("#selectOrder");
-
-
+const headers = {};
+headers['${_csrf.headerName}'] = '${_csrf.token}';
 
 document.querySelector("#allOrder").addEventListener('click', (e) => {
 	[...select].forEach((check) => {
@@ -138,10 +164,14 @@ document.querySelector("#delBtn").addEventListener('click', (e) => {
 		}
 	}
 
+	
+	
+	
 	// 비동기로 삭제
 	$.ajax({
 		url : "${pageContext.request.contextPath}/cart/cartDelete.do",
 		type : "POST",
+		headers,
 		data : {delCartNo},
 		traditional:true,
 		success(response) {
@@ -168,5 +198,63 @@ window.addEventListener('load', (e) => {
 	totalPrice.innerHTML = (productPrice + Number(fee.innerHTML.replace(",",""))).toLocaleString('ko-KR');
 	total.innerHTML = totalPrice.innerHTML;
 });
+
+
+function amount_change(change , val){
+	var amount = val;
+	var _pcode = change;
+	var origin = $('input[name='+_pcode+'amount]').val();
+	var ps = 0;
+	var amountnum = parseInt(origin);
+	
+	if(amount == -1){ps = amountnum-1;	}
+	else{ps = amountnum + 1;}
+	
+	var pcode = parseInt(_pcode);
+	if(ps <= 0){
+		alert('0개 이하로는 변경할 수 없습니다. ');
+		return;
+	}
+	
+	
+	$.ajax({
+		type : "POST",
+		headers,
+		url : "${pageContext.request.contextPath}/cart/updateCart.do",
+		data : {
+			amount : ps,
+			pcode : pcode
+		},
+		success : function(){
+			location.reload();
+		}
+	});
+	
+}
+
+
+
+function button_change_amount(val){
+	var origin = $('input[name='+val+'amount]').val();
+	var pcode = parseInt(val);
+	var amount = parseInt(origin);
+	if(amount <= 0){
+		alert('0개 이하로는 변경할 수 없습니다.');
+		location.reload();
+		return;
+	}
+	$.ajax({
+		type : "POST",
+		headers,
+		url : "${pageContext.request.contextPath}/cart/updateCart.do",
+		data : {
+			amount : amount,
+			pcode : pcode
+		},
+		success : function(){
+			location.reload();
+		}
+	});
+}
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

@@ -1,6 +1,7 @@
 package com.kh.drugstore.product.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -8,6 +9,7 @@ import org.apache.ibatis.session.RowBounds;
 
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.dto.ProductAttachment;
+import com.kh.drugstore.product.model.dto.ProductEntity;
 
 @Mapper
 public interface ProductDao {
@@ -24,8 +26,9 @@ public interface ProductDao {
 	@Select("select * from product where category_id = #{categoryId}")
 	List<Product> selectProductByCategoryId(int categoryId);
 
-	@Select("select * from product where pcode = #{pcode}")
-	List<Product> selectOneProduct(int pcode);
+	Product selectOneProductCollection(int pcode);
+
+	List<ProductEntity> findByValues(Map<String, Object> param);
 
 	@Select("select * from product where main_fnctn like concat('%' || #{symptom},'%')")
 	List<Product> findServeyProduct(String symptom);

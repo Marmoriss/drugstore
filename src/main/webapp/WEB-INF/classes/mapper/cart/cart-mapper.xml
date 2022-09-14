@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.drugstore.cart.model.dao.CartDao">
+	<delete id="cartDelete">
+    DELETE FROM cart
+    WHERE 
+    <foreach collection="array" item="no" open="" close="" separator=" OR ">
+      cart_no = #{no}
+    </foreach>
+  </delete>
+  
+  <select id="findCartListByMemberId" resultMap="cartMap">
+    select 
+	    c.*,
+	    p.*,
+	    pa.*,
+	    pa.created_at attach_created_at
+	from
+	    cart c 
+	        join product p on c.pcode = p.pcode
+	        left join product_attachment pa on p.pcode = pa.pcode
+	where
+	    c.member_id = #{memberId}
+  </select>
+  <resultMap type="cart" id="cartMap">
+    <id column="cart_no" property="cartNo"/>
+  	<result column="member_id" property="memberId"/>
+  	<result column="amount" property="amount"/>
+  	
+  	<association property="product" javaType="product">
+  		<id column="pcode" property="pcode"/>
+  		<result column="pname" property="pname"/>
+  		<result column="price" property="price"/>
+  		<collection property="attachments" ofType="productAttachment">
+	  		<id column="attach_no" property="attachNo"/>
+	  		<result column="pcode" property="pcode"/>
+	  		<result column="original_filename" property="originalFilename"/>
+	  		<result column="renamed_filename" property="renamedFilename"/>
+	  		<result column="attach_created_at" property="createdAt"/>
+	  	</collection>
+  	</association>
+  	
+  </resultMap>
+  
+  <update id="updateCart">
+			update cart set amount = #{amount} 
+			where cart_no = #{cartNo}
+	</update>
+	
+	<select id="findOrderListByCartNo" resultMap="orderMap">
+	select 
+	    c.*,
+	    p.*,
+	    m.*,
+	    pa.*,
+	    pa.created_at attach_created_at
+	from
+	    cart c 
+	        join product p on c.pcode = p.pcode
+	        left join product_attachment pa on p.pcode = pa.pcode
+	        join member m on c.member_id = m.member_id
+	 <foreach collection="array" item="no" open="" close="" separator=" OR ">
+	where
+   	 c.cart_no = #{cartNo}
+   	 </foreach>
+	</select>
+	<resultMap type="cart" id="orderMap">
+    <id column="cart_no" property="cartNo"/>
+  	<result column="member_id" property="memberId"/>
+  	<result column="amount" property="amount"/>
+  	<association property="member" javaType="member">
+  	<result column="member_id" property="memberId"/>
+  	<result column="phone" property="phone"/>
+  	<result column="post_code" property="postCode"/>
+  	<result column="address" property="address"/>
+  	<result column="detail_address" property="detailAddress"/>
+  	</association>
+  	<association property="product" javaType="product">
+  		<id column="pcode" property="pcode"/>
+  		<result column="pname" property="pname"/>
+  		<result column="price" property="price"/>
+  		<collection property="attachments" ofType="productAttachment">
+	  		<id column="attach_no" property="attachNo"/>
+	  		<result column="pcode" property="pcode"/>
+	  		<result column="original_filename" property="originalFilename"/>
+	  		<result column="renamed_filename" property="renamedFilename"/>
+	  		<result column="attach_created_at" property="createdAt"/>
+	  	</collection>
+  	</association>
+  	
+  </resultMap>
+</mapper>

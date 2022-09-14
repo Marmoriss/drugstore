@@ -1,15 +1,18 @@
 package com.kh.drugstore.cart.model.dto;
 
+import com.kh.drugstore.member.model.dto.Member;
+import com.kh.drugstore.product.model.dto.Product;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cart {
-	private int CartNo;
-	private String memberId;
-	private String pcode;
-	private int amount;
+@ToString(callSuper = true)
+public class Cart extends CartEntity {
+	private Product product;
+	private Member member;
 }

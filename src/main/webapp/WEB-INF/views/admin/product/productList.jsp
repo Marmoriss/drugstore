@@ -81,7 +81,7 @@
 					<!-- /결제 상태 등 표시 끝 -->
 					<!-- 상품 조회 폼 시작 -->
 					<div class="panel panel-admin">
-						<form action="" name="adminSearchFrm">
+						<form action="${pageContext.request.contextPath}/admin/product/findByValues.do" name="adminSearchFrm">
 							<!-- 조회폼 선택지 시작 -->
 							<div class="panel-body">
 								<div class="admin-search-section">
@@ -104,80 +104,27 @@
 												</div>
 											</div>
 										</li>
-										<script>
-										// 상품명 자동 완성
-										$('#pname').autocomplete({
-											source(request, response){
-												console.log(request);
-												const {term} = request;
-												
-												$.ajax({
-													url : "${pageContext.request.contextPath}/admin/autocompletePname.do",
-													method : "GET",
-													data : {term},
-													success(pnames){
-														console.log(pnames);
-														const arr = pnames.map((pname) => ({
-															label : pname,
-															value : pname
-														}));
-														console.log(arr);
-														response(arr);
-													},
-													error(jqxhr, statusText, err){
-									                    console.log(jqxhr, statusText, err);
-									                }
-												});
-											},
-											focus(e, selected){return false;}
-										});
 										
-										// 제조사명 자동 완성
-										$('#manu').autocomplete({
-											source(request, response){
-												console.log(request);
-												const {term} = request;
-												
-												$.ajax({
-													url : "${pageContext.request.contextPath}/admin/autocompleteManu.do",
-													method : "GET",
-													data : {term},
-													success(manus){
-														console.log(manus);
-														const arr = manus.map((manu) => ({
-															label : manu,
-															value : manu
-														}));
-														console.log(arr);
-														response(arr);
-													},
-													error(jqxhr, statusText, err){
-									                    console.log(jqxhr, statusText, err);
-									                }
-												});
-											},
-											focus(e, selected){return false;}
-										});
-										</script>
 										<!-- /검색어로 검색 끝 -->
 										<!-- 판매 상태 검색 시작 -->
 										<li>
 											<div class="control-label">판매 상태</div>
 											<div class="form-group checkbox-wrap">
+											<input type="hidden" name="saleStatus" id="saleStatus" value=""/>
 												<div>
-													<input type="checkbox" name="saleStatus" value="total" id="getTotal"/>
+													<input type="radio" name="saleStatuses" value="total" id="getTotal"/>
 													<label for="getTotal">전체</label>
 												</div>
 												<div>
-													<input type="checkbox" name="saleStatus" value="Y" id="getY"/>
+													<input type="radio" name="saleStatuses" value="Y" id="getY"/>
 													<label for="getY">판매중</label>
 												</div>
 												<div>
-													<input type="checkbox" name="saleStatus" value="soldOut" id="getSoldOut"/>
+													<input type="radio" name="saleStatuses" value="S" id="getSoldOut"/>
 													<label for="getSoldOut">품절</label>
 												</div>
 												<div>
-													<input type="checkbox" name="saleStatus" value="N" id="getN"/>
+													<input type="radio" name="saleStatuses" value="N" id="getN"/>
 													<label for="getN">판매 종료</label>
 												</div>
 											</div>
@@ -197,30 +144,9 @@
 												<select class="custom-select small-category">
 													<option selected>소분류</option>
 												</select>
+												<input type="hidden" name="categoryId" id="categoryId" value="" />
 											</div>
 										</li>
-										<script>
-										document.querySelector(".big-category").addEventListener('change', (e) => {
-											const smallCategory = document.querySelector('.small-category');
-											smallCategory.options[0].selected = true;
-											$.ajax({
-												url : "${pageContext.request.contextPath}/admin/product/category.do",
-												method : "GET",
-												data : {
-													categoryId : e.target.value
-												},
-												success(data){
-													console.log(data);
-													
-													data.forEach(({categoryDetailName, categoryId}) => {
-														console.log(categoryDetailName, categoryId);
-														$(smallCategory).append("<option name='categoryId' value='" + categoryId + "'>" + categoryDetailName + "</option>");
-													});
-												},
-												error : console.log
-											});
-										});
-										</script>
 										<!-- /카테고리 검색 끝 -->
 										<!-- 기간 검색 시작 -->
 										<li>
@@ -248,83 +174,7 @@
 													<input type="text" class="datepicker" id="to" name="toDate" placeholder="시작일"/>
 													<input type="text" class="datepicker" id="from" name="fromDate" placeholder="종료일"/>
 												</div>
-												<script>
-												const to = document.querySelector('#to');
-												const from = document.querySelector('#from');
-												const today = new Date();
-												const dateFormat = (date) => {
-													let year = date.getFullYear();
-													let month = (date.getMonth() + 1) >= 10 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
-													let _date = date.getDate() >= 10 ? date.getDate() : '0' + date.getDate(); 
-													
-													
-													return year + '-' + month + '-' + _date;
-												};
-												$.datepicker.setDefaults({
-													dateFormat:'yy-mm-dd',
-													prevText: '이전 달',
-													nextText: '다음 달',
-												    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-												    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-												    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-												    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-												    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-													showMonthAfterYear: true,
-													yearSuffix: '년'
-												});
-												$(function(){
-													$('.datepicker').datepicker();
-												});
 												
-												// 오늘 버튼 클릭시
-												$('#today-btn').on('click', (e) => {
-													$('.datepicker').datepicker('option', 'disabled', false);
-													to.value = dateFormat(today);
-													from.value = dateFormat(today);
-												});
-												// 1주일 버튼 클릭시
-												$('#week-btn').on('click', (e) => {
-													$('.datepicker').datepicker('option', 'disabled', false);
-													to.value = dateFormat(new Date(today.getFullYear(),today.getMonth(), today.getDate() - 6));
-													from.value = dateFormat(today);
-												});
-												// 1개월 버튼 클릭시
-												$('#one-month-btn').on('click', (e) => {
-													$('.datepicker').datepicker('option', 'disabled', false);
-													let _month = today.getMonth() - 1 <= 0 ? today.getMonth() - 1 + 12 : today.getMonth() - 1;
-													let _year = today.getMonth() - 3 <= 0 ? today.getFullYear() - 1 : today.getFullYear();
-													to.value = dateFormat(new Date(today.getFullYear(), today.getMonth() - 1, today.getDate() + 1));
-													from.value = dateFormat(today);
-												});
-												// 3개월 버튼 클릭시
-												$('#three-month-btn').on('click', (e) => {
-													$('.datepicker').datepicker('option', 'disabled', false);
-													let _month = today.getMonth() - 3 <= 0 ? today.getMonth() - 3 + 12 : today.getMonth() - 3;
-													let _year = today.getMonth() - 3 <= 0 ? today.getFullYear() - 1 : today.getFullYear();
-													to.value = dateFormat(new Date(_year, _month, today.getDate() + 1));
-													from.value = dateFormat(today);
-												});
-												// 6개월 버튼 클릭시
-												$('#six-month-btn').on('click', (e) => {
-													$('.datepicker').datepicker('option', 'disabled', false);
-													let _month = today.getMonth() - 6 <= 0 ? today.getMonth() - 6 + 12 : today.getMonth() - 6;
-													let _year = today.getMonth() - 6 <= 0 ? today.getFullYear() - 1 : today.getFullYear();
-													to.value = dateFormat(new Date(_year, _month, today.getDate() + 1));
-													from.value = dateFormat(today);
-												});
-												// 1년 버튼 클릭시
-												$('#year-btn').on('click', (e) => {
-													$('.datepicker').datepicker('option', 'disabled', false);
-													to.value = dateFormat(new Date(today.getFullYear() - 1, today.getMonth(), today.getDate() + 1));
-													from.value = dateFormat(today);
-												});
-												// 전체 버튼 클릭시
-												$('#total-btn').on('click', (e) => {
-													to.value='';
-													from.value='';
-													$('.datepicker').datepicker('option', 'disabled', true); // input 박스 비활성화
-												});
-												</script>
 											</div>
 										</li>
 										<!-- 기간 검색 끝 -->
@@ -368,7 +218,7 @@
 									<button type="button" class="btn btn-submit">선택 삭제</button>
 								</div>
 								<div class="admin-btn-right">
-									<button type="button" class="btn btn-submit">수정 저장</button>
+									<button type="button" class="btn btn-submit" onclick="updateProduct();">수정</button>
 								</div>
 							</div>
 							<div class="admin-product-list">
@@ -404,12 +254,12 @@
 										<c:if test="${not empty list}">
 											<c:forEach items="${list}" var="product">
 												<tr data-no="${product.pcode}">
-													<td><input type="checkbox" /></td>
+													<td><input type="checkbox" name="checkbox" value="${product.pcode}"/></td>
 													<td>${product.pcode}</td>
 													<td>${product.categoryId}</td>
 													<td>${product.sttenmtNo}</td>
 													<td>${product.pname}</td>
-													<td>${product.menu}</td>
+													<td>${product.manu}</td>
 													<td>${product.price}</td>
 													<td>${product.amount}</td>
 													<td>${product.ingreName}</td>
@@ -429,9 +279,7 @@
 										</c:if>
 									</tbody>
 								</table>
-								<nav class="pagebar">
-									${pagebar}
-								</nav>
+								<nav class="pagebar"></nav>
 							</div>
 						</div>
 					</div>
@@ -439,29 +287,190 @@
 			</div>
 		</div>
 		<!-- /admin content 끝 -->
-		<script>
-		document.adminSearchFrm.addEventListener('submit', (e) => {
-			e.preventDefault();
-			const frm = e.target;
-			
-			const pcode = frm.pcode.value;
-			const pname = frm.pname.value;
-			const manu = frm.manu.value;
-			
-			const saleStatuses = document.querySelectorAll('[name=saleStatus]:checked');
-			let saleStatus = [];
-			for(let i = 0; i < saleStatuses.length; i++){
-				saleStatus.push(saleStatuses[i].value);
-			};
-			
-			const categoryId = document.querySelector('.small-category').value;
-			const toDate = frm.toDate.value;
-			const fromDate = frm.fromDate.value;
-			
-			 
-			
+<script>
+document.adminSearchFrm.addEventListener('submit', (e) => {
+	const frm = e.target;
+	e.preventDefault();
+	
+	const status = document.querySelector('[name=saleStatuses]:checked') == null ? null : document.querySelector('[name=saleStatuses]:checked').value;
+	document.querySelector('#saleStatus').value = status;
+	const category = 
+		document.querySelector('.small-category').value == null ? null : 
+			document.querySelector('.small-category').value == '소분류' ? null : document.querySelector('.small-category').value;
+	document.querySelector('#categoryId').value = category;
+		
+	frm.submit();
+});
+
+const updateProduct = () => {
+	let arr = [];
+	$("input:checkbox[name='checkbox']:checked").each(function(){
+	    arr.push($(this).val());
+	    console.log(arr);
+	});
+	
+	if(arr.length == 0)
+		alert("수정할 상품을 선택해주세요.");
+	
+	if(arr.length > 1)
+		alert("하나의 상품만 선택해주세요.");
+	
+	if(arr.length == 1){
+		location.href = "${pageContext.request.contextPath}/admin/product/productUpdate.do?pcode=" + arr[0];
+	}
+}
+
+// 상품명 자동 완성
+$('#pname').autocomplete({
+	source(request, response){
+		console.log(request);
+		const {term} = request;
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/admin/autocompletePname.do",
+			method : "GET",
+			data : {term},
+			success(pnames){
+				console.log(pnames);
+				const arr = pnames.map((pname) => ({
+					label : pname,
+					value : pname
+				}));
+				console.log(arr);
+				response(arr);
+			},
+			error(jqxhr, statusText, err){
+                   console.log(jqxhr, statusText, err);
+               }
 		});
-		</script>
+	},
+	focus(e, selected){return false;}
+});
+
+// 제조사명 자동 완성
+$('#manu').autocomplete({
+	source(request, response){
+		console.log(request);
+		const {term} = request;
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/admin/autocompleteManu.do",
+			method : "GET",
+			data : {term},
+			success(manus){
+				console.log(manus);
+				const arr = manus.map((manu) => ({
+					label : manu,
+					value : manu
+				}));
+				console.log(arr);
+				response(arr);
+			},
+			error(jqxhr, statusText, err){
+                   console.log(jqxhr, statusText, err);
+               }
+		});
+	},
+	focus(e, selected){return false;}
+});
+
+document.querySelector(".big-category").addEventListener('change', (e) => {
+	const smallCategory = document.querySelector('.small-category');
+	smallCategory.options[0].selected = true;
+	$.ajax({
+		url : "${pageContext.request.contextPath}/admin/product/category.do",
+		method : "GET",
+		data : {
+			categoryId : e.target.value
+		},
+		success(data){
+			console.log(data);
+			
+			data.forEach(({categoryDetailName, categoryId}) => {
+				console.log(categoryDetailName, categoryId);
+				$(smallCategory).append("<option id='small-category' value='" + categoryId + "'>" + categoryDetailName + "</option>");
+			});
+		},
+		error : console.log
+	});
+});
+
+const to = document.querySelector('#to');
+const from = document.querySelector('#from');
+const today = new Date();
+const dateFormat = (date) => {
+	let year = date.getFullYear();
+	let month = (date.getMonth() + 1) >= 10 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
+	let _date = date.getDate() >= 10 ? date.getDate() : '0' + date.getDate(); 
+	
+	
+	return year + '-' + month + '-' + _date;
+};
+$.datepicker.setDefaults({
+	dateFormat:'yy-mm-dd',
+	prevText: '이전 달',
+	nextText: '다음 달',
+    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+	showMonthAfterYear: true,
+	yearSuffix: '년'
+});
+$(function(){
+	$('.datepicker').datepicker();
+});
+
+// 오늘 버튼 클릭시
+$('#today-btn').on('click', (e) => {
+	$('.datepicker').datepicker('option', 'disabled', false);
+	to.value = dateFormat(today);
+	from.value = dateFormat(today);
+});
+// 1주일 버튼 클릭시
+$('#week-btn').on('click', (e) => {
+	$('.datepicker').datepicker('option', 'disabled', false);
+	to.value = dateFormat(new Date(today.getFullYear(),today.getMonth(), today.getDate() - 6));
+	from.value = dateFormat(today);
+});
+// 1개월 버튼 클릭시
+$('#one-month-btn').on('click', (e) => {
+	$('.datepicker').datepicker('option', 'disabled', false);
+	let _month = today.getMonth() - 1 <= 0 ? today.getMonth() - 1 + 12 : today.getMonth() - 1;
+	let _year = today.getMonth() - 3 <= 0 ? today.getFullYear() - 1 : today.getFullYear();
+	to.value = dateFormat(new Date(today.getFullYear(), today.getMonth() - 1, today.getDate() + 1));
+	from.value = dateFormat(today);
+});
+// 3개월 버튼 클릭시
+$('#three-month-btn').on('click', (e) => {
+	$('.datepicker').datepicker('option', 'disabled', false);
+	let _month = today.getMonth() - 3 <= 0 ? today.getMonth() - 3 + 12 : today.getMonth() - 3;
+	let _year = today.getMonth() - 3 <= 0 ? today.getFullYear() - 1 : today.getFullYear();
+	to.value = dateFormat(new Date(_year, _month, today.getDate() + 1));
+	from.value = dateFormat(today);
+});
+// 6개월 버튼 클릭시
+$('#six-month-btn').on('click', (e) => {
+	$('.datepicker').datepicker('option', 'disabled', false);
+	let _month = today.getMonth() - 6 <= 0 ? today.getMonth() - 6 + 12 : today.getMonth() - 6;
+	let _year = today.getMonth() - 6 <= 0 ? today.getFullYear() - 1 : today.getFullYear();
+	to.value = dateFormat(new Date(_year, _month, today.getDate() + 1));
+	from.value = dateFormat(today);
+});
+// 1년 버튼 클릭시
+$('#year-btn').on('click', (e) => {
+	$('.datepicker').datepicker('option', 'disabled', false);
+	to.value = dateFormat(new Date(today.getFullYear() - 1, today.getMonth(), today.getDate() + 1));
+	from.value = dateFormat(today);
+});
+// 전체 버튼 클릭시
+$('#total-btn').on('click', (e) => {
+	to.value='';
+	from.value='';
+	$('.datepicker').datepicker('option', 'disabled', true); // input 박스 비활성화
+});
+</script>
 	</div>
 </div>
 

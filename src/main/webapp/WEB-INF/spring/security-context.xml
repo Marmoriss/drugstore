@@ -30,7 +30,9 @@
 		<intercept-url pattern="/admin/**" access="hasRole('ADMIN')"/>
 		
 		<intercept-url pattern="/**" access="isAuthenticated()"/>
-		
+		<intercept-url pattern="/notice/noticeForm.do" access="hasRole('ADMIN')"/>
+		<intercept-url pattern="/notice/noticeUpdate.do" access="hasRole('ADMIN')"/>
+		<intercept-url pattern="/notice/noticeDelete.do" access="hasRole('ADMIN')"/>
 		
 		<form-login 
 			login-page="/member/memberLogin.do"

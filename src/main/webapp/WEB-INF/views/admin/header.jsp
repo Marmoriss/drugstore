@@ -115,7 +115,7 @@
 							</h2>
 						</div>
 						<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
-							<div class="card-body text-center">날짜별 가입자 수</div>
+							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/statis/enrollStatis.do">날짜별 가입자 수</a></div>
 							<div class="card-body text-center">날짜별 방문자 수</div>
 							<div class="card-body text-center">날짜별 수익 추이</div>
 						</div>
