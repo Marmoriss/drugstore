@@ -97,8 +97,6 @@ public interface AdminDao {
 
 	
 	
-	
-	
 // 태연코드 끝
 
 }

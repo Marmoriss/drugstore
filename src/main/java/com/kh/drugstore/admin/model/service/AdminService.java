@@ -48,12 +48,7 @@ public interface AdminService {
 
 
 	
-	
-	
-	
-	
-	
-	
+
 // 태연코드 끝
 
 }
