@@ -18,5 +18,7 @@ public interface ProductService {
 
 	List<Product> selectOneProduct(int pCode);
 
+	List<Product> findServeyProduct(String symptom);
+
 	
 }

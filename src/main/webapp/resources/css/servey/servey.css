@@ -4,23 +4,46 @@ span{
 	font-size : 22px;
 }
 #container{
-	background-color: pink;
 	height: 600px;
 }
 form{
 	padding : 20px;
 }
-#main, .qBox div{
-	background-color: whitesmoke;
-	width: 50%;
-	height : 580px;
-	padding : 10px;
-    text-align: center;
+
+/* 버튼 */
+.btn-wrapper{
+	display: flex;
+	justify-content: center;
 }
-#main div, .qBox div{
-	padding-top: 200px;
+.btn{
+	height: 50px;
+    padding: 10px;
+    margin-top: 70px;
+}
+button{
+	color : white;
+}
+.prev{
+	width : 80px;	
+}
+.next{
+	width: 300px;
 }
 
+
+#main div, .qBox{
+	padding-top: 100px;
+}
+#main, #qna{
+	display: flex;
+	justify-content: center;
+}
+#main div{
+	text-align: center;
+}
+.qBox div{
+	text-align: center;
+}
 /* input radio,number 크기 조절 */
 .qBox div label{
 	    margin: 20px 20px;
@@ -34,17 +57,24 @@ form{
 	margin-top : 10px;
 	width: 300px;
 	height: 50px;
+    border: 2px solid #ebebeb;
+    border-radius: 8px;
+    background-color: #fefefe;
 }
-.btn{
-	width: 80px;
-	height: 50px;
-    padding: 10px;
-    margin-top: 70px;
+.qBox div input[type=number]:focus{
+	outline: none;
 }
-button{
-	color : white;
+/* checkbox */
+.form-check{
+	display: flex;
+    align-items: center;
+    width: auto;
+    height: auto;
 }
-
+input[type=checkbox]{
+	width: 30px;
+	height: 30px;
+}
 @Keyframes fadeIn{
 	from {opacity : 0;}
 	to {opacity : 1;}

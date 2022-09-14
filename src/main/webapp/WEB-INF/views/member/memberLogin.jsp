@@ -44,11 +44,16 @@
                                 <label for="remember-me" class="text-info"><span>아이디 저장</span></label>
                                 <br>
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="로그인">
+                                <a name="kakaoLogin" href="https://kauth.kakao.com/oauth/authorize?client_id=88be96f783f8adf9f14dc6555f3c228e&redirect_uri=http://localhost:9090/drugstore/member/kakao/callback.do&response_type=code">
+                                	<img src="${pageContext.request.contextPath}/resources/images/kakao_login_medium.png" alt="" />
+                                	
+                                </a>
                             </div>
                                 
                             <div id="register-link" class="text-right">
                                 <a href="${pageContext.request.contextPath}/member/memberEnroll.do" class="text-info">회원가입</a>
                             </div>
+
                         </form:form>
                     </div>
                 </div>

@@ -2,12 +2,14 @@ package com.kh.drugstore.product.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.session.RowBounds;
 
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.dto.ProductAttachment;
 
+@Mapper
 public interface ProductDao {
 
 	@Select("select p.*, (select count(*) from product_attachment where pcode = p.pcode) attach_count from product p")
@@ -24,5 +26,8 @@ public interface ProductDao {
 
 	@Select("select * from product where pcode = #{pcode}")
 	List<Product> selectOneProduct(int pcode);
+
+	@Select("select * from product where main_fnctn like concat('%' || #{symptom},'%')")
+	List<Product> findServeyProduct(String symptom);
 
 }

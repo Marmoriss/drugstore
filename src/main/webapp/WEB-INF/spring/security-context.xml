@@ -23,6 +23,7 @@
 		<intercept-url pattern="/member/naverLogin.do" access="isAnonymous()"/>
 		<intercept-url pattern="/member/checkIdDuplicate.do" access="isAnonymous()"/>
 		<intercept-url pattern="/member/memberLogout.do" access="permitAll"/>
+		<intercept-url pattern="/member/kakao/callback.do" access="permitAll"/>
 		
 		<intercept-url pattern="/member/memberPage.do" access="isAuthenticated()"/>
 				
@@ -41,6 +42,7 @@
 			authentication-success-forward-url="/member/memberLoginSuccess.do"
 			/>
 		
+
 		<logout logout-url="/member/memberLogout.do" logout-success-url="/"/>
 		
 		
@@ -65,6 +67,7 @@
 		<authentication-provider user-service-ref="memberSecurityService">
 			<password-encoder ref="bcryptPasswordEncoder"/>
 		</authentication-provider>
+		
 	</authentication-manager>
 	
 	<!-- @service클래스를 빈으로 등록 -->

@@ -53,6 +53,10 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.selectOneProduct(pCode);
 	}
 	
+	@Override
+	public List<Product> findServeyProduct(String symptom) {
+		return productDao.findServeyProduct(symptom);
+	}
 	
 	
 	
