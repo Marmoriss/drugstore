@@ -41,7 +41,8 @@
       <h3><sec:authentication property="principal.name"/> 페이지</h3>
     </div>
 	<div class="main">
-	 	<h1>정기구독 내역</h1>
+	 	<h3>정기구독 내역</h3>
+	 	<span>정기구독 내역이 없습니다.</span>
 	</div>    
   </div>
  
