@@ -3,9 +3,9 @@ package com.kh.drugstore.admin.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.drugstore.admin.model.service.AdminService;
 import com.kh.drugstore.common.DrugstoreUtils;
-import com.kh.drugstore.member.model.dto.Member;
 import com.kh.drugstore.member.model.dto.User;
 import com.kh.drugstore.product.model.dto.Category;
 import com.kh.drugstore.product.model.dto.Product;
@@ -39,6 +38,8 @@ public class AdminController {
 	@Autowired
 	ProductService productService;
 
+	HttpSession session;
+	
 	@GetMapping("/header.do")
 	public void toAdmin() {
 		
@@ -115,13 +116,14 @@ public class AdminController {
 			@RequestParam(value = "searchType",required = false,defaultValue="") String searchType,
 			@RequestParam(value = "keyword",required = false,defaultValue="") String keyword) {
 		
+		// 1. content영역
 		Map<String, Integer> param = new HashMap<>();
 		int limit = 10;
 		param.put("cPage", cPage);
 		param.put("limit", limit);
-		
 		List<User> list = adminService.userList(param,searchType,keyword);
 		log.debug("list = {}", list);
+		
 		model.addAttribute("list", list);
 		model.addAttribute("searchType",searchType);
 		model.addAttribute("keyword",keyword);
@@ -132,8 +134,7 @@ public class AdminController {
 		String url = request.getRequestURI(); 
 		String pagebar = DrugstoreUtils.getPagebar(cPage, limit, totalContent, url);
 		model.addAttribute("pagebar", pagebar);
-		
-		
+		model.addAttribute("totalContent", totalContent);
 	}
 	
 	@GetMapping("/statis/enrollStatis.do")
@@ -147,5 +148,17 @@ public class AdminController {
 			model.addAttribute("memMinus7", adminService.getMinus7Mem());
 			model.addAttribute("memToday", adminService.getMemToday());
 	}
+	
+	@GetMapping("/statis/visitStatis.do")
+	public String visitStatis(Model model) {
+		model.addAttribute("todayCount", adminService.getVisitTodayCount());
+		model.addAttribute("totalCount", adminService.getVisitTotalCount());
+		
+		return "admin/statis/visitStatis";
+	}
+	
+	
+	
 // 태연코드 끝
+	
 }	

@@ -1,16 +1,14 @@
 package com.kh.drugstore.admin.model.dao;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.session.RowBounds;
-import com.kh.drugstore.member.model.dto.User;
 
-import com.kh.drugstore.member.model.dto.Member;
+import com.kh.drugstore.member.model.dto.User;
 import com.kh.drugstore.product.model.dto.Category;
 import com.kh.drugstore.product.model.dto.Product;
 
@@ -36,8 +34,8 @@ public interface AdminDao {
 	
 	@Select("select count(*)\r\n"
 			+ "from (select\r\n"
-			+ "		m.member_id,name,phone,created_at,gender,body from member m join servey s on\r\n"
-			+ "		(m.member_id = s.member_id))")
+			+ "		m.member_id,name,phone,created_at,gender,body from member m left join servey s on\r\n"
+			+ "		(m.member_id = s.member_id)) order by created_at desc")
 	int getTotalContent();
 
 	@Select("select count(*) from member where to_char(created_at, 'yymmdd') = to_char(sysdate-1,'yymmdd')")
@@ -64,7 +62,19 @@ public interface AdminDao {
 	@Select("select count(*) from member where to_char(created_at, 'yymmdd') = to_char(sysdate,'yymmdd')")
 	int getMemToday();
 
+	@Select("select count(*) from visit where to_char(v_date, 'yy/mm/dd') = to_char(sysdate, 'yy/mm/dd')")
+	int getVisitTodayCount();
 
+	@Select("select count(*) from visit")
+	int getVisitTotalCount();
+	
+	@Insert("insert into visit(v_date) values(sysdate)")
+	void insertVisit();
+
+
+	
+	
+	
 	
 	
 	
