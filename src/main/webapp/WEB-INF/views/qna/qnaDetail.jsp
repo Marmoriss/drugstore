@@ -76,7 +76,7 @@
 						<br />
 					</td>
 					<td>
-							<button class="btn-delete" value="">삭제</button>
+						<button class="btn-delete" value="">삭제</button>
 
 					</td>
 				</tr>

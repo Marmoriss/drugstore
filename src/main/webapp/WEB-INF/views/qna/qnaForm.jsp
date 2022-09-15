@@ -23,7 +23,7 @@
 		</div><br />
 
 		<div class="form-group">
-			<label for="writer">작성자</label> <input type="text"
+			<label for="writer">${loginMember.memberId eq qna.writer}</label> <input type="text"
 				class="form-control" id="writer" name="writer" required>
 		</div><br />
 
