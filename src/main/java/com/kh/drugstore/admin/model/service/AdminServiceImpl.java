@@ -151,6 +151,21 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.getMemToday(); 
 	}
 	
+	@Override
+	public int getVisitTodayCount() {
+		return adminDao.getVisitTodayCount();
+	}
+	
+	@Override
+	public int getVisitTotalCount() {
+		return adminDao.getVisitTotalCount();
+	}
+	
+	@Override
+	public void insertVisit() {
+		adminDao.insertVisit();
+		
+	}
 
 	
 	
