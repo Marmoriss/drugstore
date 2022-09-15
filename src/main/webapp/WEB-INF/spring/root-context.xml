@@ -42,6 +42,6 @@
 	<!-- @Transactional 어노테이션에 Transaction Advice를 적용 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
-	
+	<bean id="adminServiceImpl" class="com.kh.drugstore.admin.model.service.AdminServiceImpl"/>
 	
 </beans>

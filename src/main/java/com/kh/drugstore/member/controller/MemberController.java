@@ -286,5 +286,8 @@ public class MemberController {
 			return "redirect:/";
 	}
 	
-	
+	@GetMapping("/memberSubscription")
+	public void memberSubscription() {
+		
+	}
 }

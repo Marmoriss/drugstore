@@ -43,6 +43,13 @@ public interface AdminService {
 	int getMinus6Mem();
 	int getMinus7Mem();
 	int getMemToday();
+
+	void insertVisit();
+
+	int getVisitTodayCount();
+
+	int getVisitTotalCount();
+
 	
 	
 

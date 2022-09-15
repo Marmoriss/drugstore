@@ -8,7 +8,7 @@
 
 <fmt:requestEncoding value="utf-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param name="title" value="마이페이지" />
+	<jsp:param name="title" value="정기구독" />
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/memberMyPage.css" />
@@ -28,7 +28,7 @@
       <li><a href="#">교환 / 반품내역</a></li>
       <li><h3>나의 활동</h3></li>
       <hr />
-      <li><a href="${pageContext.request.contextPath}/member/memberSubscription">정기구독</a></li>
+      <li><a href="#">정기구독</a></li>
       <li><a href="${pageContext.request.contextPath}/notice/noticeList.do">1:1문의</a></li>
       <li><a href="#">상품 리뷰</a></li>
       <li><a href="#">상품 문의</a></li>
@@ -40,11 +40,11 @@
     <div class="container-fluid">
       <h3><sec:authentication property="principal.name"/> 페이지</h3>
     </div>
-    <div class="main">
-    
-    </div>
+	<div class="main">
+	 	<h1>정기구독 내역</h1>
+	</div>    
   </div>
- 	
+ 
 </div>
 	
 

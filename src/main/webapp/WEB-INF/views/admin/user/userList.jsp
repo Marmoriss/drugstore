@@ -16,13 +16,13 @@
 }
  
 #userList {
-	margin-left: 450px;
+	margin-left: 500px;
 }
 
 .pagebar {
 	background-color: transparent;
-	margin-top: 150px;
-	justify-content: center;
+	margin-top: 35px;
+	margin-left: 120px;
 }
 
 .page-item.active .page-link {
