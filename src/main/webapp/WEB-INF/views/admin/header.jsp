@@ -85,11 +85,10 @@
 							</h2>
 						</div>
 						<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-							<div class="card-body text-center">주문 내역 조회</div>
-							<div class="card-body text-center">배송 현황 조회</div>
+							<div class="card-body text-center">주문&배송 관리</div>
 							<div class="card-body text-center">취소 관리</div>
 							<div class="card-body text-center">반품 관리</div>
-							<div class="card-body text-center">교환 관리</div>
+							<div class="card-body text-center">환불 내역 조회</div>
 						</div>
 					</div>
 					<div class="card">
@@ -115,8 +114,8 @@
 							</h2>
 						</div>
 						<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
-							<div class="card-body text-center">날짜별 가입자 수</div>
-							<div class="card-body text-center">날짜별 방문자 수</div>
+							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/statis/enrollStatis.do">회원가입 수</a></div>
+							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/statis/visitStatis.do">오늘/전체 방문자 수</a></div>
 							<div class="card-body text-center">날짜별 수익 추이</div>
 						</div>
 					</div>

@@ -23,10 +23,10 @@ public class ProductEntity {
 	@NonNull
 	private int pcode; //상품코드
 	private int categoryId; //대분류코드
-	private int sttenmtNo; //품목제조관리 번호
+	private Long sttenmtNo; //품목제조관리 번호
 	private String pname; //상품명
 	@NonNull
-	private String menu; //제조사
+	private String manu; //제조사
 	@NonNull
 	private int price; //가격
 	@NonNull
@@ -41,5 +41,6 @@ public class ProductEntity {
 	private SaleStatus saleStatus; // 판매 상태
 	private LocalDate createdAt; // 제품 등록일
 	private LocalDate updatedAt; // 최종 수정일
+	private int discount; // 할인 금액
 	
 }
