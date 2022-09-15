@@ -1,6 +1,7 @@
 package com.kh.security.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,5 +32,8 @@ public class MemberSecurityService implements UserDetailsService {
 		log.info("member={}",member);
 		return member;
 	}
+	
+	
+	
 
 }

@@ -44,5 +44,4 @@
 	
 	<bean id="adminServiceImpl" class="com.kh.drugstore.admin.model.service.AdminServiceImpl"/>
 	
-	
 </beans>

@@ -14,7 +14,7 @@
 
 <body>
 	<div id="enroll-container" class="mx-auto text-center">
-	<form:form name="memberEnrollFrm" action="${pageContext.request.contextPath}/member/memberEnroll.do" method="POST">
+	<form:form name="memberEnrollFrm" action="" method="POST">
 		<table class="mx-auto">
 			<tr>
 				<th>아이디</th>
@@ -36,7 +36,7 @@
 			<tr>
 				<th>패스워드확인</th>
 				<td>	
-					<input type="password" class="form-control" id="passwordCheck" value="" required>
+					<input type="password" class="form-control" id="passwordCheck" name="passwordCheck" value="" required>
 				</td>
 			</tr>  
 			<tr>
@@ -64,20 +64,32 @@
 					<input type="text" class="form-control" placeholder="" name="detailAddress" id="detailAddress" value="">
 				</td>
 			</tr>
-			
+			<tr>
+				<th></th>
+				<td>
+					<button type="submit" class="btn btn-success">가입</button>
+					<button type="button" class="btn btn-secondary" onclick="history.back()">취소</button>
+				</td>
+			</tr>
 		</table>
-		<input type="submit" value="가입" >
-		<input type="reset" value="취소">
 	</form:form>
 </div>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
 
-/* document.memberEnrollFrm.addEventListener('submit', (e) => {
+document.memberEnrollFrm.addEventListener('submit', (e) => {
+	const password = document.querySelector("#password");
+	const passwordCheck = document.querySelector("#passwordCheck");
+	
 	if(idValid.value === "0"){
 		e.preventDefault();
 		alert("유효한 아이디를 입력해주세요.");
+		return;
+	}
+	if(password.value != passwordCheck.value){
+		e.preventDefault();
+		alert("비밀번호가 일치하지 않습니다.");
+		passwordCheck.select();
 		return;
 	}
 }); 
@@ -105,27 +117,31 @@ document.querySelector("#memberId").addEventListener('keyup', (e) => {
 		url : "${pageContext.request.contextPath}/member/checkIdDuplicate.do",
 		method : "POST",
 		headers,
+		dataType : "JSON",
 		data : {memberId},
 		success(response){
 			console.log(response); // js object
 			
+			
 			const {available} = response;
+			
+			console.log(available);
+			if(!available){
+				error.style.display = "inline";
+				ok.style.display = "none";
+				idValid.value = "0";
+			}
 			if(available){
 				error.style.display = "none";
 				ok.style.display = "inline";
 				idValid.value = "1";
-			}
-			else {
-				error.style.display = "inline";
-				ok.style.display = "none";
-				idValid.value = "0";
 			}
 			
 		},
 		error(jqxhr, statusText, err){
 			console.log(jqxhr, statusText, err);
 		}
-	}); */
+	});
 
 });
 
