@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.kh.drugstore.common.YesNo;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -22,18 +23,20 @@ public class Product extends ProductEntity {
 	// 첨부파일 추가 클래스
 	private List<ProductAttachment> attachments = new ArrayList<>();
 
-	public Product(@NonNull int pcode, int categoryId, int sttenmtNo, String pname, @NonNull String menu,
+
+	public Product(@NonNull int pcode, int categoryId, Long sttenmtNo, String pname, @NonNull String manu,
 			@NonNull int price, @NonNull int amount, String ingreName, String mainFnctn, String intakeHint1,
 			String srvUse, String distbPd, YesNo subYn, String baseStandard, SaleStatus saleStatus, LocalDate createdAt,
-			LocalDate updatedAt) {
-		super(pcode, categoryId, sttenmtNo, pname, menu, price, amount, ingreName, mainFnctn, intakeHint1, srvUse, distbPd,
-				subYn, baseStandard, saleStatus, createdAt, updatedAt);
-		// TODO Auto-generated constructor stub
+			LocalDate updatedAt, int discount) {
+		super(pcode, categoryId, sttenmtNo, pname, manu, price, amount, ingreName, mainFnctn, intakeHint1, srvUse, distbPd,
+				subYn, baseStandard, saleStatus, createdAt, updatedAt, discount);
 	}
+
 	
 	public void add(ProductAttachment attach) {
 		this.attachments.add(attach);
 	}
-
+	
+	
 
 }

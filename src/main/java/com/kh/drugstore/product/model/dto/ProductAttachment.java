@@ -3,12 +3,14 @@ package com.kh.drugstore.product.model.dto;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor

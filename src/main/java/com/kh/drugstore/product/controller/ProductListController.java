@@ -69,9 +69,9 @@ public class ProductListController {
 	@GetMapping("/productDetail.do")
 	public void productDetail(@RequestParam int pcode, Model model) {
 		log.debug("pcode = {}", pcode);
-		List<Product> list = productService.selectOneProduct(pcode);
-		log.debug("list = {}", list);
-		model.addAttribute("list", list);
+		Product product = productService.selectOneProductCollection(pcode);
+		log.debug("product = {}", product);
+		model.addAttribute("product", product);
 		
 	}
 	

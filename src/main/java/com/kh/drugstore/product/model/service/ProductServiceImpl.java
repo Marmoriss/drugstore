@@ -1,5 +1,6 @@
 package com.kh.drugstore.product.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.drugstore.product.model.dao.ProductDao;
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.dto.ProductAttachment;
+import com.kh.drugstore.product.model.dto.ProductEntity;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,11 +51,18 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public List<Product> selectOneProduct(int pCode) {
-		return productDao.selectOneProduct(pCode);
+	public Product selectOneProductCollection(int pCode) {
+		return productDao.selectOneProductCollection(pCode);
 	}
 	
+	// 주희 코드 시작
 	
+	@Override
+	public List<ProductEntity> findByValues(Map<String, Object> param) {
+		return productDao.findByValues(param);
+	}
+	
+	// 주희 코드 끝
 	
 	
 	

@@ -6,6 +6,7 @@
 
 .price-wrap{
 	display: flex;
+	vertical-align: middle;
 }
 
 .discount-wrap{
@@ -14,7 +15,7 @@
 }
 
 .discount-price{
-	margin-top: 15px;
+	margin-left: 15px;
 }
 
 .form-group label{
