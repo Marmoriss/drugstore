@@ -23,7 +23,10 @@ public interface ProductService {
 
 	// 주희 코드 시작
 	List<ProductEntity> findByValues(Map<String, Object> param);
+
 	
 	//주희 코드 끝
 	
+	// 설문 조사 상품 가져오기 
+	List<Product> findServeyProduct(String body);
 }

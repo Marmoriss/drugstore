@@ -23,7 +23,7 @@
 		 		<span>몇 가지 질문에 답하고 나에게 필요한 영양성분을 알아보세요</span>
 		 		<br />
 		 		<div class="btn-wrapper">
-			 		<span class="btn btn-success next" onclick="begin(0)">시작</span>
+			 		<span class="btn btn-success next" id="start">시작</span>
 		 		</div>
 		 		
 	 		</div>
@@ -85,19 +85,43 @@
 	const qna = document.querySelector("#qna");
 	const list = document.querySelectorAll(".qBox .mx-auto");
 	const symptomDiv = document.querySelector("#symptomQ");
+	const headers = {};
+	headers['${_csrf.headerName}'] = '${_csrf.token}';
 	
-	function begin(cnt){
-		main.style.WebkitAnimation = "fadeOut 1s";
-		main.style.animation = "fadeOut 1s";
-		setTimeout(()=>{
-			list[cnt].style.WebkitAnimation = "fadeIn 1s";
-			list[cnt].style.animation = "fadeIn 1s";
-			setTimeout(()=>{
-				main.style.display = "none";
-				list[cnt].style.display="block";				
-			},450)
-		},450)
-	}
+	document.querySelector("#start").addEventListener('click',(e)=>{
+		$.ajax({
+			url : "${pageContext.request.contextPath}/servey/serveyCheck.do",
+			method : "POST",
+			dataType : "JSON",
+			headers,
+			success(data){
+				console.log(data);
+				const {available} = data;
+				if(available){
+					alert("이미 건강 설문에 참여하셨습니다.");
+					e.preventDefault();
+					location.href = "${pageContext.request.contextPath}/servey/serveyResult.do";
+					return;
+				}else{
+					main.style.WebkitAnimation = "fadeOut 1s";
+					main.style.animation = "fadeOut 1s";
+					setTimeout(()=>{
+						list[0].style.WebkitAnimation = "fadeIn 1s";
+						list[0].style.animation = "fadeIn 1s";
+						setTimeout(()=>{
+							main.style.display = "none";
+							list[0].style.display="block";				
+						},450)
+					},450)
+				}
+			},
+			error : console.log
+		})
+		
+		
+		
+		
+	})
 	
 	function next(cnt){
 		list[cnt].style.display ="none";

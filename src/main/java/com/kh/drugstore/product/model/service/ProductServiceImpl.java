@@ -65,7 +65,10 @@ public class ProductServiceImpl implements ProductService {
 	// 주희 코드 끝
 	
 	
-	
+	@Override
+	public List<Product> findServeyProduct(String body) {
+		return productDao.findServeyProduct(body);
+	}
 	
 	
 	

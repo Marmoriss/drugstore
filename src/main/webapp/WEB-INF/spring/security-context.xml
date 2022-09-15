@@ -26,10 +26,12 @@
 		<intercept-url pattern="/member/kakao/callback.do" access="permitAll"/>
 		
 		<intercept-url pattern="/member/memberPage.do" access="isAuthenticated()"/>
+		<intercept-url pattern="/servey/**" access="isAuthenticated()"/>
 				
 		<intercept-url pattern="/admin/**" access="hasRole('ADMIN')"/>
 		
 		<intercept-url pattern="/**" access="isAuthenticated()"/>
+		
 		<intercept-url pattern="/notice/noticeForm.do" access="hasRole('ADMIN')"/>
 		<intercept-url pattern="/notice/noticeUpdate.do" access="hasRole('ADMIN')"/>
 		<intercept-url pattern="/notice/noticeDelete.do" access="hasRole('ADMIN')"/>

@@ -21,8 +21,12 @@
 				<div id="header__title">
 					<div>
 						<h4><sec:authentication property="principal.name"/>님의 건강설문 결과표</h4>
-						<span>성별 : ${servey.gender eq 'M' ? '남' : '여'}</span>
-						<span>BMI : ${bmi}</span>
+					</div>
+					<div id="bmiImg">
+						<div>
+						<span style="margin-right: 104px">18.5</span><span style="margin-right: 101px">23.0</span><span style="margin-right: 76px">25.0</span>
+						</div>
+						<img src="${pageContext.request.contextPath}/resources/images/bmi-range.png" alt="" />
 					</div>
 				</div>
 				
@@ -31,25 +35,33 @@
 					<c:when test="${bmi < 18.5}">
 						<div class="bmi__result">
 							<i class="fa-solid fa-thumbs-down"></i>
-							<span>저체중</span>
+							<h3>저체중</h3>
+							<span>성별 : ${servey.gender eq 'M' ? '남' : '여'}</span>
+							<span>BMI : ${bmi}</span>
 						 </div>
 					</c:when>
 					<c:when test="${bmi >= 18.5 and bmi < 23}">
 					<div class="bmi__result">
 						<i class="fa-solid fa-thumbs-up"></i>
-						<span>정상</span>
+						<h3>정상</h3>
+						<span>성별 : ${servey.gender eq 'M' ? '남' : '여'}</span>
+						<span>BMI : ${bmi}</span>
 					</div>
 					</c:when>
 					<c:when test="${bmi >= 23 and bmi < 25}">
 						<div class="bmi__result">
 						<i class="fa-solid fa-thumbs-up"></i>
-						<span>과체중</span>
+						<h3>과체중</h3>
+						<span>성별 : ${servey.gender eq 'M' ? '남' : '여'}</span>
+						<span>BMI : ${bmi}</span>
 						</div>						
 					</c:when>
 					<c:when test="${bmi >= 25 }">
 						<div class="bmi__result">
 						<i class="fa-solid fa-thumbs-down"></i>
-						<span>비만</span>
+						<h3>비만</h3>
+						<span>성별 : ${servey.gender eq 'M' ? '남' : '여'}</span>
+						<span>BMI : ${bmi}</span>
 						</div>
 					</c:when>
 					</c:choose>
@@ -59,16 +71,45 @@
 			</div>
 			<div id="bmi__result">
 				<div id="product">
-					<button name="serveyProduct" id="serveyProduct" value="${servey.body}">상품 보기</button>
+					<h3>${servey.body}이 좋지않은 당신을 위해 준비했어요</h3>
+					<c:forEach items="${serveyProductList}" var="product">
+						<div class="productInfo">
+							
+							<img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="" />
+							<a href="">
+								<h4>${product.pname}</h4>
+								<br />
+								<p align="left">${product.mainFnctn}</p>
+							</a>
+						</div>
+					</c:forEach>
+						</div>
+					<div>
+						<button id="reServey" type="button" class="btn btn-danger">설문 다시하기</button>
+					</div>
 				</div>
 			</div>
 		</div>
 		
 	</div>
-</div>
 <script>
-
-
+const headers = {};
+headers['${_csrf.headerName}'] = '${_csrf.token}';
+document.querySelector("#reServey").addEventListener('click',(e)=>{
+	if(confirm("설문을 다시하시겠습니까?(기존 설문은 삭제됩니다.)")){
+		$.ajax({
+			url : "${pageContext.request.contextPath}/servey/serveyDel.do",
+			method : "post",
+			dataType : "json",
+			headers,
+			success(response){
+				console.log(response);
+			},
+			error : console.log
+		})			
+		 location.href = "${pageContext.request.contextPath}/servey/servey.do"; 
+	}
+})
 </script>
 
 

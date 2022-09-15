@@ -8,22 +8,17 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.web.header.Header;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.service.ProductService;
 import com.kh.drugstore.servey.model.dto.Servey;
 import com.kh.drugstore.servey.model.service.ServeyService;
-
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -57,11 +52,11 @@ public class ServeyController {
 		double bmi = Math.round(bmiOrigin * 100) / 100;
 		
 		
-//		List<?> serveyProductList = productService.findServeyProduct(servey.getBody());
+		List<Product> serveyProductList = productService.findServeyProduct(servey.getBody());
 		
 		model.addAttribute("servey", servey);
 		model.addAttribute("bmi", bmi);
-		
+		model.addAttribute("serveyProductList", serveyProductList);
 		
 		
 		
@@ -80,10 +75,31 @@ public class ServeyController {
 		double bmiOrigin = (weight / (height * height)) * 10000;
 		double bmi = Math.round(bmiOrigin * 100) / 100;
 		
+		List<Product> serveyProductList = productService.findServeyProduct(servey.getBody());
+		
 		model.addAttribute("servey",servey);
 		model.addAttribute("bmi", bmi);
+		model.addAttribute("serveyProductList", serveyProductList);
 	}
 
+	@PostMapping("/serveyCheck.do")
+	public ResponseEntity<?> serveyCheck(Principal principal) {
+		Servey servey = serveyService.selectOneServey(principal.getName());
+		boolean available = servey != null;
+		
+		log.debug("available = {}",available);
+		Map<String,Object> serveyMap = new HashMap<>();
+		serveyMap.put("available", available);
+		
+		
+		return ResponseEntity.status(HttpStatus.OK).body(serveyMap);
+	}
 
-
+	@PostMapping("/serveyDel.do")
+	public ResponseEntity<?> serveyDel(Principal princiapl){
+		int result = serveyService.deleteServey(princiapl.getName());
+		
+		
+		return ResponseEntity.status(HttpStatus.OK).body(result);
+	}
 }

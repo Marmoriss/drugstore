@@ -64,10 +64,14 @@
 					<input type="text" class="form-control" placeholder="" name="detailAddress" id="detailAddress" value="">
 				</td>
 			</tr>
-			
+			<tr>
+				<th></th>
+				<td>
+					<button type="submit" class="btn btn-success">가입</button>
+					<button type="button" class="btn btn-secondary" onclick="history.back()">취소</button>
+				</td>
+			</tr>
 		</table>
-		<button type="submit" class="btn btn-success">가입</button>
-		<button type="button" class="btn btn-secondary" onclick="history.back()">취소</button>
 	</form:form>
 </div>
 <script>
@@ -113,6 +117,7 @@ document.querySelector("#memberId").addEventListener('keyup', (e) => {
 		url : "${pageContext.request.contextPath}/member/checkIdDuplicate.do",
 		method : "POST",
 		headers,
+		dataType : "JSON",
 		data : {memberId},
 		success(response){
 			console.log(response); // js object
@@ -121,12 +126,12 @@ document.querySelector("#memberId").addEventListener('keyup', (e) => {
 			const {available} = response;
 			
 			console.log(available);
-			if(available){
+			if(!available){
 				error.style.display = "inline";
 				ok.style.display = "none";
 				idValid.value = "0";
 			}
-			if(!available){
+			if(available){
 				error.style.display = "none";
 				ok.style.display = "inline";
 				idValid.value = "1";

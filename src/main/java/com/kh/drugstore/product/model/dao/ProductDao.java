@@ -30,7 +30,8 @@ public interface ProductDao {
 
 	List<ProductEntity> findByValues(Map<String, Object> param);
 
-	@Select("select * from product where main_fnctn like concat('%' || #{symptom},'%')")
+	@Select("select * from (select * from product where main_fnctn like concat('%' || #{symptom},'%')) where rownum <= 3")
 	List<Product> findServeyProduct(String symptom);
-
+	
+			
 }

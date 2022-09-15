@@ -20,11 +20,14 @@
     <ul class="sidebar-nav">
       <li><h3>마이페이지</h3></li>
       <li><a href="${pageContext.request.contextPath}/member/updateMember.do">회원정보수정</a></li>
+      <li><a href="${pageContext.request.contextPath}/servey/serveyResult.do">설문결과확인</a></li>
       <li><h3>나의 쇼핑정보</h3></li>
+      <hr />
       <li><a href="">주문 / 배송내역</a></li>
       <li><a href="#">최소 / 환불내역</a></li>
       <li><a href="#">교환 / 반품내역</a></li>
       <li><h3>나의 활동</h3></li>
+      <hr />
       <li><a href="#">정기구독</a></li>
       <li><a href="#">1:1문의</a></li>
       <li><a href="#">상품 리뷰</a></li>

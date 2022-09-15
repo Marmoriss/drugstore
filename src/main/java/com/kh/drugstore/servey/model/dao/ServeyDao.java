@@ -1,5 +1,6 @@
 package com.kh.drugstore.servey.model.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -15,6 +16,10 @@ public interface ServeyDao {
 	
 	@Select("select * from servey where member_id = #{memberId}")
 	Servey selectOneServey(Object principal);
+
+	@Delete("delete servey where member_id = #{memberId}")
+	int deleteServey(String name);
+
 	
 
 }

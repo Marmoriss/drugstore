@@ -22,6 +22,8 @@
   	border: 1px solid black;
     width: 80%;
     padding: 20px;
+    background-color: #FFE1B6;
+    border: none;
   }
   
   .container-fluid{
@@ -42,6 +44,7 @@
   .sidebar-nav li {
     text-indent: 1.5em;
     line-height: 2.8em;
+    margin-bottom: 4px;
   }
   
   .sidebar-nav li a {
@@ -51,7 +54,8 @@
   }
   
   .sidebar-nav li a:hover {
-    color: #fff;
+    color: black;
+    font-size : 20px;
     background: rgba(255, 255, 255, 0.2);
   }
   
@@ -59,3 +63,12 @@
     font-size: 1.3em;
     line-height: 3em;
   }
+  
+/* container-fluid */
+.container-fluid{
+	    background-color: whitesmoke;
+    border: none;
+    border-top: 1px solid black;
+    height: 80px;	
+}
+  

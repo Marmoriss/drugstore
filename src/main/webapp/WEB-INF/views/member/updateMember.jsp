@@ -62,11 +62,15 @@
 					<input type="text" class="form-control" placeholder="" name="detailAddress" id="detailAddress" value="">
 				</td>
 			</tr>
-			
+			<tr>
+				<th></th>
+				<td>
+					<button type="button" class="btn btn-outline-primary" onclick="updateMember();">수정</button>
+					<button type="button" class="btn btn-outline-danger" onclick="deleteMember()">삭제</button>
+					<button type="button" class="btn btn-outline-info" onclick="history.back()">취소</button>
+				</td>
+			</tr>
 		</table>
-		<button type="button" class="btn btn-outline-primary" onclick="updateMember();">수정</button>
-		<button type="button" class="btn btn-outline-danger" onclick="deleteMember()">삭제</button>
-		<button type="button" class="btn btn-outline-info" onclick="history.back()">취소</button>
 	</form:form>
 </div>
 
