@@ -2,6 +2,95 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="student">
+<mapper namespace="com.kh.drugstore.product.model.dao.ProductDao">
+	<!-- 주희 코드 시작 -->
+	<resultMap type="productEntity" id="productMap"></resultMap>
   
+	<!-- 상품 검색 필터로 검색 -->
+	<select id="findByValues" resultMap="productMap">
+		select
+			*
+		from
+			product
+		<where>
+			<if test="pcode != null and pcode != ''">
+				pcode = #{pcode}
+			</if>
+			<if test="pname != null and pname != ''">
+				or pname = #{pname}
+			</if>
+			<if test="manu != null and manu != ''">
+				or manu = #{manu}
+			</if>
+			<if test="saleStatus != null and saleStatus != ''">
+				<if test="saleStatus == 'total'">
+					or sale_status in ('Y', 'N', 'soldOut')
+				</if>
+				or sale_status = #{saleStatus}
+			</if>
+			<if test="categoryId != null and categoryId != ''">
+				or category_id = #{categoryId}
+			</if>
+			<if test="to != null and from != null">
+				or created_at 
+				between to_date(#{toDate}, 'yyyy/mm/dd') and to_date(#{fromDate}, 'yyyy/mm/dd')
+			</if>
+		</where>
+	</select>
+
+	<resultMap type="product" id="productCollectionMap">
+		<id column="pcode" property="pcode"/>
+		<result column="category_id" property="categoryId"/>
+		<result column="sttenmt_no" property="sttenmtNo"/>
+		<result column="pname" property="pname"/>
+		<result column="manu" property="manu"/>
+		<result column="price" property="price"/>
+		<result column="amount" property="amount"/>
+		<result column="ingre_name" property="ingreName"/>
+		<result column="main_fnctn" property="mainFnctn"/>
+		<result column="intake_hint1" property="intakeHint1"/>
+		<result column="srv_use" property="srvUse"/>
+		<result column="distb_pd" property="distbPd"/>
+		<result column="sub_yn" property="subYn"/>
+		<result column="base_standard" property="baseStandard"/>
+		<result column="sale_status" property="saleStatus"/>
+		<result column="created_at" property="createdAt"/>
+		<result column="updated_at" property="updatedAt"/>
+		<result column="discount" property="discount"/>
+		<collection property="attachments" ofType="productAttachment">
+			<id column="attach_no" property="attachNo"/>
+			<result column="pcode" property="pcode"/>
+			<result column="original_filename" property="originalFilename"/>
+			<result column="renamed_filename" property="renamedFilename"/>
+			<result column="attach_created_at" property="createdAt"/>
+		</collection>
+	</resultMap>
+
+	<select id="selectOneProductCollection" resultMap="productCollectionMap">
+		select
+			p.*,
+			a.attach_no,
+			a.pcode,
+			a.original_filename,
+			a.renamed_filename,
+			a.created_at attach_created_at
+		from
+			product p
+				left join product_attachment a
+					on p.pcode = a.pcode
+		where
+			p.pcode = #{pcode}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

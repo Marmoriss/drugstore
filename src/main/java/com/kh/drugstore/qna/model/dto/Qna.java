@@ -15,7 +15,7 @@ public class Qna {
 
 	private int qnaId; //번호
 	private int commentRef; //댓글 null, 대댓글인 경우 참조댓글 no
-	private int pCode; //상품코드
+	private int pcode; //상품코드
 	private String writer; //작성자
 	private String answered; //답변상태
 	private LocalDateTime regDate; //작성일

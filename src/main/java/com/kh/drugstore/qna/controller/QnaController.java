@@ -70,6 +70,7 @@ public class QnaController {
 	//등록
 	@PostMapping("/qnaEnroll.do")
 	public String qnaEnroll(Qna qna, RedirectAttributes redirectAttr) {
+		log.debug("qna = {}", qna);
 		int result = qnaService.insertQna(qna);
 		redirectAttr.addFlashAttribute("msg", "게시글을 성공적으로 저장했습니다.");
 		return "redirect:/qna/qnaList.do";

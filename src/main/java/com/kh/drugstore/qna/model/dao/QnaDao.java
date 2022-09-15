@@ -23,12 +23,12 @@ public interface QnaDao {
 	int getTotalContent();
 	
 	//qna 게시글 등록 - 그런데 비밀글이 가능한. 만약 제목, 내용이 없으면 에러. 
-	@Insert("insert into qna values(seq_qna_no.nextval, default, default, #{writer}, default, default, #{content}, #{secret_password}, default")
+	@Insert("insert into qna values(seq_qna_id.nextval, default, default, #{writer}, default, default, #{content}, #{secretPassword}, default)")
 	@SelectKey(statement= "select pcode from dual", before = false, keyProperty = "pcode", resultType = int.class)
 	int insertQna(Qna qna);
 	
 	//덧글 등록(레벨 : 답글1 관리자, 대댓글2 사용자 / null 덧글, 대댓인 경우 참조댓글 no) 
-	@Insert("insert into qna values(seq_qna_no.nextval, #{comment_ref}, #{pcode}, #{writer}, default, default, #{content}, default, #{secretPassword}, #{comment_level}")
+	@Insert("insert into qna values(seq_qna_id.nextval, #{commentRef}, #{pcode}, #{writer}, default, default, #{content}, default, #{secretPassword}, #{commentLevel}")
 	int insertQnaComment(Qna qna);
 
 	//qna에서 내가 쓴 글 조회
