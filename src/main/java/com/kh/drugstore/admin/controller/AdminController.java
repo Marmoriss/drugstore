@@ -23,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.kh.drugstore.admin.model.service.AdminService;
 import com.kh.drugstore.common.DrugstoreUtils;
 import com.kh.drugstore.member.model.dto.User;
+import com.kh.drugstore.orders.model.dto.Orders;
 import com.kh.drugstore.product.model.dto.Category;
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.dto.ProductAttachment;
@@ -325,7 +327,23 @@ public class AdminController {
 		return "admin/statis/visitStatis";
 	}
 	
+	@GetMapping("/order/orderList.do")
+	public void orderList(Model model) {
+		List<Orders> list = adminService.selectOrders();
+		model.addAttribute("list", list);
+	}
 	
+	@PostMapping("/order/statusUpdate.do")
+	public void statusUpdate(Orders orders, HttpServletRequest request) {
+		String merchantUid = request.getParameter("merchantUid");
+		String status = request.getParameter("status");
+
+		Map<String, Object> data = new HashMap<>();
+		data.put("merchantUid", merchantUid);
+		data.put("status", status);
+		
+		int result = adminService.statusUpdate(data);
+	}
 	
 // 태연코드 끝
 	
