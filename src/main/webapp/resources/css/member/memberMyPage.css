@@ -11,11 +11,15 @@
   
   #sidebar-wrapper {
     padding: 25px 0 25px 0;
-    height: 100%;
+    height: 619px;
     margin-left: -250px;
     background: #FFE1B6;
     overflow-x: hidden;
     overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
   }
   
   #page-content-wrapper {

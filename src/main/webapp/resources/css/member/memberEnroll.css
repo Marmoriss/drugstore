@@ -13,3 +13,14 @@ div#memberId-container span.guide { display:none; font-size:12px; position:absol
 div#memberId-container span.ok { color:green; }
 div#memberId-container span.error { color:red; }
 }
+
+#pwCheck-btn{
+	    display: flex;
+    text-align: center;
+    justify-content : center;
+    align-content: center;
+     height: 39px;	
+}
+#pwCheck-btn button{
+     height: 30px;	
+}

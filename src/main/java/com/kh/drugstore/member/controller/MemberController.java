@@ -1,5 +1,6 @@
 package com.kh.drugstore.member.controller;
 
+import java.security.Principal;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +13,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,6 +36,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kh.drugstore.auth.model.service.AuthService;
 import com.kh.drugstore.member.model.dto.KakaoProfile;
 import com.kh.drugstore.member.model.dto.Member;
 import com.kh.drugstore.member.model.dto.MemberEntity;
@@ -55,6 +56,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberSecurityService memberSecurityService;
+	
+	@Autowired
+	private AuthService authService;
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -84,8 +88,10 @@ public class MemberController {
 			String encodedPassword = bcryptPasswordEncoder.encode(rawPassword);
 			member.setPassword(encodedPassword);
 			log.debug("encodedPassword = {}", encodedPassword);
-
+			
+			
 			int result = memberService.insertMember(member);
+			result = authService.insertAuth(member.getMemberId());
 			redirectAttr.addFlashAttribute("msg", "회원 가입이 정상적으로 처리되었습니다.");
 			return "redirect:/";
 		} catch (Exception e) {
@@ -165,11 +171,12 @@ public class MemberController {
 	}
 
 	@PostMapping("/memberUpdate.do")
-	public String memberUpdate(@ModelAttribute Member member, RedirectAttributes redirectAttr, Model model) {
+	public String memberUpdate(@ModelAttribute Member member,String newPassword, RedirectAttributes redirectAttr, Model model) {
 		log.debug("member = {}", member);
+		
 		// 비밀번호 암호화
-		String rawPassword = member.getPassword();
-		String encodedPassword = bcryptPasswordEncoder.encode(rawPassword);
+		
+		String encodedPassword = bcryptPasswordEncoder.encode(newPassword);
 		member.setPassword(encodedPassword);
 		log.debug("encodedPassword = {}", encodedPassword);
 
@@ -290,4 +297,23 @@ public class MemberController {
 	public void memberSubscription() {
 		
 	}
+	
+	@PostMapping("/passwordCheck.do")
+	public ResponseEntity<?> passwordCheck(@RequestParam("password") String password , Principal principal) {
+		log.debug("프린시발 = {}",principal.getName());
+		Member member = memberService.selectOneMember(principal.getName());
+		log.debug("password = {}",member.getPassword());
+		log.debug("password = {}",password);
+		// 비밀번호 암호화
+		
+		String encodedPassword = bcryptPasswordEncoder.encode(password);
+		boolean isMatched = bcryptPasswordEncoder.matches(password, member.getPassword());
+		
+		
+		 
+		return ResponseEntity.status(HttpStatus.OK).body(isMatched);
+		
+		
+	}
+	
 }

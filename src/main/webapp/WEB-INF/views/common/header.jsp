@@ -78,7 +78,7 @@
 		</div>
 		<!-- 로고 -->
 		<div class="header-logo">
-			<a href="/" class="header-logo-link">
+			<a href="${pageContext.request.contextPath}/" class="header-logo-link">
 				<img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="logo" class="header-logo-img"/>
 			</a>
 		</div>
