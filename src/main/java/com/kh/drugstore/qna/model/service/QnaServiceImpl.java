@@ -36,9 +36,9 @@ public class QnaServiceImpl implements QnaService {
 	}
 	
 	@Override
-	public Qna oneQna(int pCode) {
+	public Qna oneQna(int pcode) {
 		// TODO Auto-generated method stub
-		return qnaDao.oneQna(pCode);
+		return qnaDao.oneQna(pcode);
 	}
 	
 	@Override

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Qna {
-
+//계층형 쿼리에서 수업때 대댓글 상황이랑 비슷함. 
 	private int qnaId; //번호
 	private int commentRef; //댓글 null, 대댓글인 경우 참조댓글 no
 	private int pcode; //상품코드

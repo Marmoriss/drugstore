@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,6 +73,8 @@ public class QnaController {
 	@PostMapping("/qnaEnroll.do")
 	public String qnaEnroll(Qna qna, RedirectAttributes redirectAttr) {
 		log.debug("qna = {}", qna);
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String writer = ((UserDetails) principal).getUsername();
 		int result = qnaService.insertQna(qna);
 		redirectAttr.addFlashAttribute("msg", "게시글을 성공적으로 저장했습니다.");
 		return "redirect:/qna/qnaList.do";
@@ -78,17 +82,17 @@ public class QnaController {
 	
 	//상세조회
 	@GetMapping("/qnaDetail.do")
-	public void qnaDetail(@RequestParam int pCode, Model model) {
-		Qna qna = qnaService.oneQna(pCode);
+	public void qnaDetail(@RequestParam int pcode, Model model) {
+		Qna qna = qnaService.oneQna(pcode);
 		log.debug("qna = {}", qna);
 		model.addAttribute("qna", qna);
 	}
 	
 	//답글쓰기화면
 	@GetMapping("/qnaReplay.do")
-	public String replay(int pCode, Model model) {
+	public String replay(int pcode, Model model) {
 		//원글 정보 불러오기
-		model.addAttribute("qna", qnaService.oneQna(pCode));
+		model.addAttribute("qna", qnaService.oneQna(pcode));
 		
 		return "redirect:/qna/qnaReplay.do";
 	}

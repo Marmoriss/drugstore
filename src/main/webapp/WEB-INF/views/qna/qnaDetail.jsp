@@ -10,77 +10,91 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/qna.css" />
 <table>
+	<c:forEach items="${qna}" var="qna">
+	<th>
+		<td class="content">제목</td>
+		<td colspan="5" class="left">${qna.content}</td>
+	</th>
 	<tr>
-		<th class="title">제목</th>
-		<td colspan="5" class="left">${qna.title}</td>
+		<td>작성자</td>
+		<td>${qna.writer}</td>
 	</tr>
 	<tr>
-		<th>작성자</th>
-		<td>${qna.name}</td>
-		<th class="answered">답변여부</th>
+		<td class="answered">답변여부</td>
 		<td class="answered">${qna.answered}</td>
-		<th class="regDate">작성일</th>
+	</tr>
+	<tr>
+		<td class="regDate">작성일</td>
 		<td class="regDate">${qna.regDate}</td>
 	</tr>
 	<tr>
-		<th>내용</th>
-		<td colspan="5" class="left">${fn:replace(qna.content, '<br>') }</td>
+		<td colspan="2">내용</td>
 	</tr>
+	<tr>
+		<td colspan="2" class="left">${qna.content}</td>
+	</tr>
+	</c:forEach>
 </table>
    <br />
-   <%-- 해당 게시글 작성자가(관리자)한테만 수정/답글/삭제버튼이 보일것 --%>
-   <sec:authorize access="hasRole('ADMIN')">
-   	<button type="button" 
-			class="btn-update"
-			onclick="location.href='${pageContext.request.contextPath}/qna/qnaUpdate.do?no=${qna.qnaId}';">수정</button>
-   	<button type="button" 
-			class="btn-replay"
-			onclick="location.href='${pageContext.request.contextPath}/qna/qnaReplay.do?no=${qna.qnaId}';">답글</button>
-	<button type="button" 
-			class="btn-delete"
-			onclick="location.href='${pageContext.request.contextPath}/qna/qnaDelete.do?no=${qna.qnaId}';">삭제</button>   
-</sec:authorize>
-
+   <div class="btnSet">
+   	<a class="btn-fill" href="${pageContext.request.contextPath}/qna/qnaList.do">목록으로</a>
+   	<!-- 작성자 본인만 수정/삭제 가능. 수정/삭제 버튼은 작성자가 본인일때만 보여야함 -->
+   	<c:if test="${qna.writer eq 'Y'}">
+		<input type="button" value="수정" id="btn-update" class="btn-update" 
+			onclick="location.href='${pageContext.request.contextPath}/qna/qnaUpdate.do';"/>
+				<input type="button" value="삭제" id="btn-delete" class="btn-delete" 
+			onclick="location.href='${pageContext.request.contextPath}/qna/qnaDelete.do';"/>
+   	</c:if>
+   </div>
+   		
+		<input type="button" value="답글" id="btn-write" class="btn-write" 
+			onclick="location.href='${pageContext.request.contextPath}/qna/qnaReply.do';"/>
+		
+		
     <hr style="margin-top:30px;" />    
+    <hr/>
     
     <div class="comment-container">
         <div class="comment-editor">
-            <form
-            	action="${pageContext.request.contextPath}/qna/qnaReplay.do" method="post" name="qnaCommentFrm">
-                <input type="hidden" name="qnadId" value="${qna.qnaId}" />
-                <input type="hidden" name="writer" value="${qna.writer}" />                
-                <input type="hidden" name="commentLevel" value="1" />
-                <input type="hidden" name="commentRef" value="0" />    
-                <textarea name="content" cols="60" rows="3"></textarea>
-                <button type="submit" id="btn-comment-enroll1">등록</button>
-            </form>
+        	<sec:authorize access="hasRole('ADMIN')">
+	            <form
+	            	action="${pageContext.request.contextPath}/qna/qnaReplay.do" method="post" name="qnaCommentFrm">
+	                <input type="hidden" name="qnaId" value="${qna.qnaId}" />
+	                <input type="hidden" name="writer" value="${qna.writer}" />                
+	                <input type="hidden" name="commentLevel" value="1" />
+	                <input type="hidden" name="commentRef" value="0" />    
+	                <textarea name="content" cols="60" rows="3"></textarea>
+	                <button type="submit" id="btn-comment-enroll1">등록</button>
+	            </form>
+           	</sec:authorize>
         </div>
-       <!--table#tbl-comment-->
-		<table id="tbl-comment">
-			<tbody>
-				<tr class="level1">
-					<td>
-						<sub class="comment-writer"></sub>
-						<sub class="comment-date"></sub>
-						<br />
-					</td>
-					<td>
-						<button class="btn-reply" value="">답글</button>
-						<button class="btn-delete" value="">삭제</button>
-					</td>
-				</tr>
-				<tr class="level2">
-					<td>
-						<sub class="comment-writer"></sub>
-						<sub class="comment-date"></sub>
-						<br />
-					</td>
-					<td>
-						<button class="btn-delete" value="">삭제</button>
-
-					</td>
-				</tr>
-
-			</tbody>
-		</table>
     </div>
+         <!--table#tbl-comment-->
+			<table id="tbl-comment">
+				<tbody>
+					<tr class="level1">
+						<td>
+							<sub class="comment-writer"></sub>
+							<sub class="comment-date"></sub>
+							<br />
+						</td>
+						<td>
+							<button class="btn-reply" value="">답글</button>
+							<button class="btn-delete" value="">삭제</button>
+						</td>
+					</tr>
+					<tr class="level2">
+						<td>
+							<sub class="comment-writer"></sub>
+							<sub class="comment-date"></sub>
+							<br />
+						</td>
+						<td>
+							<button class="btn-delete" value="">삭제</button>
+	
+						</td>
+					</tr>
+	
+				</tbody>
+			</table>
+	

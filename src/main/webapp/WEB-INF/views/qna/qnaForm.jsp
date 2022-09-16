@@ -20,11 +20,6 @@
 	<br>
 	<form:form action="${pageContext.request.contextPath}/qna/qnaEnroll.do" method="post">
 		<div class="form-group">
-			<label for="title">제목</label>
-			<input type="text" class="form-control" id="title" placeholder="제목 입력" name="title" required="required">
-		</div><br />
-
-		<div class="form-group">
 			<label for="writer"><sec:authentication property="principal.memberId"/></label>
 		</div><br />
 		<div class="form-group">
@@ -39,5 +34,11 @@
 		<button type="submit" class="btn-add">등록</button>
 	</form:form>
 </div>
+
+
+<br/>
+<br/>
+<br/>
+
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

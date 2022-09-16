@@ -13,7 +13,7 @@ public interface QnaService {
 
 	int insertQna(Qna qna);
 
-	Qna oneQna(int pCode);
+	Qna oneQna(int qnaId);
 
 	int insertQnaComment(Qna qna);
 
