@@ -1,0 +1,115 @@
+@charset "UTF-8";
+#main{
+	padding-top: 350px;
+}
+ul,li{
+	list-style: none;
+}
+#bmi{
+	display: flex;
+	text-align: center;
+	text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#bmi__header{
+	background-color: #D9AFD9;
+	background-image: -webkit-linear-gradient(#D9AFD9 0%, #97D9E1 100%);
+	background-image: -moz-linear-gradient(#D9AFD9 0%, #97D9E1 100%);
+	background-image: -o-linear-gradient(#D9AFD9 0%, #97D9E1 100%);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#D9AFD9), to(#97D9E1));
+	background-image: linear-gradient(#D9AFD9 0%, #97D9E1 100%);
+	padding: 40px;
+	width: 1235.48px;
+	
+}
+#header__title{
+	    display: flex;
+	    flex-direction : column;
+    justify-content: space-evenly;
+    margin-bottom: 84px;
+    align-items: center;
+}
+#bmiImg{
+	display: flex;
+	flex-direction: column;
+}
+#bmiImg div{
+	position: relative;
+    top: 32px;
+}
+#bmiImg div span{
+	font-size: 15px;
+	font-weight: bold;
+}
+#header__title img{
+	margin-top: 40px;
+}
+
+#header__title div span{
+	margin: 0 5px;
+}
+.header__content{
+	display: flex;
+	justify-content: center;
+}
+.header__content span,i{
+	font-size: 24px;
+}
+#header__info span{
+	margin: 0 20px;
+	font-size: 15px;
+}
+header__title img{
+	width: 500px;
+	height: 50px;
+}
+
+.bmi__result{
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+	width: 80%;
+	height: 120px;
+	border: 1px solid white;
+	border-radius: 30px;
+	background-color: white;
+}
+.bmi__result span{
+	font-size: 10px;
+}
+.bmi_result i{
+	font-size: 34px;
+}
+#product{
+	padding : 40px;
+	background-color : #C2DCDE;
+	display: flex;
+	flex-direction : column;
+	width: 1235.48px;
+}
+#product h3{
+	margin-bottom: 40px;
+}
+.productInfo{
+	margin-bottom: 112px;
+    display: flex;
+        width: 1100px;
+    justify-content: center;
+}
+.productInfo a{
+	display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+.productInfo img{
+	width : 200px;
+	height: 200px;
+}
+
+#reServey{
+	    position: relative;
+    bottom: 39px;
+}

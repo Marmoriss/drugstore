@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.drugstore.member.model.dto.User;
+import com.kh.drugstore.orders.model.dto.Orders;
 import com.kh.drugstore.product.model.dto.Category;
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.dto.ProductAttachment;
@@ -50,10 +51,20 @@ public interface AdminService {
 
 	int getVisitTotalCount();
 
+	List<Orders> selectOrders();
+
+	int statusUpdate(Map<String, Object> data);
+
+
+
+
 	
 	
 
 
+	
+	
+	
 	
 
 // 태연코드 끝

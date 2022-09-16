@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+span{
+	font-size : 22px;
+}
+#container{
+	height: 600px;
+}
+form{
+	padding : 20px;
+}
+
+/* 버튼 */
+.btn-wrapper{
+	display: flex;
+	justify-content: center;
+}
+.btn{
+	height: 50px;
+    padding: 10px;
+    margin-top: 70px;
+}
+button{
+	color : white;
+}
+.prev{
+	width : 80px;	
+}
+.next{
+	width: 300px;
+}
+
+
+#main div, .qBox{
+	padding-top: 100px;
+}
+#main, #qna{
+	display: flex;
+	justify-content: center;
+}
+#main div{
+	text-align: center;
+}
+.qBox div{
+	text-align: center;
+}
+/* input radio,number 크기 조절 */
+.qBox div label{
+	    margin: 20px 20px;
+	    font-size: 23px;
+}
+.qBox div input[type=radio]{
+	width: 30px;
+	height: 30px;
+}
+.qBox div input[type=number]{
+	margin-top : 10px;
+	width: 300px;
+	height: 50px;
+    border: 2px solid #ebebeb;
+    border-radius: 8px;
+    background-color: #fefefe;
+}
+.qBox div input[type=number]:focus{
+	outline: none;
+}
+/* checkbox */
+.form-check{
+	display: flex;
+    align-items: center;
+    width: auto;
+    height: auto;
+}
+input[type=checkbox]{
+	width: 30px;
+	height: 30px;
+}
+@Keyframes fadeIn{
+	from {opacity : 0;}
+	to {opacity : 1;}
+}
+
+@Keyframes fadeOut{
+	from {opacity : 1;}
+	to {opacity : 0;}
+}
+
+@-webkit-Keyframes fadeIn{
+	from {opacity : 0;}
+	to {opacity : 1;}
+}
+
+@-webkit-Keyframes fadeOut{
+	from {opacity : 1;}
+	to {opacity : 0;}
+}

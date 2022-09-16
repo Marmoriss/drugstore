@@ -249,7 +249,7 @@ create table notice(
     constraint pk_notice_no primary key(no)
 );
 
--- 날짜별 가입자 수
+-- 날짜별 가입자 수(사용x)
 create table user_by_date(
     no number,
     by_date date default sysdate,
@@ -257,7 +257,7 @@ create table user_by_date(
     constraint pk_user_by_date_no primary key(no)
 );
 
--- 날짜별 방문자 수
+-- 날짜별 방문자 수(수정)
 create table visit(
     v_date date
 );
@@ -270,7 +270,7 @@ create table sales_by_date(
     constraint pk_sales_by_date_no primary key(no)
 );
 
--- 주문 / 결제
+-- 주문 / 결제(수정)
 create table orders(
     merchant_uid number,
     member_id varchar2(50),
@@ -278,7 +278,7 @@ create table orders(
     receiptId varchar2(100) not null,
     method varchar2(10) not null,
     name varchar2(50),
-    status varchar2(10),
+    status varchar2(20),
     created_at date default sysdate,
     paid_at date,
     failed_at date,
@@ -391,7 +391,14 @@ insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.ne
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다2', '배송관련입니다2', default); 
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다3', '배송관련입니다3', default); 
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다4', '배송관련입니다4', default); 
-
+select * from visit;
+select * from member;
+--alter table notice add constraint fk_notice_writer foreign key(writer) references member(member_id) on delete cascade;
+--alter table orders add status varchar2(20) default '배송준비중';
+desc orders;
+insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price, paid_at ) values(524589565, 'sinsa', '1', '김태연','post', 15000, 30000, '22/05/15'); 
+insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price, paid_at) values(125478569, 'cat', '2', '김서연','post', 20000, 20000,'22/08/05'); 
+select * from orders;
 --태연 코드 끝--
 
 -- 주희 코드 --

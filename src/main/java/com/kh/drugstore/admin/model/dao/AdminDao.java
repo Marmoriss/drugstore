@@ -9,9 +9,11 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
 
 import com.kh.drugstore.member.model.dto.User;
+import com.kh.drugstore.orders.model.dto.Orders;
 import com.kh.drugstore.product.model.dto.Category;
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.dto.ProductAttachment;
@@ -100,6 +102,13 @@ public interface AdminDao {
 	
 	@Insert("insert into visit(v_date) values(sysdate)")
 	void insertVisit();
+
+	@Select("select merchant_uid, member_id, total_price, status, paid_at from orders")
+	List<Orders> selectOrders();
+
+	@Update("update orders set status ='배송중' where merchant_uid = #{merchantUid}")
+	int statusUpdate(Map<String, Object> data);
+
 
 
 	
