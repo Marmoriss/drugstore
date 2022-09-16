@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.drugstore.admin.model.dao.AdminDao;
 import com.kh.drugstore.member.model.dto.User;
+import com.kh.drugstore.notice.model.dto.Notice;
+import com.kh.drugstore.orders.model.dto.Orders;
 import com.kh.drugstore.product.model.dto.Category;
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.dto.ProductAttachment;
@@ -164,13 +166,18 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void insertVisit() {
 		adminDao.insertVisit();
-		
 	}
 
+	@Override
+	public List<Orders> selectOrders() {
+		return adminDao.selectOrders();
+	}
 	
-	
-	
-	
+	@Override
+	public int statusUpdate(Map<String, Object> data) {
+		return adminDao.statusUpdate(data);
+	}
+
 	
 // 태연코드 끝
 }
