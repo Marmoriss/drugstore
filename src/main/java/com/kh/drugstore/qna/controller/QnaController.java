@@ -30,9 +30,9 @@ import com.kh.drugstore.qna.model.service.QnaService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Controller
-@Slf4j
-@RequestMapping("/qna")
+//@Controller
+//@Slf4j
+//@RequestMapping("/qna")//이걸 주석하라 하신게 맞을지 아니면 아래의 어노테이션까지 전부 하는걸지 잘 모르겠지만 
 public class QnaController {
 
 	@Autowired
@@ -53,11 +53,11 @@ public class QnaController {
 		param.put("cPage", cPage);
 		param.put("limit", limit);
 		List<Qna> list = qnaService.selectQnaList(param);
-		log.debug("list = {}", list);
+//		log.debug("list = {}", list);
 		model.addAttribute("list", list);
 		
 		int totalContent = qnaService.getTotalContent();
-		log.debug("totalContent = {}", totalContent);
+//		log.debug("totalContent = {}", totalContent);
 		String url = request.getRequestURI(); 
 		String pagebar = DrugstoreUtils.getPagebar(cPage, limit, totalContent, url);
 		model.addAttribute("pagebar", pagebar);
@@ -72,7 +72,7 @@ public class QnaController {
 	//등록
 	@PostMapping("/qnaEnroll.do")
 	public String qnaEnroll(Qna qna, RedirectAttributes redirectAttr) {
-		log.debug("qna = {}", qna);
+//		log.debug("qna = {}", qna);
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String writer = ((UserDetails) principal).getUsername();
 		int result = qnaService.insertQna(qna);
@@ -84,7 +84,7 @@ public class QnaController {
 	@GetMapping("/qnaDetail.do")
 	public void qnaDetail(@RequestParam int pcode, Model model) {
 		Qna qna = qnaService.oneQna(pcode);
-		log.debug("qna = {}", qna);
+//		log.debug("qna = {}", qna);
 		model.addAttribute("qna", qna);
 	}
 	
