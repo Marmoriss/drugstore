@@ -52,6 +52,7 @@
                                 
                             <div id="register-link" class="text-right">
                                 <a href="${pageContext.request.contextPath}/member/memberEnroll.do" class="text-info">회원가입</a>
+                                <a href="${pageContext.request.contextPath}/member/findInfo.do" class="text-info">아이디/비번 찾기</a>
                             </div>
 
                         </form:form>

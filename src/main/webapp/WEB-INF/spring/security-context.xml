@@ -19,6 +19,8 @@
 		<intercept-url pattern="/" access="permitAll"/>
 		<intercept-url pattern="/index.jsp" access="permitAll"/>				
 		<intercept-url pattern="/member/memberEnroll.do" access="isAnonymous()"/>
+		<intercept-url pattern="/member/findInfo.do" access="isAnonymous()"/>
+		<intercept-url pattern="/member/findId.do" access="isAnonymous()"/>
 		<intercept-url pattern="/member/memberLogin.do" access="isAnonymous()"/>
 		<intercept-url pattern="/member/naverLogin.do" access="isAnonymous()"/>
 		<intercept-url pattern="/member/checkIdDuplicate.do" access="isAnonymous()"/>

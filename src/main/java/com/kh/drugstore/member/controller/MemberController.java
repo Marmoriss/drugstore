@@ -69,6 +69,46 @@ public class MemberController {
 	public String memberEnroll() {
 		return "member/memberEnroll";
 	}
+	
+	/**
+	 *  아이디/비밀번호 찾기
+	 */
+	@GetMapping("/findInfo.do")
+	public void findMemberInfo() {
+		
+	}
+	
+	@PostMapping("/findInfo.do")
+	public ModelAndView findPw(@RequestParam String memberId, @RequestParam String phone, ModelAndView mav) {
+		Member member = memberService.selectOneMember(memberId);
+		int rnd = (int) (Math.random() * (10000-1000) + 1000);
+		String password = String.valueOf(rnd);
+		String encodedPassword = bcryptPasswordEncoder.encode(password);
+		member.setPassword(encodedPassword);
+
+		// 1. db row 수정
+		int result = memberService.updateMember(member);
+
+		UserDetails updatedMember = memberSecurityService.loadUserByUsername(member.getMemberId());
+		// 2. authentication 수정
+		Authentication newAuthentication = new UsernamePasswordAuthenticationToken(updatedMember,
+				updatedMember.getPassword(), updatedMember.getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+
+		mav.addObject("password", password);
+		mav.setViewName("/member/findInfo");
+		return mav;
+	}
+	
+	@PostMapping("/findId.do")
+	public ModelAndView findId(Member member, ModelAndView mav) {
+		log.debug("멈버 = {}",member);
+		Member findMember = memberService.selectOneMemberByName(member);
+		log.debug("memberId = {}",findMember.getMemberId());
+		mav.addObject("memberId", findMember.getMemberId());
+		mav.setViewName("/member/findInfo");
+		return mav;
+	}
 
 	/**
 	 * $2a$10$2.AdYu08nfVhU89v8PyfsuF0kObCQvGCdJiR3I5p1dSQMY81FfD6O
@@ -315,5 +355,6 @@ public class MemberController {
 		
 		
 	}
+	
 	
 }
