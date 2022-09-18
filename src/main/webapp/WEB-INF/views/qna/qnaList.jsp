@@ -27,7 +27,7 @@
 				<div class="qna-enroll">
 					<sec:authorize access="isAuthenticated()">
 						<input type="button" value="상품 Q&A 작성하기" id="btn-write" class="btn-write" 
-							onclick="location.href='${pageContext.request.contextPath}/qna/qnaUpdateForm.do';"/>
+							onclick="location.href='${pageContext.request.contextPath}/qna/qnaForm.do';"/>
 					</sec:authorize>
 				</div>
 			<div class="content-myQna-wrap">
@@ -36,7 +36,7 @@
 						<button 
 						type="button" 
 						class="btn-search" id="btn-search"
-						onclick="location.href='${pageContext.request.contextPath}/qna/qnaList.do?no=${qna.qnaId}';">내 Q&A 조회하기</button>
+						onclick="location.href='${pageContext.request.contextPath}/qna/qnaList.do?no=${qna.writer}';">내 Q&A 조회하기</button>
 					</c:if>
 				</div>
 					<div class="dropdown">
@@ -70,8 +70,10 @@
 						<c:forEach items="${list}" var="qna">
 							<tr data-no="${qna.qnaId}">
 								<td>${qna.answered}</td>
-								<td>${qna.title}</td>
-								<td>${qna.memberId}</td>
+								<td style="max-width: 100px; 
+								overflow: hidden; white-space: nowrap; 
+								text-overflow: ellipsis;">${qna.content}</td>
+								<td>${qna.writer}</td>
 								<td>
 									<fmt:parseDate value="${qna.regDate}" pattern="yyyy-MM-dd'T'HH:mm" var="regDate"/>
 									<fmt:formatDate value="${regDate}" pattern="YYYY.MM.dd"/>
@@ -81,26 +83,25 @@
 					</c:if>
 				</table>
 			</div>
-			<nav>
-				${pagebar}
-			</nav>
+		<nav>
+			${pagebar}
+		</nav>
 <br />
 <br />
 <br />
 <br />
 	</section>
 <script>
-/*	var toggle = false;
+document.querySelectorAll("tr[data-no]").forEach((tr) => {
+	tr.addEventListener('click', (e) => {
+		const tr = e.target.parentElement;
+		const no = tr.dataset.no;
+		if(no){
+			location.href = "${pageContext.request.contextPath}/qna/qnaDetail.do?pcode=" + no;
+		}
+	});
 	
- 	btn.addEventListener('click', function() {
-		//클릭할 때마다 현재상태 반전
-		toggle = !toggle;
-		
-		//if문 만약 토글이 true라면 
-		if(toggle == true)
-			selector.classList.add('on');
-		else
-			selector.classList.remove('on');
-	}, false); */
-	
+});
+
 </script>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
