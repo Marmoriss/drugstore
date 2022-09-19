@@ -10,21 +10,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.drugstore.admin.model.dao.AdminDao;
-import com.kh.drugstore.member.model.dto.Member;
 import com.kh.drugstore.member.model.dto.User;
+import com.kh.drugstore.notice.model.dto.Notice;
+import com.kh.drugstore.orders.model.dto.Orders;
 import com.kh.drugstore.product.model.dto.Category;
 import com.kh.drugstore.product.model.dto.Product;
+import com.kh.drugstore.product.model.dto.ProductAttachment;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@Transactional(rollbackFor = Exception.class)
 public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	AdminDao adminDao;
 	
-// 주희코드 시작	
+	// 주희코드 시작	
 	@Override
 	public List<Product> selectProductList() {
 		return adminDao.selectProductList();
@@ -44,7 +47,60 @@ public class AdminServiceImpl implements AdminService {
 	public List<String> autocompleteManu(String manu) {
 		return adminDao.autocompleteManu(manu);
 	}
+
+	@Override
+	public int insertProduct(Product product) {
+		int result = adminDao.insertProduct(product);
+		log.debug("admin#pcode = {}", product.getPcode());
+		
+		// 첨부파일 insert
+		List<ProductAttachment> attachments = product.getAttachments();
+		if(!attachments.isEmpty()) {
+			for(ProductAttachment attach : attachments) {
+				attach.setPcode(product.getPcode());
+				result = adminDao.insertAttachment(attach);
+			}
+		}
+		return result;
+				
+	}
 	
+	@Override
+	public Category getCategoryParentLevel(int categoryId) {
+		return adminDao.getCategoryParentLevel(categoryId);
+	}
+	
+	@Override
+	public ProductAttachment selectOneAttachment(int attachNo) {
+		return adminDao.selectOneAttachment(attachNo);
+	}
+	
+	@Override
+	public int deleteAttachment(int attachNo) {
+		return adminDao.deleteAttachment(attachNo);
+	}
+	
+	@Override
+	public int updateProduct(Product product) {
+		// 상품 업데이트
+		int result = adminDao.updateProduct(product);
+		
+		// 첨부파일 insert
+		List<ProductAttachment> attachments = product.getAttachments();
+		if(attachments != null && !attachments.isEmpty()) {
+			for(ProductAttachment attach : attachments) {
+				result = adminDao.insertAttachment(attach);
+			}
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+
 // 주희코드 끝
 	
 //	태연코드 시작
@@ -97,11 +153,31 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.getMemToday(); 
 	}
 	
+	@Override
+	public int getVisitTodayCount() {
+		return adminDao.getVisitTodayCount();
+	}
+	
+	@Override
+	public int getVisitTotalCount() {
+		return adminDao.getVisitTotalCount();
+	}
+	
+	@Override
+	public void insertVisit() {
+		adminDao.insertVisit();
+	}
 
+	@Override
+	public List<Orders> selectOrders() {
+		return adminDao.selectOrders();
+	}
 	
-	
-	
-	
+	@Override
+	public int statusUpdate(Map<String, Object> data) {
+		return adminDao.statusUpdate(data);
+	}
+
 	
 // 태연코드 끝
 }

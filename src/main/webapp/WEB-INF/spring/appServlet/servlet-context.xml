@@ -23,6 +23,13 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- multipartResolver 등록 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="52428800"></beans:property> <!-- 50mb 한 건의 파일 요청시 첨부할 파일 등의 총 용량 -->
+		<beans:property name="maxUploadSizePerFile" value="10245760"></beans:property><!-- 10mb 한 건의 파일당 용량 -->
+		<beans:property name="maxInMemorySize" value="10240"></beans:property><!-- 10kb이상이면 임시파일을 생성해서 관리 -->
+	</beans:bean>
+	
 	<context:component-scan base-package="com.kh.drugstore" />
 	
 	<!-- #13.1 jackson message converter bean 등록 -->

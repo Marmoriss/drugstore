@@ -3,146 +3,203 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <fmt:requestEncoding value="utf-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="${param.title}" />
 </jsp:include>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<!-- bootstrap js: jquery load 이후에 작성할것.-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<!-- bootstrap css -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/intakeCheck.css" />
-<body>
-	<!-- 달력 -->
-	<div class="main">
-		<div class="content-wrap">
-			<div class="content-left">
-				<table id="calendar" align="center">
-					<thead>
-						<tr class="btn-wrap clearfix">
-							<td>
-								<label id="prev">&#60;</label>
-							</td>
-							<td id="current-year-month" align="center" colspan="5"></td>
-							<td>
-								<label id="prev">&#62;</label>
-							</td>
-						</tr>
-						<tr>
-							<td class="sun" align="center">Sun</td>
-							<td align="center">Mon</td>
-							<td align="center">Tue</td>
-							<td align="center">Wed</td>
-							<td align="center">Thu</td>
-							<td align="center">Fri</td>
-							<td class="sat" align="center">Sat</td>
-						</tr>
-					</thead>
-					<tbody id="calendar-body" class="calendar-body"></tbody>
-				</table>
+
+<!-- 섭취 체크 페이지 시작 -->
+<div class="body">
+	<div id="intake-calendar">
+		<div class="sec-cal">
+			<div class="cal-nav">
+				<a href="javascript:;" class="nav-btn go-prev">prev</a>
+				<div class="year-month"></div>
+				<a href="javascript:;" class="nav-btn go-next">next</a>
 			</div>
-			<div class="content-right">
-				<div class="main-wrap">
-					<div class="main-day" id="main-day"></div>
-					<div class="main-date" id="main-date"></div>
+			<div class="cal-wrap">
+				<div class="days">
+					<div class="day">월</div>
+					<div class="day">화</div>
+					<div class="day">수</div>
+					<div class="day">목</div>
+					<div class="day">금</div>
+					<div class="day">토</div>
+					<div class="day">일</div>
 				</div>
-				<div class="todo-wrap">
-					<div class="todo-title">Intake Check</div>
-					<div class="input-wrap">
-						<input type="text" id="input-box" class="input-box" placeholder="여기에 적어주세요"/>
-						<button type="button" id="input-data" class="input-data">INPUT</button>
-						<div id="input-list" class="input-list"></div>
-					</div>
-				</div>
+				<div class="dates"></div>
 			</div>
 		</div>
 	</div>
+	<div id="intake-wrap">
+		<div id="count-date"><span>1/31일</span> 섭취 완료</div>
+		<div id="intake-list">
+			<span>상콤 비타민</span>
+			<span>2022.09.13 시작</span>
+		</div>
+	</div>
+	<div id="check-list-wrap">
+		<div id="check-list">
+			<div id="intake-time">섭취 예정 시간 | 10:00</div>
+			<span id="pname">상콤 비타민</span>
+			<span id="srvUse">1정</span>
+			<div id="buttons">
+				<div class="btn-group-toggle p-0 mb-3" data-toggle="buttons">
+					<label class="btn btn-outline-success" style="overflow: hidden" title="">
+					<input type="checkbox" id="" name="" value="">
+						먹었어요
+					</label>
+				</div>
+				<div class="btn-group-toggle p-0 mb-3" data-toggle="buttons">
+					<label class="btn btn-outline-warning" style="overflow: hidden" title="">
+					<input type="checkbox" id="" name="" value="">
+						안 먹었어요
+					</label>
+				</div>
+			</div>
+		</div>
+		<form:form>
+			<div id="add-intake">
+				<div id="add-pname">
+					<label for="">제품명 : </label>
+					<input type="text" />
+				</div>
+				<div id="add-srvUse">
+					<span>섭취량 : </span>
+					<span>1일 1회 1정</span>
+				</div>
+				<div id="add-intake-time">
+					<span>섭취시간 : </span>
+					<select name="intake-time" id="select-intake-time">
+						<option selected>시간</option>
+						<option>1:00</option>
+						<option>2:00</option>
+						<option>3:00</option>
+						<option>4:00</option>
+						<option>5:00</option>
+						<option>6:00</option>
+						<option>7:00</option>
+						<option>8:00</option>
+						<option>9:00</option>
+						<option>10:00</option>
+						<option>11:00</option>
+						<option>12:00</option>
+						<option>13:00</option>
+						<option>14:00</option>
+						<option>15:00</option>
+						<option>16:00</option>
+						<option>17:00</option>
+						<option>18:00</option>
+						<option>19:00</option>
+						<option>20:00</option>
+						<option>21:00</option>
+						<option>22:00</option>
+						<option>23:00</option>
+						<option>24:00</option>
+					</select>
+				</div>
+				<button type="button" class="btn btn-warning" id="btn-add">추가하기</button>
+			</div>
+		</form:form>
+	</div>
+</div>
 <script>
-    const currentTitle = document.querySelector('#current-year-month');
-    const calendarBody = document.querySelector('#calendar-body');
-    let today = new Date();
-    let first = new Date(today.getFullYear(), today.getMonth(), 1); // 오늘이 속한 달의 첫 날
-    const dayList = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    const monthList = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    
-    //월 총 일수
-    const leafYear = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];    
-    const notleafYear= [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    
-    const pageFirst = first;
-    let pageYear;
-    
-    if(first.getFullYear() % 4 == 0){ 
-        pageYear = leafYear; // 윤년일 때
-    } else {
-        pageYear = notleafYear; // 윤년이 아닐 때
-    }
+$(document).ready(function() {
+    calendarInit();
+});
 
-    const showCalendar = () => {
-        let monthCnt = 100;
-        let cnt = 1;
-        for(let i = 0; i < 6; i++){ // 최대 6주
-            let $tr = document.createElement('tr');
-            $tr.setAttribute('id', monthCnt);
-            for(let j = 0; j < 7; j++){ // 일
-                if((i === 0 && j < first.getDay()) || cnt > pageYear[first.getMonth()]){
-                    // 첫째주이면서 매 달 1일의 요일보다 작거나 그 달의 일수보다 cnt가 크거나
-                    // 즉 달력에서 날짜가 없는 빈 칸을 생성하는 것.
-                    let $td = document.createElement('td');
-                    $tr.appendChild($td);
-                } else {
-                    // 날짜가 있는 칸 생성
-                    let $td = document.createElement('td');
-                    $td.textContent = cnt;
-                    $td.setAttribute('id', cnt);
-                    $tr.appendChild($td);
-                    cnt++;
-                }
-            }
-            monthCnt++;
-            calendarBody.appendChild($tr);
+function calendarInit() {
+	const date = new Date(); // 현재 날짜(로컬 기준) 가져오기
+	const utc = date.getTime() + (date.getTimezoneOffset() * 60 * 1000); // utc 표준시 도출
+	const kstGap = 9 * 60 * 60 * 1000; // 한국 kst 기준 시간 더하기
+	const today = new Date(utc + kstGap); // 한국 시간으로 date 객체 만들기(오늘)
+
+    let thisMonth = new Date(today.getFullYear(), today.getMonth(), today.getDate()); // 달력에서 표기하는 날짜 객체
+    let currentYear = thisMonth.getFullYear(); // 달력에 표기하는 년
+    let currentMonth = thisMonth.getMonth(); // 달력에서 표기하는 월
+    let currentDate = thisMonth.getDate(); // 달력에서 표기하는 일
+
+    console.log(thisMonth);
+
+    // 캘린더 랜더링
+    renderCalender(thisMonth);
+
+    function renderCalender(thisMonth) {
+        // 랜더링 데이터 
+        currentYear = thisMonth.getFullYear();
+        currentMonth = thisMonth.getMonth();
+        currentDate = thisMonth.getDate();
+
+        // 이전 달의 마지막 날짜와 요일 구하기
+        let startDay = new Date(currentYear, currentMonth, 0);
+        let prevDate = startDay.getDate();
+        let prevDay = startDay.getDay();
+
+        // 이번 달의 마지막 날짜와 요일 구하기
+        let endDay = new Date(currentYear, currentMonth + 1, 0);
+        let nextDate = endDay.getDate();
+        let nextDay = endDay.getDay();
+
+        console.log(prevDate, prevDay, nextDate, nextDay);
+
+        // 현재 월 표기
+        $('.year-month').text(currentYear + '.' + (currentMonth + 1));
+
+        // 랜더링 html
+        let calendar = document.querySelector('.dates');
+        calendar.innerHTML = '';
+
+        // 지난달
+        for (let i = prevDate - prevDay + 1; i <= prevDate; i++) {
+            calendar.innerHTML += '<div class="day prev disable">' + i + '</div>';
         }
-    }
-    showCalendar();
 
-    const removeCalendar = () => {
-        let cathTr = 100;
-        for(let i = 100; i < 106; i++){
-            let $tr = document.querySelectorAll(catchTr);
-            $tr.remove();
-            catchTr++;
+        // 이번달
+        for (let i = 1; i <= nextDate; i++) {
+            calendar.innerHTML += '<div class="day current" data-date=' + i + '>' + i + '</div>';
         }
-    }
 
-    // 다음 달로 이동
-    const prev = () => {
-        const $divs = document.querySelectorAll('#input-list > div');
-        $divs.forEach((e) => {
-            e.remove();
-        });
-        const $btns = document.querySelectorAll('#input-list > button');
-        $btns.forEach((e) => {
-            e.remove();
-        });
+        // 다음달
+        for (let i = 1; i <= (7 - nextDay == 7 ? 0 : 7 - nextDay); i++) {
+            calendar.innerHTML += '<div class="day next disable">' + i + '</div>';
+        }
 
-        if(pageFirst.getMonth() === 1){
-            // 1월이면
-            pageFirst = new Date(first.getFullYear - 1, 12, 1); // 전년도 12월로
-            first = pageFirst;
-            if(first.getFullYear() % 4 === 0){
-                // 윤년이면
-                pageYear = leafYear;
-            } else {
-                // 윤년이 아니면
-                pageYear = notleafYear;
-            }
-        } else {
-            pageFirst = new Date(first.getFullYear, first.getMonth - 1, 1);
-            first = pageFirst;
+        // 오늘 날짜 표기
+        if (today.getMonth() == currentMonth) {
+            todayDate = today.getDate();
+            let currentMonthDate = document.querySelectorAll('.dates .current');
+            currentMonthDate[todayDate - 1].classList.add('today');
         }
     }
 
-</script>
+ 	// 이전달로 이동
+    $('.go-prev').on('click', function () {
+        thisMonth = new Date(currentYear, currentMonth - 1, 1);
+        renderCalender(thisMonth);
+    });
 
+    // 다음달로 이동
+    $('.go-next').on('click', function() {
+        thisMonth = new Date(currentYear, currentMonth + 1, 1);
+        renderCalender(thisMonth); 
+    });
+};
 
-
+   </script>
 
 
 

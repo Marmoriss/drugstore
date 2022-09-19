@@ -16,7 +16,7 @@
 
 <body>
 	<div id="enroll-container" class="mx-auto text-center">
-	<form:form name="memberUpdateFrm" action="${pageContext.request.contextPath}/member/memberUpdate.do" method="POST">
+	<form:form name="memberFrm" action="" method="POST">
 		<table class="mx-auto">
 			<tr>
 				<th>아이디</th>
@@ -62,14 +62,37 @@
 					<input type="text" class="form-control" placeholder="" name="detailAddress" id="detailAddress" value="">
 				</td>
 			</tr>
-			
+			<tr>
+				<th></th>
+				<td>
+					<button type="button" class="btn btn-outline-primary" onclick="updateMember();">수정</button>
+					<button type="button" class="btn btn-outline-danger" onclick="deleteMember()">삭제</button>
+					<button type="button" class="btn btn-outline-info" onclick="history.back()">취소</button>
+				</td>
+			</tr>
 		</table>
-		<input type="submit" value="수정" >
-		<input type="reset" value="취소">
 	</form:form>
 </div>
 
+<script>
 
+
+const updateMember = () => {
+	
+		const frm = document.memberFrm;
+		frm.action = "${pageContext.request.contextPath}/member/memberUpdate.do";
+		frm.submit();
+};
+
+const deleteMember = (name) => {
+	
+	if(confirm(name + "님 정보를 정말 삭제하시겠습니까?")){		
+		const frm = document.memberFrm;
+		frm.action = "${pageContext.request.contextPath}/member/memberDelete.do";
+		frm.submit();
+	}
+};
+</script>
 </body>
 
 

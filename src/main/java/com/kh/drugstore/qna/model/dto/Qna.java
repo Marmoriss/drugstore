@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Qna {
-
+//계층형 쿼리에서 수업때 대댓글 상황이랑 비슷함. 
 	private int qnaId; //번호
 	private int commentRef; //댓글 null, 대댓글인 경우 참조댓글 no
-	private int pCode; //상품코드
+	private int pcode; //상품코드
 	private String writer; //작성자
 	private String answered; //답변상태
 	private LocalDateTime regDate; //작성일
