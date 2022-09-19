@@ -16,13 +16,20 @@
 	<div id="enroll-container" class="mx-auto text-center">
 	<form:form name="memberEnrollFrm" action="" method="POST">
 		<table class="mx-auto">
+			
+			<tr>
+				<th></th>
+				<td><h3>회원가입</h3></td>
+			</tr>
 			<tr>
 				<th>아이디</th>
 				<td>
 					<div id="memberId-container">
 			            <input type="text" class="form-control" placeholder="아이디(4글자이상)" name="memberId" id="memberId" required>
-			            <span class="guide ok">이 아이디는 사용가능합니다.</span>
-			            <span class="guide error">이 아이디는 사용할 수 없습니다.</span>
+			        </div>
+			        <div id="memberId-alert">
+			            <span class="guide ok" style="display: none">이 아이디는 사용가능합니다.</span>
+			            <span class="guide error" style="display: none">이 아이디는 사용할 수 없습니다.</span>
 			            <input type="hidden" id="idValid" value="0"/><!-- 사용불가한 아이디 0, 사용가능한 아이디 1 -->
 			        </div>
 				</td>
@@ -30,7 +37,7 @@
 			<tr>
 				<th>패스워드</th>
 				<td>
-					<input type="password" class="form-control" name="password" id="password" value="" required>
+					<input type="password" class="form-control" name="password" id="password" placeholder="영문,특수문자,숫자 포함 8자 이상" value="" required>
 				</td>
 			</tr>
 			<tr>
@@ -49,7 +56,7 @@
 			<tr>
 				<th>휴대폰</th>
 				<td>	
-					<input type="tel" class="form-control" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="" required>
+					<input type="tel" class="form-control" placeholder="(-없이)01012345678" name="phone" id="phone" oninput="autoHyphen2(this)" maxlength="13" value="" required>
 				</td>
 			</tr>
 			<tr>
@@ -80,18 +87,38 @@
 document.memberEnrollFrm.addEventListener('submit', (e) => {
 	const password = document.querySelector("#password");
 	const passwordCheck = document.querySelector("#passwordCheck");
+	const memberId = document.querySelector("#memberId");
+	const regexPw = /^[A-Za-z0-9`~!@#\$%\^&\*\(\)\{\}\[\]\-_=\+\\|;:'"<>,\./\?]{8,20}$/;
+	const phone = document.querySelector("#phone");
+	const phoneCheck = /^(?:(010-\d{4})|(01[1|6|7|8|9]-\d{3,4}))-(\d{4})$/;
+	
+	
 	
 	if(idValid.value === "0"){
 		e.preventDefault();
 		alert("유효한 아이디를 입력해주세요.");
 		return;
 	}
+	
 	if(password.value != passwordCheck.value){
 		e.preventDefault();
 		alert("비밀번호가 일치하지 않습니다.");
 		passwordCheck.select();
 		return;
 	}
+	
+   if(!regexPw.test(password.value)) {
+  		e.preventDefault();
+  		alert("8~20자 영문 대소문자, 숫자, 특수문자를 사용하세요.");
+    	return ;
+   }
+	
+   if(!phoneCheck.test(phone.value)){
+	   e.preventDefault();
+ 		alert("올바른 전화번호 형식을 입력하세요.");
+   		return ;
+   }
+   
 }); 
 
 const ok = document.querySelector(".guide.ok");
@@ -145,6 +172,14 @@ document.querySelector("#memberId").addEventListener('keyup', (e) => {
 
 });
 
+/**
+ * 휴대전화 유효성
+ */
+const autoHyphen2 = (target) => {
+	 target.value = target.value
+	   .replace(/[^0-9]/g, '')
+	  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+	}
 </script>
 
 </body>

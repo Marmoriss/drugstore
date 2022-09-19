@@ -90,6 +90,7 @@ public class MemberController {
 		int result = memberService.updateMember(member);
 
 		UserDetails updatedMember = memberSecurityService.loadUserByUsername(member.getMemberId());
+		
 		// 2. authentication 수정
 		Authentication newAuthentication = new UsernamePasswordAuthenticationToken(updatedMember,
 				updatedMember.getPassword(), updatedMember.getAuthorities());
@@ -129,6 +130,10 @@ public class MemberController {
 			member.setPassword(encodedPassword);
 			log.debug("encodedPassword = {}", encodedPassword);
 			
+			// 전화번호 - 빼기
+			String rawPhone = member.getPhone();
+			String phone = rawPhone.replace("-", "");
+			member.setPhone(phone);
 			
 			int result = memberService.insertMember(member);
 			result = authService.insertAuth(member.getMemberId());
@@ -219,6 +224,11 @@ public class MemberController {
 		String encodedPassword = bcryptPasswordEncoder.encode(newPassword);
 		member.setPassword(encodedPassword);
 		log.debug("encodedPassword = {}", encodedPassword);
+		
+		// 전화번호 - 빼기
+		String rawPhone = member.getPhone();
+		String phone = rawPhone.replace("-", "");
+		member.setPhone(phone);
 
 		// 1. db row 수정
 		int result = memberService.updateMember(member);
@@ -333,7 +343,7 @@ public class MemberController {
 			return "redirect:/";
 	}
 	
-	@GetMapping("/memberSubscription")
+	@GetMapping("/memberSubscription.do")
 	public void memberSubscription() {
 		
 	}
@@ -356,5 +366,6 @@ public class MemberController {
 		
 	}
 	
+
 	
 }

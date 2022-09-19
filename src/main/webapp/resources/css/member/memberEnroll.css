@@ -8,19 +8,32 @@ div#enroll-container table td:not(td:last-child) { text-align:left; }
 
 
 /* 중복아이디체크관련 */
-div#memberId-container { position:relative; padding:0px; }
-div#memberId-container span.guide { display:none; font-size:12px; position:absolute; top:12px; right:10px; }
-div#memberId-container span.ok { color:green; }
-div#memberId-container span.error { color:red; }
+div#memberId-container { width: 260px; }
+div#memberId-alert span.guide { display:none; font-size:12px; }
+div#memberId-alert span.ok { color:green; }
+div#memberId-alert span.error { color:red; }
 }
 
 #pwCheck-btn{
-	    display: flex;
-    text-align: center;
-    justify-content : center;
-    align-content: center;
-     height: 39px;	
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
 }
 #pwCheck-btn button{
-     height: 30px;	
+	margin-bottom: 10px;
+}
+#eyes{
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+#eyes i {
+	margin-bottom: 10px;
+}
+
+#eyes:hover {
+	cursor: pointer;
+}
+input{
+    height: 52px;
 }

@@ -30,13 +30,13 @@
 					<input type="password" class="form-control" name="password" id="password" value='' required>
 				</td>
 				<td id="pwCheck-btn">
-					<button onclick="pwCheck();" value="0" id="btn-pwCheck">확인</button>
+					<button onclick="pwCheck();" value="0" id="btn-pwCheck" class="btn btn-primary">확인</button>
 				</td>
 			</tr>
 			<tr>
 				<th>변경할 비밀번호</th>
 				<td>
-					<input type="password" class="form-control" name="newPassword" id="newPassword" value='' required>
+					<input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="영문,특수문자,숫자 포함 8자 이상" value='' required>
 				</td>
 				<td id="eyes">
 					<i class="fa-solid fa-eye"></i>
@@ -60,7 +60,7 @@
 			<tr>
 				<th>휴대폰</th>
 				<td>	
-					<input type="tel" class="form-control" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value='<sec:authentication property="principal.phone"/>' required>
+					<input type="tel" class="form-control"  name="phone" id="phone" oninput="autoHyphen2(this)" maxlength="13" value='' required>
 				</td>
 			</tr>
 			<tr>
@@ -86,7 +86,7 @@
 			</tr>
 		</table>
 	</form:form>
-	
+	<input type="hidden" name="rawPhone" id="rawPhone" value='<sec:authentication property="principal.phone"/>' />
 </div>
 
 <script>
@@ -96,6 +96,11 @@ const frm = document.memberFrm;
 const pwCheckBtn = document.querySelector("#btn-pwCheck");
 const newPassword = document.querySelector("#newPassword");
 const newPasswordCheck = document.querySelector("#newPasswordCheck");
+const regexPw = /^[A-Za-z0-9`~!@#\$%\^&\*\(\)\{\}\[\]\-_=\+\\|;:'"<>,\./\?]{8,20}$/;
+const phone = document.querySelector("#phone");
+const phoneCheck = /^(?:(010-\d{4})|(01[1|6|7|8|9]-\d{3,4}))-(\d{4})$/;
+
+
 
 document.querySelector("#eyes").addEventListener('click',(e)=>{
 	if(newPassword.type == "password")
@@ -130,6 +135,20 @@ const pwCheck = () =>{
 }
 
 const updateMember = () => {
+		
+	if(!regexPw.test(newPassword.value)) {
+  		
+  		alert("8~20자 영문 대소문자, 숫자, 특수문자를 사용하세요.");
+  		newPassword.focus();
+    	return ;
+   }
+	
+   if(!phoneCheck.test(phone.value)){
+ 		alert("올바른 전화번호 형식을 입력하세요.");
+ 		phone.focus();
+   		return ;
+   }
+	
 			if(pwCheckBtn.value == "1"){
 				if(newPassword.value == newPasswordCheck.value){
 					frm.action = "${pageContext.request.contextPath}/member/memberUpdate.do";
@@ -141,6 +160,9 @@ const updateMember = () => {
 			}else{
 				alert("비밀번호 확인을 해주세요");
 			}
+			
+			
+			 
 };
 
 const deleteMember = (name) => {
@@ -151,6 +173,19 @@ const deleteMember = (name) => {
 		frm.submit();
 	}
 };
+
+const autoHyphen2 = (target) => {
+	 target.value = target.value
+	   .replace(/[^0-9]/g, '')
+	  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+	}
+	
+const rawPhone = document.querySelector("#rawPhone").value;
+const phoneNum = rawPhone.substr(0,3)+"-"+rawPhone.substr(3,4)+"-"+rawPhone.substr(7,4);
+window.onload = () =>{
+	phone.value = phoneNum;
+	console.log(rawPhone);
+}
 </script>
 </body>
 

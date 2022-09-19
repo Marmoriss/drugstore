@@ -50,11 +50,7 @@
 	
 
 <script>
-/* 	window.onload = () =>{
-		$.ajax({
-			url : "${pageContext.requets.contexPath}/subscription/findMyProduct"
-		})
-	} */
+
 </script>
 </body>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

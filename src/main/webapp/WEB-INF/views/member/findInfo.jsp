@@ -22,22 +22,69 @@
 </script>
 <body>
 	<div id="enroll-container" class="mx-auto text-center">
-	<h3>비밀번호 찾기</h3>
+	
 	<form:form name="findPwFrm" action="${pageContext.request.contextPath}/member/findInfo.do" method="POST">
-		<label for="memberId">아이디</label>
-		<input type="text" id="memberId" name="memberId" required/>
-		<label for="phone">전화번호</label>
-		<input type="tel" id="phone" name="phone" required/>
-		<button>찾기</button>
+		<table>
+			<tr>
+				<td></td>
+				<td><h3>비밀번호 찾기</h3></td>
+			</tr>
+			<tr>
+				<td>
+					<label for="memberId">아이디</label>
+				</td>
+				<td>
+					<input class="form-control" type="text" id="memberId" name="memberId" required/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="phone">전화번호</label>
+				</td>
+				<td>
+					<input class="form-control" type="tel" id="phone" name="phone" oninput="autoHyphen2(this)" maxlength="13" required/>
+				</td>
+			</tr>
+			<tr>
+			<td></td>
+			<td>
+				<button type="submit" class="btn btn-info">찾기</button>
+			</td>
+		</tr>
+		</table>
 	</form:form>
+	<br />
 	<hr />
-	<h3>아이디 찾기</h3>
+	<br />
 	<form:form name="findIdFrm" action="${pageContext.request.contextPath}/member/findId.do" method="POST">
-		<label for="name">이름</label>
-		<input type="text" id="name" name="name" required/>
-		<label for="phone">전화번호</label>
-		<input type="tel" id="phone" name="phone" required/>
-		<button>찾기</button>
+	<table>
+		<tr>
+			<td></td>
+			<td><h3>아이디 찾기</h3></td>
+		</tr>
+		<tr>
+			<td>
+				<label for="name">이름</label>
+			</td>
+			<td>
+				<input class="form-control" type="text" id="name" name="name" required/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="phone">전화번호</label>
+			</td>
+			<td>
+				<input class="form-control" type="tel" id="phone" name="phone" oninput="autoHyphen2(this)" maxlength="13" required/>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<button type="submit" class="btn btn-info">찾기</button>
+			</td>
+		</tr>
+	</table>
 	</form:form>
 </div>
 
@@ -45,6 +92,12 @@
 const headers = {};
 headers['${_csrf.headerName}'] = '${_csrf.token}';
 
+
+const autoHyphen2 = (target) => {
+	 target.value = target.value
+	   .replace(/[^0-9]/g, '')
+	  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+	}
 </script>
 </body>
 
