@@ -29,4 +29,7 @@ public interface ProductService {
 	
 	// 설문 조사 상품 가져오기 
 	List<Product> findServeyProduct(String body);
+
+	// 구독할 수 있는 상품리스트
+	List<Product> selectSubscriptionAllProduct();
 }

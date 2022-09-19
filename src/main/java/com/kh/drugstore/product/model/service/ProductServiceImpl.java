@@ -70,6 +70,11 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.findServeyProduct(body);
 	}
 	
+	@Override
+	public List<Product> selectSubscriptionAllProduct() {
+		return productDao.selectSubscriptionAllProduct();
+	}
+	
 	
 	
 	

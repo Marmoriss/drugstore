@@ -26,9 +26,11 @@
 		<intercept-url pattern="/member/checkIdDuplicate.do" access="isAnonymous()"/>
 		<intercept-url pattern="/member/memberLogout.do" access="permitAll"/>
 		<intercept-url pattern="/member/kakao/callback.do" access="permitAll"/>
-		
 		<intercept-url pattern="/member/memberPage.do" access="isAuthenticated()"/>
+		
 		<intercept-url pattern="/servey/**" access="isAuthenticated()"/>
+		<intercept-url pattern="/subscription/product.do" access="permitAll()"/>
+		
 				
 		<intercept-url pattern="/admin/**" access="hasRole('ADMIN')"/>
 		
