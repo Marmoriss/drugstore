@@ -8,10 +8,15 @@
 	<jsp:param name="통계" value="헬로우 스프링" />
 </jsp:include>
 <style>
-#myChart{
-	margin-left:550px;
-	margin-top: 100px;
-	
+#chart1{
+	float:left;
+	margin-left: 300px;
+	margin-top: 70px;
+}
+#chart2{
+	float:left;
+	margin-top: 70px;
+
 }
 .navbar-brand {
 	margin-left: 250px;
@@ -19,7 +24,16 @@
 </style>
 <nav class="navbar navbar-light bg-light">
 		<a class="navbar-brand">가입자 수 통계</a> </nav>
-<canvas id="myChart" width="600" height="400"></canvas>
+		
+<div id="chart1">
+	<canvas id="myChart" width="600" height="400"></canvas>
+</div>
+
+<div id="chart2">
+	<p style="margin-left: 250px;">건강설문자 성비</p>
+	<canvas id="myChart2" width="600" height="400"></canvas>
+</div>
+
 
 <input type="hidden" id="memMinus1" value="${memMinus1}" />
 <input type="hidden" id="memMinus2" value="${memMinus2}" />
@@ -29,6 +43,8 @@
 <input type="hidden" id="memMinus6" value="${memMinus6}" />
 <input type="hidden" id="memMinus7" value="${memMinus7}" />
 <input type="hidden" id="memToday" value="${memToday}" />
+<input type="hidden" id="serveyFcount" value="${serveyFcount}" />
+<input type="hidden" id="serveyMcount" value="${serveyMcount}" />
 
 <script>
 const ctx = document.getElementById('myChart');
@@ -73,6 +89,38 @@ const myChart = new Chart(ctx, {
         },
     }
 });
+
+const ctx2 = document.getElementById('myChart2');
+const myChart2 = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+        labels: ['남','여'],
+        datasets: [{
+            data: ['${serveyMcount}','${serveyFcount}'],
+            backgroundColor: [
+                'rgb(30,187,215)',
+                'rgb(255,147,172)' 
+            ],
+            borderColor: [
+                'rgba(30,187,215, 1)',
+                'rgba(255,147,172, 1)'
+
+            ],
+            borderWidth: 2
+        }]
+    },
+    options: {
+    	responsive: false,
+        scales: {
+            yAxes: [{
+            	ticks:{
+                	beginAtZero: true
+            	}
+            }]
+        },
+    }
+});
+
 </script>
 
 

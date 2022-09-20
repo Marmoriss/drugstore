@@ -21,7 +21,7 @@ public class DrugstoreUtils {
 	 */
 	public static String getPagebar(int cPage, int limit, int totalContent, String url) {
 		StringBuffer pagebar = new StringBuffer();
-		url += "?cPage="; 		
+		url += (url.indexOf("?") < 0) ? "?cPage=" : "&cPage="; 		
 		
 		final int pagebarSize = 5; // 페이지바 버튼 수
 		final int totalPage = (int) Math.ceil((double) totalContent / limit);
