@@ -100,13 +100,45 @@ public class AdminServiceImpl implements AdminService {
 	
 //	태연코드 시작
 	@Override
-	public List<User> userList(Map<String, Integer> param,String searchType, String keyword) {
+	public List<User> userList(Map<String, Integer> param) {
 		int limit = param.get("limit");
 		int offset = (param.get("cPage") - 1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		return adminDao.userList(rowBounds,searchType,keyword);
+		return adminDao.userList(rowBounds);
 	}
 	
+	
+	/*
+	 * @Override public List<User> userFinder(Map<String, Object> param, String
+	 * searchType, String keyword) { int limit = (int) param.get("limit"); int
+	 * offset = ((int)param.get("cPage") - 1) * limit; RowBounds rowBounds = new
+	 * RowBounds(offset, limit); return
+	 * adminDao.userFinder(rowBounds,searchType,keyword); }
+	 */
+	
+
+	 @Override 
+	 public List<User> userFinder(Map<String, Object> param) { 
+		 int limit = (int) param.get("limit"); 
+		 int offset = (int)param.get("cPage") - 1 * limit; 
+		 RowBounds rowBounds = new RowBounds(offset, limit); 
+		 return adminDao.userFinder(rowBounds,param); 
+	 }
+	 
+	 
+	 @Override 
+	 public int getTotalContentLike(Map<String, Object> param) {
+		 return adminDao.getTotalContentLike(param); 
+	 }
+	
+	
+	 
+	 /*
+	  * @Override public Integer getTotalContentLike(Map<String, Object> param,
+	  * String searchType, String keyword) { return
+	  * adminDao.getTotalContentLike(param,searchType,keyword); }
+	  */
+	 
 	@Override
 	public int getTotalContent() {
 		return adminDao.getTotalContent();
@@ -169,10 +201,24 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public int statusUpdate(Map<String, Object> data) {
-		return adminDao.statusUpdate(data);
+	public int statusUpdate(int merchantUid) {
+		return adminDao.statusUpdate(merchantUid);
 	}
 
+	@Override
+	public int serveyFcount() {
+		return adminDao.serveyFcount();
+	}
+	
+	@Override
+	public int serveyMcount() {
+		return adminDao.serveyMcount();
+	}
+	
+
+	
+	
+	
 	
 // 태연코드 끝
 }

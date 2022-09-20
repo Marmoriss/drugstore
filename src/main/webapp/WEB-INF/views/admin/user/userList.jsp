@@ -83,26 +83,28 @@ window.addEventListener('load', (e) => {
 			</select>&nbsp;&nbsp;
 
 			<div id="search-name" class="search-type">
-				<form action="${pageContext.request.contextPath}/admin/user/userList.do"> 
+				<form action="${pageContext.request.contextPath}/admin/user/userFinder.do"> 
 				<input type="hidden" name="searchType" value="name" /> 
 				<input type="text" name="keyword" class="stext"
 					placeholder="검색할 이름을 입력하세요."
 					value="${searchType eq 'name' ? keyword : '' }" />
 				<button id="searchBtn" class="btn-search">검색</button>
+				
 				</form>
 			</div>
 			
 			<div id="search-gender" class="search-type">
-			<form action="${pageContext.request.contextPath}/admin/user/userList.do">
+			<form action="${pageContext.request.contextPath}/admin/user/userFinder.do">
 					<input type="hidden" name="searchType" value="gender" /> 
 					<input type="radio" name="keyword" value="M" <c:if test="${searchType eq 'gender' && keyword eq 'M' }">checked</c:if>>남 
 					<input type="radio" name="keyword" value="F" <c:if test="${searchType eq 'gender' && keyword eq 'F' }">checked</c:if>>여 
 					<button id="searchBtn" class="btn-search">검색</button>
+					
 			</form>
 			</div>
 			
 			<div id="search-memberId" class="search-type">
-			<form action="${pageContext.request.contextPath}/admin/user/userList.do">
+			<form action="${pageContext.request.contextPath}/admin/user/userFinder.do">
 					<input type="hidden" name="searchType" value="member_id" /> 
 					<input type="text" name="keyword" class="stext"
 						placeholder="검색할 아이디를 입력하세요."
@@ -112,7 +114,7 @@ window.addEventListener('load', (e) => {
 			</div>
 			
 			<div id="search-body" class="search-type">
-			<form action="${pageContext.request.contextPath}/admin/user/userList.do">
+			<form action="${pageContext.request.contextPath}/admin/user/userFinder.do">
 					<input type="hidden" name="searchType" value="body" /> 
 					<input type="text" name="keyword" class="stext"
 						placeholder="검색할 부위를 입력하세요."
