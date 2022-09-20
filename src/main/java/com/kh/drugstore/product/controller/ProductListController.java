@@ -32,7 +32,7 @@ public class ProductListController {
 	ProductService productService;
 	
 	// 페이징 메소드
-	public void pageInit(@RequestParam(defaultValue = "1") int cPage, Model model, HttpServletRequest request) {
+	public void pageInit(@RequestParam(defaultValue = "1", required=false) int cPage, Model model, HttpServletRequest request) {
 		//페이징 시작. 콘텐츠 영역
 		Map<String, Integer> param = new HashMap<>();
 		
@@ -57,7 +57,7 @@ public class ProductListController {
 	
 	// 카테고리 id로 상품 리스트 조회
 	@GetMapping("/productList.do")
-	public void productListByCategory(@RequestParam int categoryId, Model model) {
+	public void productListByCategory(@RequestParam(value="categoryId", required=false) int categoryId, Model model) {
 		log.debug("categoryId = {}", categoryId);
 		List<Product> list = productService.selectProductByCategoryId(categoryId);
 		
