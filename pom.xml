@@ -196,9 +196,8 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <version>${org.springframework.security-version}</version>        
-        </dependency>  
-		
-		<!-- #10. 파일 업로드용 의존 -->
+        </dependency>
+        	<!-- #10. 파일 업로드용 의존 -->
 	   
 	    <dependency>
 	        <groupId>commons-io</groupId>
@@ -230,8 +229,19 @@
 		    <groupId>com.fasterxml.jackson.datatype</groupId>
 		    <artifactId>jackson-datatype-jsr310</artifactId>
 		    <version>2.13.3</version>
-		</dependency>
-        
+		</dependency>  
+<!--  #13. jackson messageConverter빈 관련 의존  -->
+ <dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.13.3</version>
+		</dependency>  	
+<!--  xml처리를 위한 의존  -->
+<dependency>
+<groupId>com.fasterxml.jackson.dataformat</groupId>
+<artifactId>jackson-dataformat-xml</artifactId>
+<version>2.13.3</version>
+</dependency>
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>

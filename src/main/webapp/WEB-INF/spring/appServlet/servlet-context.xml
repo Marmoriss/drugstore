@@ -32,6 +32,9 @@
 	
 	<context:component-scan base-package="com.kh.drugstore" />
 	
+	<!-- #13.1 jackson message converter bean 등록 -->
+	<beans:bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+	
 	<aop:aspectj-autoproxy/>
 	
 </beans:beans>

@@ -6,6 +6,7 @@
 main {
 	max-width: 1024px;
 	margin:0 auto;
+	padding-top: 350px;
 }
 .strong {
 	font-weight: bold;
@@ -46,7 +47,7 @@ main {
 	border:1px solid #d3d3d385;
 	font-size:13px;
 	font-weight: bold;
-	background-color: rgb(26 188 156 / 16%);
+	background-color: rgb(122 158 177 / 16%);
 	height:25px;
 	display: flex;
 	align-items: center;

@@ -14,7 +14,7 @@
 	<section>
 		<article>
 	<div class="content-wrap">
-		<form action="${pageContext.request.contextPath}/cart/cartOrder" name="memberOrderFrm" method="post">
+		<form action="${pageContext.request.contextPath}/cart/cartOrder.do" name="memberOrderFrm" method="GET">
 	<div class="cart-product-header">장바구니</div>
 		<table class="cart-product">
 			<thead>
@@ -65,19 +65,19 @@
 							<td>
 								<span class=""> <span class="df-base-qty">
 												<input 
-												id="amount_id_0" name="${cartlist.product.pcode}amount" size="2" value="${cartlist.amount}"
+												id="amount_id_0" name="${cartlist.cartNo}amount" size="2" value="${cartlist.amount}"
 												type="text" />
 												<!--  name="${cartlist.pcode}"-->
 												<a href="javascript:;" style="margin-left: 0px !important;"
 												
-												onclick="amount_change(${cartlist.product.pcode},1)" >
+												onclick="amount_change(${cartlist.cartNo},1)" >
 												<img
 													src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif"
 													alt="증가" class="up" /></a>
 													
 												<a href="javascript:;" style="margin: 0 !important;" 
 												
-												onclick="amount_change(${cartlist.product.pcode},-1)" >
+												onclick="amount_change(${cartlist.cartNo},-1)" >
 												<img
 													src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif"
 													alt="감소" class="down" /></a>
@@ -146,7 +146,7 @@ document.querySelector("#order-btn").addEventListener('click', (e) => {
 	const count = $("input:checkbox[name=checkbox]:checked").length;
 
 	if(count == 0) {
-		alert('하나 이상의 상품을 반드시 선택해주세요.');
+		alert('하나 이상의 상품을 선택해주세요.');
 		e.preventDefault();
 		return;
 	}
@@ -202,15 +202,15 @@ window.addEventListener('load', (e) => {
 
 function amount_change(change , val){
 	var amount = val;
-	var _pcode = change;
-	var origin = $('input[name='+_pcode+'amount]').val();
+	var _cartNo = change;
+	var origin = $('input[name='+_cartNo+'amount]').val();
 	var ps = 0;
 	var amountnum = parseInt(origin);
 	
 	if(amount == -1){ps = amountnum-1;	}
 	else{ps = amountnum + 1;}
 	
-	var pcode = parseInt(_pcode);
+	var cartNo = parseInt(_cartNo);
 	if(ps <= 0){
 		alert('0개 이하로는 변경할 수 없습니다. ');
 		return;
@@ -223,7 +223,7 @@ function amount_change(change , val){
 		url : "${pageContext.request.contextPath}/cart/updateCart.do",
 		data : {
 			amount : ps,
-			pcode : pcode
+			cartNo : cartNo
 		},
 		success : function(){
 			location.reload();
