@@ -62,6 +62,17 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.findByValues(param);
 	}
 	
+	@Override
+	public int selectPcodeByPname(String pname) {
+		return productDao.selectPcodeByPname(pname);
+	}
+	
+	@Override
+	public List<String> autocompletePname(String term) {
+		return productDao.autocompletePname(term);
+	}
+	
+	
 	// 주희 코드 끝
 	
 	

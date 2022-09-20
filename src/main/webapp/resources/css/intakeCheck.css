@@ -32,6 +32,11 @@
 	margin: 25px;
 }
 
+#btn-delete{
+	margin-top: 10px;
+	width: 300px;
+}
+
 #check-list-wrap{
 	max-width: 1224px;
     width: 100%;
@@ -64,11 +69,22 @@
 }
 
 #buttons{
-	max-width: 400px;
+	max-width: 300px;
 	width: 100%;
 	display: flex;
 	margin: 10px auto;
     justify-content: space-around;
+    flex-direction: column;
+}
+
+.btn-group-toggle label {
+	max-width: 300px;
+	width: 100%;
+}
+
+#addIntakeFrm{
+	display: flex;
+    flex-direction: column;
 }
 
 #add-intake{
@@ -80,13 +96,18 @@
 	text-align: center;
 }
 
+#select-add-srvUse{
+	width: 150px;
+	height: 25px;
+}
+
 #add-intake-time{
 	margin-bottom: 15px;
 	vertical-align: middle;
 }
 
 #select-intake-time{
-	width: 150px;
+	width: 130px;
 	height: 25px;
 }
 
