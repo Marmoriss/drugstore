@@ -391,14 +391,19 @@ insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.ne
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다2', '배송관련입니다2', default); 
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다3', '배송관련입니다3', default); 
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다4', '배송관련입니다4', default); 
-select * from visit;
-select * from member;
 --alter table notice add constraint fk_notice_writer foreign key(writer) references member(member_id) on delete cascade;
 --alter table orders add status varchar2(20) default '배송준비중';
 desc orders;
-insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price, paid_at ) values(524589565, 'sinsa', '1', '김태연','post', 15000, 30000, '22/05/15'); 
-insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price, paid_at) values(125478569, 'cat', '2', '김서연','post', 20000, 20000,'22/08/05'); 
-select * from orders;
+insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price,paid_at,status) values(524589565, 'sinsa', '1', '김태연','post', 15000, 30000,to_date('22/07/12','RR/MM/DD'),default); 
+insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price,paid_at,status) values(125478569, 'cat', '2', '김서연','post', 20000, 20000,to_date('22/05/10','RR/MM/DD'),default); 
+insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price,paid_at,status) values(425896325, 'dlehdgk', '3', '김지구','post', 20000, 25000,to_date('22/01/10','RR/MM/DD'),default); 
+insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price,paid_at,status) values(548945484, 'potato', '4', '김감자','post', 20000, 25000,to_date('22/01/10','RR/MM/DD'),default); 
+insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price,paid_at,status) values(201547995, 'tree', '5', '이모씨','post', 20000, 25000,to_date('22/01/10','RR/MM/DD'),default); 
+
+select count(*) from member m left join servey s on (m.member_id = s.member_id) where s.gender='M';
+
+select m.member_id,merchant_uid, imp_uid, receiptid, method, product_price, total_price,paid_at,status from member m right join orders o on
+		(m.member_id = o.member_id) order by paid_at desc;
 --태연 코드 끝--
 
 -- 주희 코드 --

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -282,21 +283,17 @@ public class AdminController {
 	public void userList(
 			@RequestParam(defaultValue = "1") int cPage, 
 			Model model, 
-			HttpServletRequest request,
-			@RequestParam(value = "searchType",required = false,defaultValue="") String searchType,
-			@RequestParam(value = "keyword",required = false,defaultValue="") String keyword) {
+			HttpServletRequest request) {
 		
 		// 1. content영역
 		Map<String, Integer> param = new HashMap<>();
 		int limit = 10;
 		param.put("cPage", cPage);
 		param.put("limit", limit);
-		List<User> list = adminService.userList(param,searchType,keyword);
+		List<User> list = adminService.userList(param);
 		log.debug("list = {}", list);
 		
 		model.addAttribute("list", list);
-		model.addAttribute("searchType",searchType);
-		model.addAttribute("keyword",keyword);
 		
 		// 2. pagebar영역
 		int totalContent =adminService.getTotalContent();
@@ -304,7 +301,41 @@ public class AdminController {
 		String url = request.getRequestURI(); 
 		String pagebar = DrugstoreUtils.getPagebar(cPage, limit, totalContent, url);
 		model.addAttribute("pagebar", pagebar);
-		model.addAttribute("totalContent", totalContent);
+	}
+	
+	@GetMapping("user/userFinder.do")
+	public String userFinder(	
+			@RequestParam(defaultValue = "1") int cPage, 
+			Model model, 
+			HttpServletRequest request,
+			@RequestParam(value = "searchType",required = false,defaultValue="") String searchType,
+			@RequestParam(value = "keyword",required = false,defaultValue="") String keyword) {
+	
+		// 1. content영역
+		Map<String, Object> param = new HashMap<>();
+		int limit = 10;
+		
+		param.put("cPage", cPage);
+		param.put("limit", limit);
+		param.put("searchType", searchType); 
+		param.put("keyword", keyword);
+		
+		
+		List<User> list = adminService.userFinder(param);
+		log.debug("list = {}", list);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("searchType",searchType);
+		model.addAttribute("keyword",keyword);
+		
+		// 2. pagebar영역
+		int totalContent = adminService.getTotalContentLike(param);
+		log.debug("totalContent = {}", totalContent);
+		String url = request.getRequestURI() + "?searchType=" + searchType + "&keyword=" + keyword;
+//		String url = request.getRequestURI();
+		String pagebar = DrugstoreUtils.getPagebar(cPage, limit, totalContent, url);
+		model.addAttribute("pagebar", pagebar);
+		return "admin/user/userList";
 	}
 	
 	@GetMapping("/statis/enrollStatis.do")
@@ -317,6 +348,9 @@ public class AdminController {
 			model.addAttribute("memMinus6", adminService.getMinus6Mem());
 			model.addAttribute("memMinus7", adminService.getMinus7Mem());
 			model.addAttribute("memToday", adminService.getMemToday());
+			
+			model.addAttribute("serveyFcount", adminService.serveyFcount());
+			model.addAttribute("serveyMcount", adminService.serveyMcount());
 	}
 	
 	@GetMapping("/statis/visitStatis.do")
@@ -327,22 +361,21 @@ public class AdminController {
 		return "admin/statis/visitStatis";
 	}
 	
-	@GetMapping("/order/orderList.do")
+	@GetMapping("/orders/ordersList.do")
 	public void orderList(Model model) {
 		List<Orders> list = adminService.selectOrders();
 		model.addAttribute("list", list);
 	}
-	
-	@PostMapping("/order/statusUpdate.do")
-	public void statusUpdate(Orders orders, HttpServletRequest request) {
-		String merchantUid = request.getParameter("merchantUid");
-		String status = request.getParameter("status");
 
-		Map<String, Object> data = new HashMap<>();
-		data.put("merchantUid", merchantUid);
-		data.put("status", status);
-		
-		int result = adminService.statusUpdate(data);
+	@PostMapping("/orders/statusUpdate.do")
+	public String statusUpdate(
+			Orders orders, 
+			HttpServletRequest request,
+			@RequestParam(value = "merchantUid",required = false) int merchantUid) {
+
+		int result = adminService.statusUpdate(merchantUid);
+
+		return "redirect:/admin/orders/ordersList.do";
 	}
 	
 // 태연코드 끝

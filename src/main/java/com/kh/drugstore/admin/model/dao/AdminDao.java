@@ -62,14 +62,21 @@ public interface AdminDao {
 // 주희코드 끝
 	
 // 태연코드 시작
-	List<User> userList(RowBounds rowBounds, @Param("searchType")String searchType, @Param("keyword")String keyword);
+	List<User> userList(RowBounds rowBounds);
 	
+
 	@Select("select count(*)\r\n"
 			+ "from (select\r\n"
 			+ "		m.member_id,name,phone,created_at,gender,body from member m left join servey s on\r\n"
 			+ "		(m.member_id = s.member_id)) order by created_at desc")
 	int getTotalContent();
 
+//	List<User> userFinder(RowBounds rowBounds, @Param("searchType")String searchType, @Param("keyword")String keyword);
+	List<User> userFinder(RowBounds rowBounds, Map<String, Object> param);
+	
+//	Integer getTotalContentLike(Map<String, Object> param, @Param("searchType")String searchType, @Param("keyword")String keyword);
+	int getTotalContentLike(Map<String, Object> param);
+	
 	@Select("select count(*) from member where to_char(created_at, 'yymmdd') = to_char(sysdate-1,'yymmdd')")
 	int getMinus1Mem();
 
@@ -96,19 +103,28 @@ public interface AdminDao {
 
 	@Select("select count(*) from visit where to_char(v_date, 'yy/mm/dd') = to_char(sysdate, 'yy/mm/dd')")
 	int getVisitTodayCount();
+	
+	@Select("select count(*) from member m left join servey s on (m.member_id = s.member_id) where s.gender='F'")
+	int serveyFcount();
 
+	@Select("select count(*) from member m left join servey s on (m.member_id = s.member_id) where s.gender='M'")
+	int serveyMcount();
+	
 	@Select("select count(*) from visit")
 	int getVisitTotalCount();
 	
 	@Insert("insert into visit(v_date) values(sysdate)")
 	void insertVisit();
 
-	@Select("select merchant_uid, member_id, total_price, status, paid_at from orders")
 	List<Orders> selectOrders();
 
-	@Update("update orders set status ='배송중' where merchant_uid = #{merchantUid}")
-	int statusUpdate(Map<String, Object> data);
+	@Update("update orders set status = '배송중' where merchant_uid = #{merchantUid}")
+	int statusUpdate(int merchantUid);
 
+
+	
+
+	
 
 
 	
