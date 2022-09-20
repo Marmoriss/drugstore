@@ -16,8 +16,6 @@ public interface AdminService {
 	
 	List<Category> selectCategoryList(int categoryId);
 	
-	List<String> autocompletePname(String pname);
-	
 	List<String> autocompleteManu(String manu);
 
 	int insertProduct(Product product);
@@ -34,8 +32,17 @@ public interface AdminService {
 // 주희코드 끝
 
 // 태연코드 시작
-	List<User> userList(Map<String, Integer> param, String searchType, String keyword);
+	List<User> userList(Map<String, Integer> param);
+	
 	int getTotalContent();
+
+//	List<User> userFinder(Map<String, Object> param);
+	List<User> userFinder(Map<String, Object> param);
+	
+//	int getTotalContentLike(Map<String, Object> param, String searchType, String keyword);
+	int getTotalContentLike(Map<String, Object> param);
+
+	
 	int getMinus1Mem();
 	int getMinus2Mem();	
 	int getMinus3Mem();
@@ -53,7 +60,13 @@ public interface AdminService {
 
 	List<Orders> selectOrders();
 
-	int statusUpdate(Map<String, Object> data);
+	int statusUpdate(int merchantUid);
+
+	int serveyFcount();
+
+	int serveyMcount();
+
+
 
 
 

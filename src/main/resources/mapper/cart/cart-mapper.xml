@@ -49,6 +49,32 @@
 			where cart_no = #{cartNo}
 	</update>
 	
+	<insert id ="insertOrder">
+	insert into
+		orders
+	(merchant_uid, member_id, receiptid, method, name, paid_at, total_price, delivery_price, recipient, post_code, address, detail_address, memo, status)
+		values
+	(#{merchantUid}, #{memberId}, #{impUid}, #{receiptId}, #{method}, #{name}, #{paidAt}, 
+	 #{totalPrice}, 3000 , #{recipient}, #{postCode}, #{address}, #{detailAddress}, #{memo}, default)
+	</insert>
+	<insert id="insertProductOrder">
+	insert into
+		product_orders
+	values
+	(
+	<foreach collection="array" item="pcode" separator=",">
+		#{pcode}
+	</foreach>
+		  #{merchantUid}
+	)
+	</insert>
+	<delete id ="deleteOrdercart">
+	DELETE FROM cart
+    WHERE 
+    <foreach collection="array" item="no" open="" close="" separator=" OR ">
+      cart_no = #{no}
+    </foreach>
+	</delete>
 	<select id="findOrderListByCartNo" resultMap="orderMap">
 	select 
 	    c.*,
@@ -61,9 +87,9 @@
 	        join product p on c.pcode = p.pcode
 	        left join product_attachment pa on p.pcode = pa.pcode
 	        join member m on c.member_id = m.member_id
-	 <foreach collection="array" item="no" open="" close="" separator=" OR ">
-	where
-   	 c.cart_no = #{cartNo}
+	where c.cart_no IN
+	 <foreach collection="array" item="no" open="(" close=")" separator=",">
+   	#{no}
    	 </foreach>
 	</select>
 	<resultMap type="cart" id="orderMap">
@@ -71,6 +97,8 @@
   	<result column="member_id" property="memberId"/>
   	<result column="amount" property="amount"/>
   	<association property="member" javaType="member">
+  	
+  	<result column="name" property="name"/>
   	<result column="member_id" property="memberId"/>
   	<result column="phone" property="phone"/>
   	<result column="post_code" property="postCode"/>
@@ -91,4 +119,7 @@
   	</association>
   	
   </resultMap>
+  
+
+  
 </mapper>

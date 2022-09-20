@@ -32,6 +32,13 @@ public interface ProductDao {
 
 	@Select("select * from (select * from product where main_fnctn like concat('%' || #{symptom},'%')) where rownum <= 3")
 	List<Product> findServeyProduct(String symptom);
+
+	// 주희 코드 시작
 	
+	@Select("select pcode from product where pname like '%' || #{pname} || '%'")
+	int selectPcodeByPname(String pname);
+	
+	@Select("select pname from product where pname like '%' || #{pname} || '%' ")
+	List<String> autocompletePname(String pname);
 			
 }

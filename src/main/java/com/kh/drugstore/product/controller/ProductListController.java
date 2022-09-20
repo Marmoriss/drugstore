@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,7 +80,16 @@ public class ProductListController {
 	}
 	
 	
-	
+	// 주희 코드 시작
+	@GetMapping("/autocompletePname.do")
+	public ResponseEntity<?> autocompletePname(@RequestParam String term){
+		List<String> resultList = productService.autocompletePname(term);
+		log.debug("resultList = {}", resultList);
+		
+		return ResponseEntity.status(HttpStatus.OK)
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+				.body(resultList);
+	}
 	
 	
 	
