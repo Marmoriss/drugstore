@@ -41,8 +41,8 @@ public interface ProductDao {
 	@Select("select pname from product where pname like '%' || #{pname} || '%' ")
 	List<String> autocompletePname(String pname);
 	
+
 	// 동하
-	@Select("select * from product where rownum <= 10")
 	List<Product> selectSubscriptionAllProduct();
 	
 	

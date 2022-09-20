@@ -23,12 +23,16 @@
 								<div id="header">
 								<h4>${product.pname}</h4>
 								</div>
+								<div id="img-container">
+									<img src="${pageContext.request.contextPath}/resources/images/products/${product.pname}.jpg" style="width: 300px; height: 200px; border-radius: 20px;" alt="" />
+									
+								</div>
 								<div id="content">
-								<p>
+								<p align="left">
 									${product.mainFnctn}
 								</p>
 								</div>
-								<div id="footer"><button>제품보기</button></div>
+								<div id="footer"><button>구독하기</button></div>
 					</div>
 					</li>				
 				</c:forEach>
