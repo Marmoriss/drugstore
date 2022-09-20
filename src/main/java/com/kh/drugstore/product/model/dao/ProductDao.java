@@ -45,7 +45,6 @@ public interface ProductDao {
 	@Select("select * from product where rownum <= 10")
 	List<Product> selectSubscriptionAllProduct();
 	
-	@Select("select pcode from product where pname like '%' || #{pname} || '%'")
-	int selectPcodeByPname(String pname);
+	
 			
 }
