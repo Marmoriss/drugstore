@@ -39,11 +39,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public List<String> autocompletePname(String pname) {
-		return adminDao.autocompletePname(pname);
-	}
-	
-	@Override
 	public List<String> autocompleteManu(String manu) {
 		return adminDao.autocompleteManu(manu);
 	}

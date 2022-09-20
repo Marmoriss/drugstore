@@ -16,8 +16,6 @@ public interface AdminService {
 	
 	List<Category> selectCategoryList(int categoryId);
 	
-	List<String> autocompletePname(String pname);
-	
 	List<String> autocompleteManu(String manu);
 
 	int insertProduct(Product product);
