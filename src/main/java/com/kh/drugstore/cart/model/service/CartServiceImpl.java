@@ -1,16 +1,18 @@
 package com.kh.drugstore.cart.model.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.drugstore.cart.model.dao.CartDao;
 import com.kh.drugstore.cart.model.dto.Cart;
+import com.kh.drugstore.cart.model.dto.CartOrder;
 import com.kh.drugstore.product.model.dto.Product;
 
+@Transactional(rollbackFor = Exception.class)
 @Service
 public class CartServiceImpl implements CartService{
 	@Autowired
@@ -41,8 +43,8 @@ public class CartServiceImpl implements CartService{
 	}
 	
 	@Override
-	public int updateCart(int amount, int pcode) {
-		return cartDao.updateCart(amount,pcode);
+	public int updateCart(Map<String, Object> param) {
+		return cartDao.updateCart(param);
 	}
 //	@Override
 //	public Map<String, List> findCartListByMemberId(String memberId) {
@@ -62,5 +64,13 @@ public class CartServiceImpl implements CartService{
 	@Override
 	public List<Cart> findOrderListByCartNo(int[] checkbox) {
 		return cartDao.findOrderListByCartNo(checkbox);
+	}
+	@Override
+	public int insertOrder(CartOrder cartOrder) {
+		int result = 0;
+		result = cartDao.insertOrder(cartOrder);
+		result = cartDao.insertProductOrder(cartOrder);
+		result = cartDao.deleteOrdercart(cartOrder);
+		return result;
 	}
 }
