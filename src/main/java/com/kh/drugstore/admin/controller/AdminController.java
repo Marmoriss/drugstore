@@ -105,15 +105,6 @@ public class AdminController {
 				.body(categoryList);
 	}
 	
-	@GetMapping("/autocompletePname.do")
-	public ResponseEntity<?> autocompletePname(@RequestParam String term){
-		List<String> resultList = adminService.autocompletePname(term);
-		log.debug("resultList = {}", resultList);
-		
-		return ResponseEntity.status(HttpStatus.OK)
-				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-				.body(resultList);
-	}
 	
 	@GetMapping("/autocompleteManu.do")
 	public ResponseEntity<?> autocompleteManu(@RequestParam String term){

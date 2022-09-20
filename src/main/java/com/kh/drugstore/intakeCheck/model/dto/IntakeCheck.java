@@ -18,6 +18,7 @@ public class IntakeCheck {
 	private int pcode;
 	private String intakeDay;
 	private int alarmTime;
+	private int amount;
 	private IntakeYn intakeYn;
 	private LocalDate createdAt;
 	private LocalDate deletedAt;

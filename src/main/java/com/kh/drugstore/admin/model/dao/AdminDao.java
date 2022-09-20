@@ -28,9 +28,6 @@ public interface AdminDao {
 	@Select("select * from category where category_parent_lev = #{categoryId} order by category_id")
 	List<Category> selectCategoryList(int categoryId);
 	
-	@Select("select pname from product where pname like '%' || #{pname} || '%' ")
-	List<String> autocompletePname(String pname);
-	
 	@Select("select manu from product where manu like '%' || #{menu} || '%' ")
 	List<String> autocompleteManu(String manu);
 	
