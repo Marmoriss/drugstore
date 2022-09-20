@@ -37,33 +37,49 @@
 		<collection property="servey" resultMap="serveyMap" />
 	</resultMap>
 
-<!-- <select id="userList" resultMap="userMap">
-		select
-		m.member_id,name,phone,created_at,gender,body from member m join servey s on
-		(m.member_id = s.member_id)
-		
-		
-</select> -->
-
 <select id="userList" resultMap="userMap" parameterType="map">
 		select
 		m.member_id,name,phone,created_at,gender,body from member m left join servey s on
-		(m.member_id = s.member_id) 
+		(m.member_id = s.member_id) order by created_at desc
+</select>
+
+<select id="userFinder" resultMap="userMap" parameterType="map">
+		select
+		m.member_id,name,phone,created_at,gender,body from member m left join servey s on
+		(m.member_id = s.member_id)
 		
- 		<if test='searchType.equals("name")'>
+		<if test="searchType.equals('name')">
 		where name like concat('%' || #{keyword},'%')
 		</if> 
-		<if test='searchType.equals("gender")'>
+		<if test="searchType.equals('gender')">
 		where gender like concat('%' || #{keyword},'%')
 		</if>
-		<if test='searchType.equals("member_id")'>
+		<if test="searchType.equals('member_id')">
 		where m.member_id like concat('%' || #{keyword},'%')
 		</if>
-		<if test='searchType.equals("body")'>
+		<if test="searchType.equals('body')">
 		where body like concat('%' || #{keyword},'%')
 		</if> 
 
-		order by created_at desc
+</select>
+
+<select id="getTotalContentLike" resultType="_int" parameterType="map">
+		select count(*) 
+		from(select m.member_id,name,phone,created_at,gender,body from member m left join servey s on
+		(m.member_id = s.member_id))
+		
+		<if test="searchType.equals('name')">
+		where name like concat('%' || #{keyword},'%')
+		</if> 
+		<if test="searchType.equals('gender')">
+		where gender like concat('%' || #{keyword},'%')
+		</if>
+		<if test="searchType.equals('member_id')">
+		where m.member_id like concat('%' || #{keyword},'%')
+		</if>
+		<if test="searchType.equals('body')">
+		where body like concat('%' || #{keyword},'%')
+		</if> 
 </select>
 
 	<resultMap type="com.kh.drugstore.admin.model.dto.Visit"
@@ -71,6 +87,53 @@
 		<id property="vDate" column="v_date" />
 	</resultMap>
 
+	<resultMap
+		type="com.kh.drugstore.orders.model.dto.Orders" id="ordersMap">
+		<id property="merchantUid" column="merchant_uid" />
+		<id property="memberId" column="member_id" />
+		<id property="impUid" column="imp_uid" />
+		<id property="receiptId" column="receiptId" />
+		<id property="method" column="method" />
+		<id property="name" column="name" />
+		<id property="createdAt" column="created_at" />
+		<id property="paidAt" column="paid_at" />
+		<id property="failedAt" column="failed_at" />
+		<id property="cancelledAmount" column="cancelled_amount" />
+		<id property="cancelledAt" column="cancelled_at"/>
+		<id property="productPrice" column="product_price"/>
+		<id property="totalPrice" column="total_price"/>
+		<id property="deliveryPrice" column="delivery_price"/>
+		<id property="returnStatus" column="return_status"/>
+		<id property="returnReason" column="return_reason"/>
+		<id property="returnRequestDate" column="return_request_date"/>
+		<id property="returnCompleteDate" column="return_complete_date"/>
+		<id property="cancelStatus" column="cancel_status"/>
+		<id property="cancelReason" column="cancel_reason"/>
+		<id property="cancelRequestDate" column="cancel_request_date"/>
+		<id property="cancelCompleteDate" column="cancel_complete_date"/>
+		<id property="refundStatus" column="refund_status"/> 
+		<id property="refundMethod" column="refund_method"/> 
+		<id property="totalRefundPrice" column="total_refund_price"/> 
+		<id property="refundRequestDate" column="refund_request_date"/> 
+		<id property="refundCompleteDate" column="refund_complete_date"/> 
+		<id property="recipient" column="recipient"/> 
+		<id property="postCode" column="post_code"/> 
+		<id property="address" column="address"/> 
+		<id property="detailAddress" column="detail_address"/> 
+		<id property="memo" column="memo"/> 
+		<id property="status" column="status"/> 
+	
+	</resultMap>
+	
+	<resultMap type="com.kh.drugstore.admin.model.dto.Order" id="orderListMap">
+		<collection property="member" resultMap="memberMap" />
+		<collection property="orders" resultMap="ordersMap" />
+	</resultMap> 
+	
+	<select id="selectOrders" resultMap="orderListMap" parameterType="map">
+		select m.member_id,merchant_uid, imp_uid, receiptid, method, product_price, total_price,paid_at,status from member m right join orders o on
+		(m.member_id = o.member_id) order by paid_at desc
+	</select>
 	
 	
 	<!-- 주희 코드 -->
