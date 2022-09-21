@@ -30,11 +30,17 @@
 #intake-list{
 	font-size: 20px;
 	margin: 25px;
+	text-align: center;
 }
 
-#btn-delete{
+.btn-delete{
 	margin-top: 10px;
 	width: 300px;
+	color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    font-size: 20px;
+    padding: 5px;
 }
 
 #check-list-wrap{
@@ -77,6 +83,31 @@
     flex-direction: column;
 }
 
+#intakeY {
+	color: #28a745;
+    background-color: #ffff;
+    border: 1px solid #28a745;
+    width: 300px;
+    font-size: 18px;
+    padding: 5px;
+    margin: 10px auto;
+}
+
+#intakeN {
+	color: #ffc107;
+    background-color: #ffff;
+    border: 1px solid #ffc107;
+    width: 300px;
+    font-size: 18px;
+    padding: 5px;
+    margin: 10px auto;
+}
+
+input[id="intakeN"]:checked + label{
+	color: black;
+	background-color: #ffc107;
+}
+
 .btn-group-toggle label {
 	max-width: 300px;
 	width: 100%;
@@ -115,12 +146,19 @@
 	margin-bottom: 15px;
 }
 
-
+.empty{
+	font-size: 18px;
+	margin: 20px;
+	padding: 10px;
+	color: #ffff;
+	background-color: #415865;
+	border-radius: 10px;
+}
 
 /* calendar */
 
 .sec-cal {
-    width: 360px;
+    width: 400px;
     margin: 0 auto;
     font-family: "NotoSansR";
 }
@@ -228,4 +266,16 @@
 
 .sec-cal .cal-wrap .day.disable {
     color: #ddd;
+}
+
+.sec-cal .cal-wrap .check--active{
+	background-color: #28a745;
+	border-radius: 50%;
+	color: #fff;
+}
+
+.sec-cal .cal-wrap .check{
+	background-color: #ffc107;
+	border-radius: 50%;
+	color: black;
 }
