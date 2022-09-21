@@ -69,6 +69,7 @@ public class ProductListController {
 		model.addAttribute("list", list);
 	}
 	
+	// 주희 코드 시작
 	// 상품 코드로 상세페이지 조회
 	@GetMapping("/productDetail.do")
 	public void productDetail(@RequestParam int pcode, Model model) {
@@ -80,7 +81,6 @@ public class ProductListController {
 	}
 	
 	
-	// 주희 코드 시작
 	@GetMapping("/autocompletePname.do")
 	public ResponseEntity<?> autocompletePname(@RequestParam String term){
 		List<String> resultList = productService.autocompletePname(term);

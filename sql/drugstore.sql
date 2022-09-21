@@ -408,7 +408,7 @@ select m.member_id,merchant_uid, imp_uid, receiptid, method, product_price, tota
 
 -- 주희 코드 --
 -- 카테고리 샘플 데이터
-select * from product;
+select * from orders;
 select * from category;
 
 --insert into category
@@ -459,3 +459,8 @@ alter table product modify(sale_status varchar2(7));
 select to_date('2022/09/08', 'yyyy/mm/dd') from dual;
 select * from product where created_at between to_date('2022/09/01', 'yyyy/mm/dd') and to_date('2022/09/08', 'yyyy/mm/dd');
 select * from product where pname like '%' || '비타' || '%' ;
+
+-- 주문/결제 테이블 상품가격, 결제 요청일, 결제 실패일 삭제
+alter table orders drop column product_price;
+alter table orders drop column created_at;
+alter table orders drop column failed_at;
