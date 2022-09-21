@@ -50,35 +50,39 @@
 		</div>
 	</div>
 	<div id="intake-wrap">
-		<div id="count-date"><span>1/31일</span> 섭취 완료</div>
-		<div id="intake-list">
-			<span>상콤 비타민</span>
-			<span>2022.09.13 시작</span>
-			<div class="btn-group-toggle p-0 mb-3" data-toggle="buttons">
-				<button type="button" class="btn btn-danger" id="btn-delete">삭제하기</button>
-			</div>
-		</div>
+		<c:if test="${not empty intakeList}">
+			<c:forEach items="${intakeList}" var="list" varStatus="vs">
+				<form:form name="intakeDeleteFrm" method="post" action="${pageContext.request.contextPath}/intakeCheck/deleteIntakeList.do">
+					<input type="hidden" name="pcode" value="${list.pcode}"/>
+					<div id="intake-list">
+						<div>${list.pname}</div>
+						<div>${list.createdAt} 시작</div>
+						<button class="btn-delete">삭제하기</button>
+					</div>
+				</form:form>
+			</c:forEach>
+		</c:if>
+		<c:if test="${empty intakeList}">
+			<div class="empty">등록한 섭취 체크리스트가 없습니다.</div>
+		</c:if>
 	</div>
 	<div id="check-list-wrap">
-		<div id="check-list">
-			<div id="intake-time">섭취 예정 시간 | 10:00</div>
-			<span id="pname">상콤 비타민</span>
-			<span id="srvUse">1정</span>
-			<div id="buttons">
-				<div class="btn-group-toggle p-0 mb-3" data-toggle="buttons">
-					<label class="btn btn-outline-success" style="overflow: hidden" title="">
-					<input type="checkbox" name="intakeYn" value="Y">
-						먹었어요
-					</label>
-				</div>
-				<div class="btn-group-toggle p-0 mb-3" data-toggle="buttons">
-					<label class="btn btn-outline-warning" style="overflow: hidden" title="">
-					<input type="checkbox" name="intakeYn" value="N">
-						안 먹었어요
-					</label>
-				</div>
-			</div>
-		</div>
+		<c:if test="${not empty intakeList}">
+			<c:forEach items="${intakeList}" var="intake" varStatus="vs">
+				<form:form name="intakeUpdateFrm">
+				<input type="hidden" name="pcode" value="${intake.pcode}"/>
+					<div id="check-list">
+						<div id="intake-time">섭취 예정 시간 | ${intake.alarmTime}:00</div>
+						<span id="pname">${intake.pname}</span>
+						<span id="srvUse">${intake.amount}정</span>
+						<div id="buttons">
+							<button name="intakeYn" id="intakeY" value="Y">먹었어요</button>
+							<button name="intakeYn" id="intakeN" value="N">안 먹었어요</button>
+						</div>
+					</div>
+				</form:form>
+			</c:forEach>
+		</c:if>
 		<form:form name="addIntakeFrm" id="addIntakeFrm" method="post"
 			action="${pageContext.request.contextPath}/intakeCheck/addIntakeList.do">
 			<div id="add-intake">
@@ -131,15 +135,6 @@
 	</div>
 </div>
 <script>
-document.addIntakeFrm.addEventListener('submit', (e) => {
-	e.preventDefault();
-	const frm = e.target;
-	const alarmTime = frm.alarmTime;
-	alarmTime.value = document.querySelector('#select-intake-time').value;
-	
-	frm.submit();
-});
-
 //상품명 자동 완성
 $('#input-add-pname').autocomplete({
 	source(request, response){
@@ -166,7 +161,94 @@ $('#input-add-pname').autocomplete({
 	},
 	focus(e, selected){return false;}
 });
+window.onload = () => {
+	
+	// 섭취 여부 Y체크
+	document.querySelector('#intakeY').addEventListener('click', (e) => {
+		e.preventDefault();
+		
+		const frm = document.querySelector('[name=intakeUpdateFrm]');
+		const pcode = frm.pcode.value;
+		const intakeYn = e.target.value;
+		
+		// 사용자 인증 권한
+		const headers = {};
+		headers['${_csrf.headerName}'] = '${_csrf.token}';
+		console.log(headers);
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/intakeCheck/updateIntakeYn.do",
+			method : "POST",
+			headers,
+			dataType : "json",
+			data : {pcode, intakeYn},
+			success(response){
+				console.log(response);
+				alert(response.resultMessage);
+				
+				const current = document.querySelectorAll('.current');
+				current.forEach((day) => {
+				    if(day.dataset.date == 21){
+				    	$(day).removeClass("check");
+				        $(day).addClass("check--active");
+				    };
+				});
+				
+			},
+			error(jqxhr, statusText, err){
+				console.log(jqxhr, statusText, err);
+			}
+		});
+	});
+	
+	//섭취 여부 N체크
+	document.querySelector('#intakeN').addEventListener('click', (e) => {
+		e.preventDefault();
+		
+		const frm = document.querySelector('[name=intakeUpdateFrm]');
+		const pcode = frm.pcode.value;
+		const intakeYn = e.target.value;
+		
+		// 사용자 인증 권한
+		const headers = {};
+		headers['${_csrf.headerName}'] = '${_csrf.token}';
+		console.log(headers);
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/intakeCheck/updateIntakeYn.do",
+			method : "POST",
+			headers,
+			dataType : "json",
+			data : {pcode, intakeYn},
+			success(response){
+				console.log(response);
+				alert(response.resultMessage);
+				
+				const current = document.querySelectorAll('.current');
+				current.forEach((day) => {
+				    if(day.dataset.date == 21){
+				    	$(day).removeClass("check--active");
+				        $(day).addClass("check");
+				    };
+				});
+				
+			},
+			error(jqxhr, statusText, err){
+				console.log(jqxhr, statusText, err);
+			}
+		});
+	});
+}
 
+// 섭취 리스트 추가
+document.addIntakeFrm.addEventListener('submit', (e) => {
+	e.preventDefault();
+	const frm = e.target;
+	const alarmTime = frm.alarmTime;
+	alarmTime.value = document.querySelector('#select-intake-time').value;
+	
+	frm.submit();
+});
 
 // 달력 출력
 $(document).ready(function() {
