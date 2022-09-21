@@ -210,6 +210,10 @@
 	</section>
 </main>
 <script>
+document.cookie = "safeCookie1=foo; SameSite=Lax"; 
+document.cookie = "safeCookie2=foo";  
+document.cookie = "crossCookie=bar; SameSite=None; Secure";
+
 const headers = {};
 headers['${_csrf.headerName}'] = '${_csrf.token}';
 window.addEventListener('load', (e) => {

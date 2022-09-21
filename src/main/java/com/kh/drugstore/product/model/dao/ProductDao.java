@@ -23,7 +23,7 @@ public interface ProductDao {
 	@Select("select * from product_attachment where pcode = #{pcode}")
 	List<ProductAttachment> findAttachmentByProductCode(int pcode);
 
-	@Select("select*from product where category_id = #{categoryId}")
+	/* @Select("select*from product where category_id = #{categoryId}") */
 	List<Product> selectProductByCategoryId(int categoryId);
 
 	Product selectOneProductCollection(int pcode);

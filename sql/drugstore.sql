@@ -382,8 +382,28 @@ values(seq_product_no.nextval, '잘보여 루테인', '여기제약', '2000', '1
 insert into
     product(pcode, pname, manu, price, amount)
 values(seq_product_no.nextval, '든든 철분', 'KH제약', '1500', '10');
-
+select*from attachment;
 select * from product;
+		select
+			p.*,
+			a.attach_no,
+			a.pcode,
+			a.original_filename,
+			a.renamed_filename,
+			a.created_at attach_created_at
+		from
+			product p
+				left join product_attachment a
+					on p.pcode = a.pcode
+		where
+			p.pcode;
+            
+            
+select p.pname, p.price, p.product_attachment 
+from product p 
+inner join category c 
+on p.category_id = c.category_id 
+where p.category_id = category_id;
 
 --태연 코드--
 -- 공지사항 샘플 데이터

@@ -22,10 +22,10 @@ import lombok.extern.slf4j.Slf4j;
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired
-	private ProductDao productDao;
+	ProductDao productDao;
 	
-	@Override
 	//페이징
+	@Override
 	public List<Product> findAllProduct(Map<String, Integer> param) {
 		int limit = param.get("limit");
 		int offset = (param.get("cPage") - 1) * limit;
@@ -33,8 +33,8 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.findAllProduct(rowBounds);
 	}
 	
-	@Override
 	//전체개수
+	@Override
 	public int getTotalContent() {
 		return productDao.getTotalContent();
 	}

@@ -36,6 +36,7 @@ public class ProductListController {
 	ProductService productService;
 	
 	// 페이징 메소드
+	@GetMapping("/productList.do")
 	public void pageInit(@RequestParam(defaultValue = "1", required=false) int cPage, Model model, HttpServletRequest request) {
 		//페이징 시작. 콘텐츠 영역
 		Map<String, Integer> param = new HashMap<>();
@@ -45,22 +46,21 @@ public class ProductListController {
 		param.put("limit", limit);
 		
 		List<Product> list = productService.findAllProduct(param); //모든 제품찾기 
-		log.debug("list = {}", list);
+//		log.debug("list = {}", list);
 		model.addAttribute("list", list);
 		
 		//2. 페이지바
 		int totalContent = productService.getTotalContent();
-		log.debug("totalContent = {}", totalContent);
+//		log.debug("totalContent = {}", totalContent);
 		String url = request.getRequestURI();
 		String pagebar = DrugstoreUtils.getPagebar(cPage, limit, totalContent, url);
 		model.addAttribute("pagebar", pagebar);
-		
-		log.debug("list = {}", list);
+//		log.debug("pagebar={}", pagebar);
 		
 	}
 	
 	// 카테고리 id로 상품 리스트 조회
-	@GetMapping("/productList.do")
+	@GetMapping("/product/productList.do?categoryId={pcode}")
 	public void productListByCategory(@RequestParam(value="categoryId", required=false) int categoryId, Model model) {
 		log.debug("categoryId = {}", categoryId);
 		List<Product> list = productService.selectProductByCategoryId(categoryId);
@@ -78,6 +78,8 @@ public class ProductListController {
 		model.addAttribute("product", product);
 		
 	}
+
+	//화면단 
 	
 	
 	// 주희 코드 시작
