@@ -38,17 +38,18 @@
   <!-- 본문 -->
   <div id="page-content-wrapper">
     <div class="container-fluid">
-      <h3><sec:authentication property="principal.name"/> 페이지</h3>
+     <h3>정기구독 내역</h3>
     </div>
 	<div class="main">
-	 	<h3>정기구독 내역</h3>
 	 	<span>구독 시작 : ${subscription.startDate}</span>
 	 	<br />
-	 	<span>종료 시기 : ${subscription.endDate}</span>
+	 	<span>배송 시기 : ${subscription.sendDate}</span>
 	 	<br />
 	 	<span>상품 정보</span>
+	 	<span>${product.pcode}</span>
+	 	<span>${product.pname}</span>
 	 	<br />
-	 	<span>정기 구독 취소</span>
+	 	<button>구독 취소</button>
 	</div>    
   </div>
 </div>

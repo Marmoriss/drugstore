@@ -40,7 +40,7 @@ public interface ProductService {
 
 	List<Product> checkCategory(int[] checkCategoryByCartNo);
 
-	Product getProductBySubNo(int subNo);
+	Product getProductBySubNo(int pcode);
 
 	
 

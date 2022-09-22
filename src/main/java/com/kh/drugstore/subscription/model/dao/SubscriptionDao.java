@@ -1,6 +1,5 @@
 package com.kh.drugstore.subscription.model.dao;
 
-import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,9 +15,15 @@ public interface SubscriptionDao {
 	int insertInfo(Subscription subscription);
 
 	@Select("select * from subscription where member_id = #{memberId}")
-	Subscription getSubscription(String memberId);
+	SubscriptionProduct getSubscription(String memberId);
 
 	@Insert("insert into subscription_product values(#{subNo}, #{pcode}, 1)")
 	int insertIntoProduct(SubscriptionProduct subscription);
+
+	@Select("select sub_no from subscription where member_id = #{memberId}")
+	int selectAllSubNoById(String memberId);
+
+	@Select("select pcode from subscription_product where sub_no = #{subNo}")
+	int getPcodeBySubNo(int subNo);
 
 }

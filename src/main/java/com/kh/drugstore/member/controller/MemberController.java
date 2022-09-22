@@ -45,6 +45,7 @@ import com.kh.drugstore.member.model.service.MemberService;
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.service.ProductService;
 import com.kh.drugstore.subscription.model.dto.Subscription;
+import com.kh.drugstore.subscription.model.dto.SubscriptionProduct;
 import com.kh.drugstore.subscription.model.service.SubscriptionService;
 import com.kh.security.model.service.MemberSecurityService;
 
@@ -358,13 +359,18 @@ public class MemberController {
 		Member member = (Member) authentication.getPrincipal();
 		String memberId = member.getMemberId();
 		
-		// 구독 정보 가져오기
-		Subscription subscription = subscriptionService.getSubscription(memberId);
+		// 구독 번호 가져오기
+		SubscriptionProduct subscription = subscriptionService.getSubscription(memberId);
 		log.debug("subscriptoin = {}",subscription);
-		
 		int subNo = subscription.getSubNo();
-		Product product = productService.getProductBySubNo(subNo);
+		
+		int pcode = subscriptionService.getPcodeBySubNo(subNo);
+		// 구독 번호로 상품 코드 가져오기
+		
+		Product product = productService.getProductBySubNo(pcode);
 		model.addAttribute("subscription", subscription);
+		model.addAttribute("product", product);
+		
 	}
 	
 	@PostMapping("/passwordCheck.do")

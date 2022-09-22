@@ -21,12 +21,22 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 	
 	@Override
-	public Subscription getSubscription(String memberId) {
+	public SubscriptionProduct getSubscription(String memberId) {
 		return subscriptionDao.getSubscription(memberId);
 	}
 	
 	@Override
 	public int insertInfoToProduct(SubscriptionProduct subscription) {
 		return subscriptionDao.insertIntoProduct(subscription);
+	}
+	
+	@Override
+	public int selectAllSubNoById(String memberId) {
+		return subscriptionDao.selectAllSubNoById(memberId);
+	}
+	
+	@Override
+	public int getPcodeBySubNo(int subNo) {
+		return subscriptionDao.getPcodeBySubNo(subNo);
 	}
 }

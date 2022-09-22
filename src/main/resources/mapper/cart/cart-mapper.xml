@@ -106,6 +106,7 @@
    	#{no}
    	 </foreach>
 	</select>
+	
 	<resultMap type="cart" id="orderMap">
     <id column="cart_no" property="cartNo"/>
   	<result column="member_id" property="memberId"/>

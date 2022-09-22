@@ -17,7 +17,6 @@ public class Subscription {
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private LocalDate sendDate;
-	private String pay;
 	private int totalPrice;
 	private int productPrice;
 	private int deliveryPrice;

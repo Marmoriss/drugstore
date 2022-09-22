@@ -46,8 +46,9 @@ public interface ProductDao {
 	List<Product> selectSubscriptionAllProduct();
 
 	List<Product> checkCategory(int[] checkCategoryByCartNo);
-
-	Product getProductBySubNo(int subNo);
+	
+	@Select("select * from product where pcode = #{pcode}")
+	Product getProductBySubNo(int pcode);
 
 	
 	

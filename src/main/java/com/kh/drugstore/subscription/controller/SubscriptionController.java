@@ -72,7 +72,7 @@ public class SubscriptionController {
 	}
 	
 	@PostMapping("/enrollSubscriptionInfo.do")
-	public String enrollSubscriptionInfo(Authentication authentication,@RequestParam String toDate, @RequestParam String fromDate,@RequestParam int pcode,@RequestParam int cartNo) {
+	public String enrollSubscriptionInfo(Authentication authentication,@RequestParam String toDate, @RequestParam String fromDate,@RequestParam int pcode,@RequestParam int cartNo,Model model) {
 		Member member = (Member) authentication.getPrincipal();
 		String memberId = member.getMemberId();
 		SubscriptionProduct subscription = new SubscriptionProduct();
@@ -87,11 +87,16 @@ public class SubscriptionController {
 		subscription.setSendDate(fromDateFormat);
 		subscription.setPcode(pcode);
 		
+		
 		log.debug("구독 정보 = {}",subscription);
 		int result = subscriptionService.insertInfo(subscription);
-		
+		// subNo가져오기
+		int subNo = subscriptionService.selectAllSubNoById(memberId);
+		subscription.setSubNo(subNo);
 		result = subscriptionService.insertInfoToProduct(subscription);
-		log.debug("result = {}",result);
+		
+		
+		model.addAttribute("subscription", subscription);
 		return "redirect:/cart/cartOrder.do?checkbox="+ cartNo;
 	
 	}
