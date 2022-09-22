@@ -62,5 +62,168 @@ em{
 
 /* css 시작 */
 #layout_body{
-	
+	position: relative;
+	overflow: hidden;
+	width: 1016px;
+	margin: 0 auto;
 }
+
+#layout_body, #layout_config{
+	zoom: 1;
+}
+
+.product-view__wrapper{
+	margin-top: 100px;
+	padding-top: 350px;
+}
+
+#bbswrite .product-qna__write{
+	border: 0;
+}
+
+#updateQnaForm .product-qna__write-item{
+	border: 0;
+	padding: 0 0 38px 0;
+}
+
+#updateQnaForm .product-qna__write .product-qna__write-item-title{
+    display: inline-block;
+    font-family: "SpoqaHanSans Neo";
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+}
+
+.product-qna__write-input{
+	width: 100%;
+    height: 56px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    padding: 0 17px 0;
+    font-family: "SpoqaHanSans Neo";
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    font-weight: 500;
+}
+
+.product-qna__write-secret{
+	width: 100%;
+	margin-top: 16px;
+}
+
+
+
+#bbswrite .contents-change{
+	display: block;
+	border: none;
+	padding: 0;
+}
+
+#secret-check{
+	width: 25px;
+	height: 25px;
+	margin-right: 10px;
+}
+
+.secret-label{
+	font-family: "SpoqaHanSans Neo";
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+#password{
+	width: 150px;
+    height: 45px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    padding: 0 17px 0;
+    font-family: "SpoqaHanSans Neo";
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    font-weight: 500;
+}
+
+#updateQnaForm .product-qna__write .product-qna__write-item-title{
+	display: inline-block;
+    font-family: "SpoqaHanSans Neo";
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+}
+
+.contents-textarea{
+	width: 100%;
+    height: 300px;
+    resize: none;
+    font-family: "SpoqaHanSans Neo";
+    font-size: 16px;
+    border-radius: 8px;
+    border: solid 2px #ddd;
+    margin-bottom: 40px;
+    padding-left: 17px;
+    padding-top: 22px;
+    color: #222;
+}
+
+.mt40{
+	margin-top: 40px !important;
+}
+
+.btn-wrap{
+	margin-top: 30px;
+	text-align: center;
+}
+
+.btn_wrap__cancel{
+	width: 288px;
+    height: 56px;
+    border-radius: 8px;
+    border: solid 2px #415865;
+    background-color: #fff;
+}
+
+.btn_wrap__cancel--text1{
+    font-family: "SpoqaHanSans Neo";
+    font-size: 20px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.38;
+    letter-spacing: -0.01em;
+    text-align: center;
+    color: #415865;
+    margin-bottom: 0px;
+}
+
+.btn_wrap__register{
+    width: 288px;
+    height: 56px;
+    border-radius: 8px;
+    background-color: #415865;
+    margin-left: 24px;
+}
+
+.btn_wrap__register--text2{
+	font-family: "SpoqaHanSans Neo";
+    font-size: 20px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.38;
+    letter-spacing: -0.01em;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 0px;
+}
+
+
+

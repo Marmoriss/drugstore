@@ -640,6 +640,7 @@
 		                                                                                                    <button id="qna-update-btn" class="product-qna__update-btn" onclick="updateQna()">수정</button>
 	                                                                                                        <form:form name="qnaDeleteForm" action="${pageContext.request.contextPath}/qna/deleteQna.do">
 	                                                                                                        	<input type="hidden" name="qnaId" value="41"/>
+	                                                                                                        	<input type="hidden" name="pcode" value="${product.pcode}"/>
 																												<button id="qna-delete-btn" class="product-qna__delete-btn">삭제</button>
 	                                                                                                        </form:form>
 																										</div>

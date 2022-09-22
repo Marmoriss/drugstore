@@ -29,6 +29,7 @@ import com.kh.drugstore.qna.model.dto.Qna;
 import com.kh.drugstore.qna.model.service.QnaService;
 
 import lombok.extern.slf4j.Slf4j;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @Slf4j
@@ -111,11 +112,47 @@ public class QnaController {
 	@GetMapping("/qnaUpdateForm.do")
 	public void qnaUpdateForm(@RequestParam int qnaId, Model model) {
 		log.debug("qnaId = {}", qnaId);
-//		List<Qna> list = qnaService.selectOneQna(qnaId);
-//		
-//		log.debug("list = {}", list);
+		Qna qna = qnaService.selectOneQna(qnaId);
 		
+		log.debug("qna = {}", qna);
+		model.addAttribute("qna", qna);
 	}
+	
+	@PostMapping("/qnaUpdate.do")
+	public String qnaUpdate(RedirectAttributes redirectAttr, Qna qna) {
+		log.debug("=================");
+		log.debug("qna = {}", qna);
+		
+		int result = qnaService.updateQna(qna);
+		redirectAttr.addFlashAttribute("msg", "성공적으로 수정되었습니다.");
+		return "redirect:/product/productDetail.do?pcode=" + qna.getPcode();
+	}
+	
+	@PostMapping("/deleteQna.do")
+	public String qnaDelete(
+					RedirectAttributes redirectAttr,
+					@RequestParam int qnaId,
+					@RequestParam int pcode) {
+		log.debug("qnaId = {}", qnaId);
+		log.debug("pcode = {}", pcode);
+		
+		int result = qnaService.deleteQna(qnaId);
+		redirectAttr.addFlashAttribute("msg", "성공적으로 삭제되었습니다.");
+		
+		return "redirect:/product/productDetail.do?pcode=" + pcode;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
 
