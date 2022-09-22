@@ -464,3 +464,6 @@ select * from product where pname like '%' || '비타' || '%' ;
 alter table orders drop column product_price;
 alter table orders drop column created_at;
 alter table orders drop column failed_at;
+
+select i.*, p.pname from intake_check i left join product p on i.pcode = p.pcode where member_id = 'potato';
+select * from qna;
