@@ -46,6 +46,9 @@ public class CartServiceImpl implements CartService{
 	public int updateCart(Map<String, Object> param) {
 		return cartDao.updateCart(param);
 	}
+	
+	
+	
 //	@Override
 //	public Map<String, List> findCartListByMemberId(String memberId) {
 //		Map<String, List> cartMap = new HashMap<String, List>();
@@ -73,4 +76,15 @@ public class CartServiceImpl implements CartService{
 		result = cartDao.deleteOrdercart(cartOrder);
 		return result;
 	}
+	
+	@Override
+	public int insertCart(Map<String, Object> map) {
+		return cartDao.insertCart(map);
+	}
+	
+	@Override
+	public List<Cart> getPcode(int[] checkCategoryByCartNo) {
+		return cartDao.getPcode(checkCategoryByCartNo);
+	}
+	
 }

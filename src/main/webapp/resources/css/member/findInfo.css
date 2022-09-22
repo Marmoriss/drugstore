@@ -1,0 +1,21 @@
+@charset "UTF-8";
+#enroll-container{
+	padding-top: 400px;
+}
+
+form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.form-control{
+	width: 186px;
+	margin : 10px 0;
+}
+
+label{
+	font-size: 16px;
+	margin-right: 5px;
+}

@@ -32,6 +32,9 @@ public interface MemberDao {
 	
 	@Insert("insert into member values(#{memberId},#{name},#{password},#{phone},default,null,default,null,null,null,null,null)")
 	int insertkakaoMember(MemberEntity memberK);
+
+	@Select("select * from member where name = #{name} and phone = #{phone}")
+	Member selecOneMemberByName(Member member);
 	
 
 
