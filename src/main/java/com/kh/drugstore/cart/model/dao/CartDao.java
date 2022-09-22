@@ -37,11 +37,11 @@ public interface CartDao {
 			+ ", null, null, null, #{recipient}, #{postCode}, #{address}"
 			+ ", #{detailAddress}, #{memo}, default")
 			**/
-	int insertOrder(CartOrder cartOrder);
+	int insertOrder(Map<String, Object> cartOrder);
 	
-	int insertProductOrder(CartOrder cartOrder);
+	int insertProductOrder(Map<String, Object> cartOrder);
 	
-	int deleteOrdercart(CartOrder cartOrder);
+	int deleteOrdercart(Map<String, Object> cartOrder);
 	
 	
 //	List<Cart> findCartListByMemberId(String memberId);

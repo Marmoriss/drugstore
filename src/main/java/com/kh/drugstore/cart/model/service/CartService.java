@@ -21,7 +21,7 @@ public interface CartService {
 
 	List<Cart> findOrderListByCartNo(int[] checkbox);
 
-	int insertOrder(CartOrder cartOrder);
+	int insertOrder(Map<String, Object> cartOrder);
 	
 //	Map<String, List> findCartListByMemberId(String memberId);
 }

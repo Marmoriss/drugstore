@@ -87,10 +87,10 @@
 												onclick="button_change_amount(${cartlist.cartNo})" 
 												class="df-btn light tiny ml-2">변경</a>
 												</span> 
-								<input type="hidden" name="cartAmount" value="${cartList.amount}" />
+								<input type="hidden" name="cartAmount" value="${cartlist.amount}" />
 							</td>
 							<td><span>기본</span></td>
-							<td>  <span><span id="productPrice"><fmt:formatNumber value="${cartList.product.price*cartList.amount}" type="number"/></span>원</span></td>
+							<td>  <span><span id="productPrice"><fmt:formatNumber value="${cartlist.product.price*cartlist.amount}" type="number"/></span>원</span></td>
 						</tr>
 					</c:forEach>
 				</c:if>

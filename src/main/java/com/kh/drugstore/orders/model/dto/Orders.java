@@ -2,6 +2,9 @@ package com.kh.drugstore.orders.model.dto;
 
 
 import java.sql.Date;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +23,8 @@ public class Orders {
     private String method; //결제수단(NN)
     private String name; //주문명
     private Date createdAt; //결제 요청일
-    private Date paidAt; //결제 완료일
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate paidAt; //결제 완료일
     private Date failedAt; //결제 실패일
     private int cancelledAmount; //취소 금액
     private Date cancelledAt; //결제 취소일
