@@ -38,10 +38,23 @@
   <!-- 본문 -->
   <div id="page-content-wrapper">
     <div class="container-fluid">
-      <h3><sec:authentication property="principal.name"/> 페이지</h3>
+      <h3>마이 쇼핑</h3>
     </div>
     <div class="main">
-    
+    	<div id="orderStatus">
+    		<div>
+    			<h4>찜한 상품</h4>
+    			<h4>0</h4>
+    		</div>
+    		<div>
+    			<h4>구매한 상품</h4>
+    			<h4>0</h4>
+    		</div>
+    		<div>
+    			<h4>배송중인 상품</h4>
+    			<h4>0</h4>
+    		</div>
+    	</div>
     </div>
   </div>
  	

@@ -11,6 +11,18 @@
     </foreach>
   </delete>
   
+  
+  <select id="getPcode" resultMap="cartMap">
+  	select
+  		*
+  	from
+  		cart c join product p on c.pcode = p.pcode
+  	where
+  	<foreach collection="array" item="no" open="" close="" separator=" OR ">
+      cart_no = #{no}
+    </foreach>
+  </select>
+  
   <select id="findCartListByMemberId" resultMap="cartMap">
     select 
 	    c.*,
@@ -24,6 +36,7 @@
 	where
 	    c.member_id = #{memberId}
   </select>
+  
   <resultMap type="cart" id="cartMap">
     <id column="cart_no" property="cartNo"/>
   	<result column="member_id" property="memberId"/>
@@ -31,6 +44,7 @@
   	
   	<association property="product" javaType="product">
   		<id column="pcode" property="pcode"/>
+  		<result column="category_id" property="categoryId"/>
   		<result column="pname" property="pname"/>
   		<result column="price" property="price"/>
   		<collection property="attachments" ofType="productAttachment">

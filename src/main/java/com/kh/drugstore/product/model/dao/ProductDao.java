@@ -44,6 +44,12 @@ public interface ProductDao {
 
 	// 동하
 	List<Product> selectSubscriptionAllProduct();
+
+	List<Product> checkCategory(int[] checkCategoryByCartNo);
+
+	Product getProductBySubNo(int subNo);
+
+	
 	
 	
 			

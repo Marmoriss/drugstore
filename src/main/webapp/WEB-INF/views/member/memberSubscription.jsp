@@ -23,7 +23,7 @@
       <li><a href="${pageContext.request.contextPath}/servey/serveyResult.do">설문결과확인</a></li>
       <li><h3>나의 쇼핑정보</h3></li>
       <hr />
-      <li><a href="">주문 / 배송내역</a></li>
+      <li><a href="${pageContext.request.contextPath}/member/memberOrder.do">주문 / 배송내역</a></li>
       <li><a href="#">최소 / 환불내역</a></li>
       <li><a href="#">교환 / 반품내역</a></li>
       <li><h3>나의 활동</h3></li>
@@ -42,10 +42,15 @@
     </div>
 	<div class="main">
 	 	<h3>정기구독 내역</h3>
-	 	<span>정기구독 내역이 없습니다.</span>
+	 	<span>구독 시작 : ${subscription.startDate}</span>
+	 	<br />
+	 	<span>종료 시기 : ${subscription.endDate}</span>
+	 	<br />
+	 	<span>상품 정보</span>
+	 	<br />
+	 	<span>정기 구독 취소</span>
 	</div>    
   </div>
- 
 </div>
 	
 

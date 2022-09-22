@@ -33,11 +33,14 @@
 									${product.mainFnctn}
 								</p>
 								</div>
-								<form action="${pageContext.request.contextPath}/subscription/subscriptionEnroll.do" method="post">
+								
+								<div id="footer">
+								<form:form action="${pageContext.request.contextPath}/subscription/subscriptionEnroll.do" method="post">
 									<input type="hidden" name="memberId" value='<sec:authentication property="principal.memberId"/>' />	
 									<input type="hidden" name="pcode" value="${product.pcode}" />
-								</form>
-								<div id="footer"><button>구독하기</button></div>
+									<button type="submit">구독하기</button>
+								</form:form>
+								</div>
 					</div>
 					</li>				
 				</c:forEach>

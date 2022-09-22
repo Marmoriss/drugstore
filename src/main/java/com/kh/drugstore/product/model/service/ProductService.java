@@ -38,6 +38,12 @@ public interface ProductService {
 	// 구독할 수 있는 상품리스트
 	List<Product> selectSubscriptionAllProduct();
 
+	List<Product> checkCategory(int[] checkCategoryByCartNo);
+
+	Product getProductBySubNo(int subNo);
+
+	
+
 
 
 }

@@ -42,6 +42,10 @@ import com.kh.drugstore.member.model.dto.Member;
 import com.kh.drugstore.member.model.dto.MemberEntity;
 import com.kh.drugstore.member.model.dto.OAuthToken;
 import com.kh.drugstore.member.model.service.MemberService;
+import com.kh.drugstore.product.model.dto.Product;
+import com.kh.drugstore.product.model.service.ProductService;
+import com.kh.drugstore.subscription.model.dto.Subscription;
+import com.kh.drugstore.subscription.model.service.SubscriptionService;
 import com.kh.security.model.service.MemberSecurityService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -62,6 +66,12 @@ public class MemberController {
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	@Autowired
+	private SubscriptionService subscriptionService;
+	
+	@Autowired
+	private ProductService productService;
 
 	
 	
@@ -344,8 +354,17 @@ public class MemberController {
 	}
 	
 	@GetMapping("/memberSubscription.do")
-	public void memberSubscription() {
+	public void memberSubscription(Authentication authentication, Model model) {
+		Member member = (Member) authentication.getPrincipal();
+		String memberId = member.getMemberId();
 		
+		// 구독 정보 가져오기
+		Subscription subscription = subscriptionService.getSubscription(memberId);
+		log.debug("subscriptoin = {}",subscription);
+		
+		int subNo = subscription.getSubNo();
+		Product product = productService.getProductBySubNo(subNo);
+		model.addAttribute("subscription", subscription);
 	}
 	
 	@PostMapping("/passwordCheck.do")
@@ -363,6 +382,11 @@ public class MemberController {
 		 
 		return ResponseEntity.status(HttpStatus.OK).body(isMatched);
 		
+		
+	}
+	
+	@GetMapping("/memberOrder.do")
+	public void memberOrder() {
 		
 	}
 	
