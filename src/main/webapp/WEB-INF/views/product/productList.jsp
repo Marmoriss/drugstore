@@ -135,8 +135,8 @@
 		<div class="goods-sort-select">
 			<p>
 			<a href="javascript:recentlist();">최신순</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
-			<a href="javascript:pricelist();">낮은 가격순</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
-			<a href="javascript:pricelistdesc();">높은 가격순</a>			
+			<a href="javascript:priceList();">낮은 가격순</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+			<a href="javascript:priceListDesc();">높은 가격순</a>			
 			</p>
 		</div>
 	</div>
@@ -161,7 +161,16 @@
 	${pagebar}
 	</nav>
 <script>
-//ajax로 할 예정임 
+//ajax 시작 
+var pricelistdesc = function(url) {
+	$.ajax({
+		type: 'GET',
+		url: "${pageContext.request.contextPath}/product/productListdesc.do"
+		data: "",
+		contentType: ""
+	})
+}
+ 
 </script>
 	
 	<br />

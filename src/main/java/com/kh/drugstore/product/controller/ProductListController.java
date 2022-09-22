@@ -36,7 +36,7 @@ public class ProductListController {
 	ProductService productService;
 	
 	// 페이징 메소드
-	@GetMapping("")
+	@RequestMapping("")
 	public void pageInit(@RequestParam(defaultValue = "1", required=false) int cPage, Model model, HttpServletRequest request) {
 		//페이징 시작. 콘텐츠 영역
 		Map<String, Integer> param = new HashMap<>();
