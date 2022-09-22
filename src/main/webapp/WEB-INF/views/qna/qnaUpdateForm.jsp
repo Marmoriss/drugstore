@@ -17,34 +17,44 @@
 <!-- 사용자 작성 css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/qna/qnaUpdateForm.css" />
 
+<c:if test="${not empty msg}">
+	<script>
+		alert(${msg});
+	</script>
+</c:if>
+ 
 <body>
 	<div id="layout_body">
-		<div style="margin:quto;">
+		<div style="margin:auto;">
 			<div id="boardlayout" class="product-view__wrapper">
 				<div id="bbswrite">
 					<form:form name="updateQnaForm" id="updateQnaForm" method="POST" action="${pageContext.request.contextPath}/qna/qnaUpdate.do">
-						<div class="bbswite_table_style product-qna__write">
+						<input type="hidden" name="qnaId" value="${qna.qnaId}"/>
+						<input type="hidden" name="pcode" value="${qna.pcode}"/>
+						<div class="bbswrite_table_style product-qna__write">
 							<div>
 								<div class="product-qna__write-item">
-									<p class="product-qna__write-item-title">제목</p>
-									<input type="text" name="subject" id="subject" class="product-qna__write-input" value="제목을 입력해주세요." placeholder="제목을 입력해주세요."/>
 									<div class="product-qna__write-secret">
-										<input type="checkbox" name="secret-check" id="secret-check" />
-										<label for="secret-check">비밀글</label>
-										<input type="number" name="password" id="password" />
+										<input type="checkbox" name="secret-check" id="secret-check" ${qna.secretPassword eq 0 ? "" : "checked"}/>
+										<label for="secret-check" class="secret-label">비밀글</label>
+										<input type="password" name="secretPassword" id="password" placeholder="비밀번호 4자리" />
 									</div>
 								</div>
 							</div>
 							<div>
 								<div colspan="2" class="contents contents-change">
 									<p class="product-qna__write-item-title">내용</p>
-									<textarea name="contents" id="contents" class="contents-textarea" style="width:100%; height:300px;" contentheight="300px"></textarea>
+									<textarea name="content" id="contents" class="contents-textarea" contentheight="300px">${qna.content}</textarea>
 								</div>
 							</div>
 						</div>
 						<div class="btn-wrap mt40">
-							<button class="btn_wrap__cancel">취소</button>
-							<button class="btn_wrap__register" name="data_save_btn" id="data_save_btn">등록</button>
+							<button class="btn_wrap__cancel" onclick="history.go(-1);">
+								<p class="btn_wrap__cancel--text1">취소</p>
+							</button>
+							<button class="btn_wrap__register" name="data_save_btn" id="data_save_btn">
+								<p class="btn_wrap__register--text2">등록</p>
+							</button>
 						</div>
 					</form:form>
 				</div>
@@ -53,7 +63,25 @@
 	</div>
 </body>
 
+<script>
+document.updateQnaForm.addEventListener('submit', (e) => {
+	e.preventDefault();
+	const frm = e.target;
+	const secretPassword = frm.secretPassword;
+	const checkbox = document.querySelector('#secret-check');
+	
+	if(checkbox.checked && !/^[0-9]{4}$/.test(secretPassword))
+		alert('비밀번호는 0부터 9까지 4자리 숫자만 가능합니다.');
 
+	if(secretPassword.value == ''){
+		secretPassword.value = 0;
+		console.log(secretPassword.value);
+	}
+	
+	frm.submit();
+});
+
+</script>
 
 
 

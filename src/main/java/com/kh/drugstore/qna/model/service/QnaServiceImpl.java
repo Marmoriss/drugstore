@@ -47,4 +47,32 @@ public class QnaServiceImpl implements QnaService {
 		return qnaDao.insertQnaComment(qna);
 	}
 	
+	// 주희 코드 시작
+	@Override
+	public Qna selectOneQna(int qnaId) {
+		return qnaDao.selectOneQna(qnaId);
+	}
+	
+	@Override
+	public int updateQna(Qna qna) {
+		return qnaDao.updateQna(qna);
+	}
+	
+	@Override
+	public int deleteQna(int qnaId) {
+		return qnaDao.deleteQna(qnaId);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
