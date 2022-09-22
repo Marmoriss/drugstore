@@ -23,5 +23,9 @@ public interface CartService {
 
 	int insertOrder(Map<String, Object> cartOrder);
 	
+	int insertCart(Map<String, Object> map);
+
+	List<Cart> getPcode(int[] checkCategoryByCartNo);
+	
 //	Map<String, List> findCartListByMemberId(String memberId);
 }

@@ -29,10 +29,11 @@ import com.kh.drugstore.qna.model.dto.Qna;
 import com.kh.drugstore.qna.model.service.QnaService;
 
 import lombok.extern.slf4j.Slf4j;
+import oracle.jdbc.proxy.annotation.Post;
 
-//@Controller
-//@Slf4j
-//@RequestMapping("/qna")//이걸 주석하라 하신게 맞을지 아니면 아래의 어노테이션까지 전부 하는걸지 잘 모르겠지만 
+@Controller
+@Slf4j
+@RequestMapping("/qna")
 public class QnaController {
 
 	@Autowired
@@ -103,5 +104,55 @@ public class QnaController {
 		int result = qnaService.insertQnaComment(qna);
 		return "redirect:/qna/qnaList.do";
 	}
+	
+	
+	// 주희 코드 시작
+	
+	// update페이지 연결
+	@GetMapping("/qnaUpdateForm.do")
+	public void qnaUpdateForm(@RequestParam int qnaId, Model model) {
+		log.debug("qnaId = {}", qnaId);
+		Qna qna = qnaService.selectOneQna(qnaId);
+		
+		log.debug("qna = {}", qna);
+		model.addAttribute("qna", qna);
+	}
+	
+	@PostMapping("/qnaUpdate.do")
+	public String qnaUpdate(RedirectAttributes redirectAttr, Qna qna) {
+		log.debug("=================");
+		log.debug("qna = {}", qna);
+		
+		int result = qnaService.updateQna(qna);
+		redirectAttr.addFlashAttribute("msg", "성공적으로 수정되었습니다.");
+		return "redirect:/product/productDetail.do?pcode=" + qna.getPcode();
+	}
+	
+	@PostMapping("/deleteQna.do")
+	public String qnaDelete(
+					RedirectAttributes redirectAttr,
+					@RequestParam int qnaId,
+					@RequestParam int pcode) {
+		log.debug("qnaId = {}", qnaId);
+		log.debug("pcode = {}", pcode);
+		
+		int result = qnaService.deleteQna(qnaId);
+		redirectAttr.addFlashAttribute("msg", "성공적으로 삭제되었습니다.");
+		
+		return "redirect:/product/productDetail.do?pcode=" + pcode;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 

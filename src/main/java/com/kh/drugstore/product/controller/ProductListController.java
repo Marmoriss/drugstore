@@ -1,16 +1,12 @@
 package com.kh.drugstore.product.controller;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,9 +14,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.drugstore.cart.model.dto.Cart;
+import com.kh.drugstore.cart.model.service.CartService;
 import com.kh.drugstore.common.DrugstoreUtils;
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.service.ProductService;
@@ -34,6 +33,10 @@ public class ProductListController {
 	
 	@Autowired
 	ProductService productService;
+	
+	@Autowired
+	CartService cartService;
+	
 	
 	// 페이징 메소드
 	public void pageInit(@RequestParam(defaultValue = "1") int cPage, Model model, HttpServletRequest request) {
@@ -69,6 +72,7 @@ public class ProductListController {
 		model.addAttribute("list", list);
 	}
 	
+	// 주희 코드 시작
 	// 상품 코드로 상세페이지 조회
 	@GetMapping("/productDetail.do")
 	public void productDetail(@RequestParam int pcode, Model model) {
@@ -80,7 +84,6 @@ public class ProductListController {
 	}
 	
 	
-	// 주희 코드 시작
 	@GetMapping("/autocompletePname.do")
 	public ResponseEntity<?> autocompletePname(@RequestParam String term){
 		List<String> resultList = productService.autocompletePname(term);
@@ -92,7 +95,13 @@ public class ProductListController {
 	}
 	
 	
-	
+	@PostMapping("/checkCategory.do")
+	public ResponseEntity<?> checkCategory(@RequestParam int[] checkCategoryByCartNo){
+		// 카트 번호로 pcode가져오기
+		List<Cart> carts = cartService.getPcode(checkCategoryByCartNo);
+		log.debug("result = {}",carts);
+		return ResponseEntity.status(HttpStatus.OK).body(carts);
+	}
 	
 	
 	

@@ -2,10 +2,12 @@ package com.kh.drugstore.qna.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
 
 import com.kh.drugstore.notice.model.dto.Notice;
@@ -40,6 +42,18 @@ public interface QnaDao {
 	
 	@Select("select * from qna where pcode = #{pcode} order by qna_id")
 	public Qna oneQna(int pcode);
-	
 
+	
+	// 주희 코드 시작
+	@Select("select * from qna where qna_id = #{qnaId}")
+	public Qna selectOneQna(int qnaId);
+
+	@Update("update qna set secret_password = #{secretPassword}, content = #{content} where qna_id = #{qnaId}")
+	public int updateQna(Qna qna);
+
+	@Delete("delete from qna where qna_id = #{qnaId}")
+	public int deleteQna(int qnaId);
+	
+	
+	
 }

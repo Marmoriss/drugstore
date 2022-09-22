@@ -3,6 +3,7 @@ package com.kh.drugstore.cart.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -42,6 +43,14 @@ public interface CartDao {
 	int insertProductOrder(Map<String, Object> cartOrder);
 	
 	int deleteOrdercart(Map<String, Object> cartOrder);
+	
+	@Insert("insert into cart values(seq_cart_no.nextval,#{memberId},#{pcode},1)")
+	int insertCart(Map<String, Object> map);
+
+	
+	List<Cart> getPcode(int[] checkCategoryByCartNo);
+
+
 	
 	
 //	List<Cart> findCartListByMemberId(String memberId);

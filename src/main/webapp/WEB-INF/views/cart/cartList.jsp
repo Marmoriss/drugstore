@@ -32,7 +32,6 @@
 			</thead>
 			<tbody>
 		
-			
 			  	<c:if test="${empty list}">
 					<tr>
 						<td colspan="8" class="text-center">장바구니에 상품이 없습니다.<br><button type='button'>쇼핑하러 가기</button></td>
@@ -136,20 +135,56 @@ const select = document.querySelectorAll("#selectOrder");
 const headers = {};
 headers['${_csrf.headerName}'] = '${_csrf.token}';
 
+
+
 document.querySelector("#allOrder").addEventListener('click', (e) => {
 	[...select].forEach((check) => {
 		check.checked = e.target.checked
 	});
+	
 });
 
 document.querySelector("#order-btn").addEventListener('click', (e) => {
 	const count = $("input:checkbox[name=checkbox]:checked").length;
-
+	
 	if(count == 0) {
 		alert('하나 이상의 상품을 선택해주세요.');
 		e.preventDefault();
 		return;
 	}
+	
+	// 클릭한 상품이 정기 구독 상품인지 체크
+		let checkCategoryByCartNo = [];
+
+		for(let i = 0; i < select.length; i++) {
+			if(select[i].checked == true) {
+				checkCategoryByCartNo.push(select[i].value);
+			}
+		
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/product/checkCategory.do",
+			type : "POST",
+			headers,
+			data : {checkCategoryByCartNo},
+			traditional:true,
+			dataType : "json",
+			success(response) {
+				for(var i=0; i< response.length; i++){
+					
+					if(response[i].product.categoryId == 350004){
+						document.memberOrderFrm.action = "${pageContext.request.contextPath}/subscription/enrollInfo.do";
+						document.memberOrderFrm.submit();
+					}
+						
+				}
+			},
+			error : console.log
+		});
+	}
+
+	
+	
 	document.memberOrderFrm.submit();
 });
 

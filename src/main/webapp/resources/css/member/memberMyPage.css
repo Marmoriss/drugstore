@@ -1,82 +1,403 @@
-@charset "UTF-8";
-
-/* 사이드바 래퍼 스타일 */
-  
-  #page-wrapper {
-  	padding-top : 350px; 
-    padding-left: 250px;
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  #sidebar-wrapper {
-    padding: 25px 0 25px 0;
-    height: 100%;
-    margin-left: -250px;
-    background: #FFE1B6;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-  
-  #page-content-wrapper {
-  	border: 1px solid black;
-    width: 80%;
-    padding: 20px;
-    background-color: #FFE1B6;
-    border: none;
-  }
-  
-  .container-fluid{
-  	border : 1px solid black;
-  	height: 80px;
-  	padding : 10px;
-  	text-align: center;
-  }
-  /* 사이드바 스타일 */
-  
-  .sidebar-nav {
-    width: 250px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  
-  .sidebar-nav li {
-    text-indent: 1.5em;
-    line-height: 2.8em;
-    margin-bottom: 4px;
-  }
-  
-  .sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #999;
-  }
-  
-  .sidebar-nav li a:hover {
-    color: black;
-    font-size : 20px;
-    background: rgba(255, 255, 255, 0.2);
-  }
-  
-  .sidebar-nav > .sidebar-brand {
-    font-size: 1.3em;
-    line-height: 3em;
-  }
-  
-/* container-fluid */
-.container-fluid{
-	    background-color: whitesmoke;
-    border: none;
-    border-top: 1px solid black;
-    height: 80px;	
+/* 전체 적용 */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'SpoqaHanSans Neo', 'SpoqaHanSans', 'Gotham', 'OpenSans',
+    sans-serif;
+  color: #222;
+  box-sizing: border-box;
+  text-decoration: none;
 }
 
-.main{
-	    width: 100%;
-    height: 500px;
-    padding : 12px;
-    border-top : 1px solid black;
-    background-color: whitesmoke;
+div {
+  display: block;
 }
-  
+
+body,
+input,
+textarea,
+select,
+button,
+table {
+  font-size: 12px;
+  color: #333;
+}
+
+input,
+select,
+textarea,
+button,
+ul,
+ol,
+li,
+dl,
+dt,
+dd {
+  vertical-align: middle;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+input,
+select,
+textarea,
+button,
+ul,
+ol,
+li,
+dl,
+dt,
+dd {
+  vertical-align: middle;
+}
+
+.slick-slide,
+a {
+  outline: none;
+}
+
+.hand,
+.pointer {
+  cursor: pointer !important;
+}
+
+img,
+fieldset {
+  border: 0;
+  vertical-align: middle;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* 마이페이지 nav-bar 시작 */
+#layout_config {
+  zoom: 1;
+  width: 1224px;
+  margin: auto;
+  padding-top: 350px;
+}
+
+#layout_side,
+#layout_config_body {
+  padding-top: 40px;
+}
+
+#layout_side {
+  background: #ffff;
+  width: 208px;
+  margin-bottom: 120px;
+}
+
+#layout_config > div {
+  float: left;
+}
+
+#layout_side > div,
+.side_list {
+  margin-right: 0;
+}
+
+.mypage-common-side__title {
+  color: #212121;
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.mypage-common-side__item {
+  padding: 32px 0;
+}
+
+.mypage-common-side__item ~ .mypage-common-side__item {
+  border-top: 2px solid #ddd;
+}
+
+.mypage-common-side__title-sub {
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 20px;
+  color: #212121;
+  font-weight: bold;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.mypage-common-side__list {
+  margin-top: 23px;
+}
+
+.mypage-common-side__link ~ .mypage-common-side__link {
+  margin-top: 15px;
+}
+
+.mypage-common-side__link a {
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 16px;
+  color: #999;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* 본문 시작 */
+#layout_config_body,
+#layout-config_full {
+  min-height: 500px;
+  background-color: #ffff;
+}
+
+#layout_config_body {
+  width: calc(100% - 208px);
+  padding-left: 80px;
+}
+
+.mypage-main__top-wrapper {
+  background: #f3f3f3;
+  width: 100%;
+  padding: 40px 0;
+  display: flex;
+  align-items: center;
+  border-top: 2px solid #222;
+}
+
+.mypage-main__user-wrapper {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  max-width: 314px;
+  width: 100%;
+  padding: 0 48px;
+}
+
+.mypage-main__user-right {
+  margin-left: 15px;
+}
+
+.mypage-main__user-name {
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 28px;
+  color: #222;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.0185em;
+  word-break: break-all;
+}
+
+.mypage-main__user-name {
+  font-weight: 400;
+}
+
+.mypage-main__user-modi-btn {
+  display: block;
+  margin-top: 15px;
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 16px;
+  color: #999;
+  letter-spacing: -0.01em;
+}
+
+.mypage-main__user-info-wrapper {
+  width: 100%;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mapage-main__user-info-item {
+  max-width: 155px;
+  width: 100%;
+  border-left: 2px dashed #ddd;
+  padding: 13px 0 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mypage-main__user-info-title {
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 16px;
+  color: #999;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.mypage-main__user-info-num-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 19px;
+}
+
+.mypage-main__user-info-num-icon {
+  width: 24px;
+  height: 20px;
+}
+
+.mypage-main__user-info-num-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.mypage-main__user-info-num {
+  margin-top: 19px;
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 24px;
+  color: #222;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mypage-main__user-info-num--wish {
+  margin-top: 0;
+  margin-left: 7px;
+}
+
+/* 위시리스트 */
+.mypage-main__wish-wraper {
+  margin-top: 72px;
+}
+
+.mypage-main__title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mypage-main__title {
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 24px;
+  font-weight: 700;
+  color: #212121;
+  letter-spacing: -0.016em;
+  line-height: 1;
+}
+
+.mypage-main__title-more {
+  display: flex;
+  align-items: center;
+}
+
+.mypage-main__title-more-text {
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #222;
+}
+
+.mypage-main__title-more-icon {
+  margin-left: 6px;
+  width: 8px;
+  height: 12px;
+}
+
+.mypage-main__title-more-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.mypage-main__wish-item-wrapper {
+  margin-top: 32px;
+}
+
+.swiper {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+}
+
+.mypage-main__wish-swiper-wrapper {
+  align-items: center;
+}
+
+.swiper-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box;
+}
+
+.mypage-main__wish-item {
+  width: 216px !important;
+  margin-right: 24px;
+}
+
+.swiper-slide {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+}
+
+.mypage-main__wish-img {
+  width: 100%;
+  border-radius: 36px;
+  overflow: hidden;
+}
+
+.mypage-main__wish-link {
+  display: block;
+}
+
+.mypage-main__wish-link img {
+  width: 100%;
+  border: 0 !important;
+  margin: 0;
+}
+
+.mypage-main__wish-info {
+  padding: 20px 10px 0;
+}
+
+.mypage-main__wish-name {
+  font-size: 16px;
+  color: #222;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  height: 41px;
+}
+
+.mypage-main__wish-link {
+  display: block;
+}
+
+.mypage-main__wish-name a {
+  height: 100%;
+}
+
+.mypage-main__wish-price-wrapper {
+  margin-top: 15px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.mypage-main__wish-price {
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+  letter-spacing: -0.02em;
+}
+
+.mypage-main__wish-price--org {
+  margin-left: 12px;
+  font-size: 12px;
+  color: #999;
+  font-weight: 400;
+}

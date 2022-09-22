@@ -60,4 +60,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.insertkakaoMember(memberK);
 	}
 	
+	@Override
+	public Member selectOneMemberByName(Member member) {
+		return memberDao.selecOneMemberByName(member);
+	}
+	
 }
