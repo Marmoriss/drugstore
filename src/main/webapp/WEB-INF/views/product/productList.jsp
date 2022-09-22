@@ -128,12 +128,17 @@
 	<br/>
 	<br/>
 </div>
+	<div class="goods-count">
+		<strong>${totalContent}</strong><em>개의 상품</em>
+	</div>
 	<div class="goods-sort-wrapper">
-		<select class="goods-sort-select">
-			<option value="popular">최신순</option>
-			<option value="low_price">낮은 가격순</option>
-			<option value="high_price">높은 가격순</option>
-		</select>
+		<div class="goods-sort-select">
+			<p>
+			<a href="javascript:recentlist();">최신순</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+			<a href="javascript:pricelist();">낮은 가격순</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+			<a href="javascript:pricelistdesc();">높은 가격순</a>			
+			</p>
+		</div>
 	</div>
 	<br />
 	<br />
@@ -155,59 +160,14 @@
 	<nav>
 	${pagebar}
 	</nav>
+<script>
+//ajax로 할 예정임 
+</script>
 	
 	<br />
 	<br />
 	<br />
 	<br />
-<%-- 			<div class="goods-count">
-			
 
-		
-		<br />
-		<br />
-		
-		<div class="display-container">
-		<!-- 상품목록 시작 -->
-			<div class="goods-content">
-				<table>
-					<thead>
-						<tr>
-							<!-- 상품 이미지가 보여야함 -->
-							<th>
-								<a href="" src="" />
-							</th> 
-							<th></th>
-							<th></th>
-						</tr>
-					</thead>
-				</table>
-				<div class="goodsDisplayImage"></div><!-- 이미지 사진 들어가야함  -->
-					<div class="goodsDisplay-listwrapper" style="text-allign:left;">
-							<!-- 상품명 ex: 나우푸드 비타민 D3 어쩌고 저쩌고 -->
-							<div class="goods-name">
-								<a href="" onclick=""><!-- 상품이름들어가야함 --></a>
-							</div>
-							<div class="goods-price-wrapper">
-								<!-- 가격이 적혀야함 -->
-								<div class="goods-price">${list}</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 
-			<div class="goodsDisplayWrap goods-list__wrap"></div>
-			<div class="goodsDisplayWrap goods-list__wrap"></div>
-			<div class="goodsDisplayWrap goods-list__wrap"></div>
-		</div>
-		<div class=goods-list_content>
-				<div class="goodsDisplayWrap goods-list__wrap">
-					<div class="goodsDisplayItemsWrap">
-						<div class="goodsDisplayImageWrap goods-list__img-wrap"></div>
-					</div>
-				</div>
-		</div>
-	</div>
-</div> --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
