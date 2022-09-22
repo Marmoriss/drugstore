@@ -30,9 +30,9 @@ import com.kh.drugstore.qna.model.service.QnaService;
 
 import lombok.extern.slf4j.Slf4j;
 
-//@Controller
-//@Slf4j
-//@RequestMapping("/qna")//이걸 주석하라 하신게 맞을지 아니면 아래의 어노테이션까지 전부 하는걸지 잘 모르겠지만 
+@Controller
+@Slf4j
+@RequestMapping("/qna")
 public class QnaController {
 
 	@Autowired
@@ -103,5 +103,19 @@ public class QnaController {
 		int result = qnaService.insertQnaComment(qna);
 		return "redirect:/qna/qnaList.do";
 	}
+	
+	
+	// 주희 코드 시작
+	
+	// update페이지 연결
+	@GetMapping("/qnaUpdateForm.do")
+	public void qnaUpdateForm(@RequestParam int qnaId, Model model) {
+		log.debug("qnaId = {}", qnaId);
+//		List<Qna> list = qnaService.selectOneQna(qnaId);
+//		
+//		log.debug("list = {}", list);
+		
+	}
+	
 }
 
