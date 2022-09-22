@@ -322,7 +322,7 @@
                                     <div class="boardlayout">
                                         <p class="product-view__detail-title">상콤 비타민</p>
                                         <div class="bbslist product-review pd0">
-                                            <form action="" name="reviewboardsearch" id="reviewboardsearch">
+                                            <form:form action="" name="reviewboardsearch" id="reviewboardsearch">
                                                 <!-- 리뷰 검색시 필요한 정보를 hidden으로 넣기 현재 아래는 예시임 -->
                                                 <input type="hidden" name="pcode" value="" />
                                                 <input type="hidden" name="star" value="" />
@@ -350,7 +350,7 @@
                                                             class="btn_chg product-review__write-btn" />
                                                     </li>
                                                 </ul>
-                                            </form>
+                                            </form:form>
                                             <!-- // 검색폼 -->
                                             <table class="bbslist_table_style product-review__table">
                                                 <tbody>
@@ -411,7 +411,7 @@
                                                                 <div class="boardlayout">
                                                                     <div class="bbsview">
                                                                         <div class="viewbox">
-                                                                            <form action="#" name="review-form1"
+                                                                            <form:form action="#" name="review-form1"
                                                                                 id="review-form1" method="POST">
                                                                                 <!-- 리뷰 수정/삭제에 필요한 정보들 hidden으로 넣어주세요 -->
                                                                                 <input type="hidden" name="pcode" id="pcode" />
@@ -437,7 +437,7 @@
                                                                                         </tr>
                                                                                     </tbody>
                                                                                 </table>
-                                                                            </form>
+                                                                            </form:form>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -496,7 +496,7 @@
                                                                 <div class="boardlayout">
                                                                     <div class="bbsview">
                                                                         <div class="viewbox">
-                                                                            <form action="#" name="review-form1"
+                                                                            <form:form action="#" name="review-form1"
                                                                                 id="review-form1" method="POST">
                                                                                 <!-- 리뷰 수정/삭제에 필요한 정보들 hidden으로 넣어주세요 -->
                                                                                 <input type="hidden" name="pcode" id="pcode" />
@@ -522,7 +522,7 @@
                                                                                         </tr>
                                                                                     </tbody>
                                                                                 </table>
-                                                                            </form>
+                                                                            </form:form>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -551,7 +551,7 @@
                                 <div style="margin: auto;">
                                     <div class="boardlayout">
                                         <div class="bbslist product-qna pd0">
-                                            <form action="" name="qnaboardsearch" id="qnaboardsearch">
+                                            <form:form action="" name="qnaboardsearch" id="qnaboardsearch">
                                                 <div class="product-qna__top">
                                                     <div class="board_info_top">
                                                         <p>배송, 주문(취소/교환/환불)관련 문의는 고객센터 1:1 고객상담에 남겨주세요.</p>
@@ -564,7 +564,7 @@
                                                             class="btn_chg product-qna__write-btn hand" />
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </form:form>
                                             <!-- // qnaboardsearch 히든폼 -->
                                             <table class="bbslist_table_style product-qna__table">
                                                 <tbody>
@@ -625,41 +625,41 @@
                                                                         <div class="boardlayout">
                                                                             <div class="bbsview">
                                                                                 <div class="viewbox">
-                                                                                    <form action="#" name="qna-form1" id="qna-from1" method="POST">
-                                                                                        <!-- qna 수정에 필요한 정보들 input hidden으로 넣기 -->
-                                                                                        <table style="width: 100%;">
-                                                                                            <tbody>
-                                                                                                <tr>
-                                                                                                    <td>
-                                                                                                        <div class="contet product-qna__viewer-contents pd0">
-                                                                                                            <p class="product-qna__viewer-mark"> Q </p>
-                                                                                                            <div class="product-qna__viewer-contents-text-wrap relative">
-                                                                                                                <div class="product-qna__viewer-contents-text viewerlay_close_btn hand">
-                                                                                                                    이미지는 비피다 콤플렉스 앰플인데 제목은 바이옴이라고 써있어서 정확한 구성품이 뭔지 잘 모르겠어요
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                            <div class="product-qna__viewer-btn-wrap">
-                                                                                                                <input type="button" value="수정" id="qna-update-btn" class="product-qna__update-btn" />
-																												<input type="button" value="삭제" id="qna-delete-btn" class="product-qna__delete-btn" />
-																											</div>
-                                                                                                        </div>
-                                                                                                        <div class="reply product-qna__reply">
-																											<p class="product-qna__viewer-mark product-qna__viewer-mark--answer">A</p>
-																											<div class="product-qna__reply-text">
-																												안녕하세요,고객님. 마녀공장입니다 ^ㅂ^ <br>
-																												문의주신 상품은 비피다 바이옴 콤플렉스 앰플 50ml 더블 세트로 <br>
-																												'비피다 바이옴 콤플렉스 앰플' 제품 2입으로 구성되어 있습니다. <br>
-																												이미지상에 오류가 있어, 제품선택에 혼동을 드린 점 죄송합니다. ㅜㅜ <br>
-																												고객님의 소중한 의견 덕분에 많은 고객분들께 더욱 더 정확한 정보를 제공드릴 수 있게 되었습니다. 감사합니다. <br>
-																												추가 문의사항이 있으시면 언제든 게시판에 남겨주시면, 확인후 답변드리겠습니다. <br>
-																												감사합니다~
-																											</div>
-                                                                                                        </div>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </form>
+																					<table style="width: 100%;">
+                                                                                    	<tbody>
+                                                                                        	<tr>
+                                                                                            	<td>
+	                                                                                            	<div class="contet product-qna__viewer-contents pd0">
+	                                                                                                	<p class="product-qna__viewer-mark"> Q </p>
+	                                                                                                    	<div class="product-qna__viewer-contents-text-wrap relative">
+	                                                                                                        	<div class="product-qna__viewer-contents-text viewerlay_close_btn hand">
+	                                                                                                            	이미지는 비피다 콤플렉스 앰플인데 제목은 바이옴이라고 써있어서 정확한 구성품이 뭔지 잘 모르겠어요
+	                                                                                                            </div>
+	                                                                                                        </div>
+	                                                                                                        <div class="product-qna__viewer-btn-wrap">
+		                                                                                                    <button id="qna-update-btn" class="product-qna__update-btn" onclick="updateQna()">수정</button>
+	                                                                                                        <form:form name="qnaDeleteForm" action="${pageContext.request.contextPath}/qna/deleteQna.do">
+	                                                                                                        	<input type="hidden" name="qnaId" value="41"/>
+																												<button id="qna-delete-btn" class="product-qna__delete-btn">삭제</button>
+	                                                                                                        </form:form>
+																										</div>
+	                                                                                                      </div>
+	                                                                                                      <div class="reply product-qna__reply">
+																										<p class="product-qna__viewer-mark product-qna__viewer-mark--answer">A</p>
+																										<div class="product-qna__reply-text">
+																											안녕하세요,고객님. 마녀공장입니다 ^ㅂ^ <br>
+																											문의주신 상품은 비피다 바이옴 콤플렉스 앰플 50ml 더블 세트로 <br>
+																											'비피다 바이옴 콤플렉스 앰플' 제품 2입으로 구성되어 있습니다. <br>
+																											이미지상에 오류가 있어, 제품선택에 혼동을 드린 점 죄송합니다. ㅜㅜ <br>
+																											고객님의 소중한 의견 덕분에 많은 고객분들께 더욱 더 정확한 정보를 제공드릴 수 있게 되었습니다. 감사합니다. <br>
+																											추가 문의사항이 있으시면 언제든 게시판에 남겨주시면, 확인후 답변드리겠습니다. <br>
+																											감사합니다~
+																										</div>
+                                                                                                	</div>
+                                                                                            	</td>
+                                                                                        	</tr>
+                                                                                    	</tbody>
+                                                                                	</table>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -684,6 +684,13 @@
 </body>
 
 <script>
+// 문의 수정 폼 연결
+const updateQna = () => {
+	const qnaId = 41;
+	location.href = "${pageContext.request.contextPath}/qna/qnaUpdateForm.do?qnaId=" + qnaId;
+}
+
+
 // 수량 변경
 document.querySelector('.btn-minus').addEventListener('click', (e) => {
 	// 수량 마이너스 처리
@@ -777,10 +784,11 @@ $(document).ready(function(){
  	// 문의 토글
  	const qnaTrs = document.querySelectorAll('.product-qna__item-header');
  	qnaTrs.forEach(function(qnaTr, item){
- 		$(qnaTr).on('click', function(){
-			const $qnaItem = $(this).children().first();
-			const $itemContents = $qnaItem.children().first();
-			const $qnaContents = $itemContents.children().first();
+		const $qnaItem = $(qnaTr).children().first();
+		const $itemContents = $qnaItem.children().first();
+		const $qnaContents = $itemContents.children().first();
+ 		
+ 		$itemContents.on('click', function(){
 			if($qnaContents.hasClass('boad_view_btn') == true){ // 닫혀있는 상태
 				// 토글 열기
 				console.log("닫힘 -> 열림");
