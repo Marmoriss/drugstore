@@ -26,4 +26,7 @@ public interface SubscriptionDao {
 	@Select("select pcode from subscription_product where sub_no = #{subNo}")
 	int getPcodeBySubNo(int subNo);
 
+	@Select("select * from subscription where member_id = #{memberId}")
+	SubscriptionProduct subscriptionCheck(String memberId);
+
 }

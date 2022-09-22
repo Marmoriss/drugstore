@@ -35,10 +35,10 @@
 								</div>
 								
 								<div id="footer">
-								<form:form action="${pageContext.request.contextPath}/subscription/subscriptionEnroll.do" method="post">
+								<form:form id="subscriptionFrm" action="" method="post">
 									<input type="hidden" name="memberId" value='<sec:authentication property="principal.memberId"/>' />	
 									<input type="hidden" name="pcode" value="${product.pcode}" />
-									<button type="submit">구독하기</button>
+									<button type="button" onclick="checkSubscription()" >구독하기</button>
 								</form:form>
 								</div>
 					</div>
@@ -48,7 +48,35 @@
 		</section>		
 	</div>
 <script>
-
+const headers = {};
+headers['${_csrf.headerName}'] = '${_csrf.token}';
+	const checkSubscription = (e) =>{
+		$.ajax({
+		url : "${pageContext.request.contextPath}/subscription/subscriptionCheck.do",
+		type : "post",
+		headers,
+		
+		success(response){
+			
+			if(response){
+				alert("이미 구독 중인 상품이 있습니다.");
+				location.href = "${pageContext.request.contextPath}/member/memberSubscription.do";
+				
+				
+				
+			}else{				
+				$('#subscriptionFrm').action = "${pageContext.request.contextPath}/subscription/subscriptionEnroll.do";
+				$('#subscriptionFrm').submit();
+			}
+			
+			
+		},
+		error : console.log
+	})
+		
+		
+	}
+	
 </script>
 
 </body>

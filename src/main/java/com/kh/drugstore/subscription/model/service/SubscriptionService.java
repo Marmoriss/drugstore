@@ -17,6 +17,8 @@ public interface SubscriptionService {
 
 	int getPcodeBySubNo(int subNo);
 
+	SubscriptionProduct subscriptionCheck(String memberId);
+
 	
 
 }

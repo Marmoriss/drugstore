@@ -39,4 +39,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	public int getPcodeBySubNo(int subNo) {
 		return subscriptionDao.getPcodeBySubNo(subNo);
 	}
+	
+	@Override
+	public SubscriptionProduct subscriptionCheck(String memberId) {
+		return subscriptionDao.subscriptionCheck(memberId);
+	}
 }
