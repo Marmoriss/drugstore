@@ -28,12 +28,32 @@
 <!-- 폰트어썸 -->
 <script src="https://kit.fontawesome.com/34c760bbb4.js" crossorigin="anonymous"></script>
 
+<!-- include libraries(jQuery, bootstrap) 썸머노트 -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+<!-- include summernote css/js-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+<!-- include summernote-ko-KR -->
+<script src="/resources/js/summernote-ko-KR.js"></script>
+
 <!-- alert 띄우기 -->
 <c:if test="${not empty msg}">
 <script>
    alert("${msg}");
 </script>
 </c:if>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js" integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<sec:authorize access="isAuthenticated()">
+   <script>
+   const memberId = "<sec:authentication property='principal.username'/>";
+   </script>
+   <script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
+</sec:authorize>
 </head>
 <body>
 
@@ -50,7 +70,7 @@
          <div class="nav header-nav-list-wrap">
             <ul class="header-nav-list">
                <li class="header-nav-item"><a href="${pageContext.request.contextPath}/servey/servey.do" class="header-nav-text">건강설문</a></li>
-               <li class="header-nav-item"><a href="${pageContext.request.contextPath}/subscription/product.do" class="header-nav-text">정기구독</a></li>
+               <li class="header-nav-item"><a href="" class="header-nav-text">정기구독</a></li>
                <li class="header-nav-item"><a class="header-nav-text" href="${pageContext.request.contextPath}/notice/noticeList.do">고객센터</a></li>
                
                <sec:authorize access="isAnonymous()">
@@ -79,7 +99,7 @@
       </div>
       <!-- 로고 -->
       <div class="header-logo">
-         <a href="${pageContext.request.contextPath}/" class="header-logo-link">
+         <a href="/" class="header-logo-link">
             <img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="logo" class="header-logo-img"/>
          </a>
       </div>
@@ -100,6 +120,12 @@
                   </li>
                   <li class="categoryList1 header-menu-item">
                      <a href="#" class="header-menu-title">베스트</a>
+                  </li>
+                  <sec:authorize access="isAuthenticated() && !hasRole('ADMIN')"> >
+                  <li class="categoryList1 header-menu-item">
+                     <a href="${pageContext.request.contextPath}/chat/chat.do" class="header-menu-title">chat
+                        <img style="width:20px; height:20px;" src="${pageContext.request.contextPath}/resources/images/792.gif" alt="chat"/></a>
+                  </sec:authorize>
                   </li>
                </ul>
             </div>
@@ -122,27 +148,4 @@
       </div>
    </div>
 </header>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 

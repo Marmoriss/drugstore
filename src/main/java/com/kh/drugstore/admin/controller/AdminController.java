@@ -26,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.drugstore.admin.model.service.AdminService;
+import com.kh.drugstore.chat.model.dto.ChatLog;
+import com.kh.drugstore.chat.model.service.ChatService;
 import com.kh.drugstore.common.DrugstoreUtils;
 import com.kh.drugstore.member.model.dto.User;
 import com.kh.drugstore.orders.model.dto.Orders;
@@ -34,6 +36,7 @@ import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.dto.ProductAttachment;
 import com.kh.drugstore.product.model.dto.ProductEntity;
 import com.kh.drugstore.product.model.service.ProductService;
+
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -50,6 +53,9 @@ public class AdminController {
 	
 	@Autowired
 	ServletContext application;
+	
+	@Autowired
+	ChatService chatService;
 
 	HttpSession session;
 	
@@ -323,7 +329,6 @@ public class AdminController {
 		int totalContent = adminService.getTotalContentLike(param);
 		log.debug("totalContent = {}", totalContent);
 		String url = request.getRequestURI() + "?searchType=" + searchType + "&keyword=" + keyword;
-//		String url = request.getRequestURI();
 		String pagebar = DrugstoreUtils.getPagebar(cPage, limit, totalContent, url);
 		model.addAttribute("pagebar", pagebar);
 		return "admin/user/userList";
@@ -367,6 +372,40 @@ public class AdminController {
 		int result = adminService.statusUpdate(merchantUid);
 
 		return "redirect:/admin/orders/ordersList.do";
+	}
+	
+	@GetMapping("/orders/findOrders.do")
+	public String findOrders(
+			@RequestParam String toDate,
+			@RequestParam String fromDate,
+			Model model) {
+			
+		Map<String, Object> param = new HashMap<>();
+		
+		param.put("toDate", toDate);
+		param.put("fromDate", fromDate);
+		
+		List<Orders> list = adminService.findOrders(param);
+		log.debug("list = {}", list);
+		model.addAttribute("list", list);
+		
+		return "/admin/orders/ordersList";
+	}
+	
+	@GetMapping("/chat/chatList.do")
+	public void chatList(Model model) {
+		// 채팅방별로 최근 1건 조회
+		List<ChatLog> list = chatService.findRecentChatLogs();
+		log.debug("list = {}", list);
+		model.addAttribute("list", list);
+	}
+	
+	@GetMapping("/chat/chat.do")
+	public void chat(@RequestParam String chatroomId, Model model) {
+		// 채팅로그목록 조회
+		List<ChatLog> chatLogs = chatService.findChatLogByChatroomId(chatroomId);
+		model.addAttribute("chatLogs", chatLogs);
+		
 	}
 	
 // 태연코드 끝

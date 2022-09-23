@@ -69,7 +69,7 @@ public class CartServiceImpl implements CartService{
 		return cartDao.findOrderListByCartNo(checkbox);
 	}
 	@Override
-	public int insertOrder(CartOrder cartOrder) {
+	public int insertOrder(Map<String, Object> cartOrder) {
 		int result = 0;
 		result = cartDao.insertOrder(cartOrder);
 		result = cartDao.insertProductOrder(cartOrder);

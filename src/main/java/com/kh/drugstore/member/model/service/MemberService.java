@@ -2,9 +2,12 @@ package com.kh.drugstore.member.model.service;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.kh.drugstore.member.model.dto.Member;
 import com.kh.drugstore.member.model.dto.MemberEntity;
+import com.kh.drugstore.orders.model.dto.Orders;
 
 import lombok.NonNull;
 
@@ -23,6 +26,10 @@ public interface MemberService {
 	int insertKakaoMember(MemberEntity memberK);
 
 	Member selectOneMemberByName(Member member);
+
+	List<Orders> getOrderById(Map<String, Object> param);
+
+	int getTotalContent(Map<String, Object> param);
 
 
 	

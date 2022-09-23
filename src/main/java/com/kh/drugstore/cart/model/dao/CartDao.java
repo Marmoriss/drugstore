@@ -38,12 +38,12 @@ public interface CartDao {
 			+ ", null, null, null, #{recipient}, #{postCode}, #{address}"
 			+ ", #{detailAddress}, #{memo}, default")
 			**/
-	int insertOrder(CartOrder cartOrder);
+	int insertOrder(Map<String, Object> cartOrder);
 	
-	int insertProductOrder(CartOrder cartOrder);
+	int insertProductOrder(Map<String, Object> cartOrder);
 	
-	int deleteOrdercart(CartOrder cartOrder);
-
+	int deleteOrdercart(Map<String, Object> cartOrder);
+	
 	@Insert("insert into cart values(seq_cart_no.nextval,#{memberId},#{pcode},1)")
 	int insertCart(Map<String, Object> map);
 
@@ -51,7 +51,6 @@ public interface CartDao {
 	List<Cart> getPcode(int[] checkCategoryByCartNo);
 
 
-	
 	
 	
 //	List<Cart> findCartListByMemberId(String memberId);

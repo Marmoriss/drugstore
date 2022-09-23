@@ -19,6 +19,7 @@
 		<id property="memo" column="memo" />
 	</resultMap>
 
+
 	<resultMap type="com.kh.drugstore.servey.model.dto.Servey"
 		id="serveyMap">
 		<id property="no" column="no" />
@@ -75,7 +76,7 @@
 		where gender like concat('%' || #{keyword},'%')
 		</if>
 		<if test="searchType.equals('member_id')">
-		where m.member_id like concat('%' || #{keyword},'%')
+		where member_id like concat('%' || #{keyword},'%')
 		</if>
 		<if test="searchType.equals('body')">
 		where body like concat('%' || #{keyword},'%')
@@ -125,16 +126,53 @@
 	
 	</resultMap>
 	
-	<resultMap type="com.kh.drugstore.admin.model.dto.Order" id="orderListMap">
-		<collection property="member" resultMap="memberMap" />
-		<collection property="orders" resultMap="ordersMap" />
-	</resultMap> 
+		<resultMap type="product" id="productMap">
+		<id column="pcode" property="pcode"/>
+		<result column="category_id" property="categoryId"/>
+		<result column="sttenmt_no" property="sttenmtNo"/>
+		<result column="pname" property="pname"/>
+		<result column="manu" property="manu"/>
+		<result column="price" property="price"/>
+		<result column="amount" property="amount"/>
+		<result column="ingre_name" property="ingreName"/>
+		<result column="main_fnctn" property="mainFnctn"/>
+		<result column="intake_hint1" property="intakeHint1"/>
+		<result column="srv_use" property="srvUse"/>
+		<result column="distb_pd" property="distbPd"/>
+		<result column="sub_yn" property="subYn"/>
+		<result column="base_standard" property="baseStandard"/>
+		<result column="sale_status" property="saleStatus"/>
+		<result column="created_at" property="createdAt"/>
+		<result column="updated_at" property="updatedAt"/>
+		<result column="discount" property="discount"/>
+	</resultMap>
+
+	<resultMap type="com.kh.drugstore.orders.model.dto.ProductOrders" id="pordersMap">
+		<id property="pcode" column="pcode" />
+		<id property="merchantUid" column="merchant_uid" />
+	</resultMap>
 	
-	<select id="selectOrders" resultMap="orderListMap" parameterType="map">
-		select m.member_id,merchant_uid, imp_uid, receiptid, method, product_price, total_price,paid_at,status from member m right join orders o on
-		(m.member_id = o.member_id) order by paid_at desc
+	<resultMap type="com.kh.drugstore.admin.model.dto.Order" id="orderListMap">
+		<collection property="orders" resultMap="ordersMap" />
+		<collection property="porders" resultMap="pordersMap" />
+		<collection property="product" resultMap="productMap" />
+		
+	</resultMap> 
+
+	<select id="selectOrders" resultMap="orderListMap">
+		select o.merchant_uid, a.pname, o.member_id, o.paid_at, o.status  from product_orders po join orders o on po.merchant_uid = o.merchant_uid join product a on po.pcode=a.pcode order by o.paid_at desc
 	</select>
 	
+	<select id="findOrders" resultMap="orderListMap">
+		select o.merchant_uid, a.pname, o.member_id, o.paid_at, o.status 
+		from product_orders po join orders o on po.merchant_uid = o.merchant_uid join product a on po.pcode=a.pcode
+		<where>
+			<if test="to != null and from != null">
+			 	o.paid_at between to_date(#{toDate},'yyyy/mm/dd') and to_date(#{fromDate},'yyyy/mm/dd')
+			</if>
+		</where>
+		order by paid_at desc
+	</select>
 	
 	<!-- 주희 코드 -->
 	<update id="updateProduct">

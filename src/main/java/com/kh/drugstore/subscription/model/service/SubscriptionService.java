@@ -19,6 +19,10 @@ public interface SubscriptionService {
 
 	SubscriptionProduct subscriptionCheck(String memberId);
 
+	int subscriptionDel(int subNo);
+
+	int subscriptionProductDel(int subNo);
+
 	
 
 }
