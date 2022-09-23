@@ -10,12 +10,10 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/notice.css" />
 <div id="noticeViewDesc">
+
 	<div><h4>${notice.title}</h4></div>
 	<hr style="margin-top:20px;"  />  
-		<div><span id="noticeView">
-			<input type="text" value="<sec:authentication property="principal.memberId"/>" required/>
-		</span> <br> 
-		<!-- <span id="noticeView"> -->
+		<div><span id="noticeView" >${notice.writer}</span> <br> 
 			<fmt:parseDate value="${notice.regDate}" pattern="yyyy-MM-dd'T'HH:mm" var="regDate"/>
 			<fmt:formatDate value="${regDate}" pattern="YYYY.MM.dd"/>
 		</div>

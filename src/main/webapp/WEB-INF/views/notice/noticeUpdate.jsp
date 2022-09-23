@@ -17,7 +17,7 @@
 	<h2>공지사항 수정📝</h2>
 	<hr>
 	<br>
-	<form action="${pageContext.request.contextPath}/notice/noticeUpdate.do" method="post">
+	<form action="${pageContext.request.contextPath}/notice/noticeUpdate.do" method="post" id="noticeEnrollFrm">
 		<div class="form-group">
 		<input type="hidden" name="no" value="${notice.no}" />
 			<label for="title">제목</label> <input type="text" class="form-control"
@@ -31,12 +31,45 @@
 
 		<div class="form-group">
 			<label for="content">내용</label>
-			<textarea class="form-control" rows="10" id="content" name="content"
-				value="${notice.content}"></textarea>
+			<input type="hidden" name="content" id="enroll_summernote"/>
 		</div>
 		<button type="submit" class="btn-add">등록</button>
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	</form>
 </div>
+<script>
+//게시판 에디터 생성
+$("#enroll_summernote").summernote({
+  height: 300,
+  width: 700,
+  focus: true,
+  disableResizeEditor: true,
+ }).summernote('code','${notice.content}');
 
+//submit 처리
+$("#noticeEnrollFrm").submit(function(){
+		$("[name=content]").val($("#enroll_summernote").summernote('code'));
+		var $title = $("[name=title]").val();
+		var $content = $("[name=content]").val();
+		
+		//제목 유효성 검사
+		if(/^.{1,}$/.test($title)==false){
+			alert("제목을 입력하세요");
+			$("[name=title]").focus();
+			return false;
+		}
+		//내용 유효성 검사
+		if($content.length==0 || $content=="<p><br></p>"){
+			alert("내용을 입력하세요");
+			$("#enroll_summernote").summernote("focus");
+			return false;
+		}
+		
+	if(confirm("게시글을 등록 하시겠습니까?")){
+		return true;
+	}else{
+		return false;
+	}
+});
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

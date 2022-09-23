@@ -68,10 +68,8 @@ public interface AdminDao {
 			+ "		(m.member_id = s.member_id)) order by created_at desc")
 	int getTotalContent();
 
-//	List<User> userFinder(RowBounds rowBounds, @Param("searchType")String searchType, @Param("keyword")String keyword);
 	List<User> userFinder(RowBounds rowBounds, Map<String, Object> param);
 	
-//	Integer getTotalContentLike(Map<String, Object> param, @Param("searchType")String searchType, @Param("keyword")String keyword);
 	int getTotalContentLike(Map<String, Object> param);
 	
 	@Select("select count(*) from member where to_char(created_at, 'yymmdd') = to_char(sysdate-1,'yymmdd')")
@@ -117,10 +115,8 @@ public interface AdminDao {
 
 	@Update("update orders set status = '배송중' where merchant_uid = #{merchantUid}")
 	int statusUpdate(int merchantUid);
-
-
 	
-
+	List<Orders> findOrders(Map<String, Object> param);
 	
 
 
