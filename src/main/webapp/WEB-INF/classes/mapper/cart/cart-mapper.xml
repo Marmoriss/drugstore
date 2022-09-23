@@ -11,6 +11,18 @@
     </foreach>
   </delete>
   
+  
+  <select id="getPcode" resultMap="cartMap">
+  	select
+  		*
+  	from
+  		cart c join product p on c.pcode = p.pcode
+  	where
+  	<foreach collection="array" item="no" open="" close="" separator=" OR ">
+      cart_no = #{no}
+    </foreach>
+  </select>
+  
   <select id="findCartListByMemberId" resultMap="cartMap">
     select 
 	    c.*,
@@ -24,6 +36,7 @@
 	where
 	    c.member_id = #{memberId}
   </select>
+  
   <resultMap type="cart" id="cartMap">
     <id column="cart_no" property="cartNo"/>
   	<result column="member_id" property="memberId"/>
@@ -31,6 +44,7 @@
   	
   	<association property="product" javaType="product">
   		<id column="pcode" property="pcode"/>
+  		<result column="category_id" property="categoryId"/>
   		<result column="pname" property="pname"/>
   		<result column="price" property="price"/>
   		<collection property="attachments" ofType="productAttachment">
@@ -52,29 +66,33 @@
 	<insert id ="insertOrder">
 	insert into
 		orders
-	(merchant_uid, member_id, receiptid, method, name, paid_at, total_price, delivery_price, recipient, post_code, address, detail_address, memo, status)
+	(merchant_uid, member_id, imp_uid, receiptid, method, name, paid_at, total_price, delivery_price, recipient, post_code, address, detail_address, memo)
 		values
-	(#{merchantUid}, #{memberId}, #{impUid}, #{receiptId}, #{method}, #{name}, #{paidAt}, 
-	 #{totalPrice}, 3000 , #{recipient}, #{postCode}, #{address}, #{detailAddress}, #{memo}, default)
+	(#{merchantUid}, #{memberId}, #{impUid}, #{receiptId}, #{method}, #{name},to_date(#{paidAt},'YYYY-MM-DD') , 
+	 #{totalPrice}, 3000 , #{recipient}, #{postCode}, #{address}, #{detailAddress}, #{memo})
 	</insert>
+	
 	<insert id="insertProductOrder">
 	insert into
 		product_orders
 	values
 	(
-	<foreach collection="array" item="pcode" separator=",">
-		#{pcode}
+	<foreach collection="products" item="pd" separator=",">
+		#{pd.pcode,jdbcType=NUMERIC}
 	</foreach>
-		  #{merchantUid}
+		 , #{merchantUid}
 	)
+	
 	</insert>
+	
 	<delete id ="deleteOrdercart">
 	DELETE FROM cart
     WHERE 
-    <foreach collection="array" item="no" open="" close="" separator=" OR ">
-      cart_no = #{no}
+    <foreach collection="products" item="pd" open="" close="" separator=" OR ">
+      cart_no = #{pd.cartNo}
     </foreach>
 	</delete>
+	
 	<select id="findOrderListByCartNo" resultMap="orderMap">
 	select 
 	    c.*,
@@ -92,6 +110,7 @@
    	#{no}
    	 </foreach>
 	</select>
+	
 	<resultMap type="cart" id="orderMap">
     <id column="cart_no" property="cartNo"/>
   	<result column="member_id" property="memberId"/>

@@ -1,3 +1,5 @@
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.kh.drugstore.member.model.dto.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -17,6 +19,12 @@
 <!-- 사용자 작성 css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product/product-detail.css" />
 
+<c:if test="${not empty msg}">
+<script>
+	alert("${msg}");
+</script>
+</c:if>
+
 <body>
     <div id="layout-config">
         <div id="layout-config-full">
@@ -25,7 +33,7 @@
                     <dt class="product-view__thumb-wrap">
                         <div id="product_thumbs" class="product-view__thumb">
                             <div class="product-view__thumb-img-wrap">
-                                <img src="" alt="" class="product-view__thumb-img" />
+                                <img src="${pageContext.request.contextPath}/resources/upload/product/${product.attachments[0].renamedFilename}" alt="상품메인이미지" class="product-view__thumb-img" />
                             </div>
                         </div>
                     </dt>
@@ -121,7 +129,7 @@
                                 </a>
                             </li>
                             <li class="product-view__detail-tab-item">
-                                <a class="tab_03 product-view__detail-tab-title">문의 30</a>
+                                <a class="tab_03 product-view__detail-tab-title">문의 ${totalContent}</a>
                             </li>
                                 <script>
                                 document.querySelector('.tab_01').addEventListener('click', (e) => {
@@ -147,8 +155,11 @@
                     <div id="product_description" class="product-view__description">
                         <a href="" name="product_description"></a>
                         <div class="product_description product-view__description-contents">
-                            <!-- 상품 상세 정보 사진들 들어갈 자리 -->
-                            상세 정보 사진 들어갑니다.
+                            <c:if test="${not empty product.attachments}">
+                            	<c:forEach items="${product.attachments}" var="attach" begin="1" varStatus="vs">
+                            		<img src="${pageContext.request.contextPath}/resources/upload/product/${attach.renamedFilename}" alt="상품상세이미지"/>
+                            	</c:forEach>
+                            </c:if>
                         </div>
                         <!-- 상품 정보 제공 공시 -->
                         <div class="product-view__guide">
@@ -566,6 +577,11 @@
                                                 </div>
                                             </form:form>
                                             <!-- // qnaboardsearch 히든폼 -->
+ <%
+ 
+ 	Member loginMember = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+ 
+ %>
                                             <table class="bbslist_table_style product-qna__table">
                                                 <tbody>
                                                     <!-- 반복문 시작 -->
@@ -573,25 +589,27 @@
                                                         <td class="product-qna__item pd0">
                                                             <div class="product-qna__item-contents relative">
                                                                 <!-- 비밀글일 때 -->
-                                                                <div class="board_cont product-qna__contents hand boad_view_btn_mbno">
-                                                                    <div>
-                                                                        <span class="product-qna__secret"></span>
-                                                                        <span class="product-qna__contents-text">
-                                                                            비밀글입니다
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="product-review__arrow-btn">
-                                                                        <img src="${pageContext.request.contextPath}/resources/css/images/angle-down-solid.svg" class="product-review__arrow-btn-img">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-qna__item-info">
+                                                                	<c:if test="${qna.writer eq principal.memberId || qna.writer eq hasRole('ADMIN')}">
+			                                                              <div class="board_cont product-qna__contents hand boad_view_btn_mbno">
+			                                                                    <div>
+			                                                                        <span class="product-qna__secret"></span>
+			                                                                        <span class="product-qna__contents-text">
+			                                                                            비밀글입니다
+			                                                                        </span>
+			                                                                    </div>
+			                                                                   <div class="product-review__arrow-btn">
+					                                                           		<img src="${pageContext.request.contextPath}/resources/css/images/angle-down-solid.svg" class="product-review__arrow-btn-img">
+					                                                           </div>
+			                                                                 </div>
+	                                                                	</c:if>
+			                                                  		</div>
+                                                              <div class="product-qna__item-info">
                                                                     <p class="product-qna__status product-qna__status--complete">답변완료</p>
                                                                     <div class="product-qna__item-info-right">
                                                                         <div class="product-qna__item-writer">pota**</div>
                                                                         <div class="product-qna__item-date">2022.09.18</div>
                                                                     </div>
-                                                                </div>
-                                                            </div>
+                                                              </div>
                                                         </td>
                                                     </tr>
                                                     <tr class="datalist product-qna__item-header">
@@ -608,6 +626,7 @@
                                                                         <img src="${pageContext.request.contextPath}/resources/css/images/angle-down-solid.svg" class="product-review__arrow-btn-img">
                                                                     </div>
                                                                 </div>
+															</div>
                                                                 <div class="product-qna__item-info">
                                                                     <p class="product-qna__status product-qna__status--complete">답변완료</p>
                                                                     <div class="product-qna__item-info-right">
@@ -685,6 +704,11 @@
 </body>
 
 <script>
+// 위시리스트 추가
+const wish_chg = () => {
+	
+};
+
 // 문의 수정 폼 연결
 const updateQna = () => {
 	const qnaId = 41;

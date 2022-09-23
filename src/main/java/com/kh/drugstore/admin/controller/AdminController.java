@@ -37,7 +37,6 @@ import com.kh.drugstore.product.model.dto.ProductAttachment;
 import com.kh.drugstore.product.model.dto.ProductEntity;
 import com.kh.drugstore.product.model.service.ProductService;
 
-
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -159,23 +158,11 @@ public class AdminController {
 	
 	@PostMapping("/product/productEnroll.do")
 	public String productEnroll(
-			@RequestParam(name = "upFile") List<MultipartFile> upFileList,
-			@RequestParam(name = "categoryId") String categoryId,
-			@RequestParam(name = "pname") String pname,
-			@RequestParam(name = "manu") String manu,
-			@RequestParam(name = "price") String price,
-			@RequestParam(name = "discount") String discount,
-			@RequestParam(name = "amount") String amount,
-			RedirectAttributes redirectAttr) 
-					throws IllegalStateException, IOException {
+					Product product,
+					@RequestParam(name = "upFile") List<MultipartFile> upFileList,
+					RedirectAttributes redirectAttr) 
+							throws IllegalStateException, IOException {
 		
-		log.debug("컨트롤러입니다");
-		Product product = new Product();
-		product.setCategoryId(Integer.parseInt(categoryId));
-		product.setPname(pname);
-		product.setManu(manu);
-		product.setPrice(Integer.parseInt(price));
-		product.setAmount(Integer.parseInt(amount));
 		log.debug("product = {}", product);
 		
 		for(MultipartFile upFile : upFileList) {
@@ -186,10 +173,10 @@ public class AdminController {
 			
 			if(!upFile.isEmpty()) {
 				// a. 서버 컴퓨터에 저장
-				String saveDirectory = application.getRealPath("resources/upload/product");
+				String saveDirectory = application.getRealPath("/resources/upload/product");
 				String renamedFilename = DrugstoreUtils.getRenamedFilename(upFile.getOriginalFilename());
-				File destFile = new File(saveDirectory, renamedFilename);
-				upFile.transferTo(destFile);
+				File destFilt = new File(saveDirectory, renamedFilename);
+				upFile.transferTo(destFilt);
 				
 				// b. DB저장을 위해 Attachment 객체 생성
 				ProductAttachment attach = new ProductAttachment(upFile.getOriginalFilename(), renamedFilename);
@@ -201,7 +188,7 @@ public class AdminController {
 		// db 저장
 		int result = adminService.insertProduct(product);
 		redirectAttr.addFlashAttribute("msg", "상품을 성공적으로 등록했습니다.");
-		return "/admin/product/productEnroll";
+		return "redirect:/admin/product/productEnroll.do";
 	}
 	
 	@GetMapping("getCategoryParentLevel.do")

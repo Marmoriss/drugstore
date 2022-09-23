@@ -281,7 +281,7 @@ img {
 
 .mypage-main__title-more {
   display: flex;
-  align-items: center;
+  align-items: flex-start;;
 }
 
 .mypage-main__title-more-text {

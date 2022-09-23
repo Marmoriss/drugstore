@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Category {
 
-	private int categoryId;
+	private String categoryId;
 	private int categoryLev;
 	private String categoryNm;
 	private String categoryDetailName;

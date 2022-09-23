@@ -1,0 +1,269 @@
+@charset "UTF-8";
+
+body, input, textarea, select, button, table {
+    font-size: 12px;
+    color: #333;
+}
+
+label {
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.product-recently__title{
+	width: 100%;
+	margin-bottom: 32px;
+}
+
+.product-recently__title .product-list__title{
+	color: #212121;
+    font-family: "SpoqaHanSans Neo";
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1;
+}
+
+.product-recently__top{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #222;
+}
+
+.product-recently__all-chk{
+	display: inline-block;
+	font-size: 0;
+}
+
+.product-recently__all-chk-box{
+	display: inline-block;
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 2px solid #ccc;
+    background: #ffffff;
+    margin-right: 11px;
+}
+
+.product-recently__all-chk-input:checked + .product-recently__all-chk-box{
+	border-color: #415865;
+    background: url(../images/check-solid.svg) no-repeat;
+    background-size: 11px 10px;
+    background-position: center center;
+}
+
+.product-recently__all-chk-title{
+    display: inline-block;
+    vertical-align: middle;
+    font-family: "SpoqaHanSans Neo";
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.product-recently__choice-delete{
+    display: inline-block;
+    border: 0;
+    background: none;
+    font-family: "SpoqaHanSans Neo";
+    font-size: 16px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #999;
+    border-bottom: 1px solid #999;
+    padding: 0;
+}
+
+.wish_wrap{
+	margin-top: 10px;
+    border-top: 1px solid #666;
+    border-bottom: 1px solid #aaa;
+    padding-top: 20px;
+}
+
+.product-recently__contents{
+	padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+.product-recently__list{
+	display: flex;
+    align-items: flex-start;
+}
+
+.wish_wrap > ul{
+	zoom: 1;
+}
+
+.product-recently__item{
+	width: 216px;
+	margin-top: 40px;
+}
+
+.wish_wrap > ul > li {
+	float: left;
+	width: 25%;
+	text-align: center;
+}
+
+.product-recently__img-wrap{
+    display: inline-block;
+    width: 100%;
+    height: 216px;
+    border-radius: 36px;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-recently__item-chk{
+	display: inline-block;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 24px;
+    height: 24px;
+}
+
+.hide{
+	display: none;
+}
+
+input[type='checkbox']{
+	width: 15px;
+    height: 15px;
+    vertical-align: middle !important;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.product-recently__item-chk-box{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    border: 2px solid #ccc;
+    background: #ffffff;
+}
+
+.product-recently__item-chk-input:checked + .product-recently__item-chk-box{
+	border: 2px solid #415865;
+    background: url(../images/check-solid.svg) no-repeat;
+    background-size: 15px 14px;
+    background-position: center center;
+}
+
+.product-recently__img-link{
+	display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.product-recently__img{
+	width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wish_wrap > ul > li > ul{
+	margin: 10px auto 20px;
+}
+
+.wish_wrap > ul > li > ul > li{
+	text-align: left;
+    padding-left: 10px;
+    line-height: 1.6;
+}
+
+.product_name{
+	color: #333;
+    letter-spacing: -1px;
+    line-height: 1.4;
+}
+
+.product-recently__pname{
+	width: 100%;
+    font-size: 16px;
+    line-height: 1.5;
+    min-height: 3em;
+    letter-spacing: -0.02em;
+    margin-top: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: keep-all;
+}
+
+.product-recently__price{
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    align-items: flex-end;
+    font-size: 0;
+}
+
+.product-recently__price-text{
+	font-family: "SpoqaHanSans Neo";
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+.product-recently__price-origin{
+	font-family: "SpoqaHanSans Neo";
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 12px;
+}
+
+.product-recently__btn-wrap{
+	width:100%;
+	margin-top: 20px;
+}
+
+.product-recently__btn{
+    display: inline-block;
+    width: 144px;
+    height: 44px;
+    border-radius: 4px;
+    border: 2px solid #415865;
+    background: none;
+    padding: 0;
+    font-family: "SpoqaHanSans Neo";
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #415865;
+}
+
+.product-recently__item ~ .product-recently__item {
+    margin-left: 24px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

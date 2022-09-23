@@ -81,14 +81,61 @@
 		where
 			p.pcode = #{pcode}
 	</select>
+	<select id="selectProductByCategoryId" resultMap="productCollectionMap">
+		select 
+			pname, 
+			price,
+			a.original_filename
+		from 
+			product p 
+		full outer join 
+			product_attachment a 
+				on p.pcode = a.pcode
+		where
+			category_id = #{category_id}
+	</select>
 	
+	<select id="selectSubscriptionAllProduct" resultMap="productCollectionMap">
+		select
+			p.*,
+			a.attach_no,
+			a.pcode,
+			a.original_filename,
+			a.renamed_filename,
+			a.created_at attach_created_at
+		from
+			product p
+				left join product_attachment a
+					on p.pcode = a.pcode
+		where
+			p.category_id = 350004
+	</select>
 	
+	<!-- 이동하 코드 시작 -->
 	
-	
-	
-	
-	
-	
+	<select  id="checkCategory" resultMap="cartCategory">
+  	select 
+  		* 
+  	from 
+  		cart c inner join product p 
+  			on c.pcode = p.pcode 
+  	where p.category_id = 350004 and
+  	<foreach collection="array" item="no" open="" close="" separator=" OR ">
+      cart_no = #{no}
+    </foreach> 
+  </select>
+  
+  
+  <resultMap type="product" id="cartCategory">
+  		<id column="pcode" property="pcode"/>
+  		<result column="category_id" property="categoryId"/>
+  	<collection property="cart" javaType="cart">
+	  	<id column="cart_no" property="cartNo"/>
+  		<result column="member_id" property="memberId"/>
+  	</collection>
+  </resultMap>
+
+
 	
 	
 	
