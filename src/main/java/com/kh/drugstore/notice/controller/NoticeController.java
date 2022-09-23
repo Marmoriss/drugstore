@@ -3,6 +3,8 @@ package com.kh.drugstore.notice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,8 +44,12 @@ public class NoticeController {
 	// 등록
 	@PostMapping("/noticeEnroll.do")
 	public String noticeEnroll(Notice notice, RedirectAttributes redirectAttr) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String writer = ((UserDetails) principal).getUsername();
+		notice.setWriter(writer);
 		int result = noticeService.insertNotice(notice);
 		redirectAttr.addFlashAttribute("msg", "게시글을 등록하였습니다.");
+		log.debug("principal = {}", principal);
 		return "redirect:/notice/noticeList.do";
 	}
 	

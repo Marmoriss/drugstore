@@ -16,14 +16,12 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/orders.css"/>
 
-
-
 <style>
 .navbar-brand {
 	margin-left: 250px;
 }
 #orderList {
-	margin-left: 500px;
+	margin-left: 350px;
 }
 
 #statusBtn {
@@ -37,7 +35,7 @@
 	height: 25px;
 }
 .dateList{
-	margin-left: 500px;
+	margin-left: 350px;
 	float:left;
 	font-size:17px;
 }
@@ -48,24 +46,27 @@
 <br />
 <br />
 
-<!-- datepicker 위젯 넣기 -->
-<div class="dateList">[날짜별 조회]</div> 
+<!-- datepicker 위젯 넣기 --> 
+<form action="${pageContext.request.contextPath}/admin/orders/findOrders.do" name="findFrm">
+<div class="dateList">[날짜별 주문 확인]</div>
+
 <div class="dates" style="float:left;">
 &nbsp;&nbsp;&nbsp;
 	<input type="text" class="datepicker" id="to" name="toDate" placeholder="시작일" />~
 	<input type="text" class="datepicker" id="from" name="fromDate" placeholder="종료일" />
+	<button style=""type="submit">조회</button>
 </div> 
+</form>
 <br />
 <br />
 <br />
 
-
-<table id="orderList" class="table w-50">
+<table id="orderList" class="table w-75">
 	  <thead>
 	    <tr>
 	      <th>주문번호</th>
+	      <th>상품명</th>
 	      <th>주문자</th>
-	      <th>결제금액</th>
 	      <th>결제일</th>
 	      <th>배송상태</th>
 	      <th>배송관리</th>
@@ -81,8 +82,8 @@
 			<c:forEach items="${list}" var="order">
 			<tr data-no="${order.orders.merchantUid}">
 				<td>${order.orders.merchantUid}</td>
-				<td>${order.member.memberId}</td>
-				<td><fmt:formatNumber value="${order.orders.totalPrice}" pattern="₩###,###,###"/></td>
+				<td>${order.product.pname}</td>
+				<td>${order.orders.memberId}</td>
 				<td>${order.orders.paidAt}</td>			
 				<td>${order.orders.status}</td>
 				

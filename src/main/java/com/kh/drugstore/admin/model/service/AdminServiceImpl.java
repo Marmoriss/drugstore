@@ -106,16 +106,6 @@ public class AdminServiceImpl implements AdminService {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return adminDao.userList(rowBounds);
 	}
-	
-	
-	/*
-	 * @Override public List<User> userFinder(Map<String, Object> param, String
-	 * searchType, String keyword) { int limit = (int) param.get("limit"); int
-	 * offset = ((int)param.get("cPage") - 1) * limit; RowBounds rowBounds = new
-	 * RowBounds(offset, limit); return
-	 * adminDao.userFinder(rowBounds,searchType,keyword); }
-	 */
-	
 
 	 @Override 
 	 public List<User> userFinder(Map<String, Object> param) { 
@@ -130,15 +120,7 @@ public class AdminServiceImpl implements AdminService {
 	 public int getTotalContentLike(Map<String, Object> param) {
 		 return adminDao.getTotalContentLike(param); 
 	 }
-	
-	
-	 
-	 /*
-	  * @Override public Integer getTotalContentLike(Map<String, Object> param,
-	  * String searchType, String keyword) { return
-	  * adminDao.getTotalContentLike(param,searchType,keyword); }
-	  */
-	 
+
 	@Override
 	public int getTotalContent() {
 		return adminDao.getTotalContent();
@@ -215,8 +197,10 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.serveyMcount();
 	}
 	
-
-	
+	@Override
+	public List<Orders> findOrders(Map<String, Object> param) {
+		return adminDao.findOrders(param);
+	}
 	
 	
 	

@@ -322,7 +322,6 @@ function execution_daum_address(){
 	    }).open();  	
 	
 }
-
 document.querySelector("#orderBtn").addEventListener('click', (e) => {
 	e.preventDefault(); // 제출방지
 	const frm = document.memberPayFrm;
@@ -351,8 +350,6 @@ document.querySelector("#orderBtn").addEventListener('click', (e) => {
 		}
 	});
 	
-
-
 	
 		if(finalPayment.value == 'cash') {
 			alert("주문이 완료되었습니다.");
@@ -420,7 +417,6 @@ document.querySelector("#orderBtn").addEventListener('click', (e) => {
 		   });
 		}
 	
-
 });
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
