@@ -62,7 +62,7 @@
         <div id="layout_config_body">
             <!-- 본문내용 시작 -->
             <div class="product-recently">
-            	form
+            	<form action=""></form>
             </div>
             <!-- // 본문내용 끝 -->
         </div>
