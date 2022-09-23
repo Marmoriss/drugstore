@@ -262,7 +262,7 @@ create table visit(
     v_date date
 );
 
--- 날짜별 판매량
+-- 날짜별 판매량(사용x)
 create table sales_by_date(
     no number,
     by_date date default sysdate,
@@ -404,8 +404,8 @@ select count(*) from member m left join servey s on (m.member_id = s.member_id) 
 
 select m.member_id,merchant_uid, imp_uid, receiptid, method, product_price, total_price,paid_at,status from member m right join orders o on
 		(m.member_id = o.member_id) order by paid_at desc;
+select * from notice;
 --태연 코드 끝--
-
 -- 주희 코드 --
 -- 카테고리 샘플 데이터
 select * from orders;
