@@ -4,11 +4,13 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+		xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
-
+		
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
@@ -23,8 +25,26 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- multipartResolver 등록 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="52428800"></beans:property> <!-- 50mb 한 건의 파일 요청시 첨부할 파일 등의 총 용량 -->
+		<beans:property name="maxUploadSizePerFile" value="10245760"></beans:property><!-- 10mb 한 건의 파일당 용량 -->
+		<beans:property name="maxInMemorySize" value="10240"></beans:property><!-- 10kb이상이면 임시파일을 생성해서 관리 -->
+	</beans:bean>
+	
 	<context:component-scan base-package="com.kh.drugstore" />
 	
+	<!-- #13.1 jackson message converter bean 등록 -->
+	<beans:bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+	
 	<aop:aspectj-autoproxy/>
+	
+	<websocket:message-broker application-destination-prefix="/app">
+		<websocket:stomp-endpoint path="/stomp">
+			<websocket:sockjs/>
+		</websocket:stomp-endpoint>
+		<websocket:simple-broker prefix="/topic, /app"/>
+	</websocket:message-broker>
+	
 	
 </beans:beans>

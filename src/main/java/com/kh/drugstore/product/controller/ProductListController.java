@@ -1,30 +1,32 @@
 package com.kh.drugstore.product.controller;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.drugstore.cart.model.dto.Cart;
+import com.kh.drugstore.cart.model.service.CartService;
 import com.kh.drugstore.common.DrugstoreUtils;
-import com.kh.drugstore.product.model.dto.BigCategory;
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
 
-//@Controller
+@Controller
 @Slf4j
 @RequestMapping("/product")
 public class ProductListController {
@@ -33,18 +35,18 @@ public class ProductListController {
 	ProductService productService;
 	
 	@Autowired
-	ServletContext application;
+	CartService cartService;
 	
-	@Autowired
-	ResourceLoader resourceLoader;
 	
-	@GetMapping("/productList.do")
-	public void productList(@RequestParam(defaultValue = "1") int cPage, Model model, HttpServletRequest request) {
+	// 페이징 메소드
+	public void pageInit(@RequestParam(defaultValue = "1") int cPage, Model model, HttpServletRequest request) {
 		//페이징 시작. 콘텐츠 영역
 		Map<String, Integer> param = new HashMap<>();
+		
 		int limit = 15;
 		param.put("cPage", cPage);
 		param.put("limit", limit);
+		
 		List<Product> list = productService.findAllProduct(param); //모든 제품찾기 
 		log.debug("list = {}", list);
 		model.addAttribute("list", list);
@@ -56,17 +58,60 @@ public class ProductListController {
 		String pagebar = DrugstoreUtils.getPagebar(cPage, limit, totalContent, url);
 		model.addAttribute("pagebar", pagebar);
 		
+		log.debug("list = {}", list);
+		
 	}
 	
-	@GetMapping("/categories")
-	public List<BigCategory.BigCategoryResponse> bigCategoryList() {
-		//대분류 카테고리 조회
-		Class c = BigCategory.class;
-		Object[] keys = c.getEnumConstants();
-		return Arrays.stream(keys).map((key)
-						-> new BigCategory.BigCategoryResponse(key.toString(), BigCategory.valueOf(key.toString())))
-											.collect(Collectors.toList()); //대분류 카테고리의 대분류카테고리응답 메소드의 key값의 문자열 리턴, 대분류카테고리의 리턴받은 key문자열값을 enum으로 갖고옴.  
+	// 카테고리 id로 상품 리스트 조회
+	@GetMapping("/productList.do")
+	public void productListByCategory(@RequestParam int categoryId, Model model) {
+		log.debug("categoryId = {}", categoryId);
+		List<Product> list = productService.selectProductByCategoryId(categoryId);
+		
+		log.debug("list = {}", list);
+		model.addAttribute("list", list);
 	}
+	
+	// 주희 코드 시작
+	// 상품 코드로 상세페이지 조회
+	@GetMapping("/productDetail.do")
+	public void productDetail(@RequestParam int pcode, Model model) {
+		log.debug("pcode = {}", pcode);
+		Product product = productService.selectOneProductCollection(pcode);
+		log.debug("product = {}", product);
+		model.addAttribute("product", product);
+		
+	}
+	
+	
+	@GetMapping("/autocompletePname.do")
+	public ResponseEntity<?> autocompletePname(@RequestParam String term){
+		List<String> resultList = productService.autocompletePname(term);
+		log.debug("resultList = {}", resultList);
+		
+		return ResponseEntity.status(HttpStatus.OK)
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+				.body(resultList);
+	}
+	
+	
+	@PostMapping("/checkCategory.do")
+	public ResponseEntity<?> checkCategory(@RequestParam int[] checkCategoryByCartNo){
+		// 카트 번호로 pcode가져오기
+		List<Cart> carts = cartService.getPcode(checkCategoryByCartNo);
+		log.debug("result = {}",carts);
+		return ResponseEntity.status(HttpStatus.OK).body(carts);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

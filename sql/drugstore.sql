@@ -30,11 +30,12 @@ create table member(
 
 -- 카테고리
 create table category(
-    big_code varchar2(50),
-    small_code number,
-    big_category_name varchar(10) not null,
-    small_category_name varchar(10) not null,
-    constraint pk_category primary key(big_code, small_code)
+    category_id number, -- 카테고리 코드
+    category_lev number, -- 카테고리 레벨
+    category_nm varchar2(10), -- 카테고리 이름("대분류", "소분류")
+    category_detail_name varchar2(255), -- 카테고리 이름("성분별", "비타민", "부위별", "눈")
+    category_parent_lev number,
+    constraint pk_category_id primary key(category_id)
 );
 
 -- 상품
@@ -54,10 +55,12 @@ create table product(
     distb_pd varchar2(3000),
     sub_yn char(1) default 'N',
     base_standard varchar2(3000),
+    sale_status char(1) default 'Y',
     constraint pk_product_pcode primary key(pcode),
     constraint fk_product_category_code foreign key(big_code, small_code) references category(big_code, small_code) on delete cascade,
     constraint uq_product_pname unique(pname),
-    constraint ck_product_sub_yn check(sub_yn in ('Y', 'N'))
+    constraint ck_product_sub_yn check(sub_yn in ('Y', 'N')),
+    constraint ck_product_sale_status check(sale_status in ('Y', 'N'))
 );
 
 -- 입출고
@@ -127,7 +130,7 @@ create table authority(
 );
 
 -- 1:1 문의
-create table inquiry(
+create table question(
     no number,
     comment_ref number,
     writer varchar2(50) not null,
@@ -137,20 +140,25 @@ create table inquiry(
     title varchar2(1000) not null,
     comment_level number default 1,
     category varchar2(50),
-    constraint pk_inquiry_no primary key(no),
-    constraint fk_inquiry_comment_ref foreign key(comment_ref) references inquiry(no) on delete cascade,
-    constraint fk_inquiry_writer foreign key(writer) references member(member_id) on delete cascade
+    constraint pk_question_no primary key(no),
+    constraint fk_question_comment_ref foreign key(comment_ref) references question(no) on delete cascade,
+    constraint fk_question_writer foreign key(writer) references member(member_id) on delete cascade
 );
 
 -- 섭취 체크
 create table intake_check(
     no number,
     member_id varchar2(50),
-    check_list varchar2(200),
+    pcode number,
+    intake_day varchar2(10), -- 섭취 요일 월요일 - 일요일
+    alarm_time number, -- 알림 시간 20, 16
+    intake_yn char(1) default 'N',
     created_at date default sysdate,
-    completed_at date,
-    constraint pk_intake_check primary key(no),
-    constraint fk_intake_check foreign key(member_id) references member(member_id) on delete cascade
+    deleted_at date,
+    constraint pk_intake_check_no primary key(no),
+    constraint fk_intake_check_member_id foreign key(member_id) references member(member_id) on delete cascade,
+    constraint fk_intake_check_pcode foreign key(pcode) references product(pcode) on delete cascade,
+    constraint ck_intake_check_intake_yn check(intake_yn in ('Y', 'N'))
 );
 
 -- 리뷰
@@ -241,7 +249,7 @@ create table notice(
     constraint pk_notice_no primary key(no)
 );
 
--- 날짜별 가입자 수
+-- 날짜별 가입자 수(사용x)
 create table user_by_date(
     no number,
     by_date date default sysdate,
@@ -249,15 +257,12 @@ create table user_by_date(
     constraint pk_user_by_date_no primary key(no)
 );
 
--- 날짜별 방문자 수
-create table visitor_by_date(
-    no number,
-    by_date date default sysdate,
-    by_visitor number default 0,
-    constraint pk_visitor_by_date_no primary key(no)
+-- 날짜별 방문자 수(수정)
+create table visit(
+    v_date date
 );
 
--- 날짜별 판매량
+-- 날짜별 판매량(사용x)
 create table sales_by_date(
     no number,
     by_date date default sysdate,
@@ -265,7 +270,7 @@ create table sales_by_date(
     constraint pk_sales_by_date_no primary key(no)
 );
 
--- 주문 / 결제
+-- 주문 / 결제(수정)
 create table orders(
     merchant_uid number,
     member_id varchar2(50),
@@ -273,7 +278,7 @@ create table orders(
     receiptId varchar2(100) not null,
     method varchar2(10) not null,
     name varchar2(50),
-    status varchar2(10),
+    status varchar2(20),
     created_at date default sysdate,
     paid_at date,
     failed_at date,
@@ -350,7 +355,7 @@ create sequence seq_faq_no;
 create sequence seq_notice_no;
 create sequence seq_chat_log_no;
 create sequence seq_servey_no;
-create sequence seq_inquiry_no;
+create sequence seq_question_no;
 create sequence seq_intake_check_no;
 create sequence seq_gift_no;
 create sequence seq_sub_no;
@@ -384,6 +389,81 @@ select * from product;
 -- 공지사항 샘플 데이터
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다', '배송관련입니다', default); 
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다2', '배송관련입니다2', default); 
-select * from notice order by no desc;
+insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다3', '배송관련입니다3', default); 
+insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다4', '배송관련입니다4', default); 
+--alter table notice add constraint fk_notice_writer foreign key(writer) references member(member_id) on delete cascade;
+--alter table orders add status varchar2(20) default '배송준비중';
+desc orders;
+insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price,paid_at,status) values(524589565, 'sinsa', '1', '김태연','post', 15000, 30000,to_date('22/07/12','RR/MM/DD'),default); 
+insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price,paid_at,status) values(125478569, 'cat', '2', '김서연','post', 20000, 20000,to_date('22/05/10','RR/MM/DD'),default); 
+insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price,paid_at,status) values(425896325, 'dlehdgk', '3', '김지구','post', 20000, 25000,to_date('22/01/10','RR/MM/DD'),default); 
+insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price,paid_at,status) values(548945484, 'potato', '4', '김감자','post', 20000, 25000,to_date('22/01/10','RR/MM/DD'),default); 
+insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price,paid_at,status) values(201547995, 'tree', '5', '이모씨','post', 20000, 25000,to_date('22/01/10','RR/MM/DD'),default); 
 
+select count(*) from member m left join servey s on (m.member_id = s.member_id) where s.gender='M';
+
+select m.member_id,merchant_uid, imp_uid, receiptid, method, product_price, total_price,paid_at,status from member m right join orders o on
+		(m.member_id = o.member_id) order by paid_at desc;
+select * from notice;
 --태연 코드 끝--
+-- 주희 코드 --
+-- 카테고리 샘플 데이터
+select * from orders;
+select * from category;
+
+--insert into category
+-- values(350001, 1, '대분류', '성분', 0);
+-- values(350002, 1, '대분류', '성별', 0);
+-- values(350003, 1, '대분류', '신체', 0);
+-- values(350004, 1, '대분류', '정기구독', 0);
+-- values(350005, 2, '소분류', '비타민', 350001);
+-- values(350006, 2, '소분류', '철분', 350001);
+-- values(350007, 2, '소분류', '오메가3', 350001);
+-- values(350008, 2, '소분류', '칼슘', 350001);
+-- values(350009, 2, '소분류', '콜라겐', 350001);
+-- values(350010, 2, '소분류', '여성', 350002);
+-- values(350011, 2, '소분류', '남성', 350002);
+-- values(350012, 2, '소분류', '눈', 350003);
+-- values(350013, 2, '소분류', '소화기관', 350003);
+-- values(350014, 2, '소분류', '피로감', 350003);
+-- values(350015, 2, '소분류', '면역', 350003);
+-- values(350016, 2, '소분류', '심혈관계', 350003);
+-- values(350017, 2, '소분류', '정기구독', 350004);
+
+select * from member;
+select * from authority;
+select * from product where pcode = 45 order by pcode;
+select * from product p
+    left join product_attachment a
+        on p.pcode = a.pcode;
+select * from product_attachment;
+select
+			p.*,
+			a.*
+		from
+			product p
+				left join product_attachment a
+					on p.pcode = a.pcode
+		where
+			p.pcode = 45;
+
+-- product 테이블에 상품 등록일, 최종 수정일 컬럼 추가
+alter table product add (
+    discount number default 0
+);
+
+--  product 테이블 sale_status 컬럼 제약조건 변경
+alter table product add constraint ck_product_sale_status check(sale_status in ('Y', 'N', 'S'));
+
+alter table product modify(sale_status varchar2(7));
+select to_date('2022/09/08', 'yyyy/mm/dd') from dual;
+select * from product where created_at between to_date('2022/09/01', 'yyyy/mm/dd') and to_date('2022/09/08', 'yyyy/mm/dd');
+select * from product where pname like '%' || '비타' || '%' ;
+
+-- 주문/결제 테이블 상품가격, 결제 요청일, 결제 실패일 삭제
+alter table orders drop column product_price;
+alter table orders drop column created_at;
+alter table orders drop column failed_at;
+
+select i.*, p.pname from intake_check i left join product p on i.pcode = p.pcode where member_id = 'potato';
+select * from qna;

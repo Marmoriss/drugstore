@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -26,6 +26,15 @@
 <!-- 폰트어썸 -->
 <script src="https://kit.fontawesome.com/34c760bbb4.js" crossorigin="anonymous"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js" integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<sec:authorize access="isAuthenticated()">
+	<script>
+	const memberId = "<sec:authentication property='principal.username'/>";
+	</script>
+	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
+</sec:authorize>
 </head>
 <body>
 
@@ -60,7 +69,7 @@
 							</h2>
 						</div>
 						<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-							<div class="card-body text-center"><a href="">회원 조회</a></div>
+							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/user/userList.do">회원 조회</a></div>
 						</div>
 					</div>
 					<div class="card">
@@ -85,11 +94,10 @@
 							</h2>
 						</div>
 						<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-							<div class="card-body text-center">주문 내역 조회</div>
-							<div class="card-body text-center">배송 현황 조회</div>
-							<div class="card-body text-center">취소 관리</div>
-							<div class="card-body text-center">반품 관리</div>
-							<div class="card-body text-center">교환 관리</div>
+							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/orders/ordersList.do">주문&배송 관리</a></div>
+							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/orders/ordersCancelList.do">취소 관리</a></div>
+							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/orders/ordersReturnList.do">반품 관리</a></div>
+							<div class="card-body text-center">환불 내역 조회</div>
 						</div>
 					</div>
 					<div class="card">
@@ -115,9 +123,8 @@
 							</h2>
 						</div>
 						<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
-							<div class="card-body text-center">날짜별 가입자 수</div>
-							<div class="card-body text-center">날짜별 방문자 수</div>
-							<div class="card-body text-center">날짜별 수익 추이</div>
+							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/statis/enrollStatis.do">회원가입 수</a></div>
+							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/statis/visitStatis.do">오늘/전체 방문자 수</a></div>
 						</div>
 					</div>
 					<div class="card">
@@ -129,7 +136,7 @@
 							</h2>
 						</div>
 						<div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
-							<div class="card-body text-center">1:1 채팅</div>
+							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/chat/chatList.do">1:1 채팅</a></div>
 							<div class="card-body text-center">알림</div>
 						</div>
 					</div>
@@ -139,15 +146,3 @@
 		</div>
 		<!-- /좌측 네비 메뉴 끝 -->
 		
-
-
-
-
-
-
-
-
-
-
-
-

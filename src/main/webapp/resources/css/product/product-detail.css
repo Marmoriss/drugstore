@@ -1,0 +1,1513 @@
+@charset "UTF-8";
+
+/* 전체 적용 */
+body, input, textarea, select, button, table {
+	font-size: 12px;
+	color: #333;
+}
+
+div {
+	display: block;
+}
+
+* {
+	color: #222;
+	box-sizing: border-box;
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
+}
+
+img, fieldset {
+	border: 0;
+	vertical-align: middle;
+}
+
+img {
+	max-width: 100%;
+}
+
+button {
+	cursor: pointer;
+	border: none;
+}
+
+input, select, textarea, button, ul, oi, li, dl, dt, dd {
+	vertical-align: middle;
+}
+
+a {
+	outline: none;
+}
+
+ul, ol {
+	list-style: none;
+}
+
+table {
+	margin: 0 auto;
+}
+
+th, td {
+	word-wrap: break-word;
+	word-break: break-all;
+	vertical-align: middle;
+	line-height: 1.4;
+}
+
+em{
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* css시작 */
+#layout-config {
+	width: 1224px;
+	margin: auto;
+	padding-top: 350px;
+}
+
+#layout-config-full {
+	min-height: 500px;
+	background-color: #ffff;
+	width: 100%;
+	float: left;
+}
+
+/* 상품 사진 + 가격 등 정보 파트 */
+#product_view .product-wrap {
+	display: table;
+	margin-bottom: 50px;
+	width: 100%;
+}
+
+#product_view .product-view__wrapper {
+	margin-bottom: 0;
+	display: flex;
+	align-items: flex-start;
+	margin-top: 50px;
+}
+
+#product_view .product-wrap>dt {
+	display: table-cell;
+	width: 50%;
+	vertical-align: top;
+}
+
+#product_view .product-wrap .product-view__thumb-wrap {
+	display: inline-block;
+	width: 560px;
+	flex: 0 0 auto;
+}
+
+.product-view__thumb {
+	display: inline-block;
+	width: 100%;
+	font-size: 0;
+}
+
+#product_view .product-view__thumb-img-wrap {
+	width: 560px;
+	border: 0;
+	margin-bottom: 39px;
+}
+
+.product-view__thumb-img {
+	width: 100%;
+	height: 560px;
+	object-fit: cover;
+}
+
+/* 상품 가격 정보 */
+#product_view .product_wrap>dd {
+	display: table-cell;
+	width: 50%;
+	vertical-align: top;
+}
+
+.product-view__info {
+	display: inline-block;
+	width: 100%;
+	flex: 0 1 auto;
+	padding: 7px 0 0 64px;
+}
+
+#product_view .product_wrap .product-view__info-contents {
+	padding: 0;
+	border: 0;
+	line-height: 1;
+}
+
+/* 상품명 + 공유하기 + 찜 */
+.product-view__info-top {
+	width: 100%;
+	position: relative;
+	padding-right: 115px;
+}
+
+.product-view__pname {
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 24px;
+	font-weight: bold;
+	letter-spacing: -0.02em;
+	line-height: normal;
+}
+
+.product-view__top-btn {
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: flex;
+	align-items: center;
+}
+
+.product-view__share {
+	display: inline-block;
+	width: 34px;
+	height: 40px;
+	font-size: 0;
+	background: url(../images/share-nodes-solid.svg) no-repeat;
+	background-size: cover;
+	margin-right: 15px;
+}
+
+.product-view__whish {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	font-size: 0;
+	background: url(../images/heart-regular.svg) no-repeat;
+	background-size: cover;
+}
+
+.product-view__share+.product-view__wish {
+	margin-left: 37px;
+}
+
+.product_spec_table dl {
+	display: table;
+	width: 100%;
+}
+
+.product_spec_table dd {
+	display: table-cell;
+	padding: 1px 0;
+	text-align: left;
+	color: #333;
+}
+
+.product-view__price-wrap .product-view__price-contents {
+	padding: 0;
+}
+
+.product-view__price {
+	width: 100%;
+	margin-top: 30px;
+	font-size: 0;
+}
+
+.product_spec_table dd .price_wrap {
+	position: relative;
+}
+
+.product-view__price-sale {
+	font-family: 'SpoqaHanSans Neo';
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 24px;
+	font-weight: 24px;
+	font-weight: bold;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	color: #7a9eb1;
+	margin-right: 18px;
+	margin-bottom: 0;
+}
+
+.product_spec_table dd strong {
+	text-align: left;
+	color: #858585;
+	font-size: 11px;
+	letter-spacing: 0px;
+}
+
+.product_spec_table .sell_price {
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.product-view__price-wrap .product-view__price-selling {
+	font-family: 'SpoqaHanSans Neo';
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	color: #222;
+}
+
+.product_spec_table .consumer_wrap {
+	margin-bottom: 5px;
+}
+
+.product-view__price-wrap .product-view__price-consumer-wrap {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 0 0 21px;
+}
+
+.product_spec_table .consumer{
+	font-size: 14px;
+	color: #888;
+	letter-spacing: -1px;
+	text-decoration: line-through;
+}
+
+.product-view__price-wrap .product-view__price-consumer{
+	font-family: "SpoqaHanSans Neo";
+	font-size: 16px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	color: #555;
+}
+
+.product-view__info .product-view__additions {
+	width: 100%;
+	font-size: 0;
+	margin-top: 36px;
+	display: flex;
+	align-items: flex-start;
+}
+
+.product-view__additions ~ .product-view__additions{
+	margin-top: 19px;
+}
+
+.product_spec_table dt {
+	display: table-cell;
+	padding: 2px 5px 0;
+	width: 20%;
+	text-align: left;
+	vertical-align: middle;
+	color: #666;
+	font-weight: normal;
+}
+
+.product-view__additions .product-view__additions-title {
+	display: inline-block;
+	vertical-align: middle;
+	width: 115px;
+	font-size: 16px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	color: #555;
+	padding: 0;
+	flex: 0 0 auto;
+}
+
+.product_spec_table dd {
+	display: table-cell;
+	padding: 1px 0;
+	text-align: left;
+	color: #333;
+}
+
+.product-view__additions .product-view__additions-contents {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 16px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	padding: 0;
+	flex: 0 1 auto;
+}
+
+/* 수량 선택 파트 */
+.product-view__option-wrap {
+	margin-top: 21px;
+}
+
+.product-option {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: flex-end;
+}
+
+.product-option .counter{
+	-webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 22px 0 2px 0;
+    display: flex;
+	align-items: center;
+}
+
+.product-option .counter .btn-minus, .product-option .counter .btn-plus{
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    border: 1px solid #dfdfdf;
+    outline: none;
+    -webkit-box-shadow: 2px 2px 0 0 rgb(0 0 0 / 6%);
+    box-shadow: 2px 2px 0 0 rgb(0 0 0 / 6%);
+    text-align: center;
+    padding: 0;
+    border-radius: 50%;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.icon{
+	display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    vertical-align: bottom;
+}
+
+.icon.icon-product-minus {
+    background-image: url(../images/minus-solid.svg);
+    background-size: 18px 18px;
+    width: 18px;
+    height: 18px;
+    background-size: cover;
+    margin: 5px;
+}
+
+.counter > input{
+    width: 50px;
+    height: 50px;
+    border: 0;
+    vertical-align: top;
+    color: #333333;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 34px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.icon.icon-product-plus {
+    background-image: url(../images/plus-solid.svg);
+    background-size: 18px 18px;
+    width: 18px;
+    height: 18px;
+    background-size: cover;
+    margin: 5px;
+}
+
+.total_price {
+	display: table;
+	width: 100%;
+	padding-top: 10px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.product-option__total {
+	display: inline-block;
+	width: auto;
+	padding: 0;
+	font-size: 0;
+	margin: 15px 0 0 auto;
+}
+
+.pd0 {
+	padding: 0px !important;
+}
+
+.total_price li.th {
+	display: table-cell;
+	padding-left: 5px;
+}
+
+#select_option_lay .product-option__total .product-option__total-title {
+	font-family: 'SpoqaHanSans Neo';
+	display: inline-block;
+	vertical-align: bottom;
+	font-size: 20px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	margin-right: 21px;
+	font-weight: normal;
+}
+
+.total_price li.total_product_price {
+	display: table-cell;
+	padding-right: 5px;
+	text-align: right;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+#select_option_lay .product-option__total .product-option__total-price-wrap
+	{
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+#select_option_lay .product-option__total .product-option__total-price {
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	color: #7a9eb1;
+	display: inline-block;
+	position: relative;
+}
+
+.total_price li.total_product_price #total_product_prce, .total_price #total_product_price
+	{
+	font-size: 24px;
+	letter-spacing: -1px;
+}
+
+#select_option_lay .product-option__total .product-option__total-price-text
+	{
+	font-family: 'SpoqaHanSans Neo';
+	display: inline-block;
+	font-size: 36px;
+	letter-spacing: inherit;
+	line-height: 1;
+	color: inherit;
+}
+
+/* 장바구니, 바로 구매 버튼*/
+.btn_wrap {
+	margin-top: 30px;
+	text-align: center;
+}
+
+.product-view__btn-wrap {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+#product_view .product_wrap .btn_wrap {
+	padding-top: 0px;
+}
+
+#product_view .product_wrap .btn_wrap .btn_chg.medium, #product_view .product_wrap .btn_wrap .btn_gray.medium,
+	#product_view .product_wrap .btn_wrap .btn_sch.medium, #product_view .product_wrap .btn_wrap .btn_move.medium
+	{
+	margin: 2px 0;
+	width: 24.5%;
+	min-width: 120px;
+}
+
+#product_view
+  .product-view__wrapper
+  .product-view__info
+  .product-view__btn-wrap
+  .product-view__btn {
+	width: 100%;
+	height: 57px;
+	border: 2px solid #415865;
+	line-height: 53px;
+	text-align: center;
+	background: #ffff;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 20px;
+	font-weight: 500 !important;
+	letter-spacing: -0.02em;
+	color: #415865;
+	margin: 0 0 0 24px;
+	padding: 0;
+	flex: 0 1 auto;
+	border-radius: 8px;
+}
+
+#product_view
+  .product-view__wrapper
+  .product-view__info
+  .product-view__btn-wrap
+  .product-view__btn:first-child {
+	margin-left: 0;
+}
+
+#product_view
+  .product-view__wrapper
+  .product-view__info
+  .product-view__btn-wrap
+  .product-view__btn-red-bg {
+	background: #415865;
+	color: #ffff;
+}
+
+/* 상품 정보 끝 */
+/* 상세 페이지 시작 */
+/* 메뉴 시작*/
+.product-view__detail {
+	max-width: 1016px;
+	width: 100%;
+	padding-top: 62px;
+	margin: 0 auto;
+}
+
+.product_tabs {
+	position: relative;
+}
+
+.product-view__detail-tab-wrap {
+	width: 100vw;
+	margin-left: calc(-50vw + 50%);
+	background: #ffff;
+	box-shadow: 0px 8px 8px 0 rgb(0 0 0/ 15%);
+}
+
+.detail_tab {
+	margin-bottom: 20px;
+	zoom: 1;
+}
+
+.product_tabs>ul {
+	width: 80%;
+	margin: 0 auto;
+	padding-top: 60px;
+}
+
+.product-view__detail-tab-wrap>.product-view__detial-tab-list {
+	display: flex;
+	max-width: 1016px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0;
+	font-size: 0;
+	position: relative;
+	background: #ffff;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.detail_tab li {
+	float: left;
+	width: 25%;
+	height: 43px;
+	overflow: hidden;
+}
+
+.product-view__detial-tab-list .product-view__detail-tab-item {
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(100%/ 3);
+	height: auto;
+	float: none;
+	overflow: unset;
+}
+
+.detail_tab li a {
+	margin-top: 1px;
+	display: block;
+	border-top: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #666;
+	border-left: 0;
+	background: #ececec;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 14px;
+	color: #999;
+	text-decoration: none;
+}
+
+.detail_tab li a, .detail_tab2 li a {
+	border-top-color: #f1f1f1;
+	border-right-color: #f1f1f1;
+	background: #fafafa;
+	font-size: 13px;
+}
+
+.detail_tab li:first-child a {
+	border-left: 1px solid #222;
+}
+
+.product-view__detial-tab-list
+  .product-view__detail-tab-item
+  .product-view__detail-tab-title {
+	display: inline-block;
+	width: 100%;
+	height: auto;
+	border: 0;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 20px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	color: #222;
+	padding: 18px 0;
+	margin: 0;
+	text-align: center;
+	background: none;
+	position: relative;
+}
+
+.product-view__detail-tab-list
+  .product-view__detail-tab-item
+  .product-view__detail-tab-title--active {
+	color: #222;
+	font-weight: bold;
+}
+
+.relative {
+	position: relative !important;
+}
+
+.product-view__review-wrap {
+	display: inline-block;
+	padding-left: 19px;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 20px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+}
+
+.product-view__review-wrap--grade {
+	position: relative;
+	padding-right: 20px;
+}
+
+.product-view__review-img-wrap {
+	display: inline-block;
+	width: 17px;
+	height: 17px;
+}
+
+.product-view__review-grade {
+	display: inline-block;
+	font-family: 'Spoqa Han Sans';
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	margin: 0 7px;
+}
+
+.product-view__review-wrap {
+	display: inline-block;
+	padding-left: 19px;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 20px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+}
+/* // 메뉴 탭*/
+.product_description {
+	padding: 10px 0 20px 0;
+	min-height: 300px;
+}
+
+.product-view__description-contents {
+	padding: 0;
+	margin: 0;
+	margin-top: 20px;
+}
+
+.product-view__guide {
+	margin: 120px 0 88px;
+}
+
+.hide {
+	display: none;
+}
+
+.product-view__detail-title {
+	width: 100%;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 32px;
+	font-weight: bold;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	padding: 99px 0 66px;
+}
+
+.product-view__guide-item {
+	border-top: 2px solid #222;
+}
+
+.product-view__guide-item-header {
+	width: 100%;
+	padding: 34px 14px 32px;
+	position: relative;
+	cursor: pointer;
+}
+
+.product-view__guide-item-title {
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 1;
+	letter-spacing: -0.02em;
+}
+
+.product-view__guide-item-arrow {
+	position: absolute;
+	right: 12px;
+	top: 40%;
+	transform: translateY(-50%);
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: url(../images/angle-down-solid.svg) no-repeat;
+	background-size: cover;
+}
+
+.product-view__guide-item-arrow--active {
+	transform: rotateZ(180deg);
+}
+
+.product-view__guide-contents {
+	display: none;
+	padding: 11px 14px 40px;
+}
+
+.product-view__guide-contents--active {
+	display: block;
+}
+
+.product-view__guide-contents-list {
+	width: 100%;
+}
+
+.product-view__guide-contents-item {
+	width: 100%;
+	display: flex;
+	align-items: flex-start;
+}
+
+.product-view__guide-contents-title {
+	width: 151px;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 1.5;
+	letter-spacing: -0.02em;
+	color: #212121;
+	flex: 0 0 auto;
+}
+
+.product-view__guide-contents-value {
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 16px;
+	line-height: 1.5;
+	letter-spacing: -0.02em;
+	color: #212121;
+	flex: 0 1 auto;
+}
+
+.product-view__guide-item {
+	border-top: 2px solid #222;
+}
+
+.product-view__guide-item ~ .product-view__guide-item {
+	border-top: 2px solid #ddd;
+}
+
+.product-view__guide-contents-item ~ .product-view__guide-contents-item
+	{
+	margin-top: 23px;
+}
+
+/* // 상품 상세 */
+/* 리뷰 시작 */
+#product_review{
+	display: none;
+}
+
+.product-view__review-board {
+	margin-bottom: 59px;
+	width: 1016px;
+}
+
+.layout_body {
+	position: relative;
+	overflow: hidden;
+}
+
+.layout_body, #layout-config {
+	zoom: 1;
+}
+
+.product-view__detail-title {
+	width: 100%;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 32px;
+	font-weight: bold;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	padding: 99px 0 66px;
+}
+
+.pd0 {
+	padding: 0 !important;
+}
+
+.bbslist {
+	margin: auto;
+	padding: 0 0 30px 0;
+}
+
+.bbsbtn_wrap {
+	margin-bottom: 10px;
+	zoom: 1;
+}
+
+.product-review__top {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	padding-bottom: 19px;
+	margin-bottom: 0px;
+	border-bottom: 2px solid #222;
+}
+
+.bbsbtn_wrap>li {
+	float: left;
+	width: 20%;
+	text-align: right;
+}
+
+.bbsbtn_wrap>li:first-child {
+	float: left;
+	width: 80%;
+	text-align: left;
+}
+
+.boardlayout .product-review__top .product-review__top-item {
+	float: none;
+	width: auto;
+	font-size: 0;
+}
+
+.btn_chg, .btn_sch, .bbs_btn.btn_sch, .btn_gray, .btn_trade, .btn_move {
+	display: inline-block;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 5px 10px;
+	min-width: 80px;
+	line-height: 1;
+	text-align: center;
+	font-size: 12px;
+	letter-spacing: -1px;
+	cursor: pointer;
+	vertical-align: middle;
+	transition: all linear 0.5s;
+}
+
+.btn_chg {
+	border: 1px solid #6a83c8;
+	background: #778ece;
+	color: #fff;
+}
+
+.btn_chg, .btn_sch, .bbs_btn.btn_sch, .btn_gray, .btn_move {
+	font-weight: normal !important;
+	letter-spacing: 0;
+}
+
+.product-review__write-btn {
+	display: inline-block;
+	vertical-align: middle;
+	width: 120px;
+	height: 44px;
+	border-radius: 4px;
+	background: #415865;
+	text-align: center;
+	line-height: 44px;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 20px;
+	font-weight: 500 !important;
+	letter-spacing: -0.02em;
+	color: #ffffff;
+	border: 0;
+	padding: 0;
+	margin-left: 20px;
+}
+
+.product-review__type-list {
+	display: inline-block;
+	font-size: 0;
+}
+
+.product-review__type-item {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.product-review__type-item ~ .product-review__type-item {
+	border-left: 2px solid #ddd;
+}
+
+.product-review__type-title {
+	display: inline-block;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 16px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	color: #999;
+	padding: 0 12px;
+	background: none;
+}
+
+.product-review__type-title--active {
+	color: #222;
+	font-weight: bold;
+}
+
+table.bbslist_table_style {
+	width: 100%;
+	border-collapse: separate;
+	border-top: 1px solid #666;
+	border-bottom: 1px solid #aaa;
+}
+
+.bbslist .product-review__table {
+	border-top: 0;
+}
+
+.bbslist tbody .datalist {
+	padding: 20px 10px;
+}
+
+.bbslist .product-review__table .product-review__item-header {
+	padding: 0;
+}
+
+table.bbslist_table_style>tbody>tr>td {
+	border-top: 1px solid #ddd;
+	padding: 10px;
+	text-align: center;
+}
+
+table.bbslist_table_style>tbody>tr:first-child>td {
+	border-top: 0;
+}
+
+table.bbslist_table_style>tbody>tr>td:first-child {
+	border-left: 0;
+}
+
+.bbslist .sbj {
+	text-align: left;
+	letter-spacing: 0px;
+	overflow: hidden;
+}
+
+.bbslist .product-review__table .product-review__item-header-contents {
+	padding: 35px 17px 0 12px;
+	border-top: 2px solid #ddd;
+}
+
+.hand, .pointer {
+	cursor: pointer !important;
+}
+
+.bbslist .product-review__table .product-review__item-header-box.boad_view_btn
+	{
+	padding-bottom: 36px;
+}
+
+.product-review__item-header-top {
+	width: 100%;
+	font-size: 0;
+	margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.product-review__star {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 0;
+}
+
+.product-review__writer {
+	display: inline-block;
+	vertical-align: middle;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 12px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	margin-left: 12px;
+}
+
+.product-review__arrow-btn {
+	width: 16px;
+}
+
+.product-review__arrow-btn--active {
+	transform: rotate(180deg);
+}
+
+.productviewbox {
+	border-top: #efefef 0px solid;
+}
+
+.product-review__view-box {
+	display: flex;
+	align-items: center;
+}
+
+.productviewbox .pic {
+	float: left;
+	margin-right: 10px;
+	width: 60px;
+	vertical-align: top;
+	border: 1px solid #dedede;
+}
+
+.product-review .product-review__img-wrap {
+	float: none;
+	margin-right: 24px;
+	width: 80px;
+	height: 80px;
+	border: 0;
+	flex: 0 0 auto;
+	border-radius: 16px;
+	overflow: hidden;
+}
+
+.product-review .product-review__img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	float: none;
+	margin: 0;
+}
+
+.productviewbox .pic img {
+	border: 0px solid #dedede;
+}
+
+.productviewbox .info {
+	line-height: 140%;
+	float: left;
+}
+
+.bbslist .product-review__subject-wrap {
+	line-height: 1;
+	float: none;
+	width: 100%;
+	flex: 0 1 auto;
+}
+
+.productviewbox .info .board_cont, .board-cont {
+	color: #6d6d6d;
+	word-wrap: break-word;
+}
+
+.bbslist .product-review__subject-wrap .product-review__subject {
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 16px;
+	line-height: 1.75;
+	letter-spacing: -0.02em;
+	color: #222;
+}
+
+.product-review__date {
+	position: absolute;
+	right: 17px;
+	bottom: 36px;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 12px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	color: #999;
+}
+
+.bbslist .product-review__table .product-review__item-viewer-contents-wrap
+	{
+	border: 0;
+}
+
+.product-review_viewer-date {
+	position: absolute;
+	right: 17px;
+	top: 0;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 12px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	color: #999;
+}
+
+.product-review__viewer-img-list {
+	display: flex;
+	align-items: center;
+	padding: 0 12px;
+}
+
+.product-review__viewer-img-wrap {
+	width: 160px;
+	height: 160px;
+}
+
+.product-review__viewer-img {
+	width: 100%;
+	height: 100%;
+	border-radius: 24px;
+	object-fit: cover;
+}
+
+.product-review__viewer-img-list+.product-review__viewer {
+	margin-top: 24px;
+}
+
+.product-review__viewer {
+	display: block;
+}
+
+.bbsview {
+	margin: auto;
+	padding: 0;
+}
+
+.bbsview .viewbox .content {
+	padding: 10px 0;
+	line-height: 160%;
+	min-height: 200px;
+}
+
+.boardlayout .bbsview .product-review__viewer-contents {
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 16px;
+	line-height: 1.75;
+	letter-spacing: -0.02em;
+	padding: 0 95px 40px 12px;
+	min-height: auto;
+	text-align: left;
+}
+
+.product-review__viewer-btn-wrap {
+	position: relative;
+	right: 0;
+	bottom: 31px;
+	font-size: 0;
+	margin-top: 15px;
+}
+
+.product-review__update-btn {
+	display: inline-block;
+	vertical-align: middle;
+	width: 120px;
+	height: 44px;
+	border-radius: 4px;
+	background: #ffff;
+	text-align: center;
+	line-height: 44px;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 20px;
+	font-weight: 500 !important;
+	letter-spacing: -0.02em;
+	color: #415865;
+	border: 0;
+	padding: 0;
+	margin-left: 20px;
+	border: 2px solid #415865;
+}
+
+.product-review__delete-btn {
+	display: inline-block;
+	vertical-align: middle;
+	width: 120px;
+	height: 44px;
+	border-radius: 4px;
+	background: #415865;
+	text-align: center;
+	line-height: 44px;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 20px;
+	font-weight: 500 !important;
+	letter-spacing: -0.02em;
+	color: #ffffff;
+	border: 0;
+	padding: 0;
+	margin-left: 20px;
+}
+
+/* // 리뷰 */
+/* QNA 시작 */
+#product_qna{
+	display: none;
+}
+
+.product-view__qna {
+	margin-bottom: 99px;
+	display: block;
+	outline: 0px;
+	width: 1016px;
+}
+
+.product-qna {
+	padding-top: 99px !important;
+}
+
+.product-qna__top {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.board_info_top {
+	display: flex;
+	justify-content: flex-start;
+	margin-bottom: 20px;
+}
+
+.board_info_top p {
+	font-size: 14px;
+	color: #7f7f7f;
+}
+
+.board_info_top a {
+	text-decoration: underline;
+	color: #5b5b5b;
+	margin-left: 10px;
+}
+
+.product-qna__top_btn_wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.product-qna__top_btn_wrapper span {
+	font-size: 21px;
+	line-height: 44px;
+}
+
+.product-qna__write-btn {
+	display: inline-block;
+	vertical-align: middle;
+	width: 120px;
+	height: 44px;
+	border-radius: 4px;
+	background: #415865;
+	text-align: center;
+	line-height: 44px;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 20px;
+	font-weight: 500 !important;
+	letter-spacing: -0.02em;
+	color: #ffffff;
+	border: 0;
+	padding: 0;
+}
+
+.bbslist .product-qna__table {
+	width: 100%;
+	border-top: 2px solid #222;
+	border-bottom: 0;
+}
+
+.bbslist .product-qna__item {
+	border-top: 0;
+	border-bottom: 2px solid #ddd;
+}
+
+.product-qna__item-contents {
+	padding: 40px 17px 10px 10px;
+}
+
+.product-qna__contents {
+	text-align: left;
+	font-size: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.product-qna__secret {
+	display: inline-block;
+	vertical-align: middle;
+	width: 14px;
+	height: 17px;
+	background: url(../images/lock-solid.svg);
+	background-size: cover;
+	margin-right: 11px;
+}
+
+.product-qna__contents-text {
+	display: inline-block;
+	vertical-align: middle;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 16px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+}
+
+.product-qna__item-info {
+	margin-top: 24px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+}
+
+.product-qna__status {
+	display: inline-block;
+	border-radius: 16px;
+	border: 2px solid #ddd;
+	padding: 8px 16px;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 16px;
+	line-height: 1;
+	font-weight: 500;
+	letter-spacing: -0.02em;
+	color: #999;
+}
+
+.product-qna__status--complete {
+	border-color: #415865;
+	color: #415865;
+}
+
+.product-qna__item-info-right {
+	font-size: 0;
+}
+
+.product-qna__item-writer {
+	display: inline-block;
+	vertical-align: middle;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 12px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+}
+
+.product-qna__item-date {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 12px;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	color: #999;
+}
+
+.product-qna__item-writer+.product-qna__item-date {
+	margin-left: 11px;
+}
+
+.product-qna__viewer {
+	margin-top: 15px;
+	display: none;
+}
+
+.bbslist .product-qna__viewer-contents-wrap {
+	border: 0;
+	background: #f5f5f5;
+	padding: 40px 32px;
+}
+
+.bbslist .bbsview .product-qna__viewer-contents {
+	line-height: 1;
+	display: flex;
+	align-items: flex-start;
+}
+
+.product-qna__viewer-mark {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border-radius: 100%;
+	background: #bbb;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 20px;
+	font-weight: bold;
+	letter-spacing: -0.02em;
+	flex: 0 0 auto;
+	color: #ffffff;
+	margin-right: 18px;
+}
+
+.bbslist .bbsview .product-qna__viewer-contents-text-wrap {
+	flex: 0 1 auto;
+	width: 100%;
+	min-height: inherit;
+}
+
+.bbslist .bbsview .product-qna__viewer-contents-text {
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 16px;
+	line-height: 1.75;
+	letter-spacing: -0.02em;
+	text-align: left;
+}
+
+.product-qna__viewer-btn-wrap {
+	position: relative;
+	right: 0;
+	bottom: 31px;
+	font-size: 0;
+	margin-top: 15px;
+}
+
+.product-qna__update-btn {
+	display: inline-block;
+	vertical-align: middle;
+	width: 120px;
+	height: 44px;
+	border-radius: 4px;
+	background: #ffff;
+	text-align: center;
+	line-height: 44px;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 20px;
+	font-weight: 500 !important;
+	letter-spacing: -0.02em;
+	color: #415865;
+	border: 0;
+	padding: 0;
+	margin-left: 20px;
+	border: 2px solid #415865;
+	margin-top: 10px;
+}
+
+.product-qna__delete-btn {
+	display: inline-block;
+	vertical-align: middle;
+	width: 120px;
+	height: 44px;
+	border-radius: 4px;
+	background: #415865;
+	text-align: center;
+	line-height: 44px;
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 20px;
+	font-weight: 500 !important;
+	letter-spacing: -0.02em;
+	color: #ffffff;
+	border: 0;
+	padding: 0;
+	margin-left: 20px;
+	margin-top: 10px;
+}
+
+.product-qna__reply {
+	width: 100%;
+	border-top: 2px solid #ddd;
+	padding-top: 40px;
+	margin-top: 40px;
+	display: flex;
+	align-items: flex-start;
+}
+
+.product-qna__viewer-mark--answer {
+	background: #415865;
+	color: #ffffff;
+}
+
+.product-qna__reply-text {
+	font-family: 'SpoqaHanSans Neo';
+	font-size: 16px;
+	line-height: 1.75;
+	letter-spacing: -0.02em;
+	flex: 0 1 auto;
+	text-align: left;
+}

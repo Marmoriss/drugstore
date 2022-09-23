@@ -11,7 +11,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
-	<!-- datasource빈 등록 -->
+	<!-- #6.1 datasource빈 등록 -->
 	<context:property-placeholder location="classpath:datasource.properties"/>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${datasource.driverClassName}"/>
@@ -20,7 +20,7 @@
 		<property name="password" value="${datasource.password}"/>
 	</bean>
 	
-	<!-- mybatis SqlSessionFactoryBean, SqlSessionTemplate 빈등록 -->
+	<!-- #6.2 mybatis SqlSessionFactoryBean, SqlSessionTemplate 빈등록 -->
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="classpath*:mapper/**/*-mapper.xml"/>
@@ -32,7 +32,7 @@
 		<constructor-arg ref="sqlSessionFactoryBean" index="0"/>
 	</bean>
 	
-	<!-- @Mapper 인터페이스 등록 : Dao 구현객체를 동적으로 생성 -->
+	<!-- #6.3 @Mapper 인터페이스 등록 : Dao 구현객체를 동적으로 생성 -->
 	<mybatis-spring:scan base-package="com.kh.**.dao"/>
 	
 	<!-- 트랜잭션 매니져 빈 등록 -->
@@ -42,7 +42,6 @@
 	<!-- @Transactional 어노테이션에 Transaction Advice를 적용 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
-	
-	
+	<bean id="adminServiceImpl" class="com.kh.drugstore.admin.model.service.AdminServiceImpl"/>
 	
 </beans>

@@ -9,17 +9,21 @@ public class DrugstoreUtils {
 	
 	/**
 	 * totalPage 전체페이지수
-	 * pagebarSize 페이지당 출력할 데이터 개수
-	 * pageNo 페이지 번호
+	 * pagebarSize 표시할 페이지 수 5
+	 * pageNo 페이지 번호(증감변수)
 	 * pagebarStart 첫페이지
 	 * pagebarEnd 마지막 페이지
+	 * numPerPage 한 페이지만 표시할 컨텐츠 수 
+	 * cPage 현재 페이지 
+	 * offset = (현재페이지-1)*한 페이지에 표시할 컨텐츠 수 
+	 * int limit = 한 페이지에 표시할 컨텐츠 수 
 	 * 
 	 */
 	public static String getPagebar(int cPage, int limit, int totalContent, String url) {
 		StringBuffer pagebar = new StringBuffer();
-		url += "?cPage="; 
+		url += (url.indexOf("?") < 0) ? "?cPage=" : "&cPage="; 		
 		
-		final int pagebarSize = 5;
+		final int pagebarSize = 5; // 페이지바 버튼 수
 		final int totalPage = (int) Math.ceil((double) totalContent / limit);
 		final int pagebarStart = ((cPage - 1) / pagebarSize) * pagebarSize + 1;
 		final int pagebarEnd = pagebarStart + pagebarSize - 1;

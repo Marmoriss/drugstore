@@ -16,4 +16,6 @@ public interface NoticeService {
 
 	int deleteNotice(int no);
 
+	Notice movePage(int no);
+
 }

@@ -3,44 +3,50 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- 헤더영역 -->
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="카테고리별 목록" name="title"/>
 </jsp:include>
-<!-- 상단영역 -->
-<div id="layout_config_full">
+
 <style>
-	#layout_config {
+	#main {
 		margin-top: 60px;
 	} 
 </style>
+
+<!-- 상단영역 -->
+<div id="main">
 <!-- 타이틀 -->
+<section>
 	<div>
-		<h3 class="goods-list__title">카테고리별</h3>
+		<h3 class="goods-list">카테고리별</h3>
 	</div>
+	<section class="goodsCate_wrap">
 	<!-- 카테고리별 세팅 -->
-	<div class="goods-list-menu__wrapper goods-list-menu__wrapper--brands-list-menu__wrapper--category">
-		<ul class="goods-list-menu goods-list-menu--brand">
-			<!-- 카테고리별 소분류 -->
-			<li class="goods-list-menu__item goods-list-menu__item--brand"></li>
-			<li class="goods-list-menu__item goods-list-menu__item--brand"></li>
-			<li class="goods-list-menu__item goods-list-menu__item--brand"></li>
-			<li class="goods-list-menu__item goods-list-menu__item--brand"></li>
-			<li class="goods-list-menu__item goods-list-menu__item--brand"></li>
-		</ul>
+	<div class="goodsCate_btn_wrap">
+		<button type="button" class="goods-list-menu item">전체</button>
+		<button type="button" class="goods-list-menu item">성분</button>
+		<button type="button" class="goods-list-menu item">연령</button>
+		<button type="button" class="goods-list-menu item">신체부위</button>
+		<!-- 주희 코드 시작 -->
+		<a href="${pageContext.request.contextPath}/product/productList.do?categoryId=350005">비타민</a>
+		<!-- 주희 코드 끝 -->			
 	</div>
-	<!-- 카테고리별 상단 모달창. 일단 코드 넣지 않겠음 -->
+	</section>
+</section>
 	<!-- 상품 리스트 ~개의 상품 & 추천순인기순어쩌구 -->
-	<div class="goods-list__setting-wrapper">
-		<div class="goods-list__count"></div><!-- 개의 상품 -->
+	<div class="goods-list_setting-wrapper">
+		<div class="goods-list_count"></div><!-- 개의 상품 -->
 			<div class="goods-list__sort-wrapper">
 				<select class="goods-list__sort goods-list__sort-select">
-					<option value="popular">추천순</option>
-					<option value="review">평점많은순</option>
+					<option value="popular">인기순</option>
 					<option value="low_price">낮은 가격순</option>
 					<option value="high_price">높은 가격순</option>
 				</select>
 			</div>
-	</div>
+		</div>
 	<div id="" class="designCategoryGoodsDisplay" designelement="categoryGoodsDisplay">
 	<div class="display-lattice-a displayTabContentsContainer goods-list__container">
 		<div class="goods-list__content">
@@ -72,5 +78,7 @@
 		</div>
 	</div>
 	</div>
+	
+	</section>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

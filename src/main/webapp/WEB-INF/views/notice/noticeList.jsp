@@ -3,18 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="고객센터" name="title" />
 </jsp:include>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/notice.css" />
 
 	<section id=notice-container>
 
 		<section class="left-menu">
-			<div class="border-top"></div>
-			<h6>고객센터</h6>
-			<div class="border-bot"></div>
+			<div class="border-top"></div><br />
+			<h6>고객센터</h6><br />
+			<div class="border-bot"></div><br />
 			<ul class=space_list>
 				<li class="menu-list"><a href="#">공지사항</a></li>
 				<li class="menu-list"><a href="#">1:1 문의하기</a></li>
@@ -23,8 +25,8 @@
 		</section>
 
 		<div class="right-content">
-			<h4>공지사항</h4>
-			<table width="700px" id="tbl-notice">
+			<h4>공지사항</h4><br />
+			<table class="table table-hover w-75">
 				<tr>
 					<th>No</th>
 					<th>제목</th>
@@ -50,6 +52,11 @@
 				</c:if>
 
 			</table>
+			
+		<sec:authorize access="hasRole('ADMIN')">
+		<input type="button" value="글쓰기" id="btn-write" class="btn-write" 
+			onclick="location.href='${pageContext.request.contextPath}/notice/noticeForm.do';"/>
+		</sec:authorize>
 <br />
 <br />
 <br />

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.drugstore.admin.model.dao.AdminDao">
+	<resultMap
+		type="com.kh.drugstore.member.model.dto.MemberEntity" id="memberMap">
+		<id property="memberId" column="member_id" />
+		<id property="name" column="name" />
+		<id property="password" column="password" />
+		<id property="phone" column="phone" />
+		<id property="createdAt" column="created_at" />
+		<id property="updatedAt" column="updated_at" />
+		<id property="enabled" column="enabled" />
+		<id property="recipient" column="recipient" />
+		<id property="postCode" column="post_code" />
+		<id property="address" column="address" />
+		<id property="detailAddress" column="detail_address" />
+		<id property="memo" column="memo" />
+	</resultMap>
+
+
+	<resultMap type="com.kh.drugstore.servey.model.dto.Servey"
+		id="serveyMap">
+		<id property="no" column="no" />
+		<id property="memberId" column="member_id" />
+		<id property="gender" column="gender" />
+		<id property="height" column="height" />
+		<id property="weight" column="weight" />
+		<id property="body" column="body" />
+		<id property="symptom" column="symptom" />
+
+	</resultMap>
+
+	<resultMap type="com.kh.drugstore.member.model.dto.User"
+		id="userMap">
+		<collection property="member" resultMap="memberMap" />
+		<collection property="servey" resultMap="serveyMap" />
+	</resultMap>
+
+<select id="userList" resultMap="userMap" parameterType="map">
+		select
+		m.member_id,name,phone,created_at,gender,body from member m left join servey s on
+		(m.member_id = s.member_id) order by created_at desc
+</select>
+
+<select id="userFinder" resultMap="userMap" parameterType="map">
+		select
+		m.member_id,name,phone,created_at,gender,body from member m left join servey s on
+		(m.member_id = s.member_id)
+		
+		<if test="searchType.equals('name')">
+		where name like concat('%' || #{keyword},'%')
+		</if> 
+		<if test="searchType.equals('gender')">
+		where gender like concat('%' || #{keyword},'%')
+		</if>
+		<if test="searchType.equals('member_id')">
+		where m.member_id like concat('%' || #{keyword},'%')
+		</if>
+		<if test="searchType.equals('body')">
+		where body like concat('%' || #{keyword},'%')
+		</if> 
+
+</select>
+
+<select id="getTotalContentLike" resultType="_int" parameterType="map">
+		select count(*) 
+		from(select m.member_id,name,phone,created_at,gender,body from member m left join servey s on
+		(m.member_id = s.member_id))
+		
+		<if test="searchType.equals('name')">
+		where name like concat('%' || #{keyword},'%')
+		</if> 
+		<if test="searchType.equals('gender')">
+		where gender like concat('%' || #{keyword},'%')
+		</if>
+		<if test="searchType.equals('member_id')">
+		where member_id like concat('%' || #{keyword},'%')
+		</if>
+		<if test="searchType.equals('body')">
+		where body like concat('%' || #{keyword},'%')
+		</if> 
+</select>
+
+	<resultMap type="com.kh.drugstore.admin.model.dto.Visit"
+		id="visitMap">
+		<id property="vDate" column="v_date" />
+	</resultMap>
+
+	<resultMap
+		type="com.kh.drugstore.orders.model.dto.Orders" id="ordersMap">
+		<id property="merchantUid" column="merchant_uid" />
+		<id property="memberId" column="member_id" />
+		<id property="impUid" column="imp_uid" />
+		<id property="receiptId" column="receiptId" />
+		<id property="method" column="method" />
+		<id property="name" column="name" />
+		<id property="createdAt" column="created_at" />
+		<id property="paidAt" column="paid_at" />
+		<id property="failedAt" column="failed_at" />
+		<id property="cancelledAmount" column="cancelled_amount" />
+		<id property="cancelledAt" column="cancelled_at"/>
+		<id property="productPrice" column="product_price"/>
+		<id property="totalPrice" column="total_price"/>
+		<id property="deliveryPrice" column="delivery_price"/>
+		<id property="returnStatus" column="return_status"/>
+		<id property="returnReason" column="return_reason"/>
+		<id property="returnRequestDate" column="return_request_date"/>
+		<id property="returnCompleteDate" column="return_complete_date"/>
+		<id property="cancelStatus" column="cancel_status"/>
+		<id property="cancelReason" column="cancel_reason"/>
+		<id property="cancelRequestDate" column="cancel_request_date"/>
+		<id property="cancelCompleteDate" column="cancel_complete_date"/>
+		<id property="refundStatus" column="refund_status"/> 
+		<id property="refundMethod" column="refund_method"/> 
+		<id property="totalRefundPrice" column="total_refund_price"/> 
+		<id property="refundRequestDate" column="refund_request_date"/> 
+		<id property="refundCompleteDate" column="refund_complete_date"/> 
+		<id property="recipient" column="recipient"/> 
+		<id property="postCode" column="post_code"/> 
+		<id property="address" column="address"/> 
+		<id property="detailAddress" column="detail_address"/> 
+		<id property="memo" column="memo"/> 
+		<id property="status" column="status"/> 
+	
+	</resultMap>
+	
+		<resultMap type="product" id="productMap">
+		<id column="pcode" property="pcode"/>
+		<result column="category_id" property="categoryId"/>
+		<result column="sttenmt_no" property="sttenmtNo"/>
+		<result column="pname" property="pname"/>
+		<result column="manu" property="manu"/>
+		<result column="price" property="price"/>
+		<result column="amount" property="amount"/>
+		<result column="ingre_name" property="ingreName"/>
+		<result column="main_fnctn" property="mainFnctn"/>
+		<result column="intake_hint1" property="intakeHint1"/>
+		<result column="srv_use" property="srvUse"/>
+		<result column="distb_pd" property="distbPd"/>
+		<result column="sub_yn" property="subYn"/>
+		<result column="base_standard" property="baseStandard"/>
+		<result column="sale_status" property="saleStatus"/>
+		<result column="created_at" property="createdAt"/>
+		<result column="updated_at" property="updatedAt"/>
+		<result column="discount" property="discount"/>
+	</resultMap>
+
+	<resultMap type="com.kh.drugstore.orders.model.dto.ProductOrders" id="pordersMap">
+		<id property="pcode" column="pcode" />
+		<id property="merchantUid" column="merchant_uid" />
+	</resultMap>
+	
+	<resultMap type="com.kh.drugstore.admin.model.dto.Order" id="orderListMap">
+		<collection property="orders" resultMap="ordersMap" />
+		<collection property="porders" resultMap="pordersMap" />
+		<collection property="product" resultMap="productMap" />
+		
+	</resultMap> 
+
+	<select id="selectOrders" resultMap="orderListMap">
+		select o.merchant_uid, a.pname, o.member_id, o.paid_at, o.status  from product_orders po join orders o on po.merchant_uid = o.merchant_uid join product a on po.pcode=a.pcode order by o.paid_at desc
+	</select>
+	
+	<select id="findOrders" resultMap="orderListMap">
+		select o.merchant_uid, a.pname, o.member_id, o.paid_at, o.status 
+		from product_orders po join orders o on po.merchant_uid = o.merchant_uid join product a on po.pcode=a.pcode
+		<where>
+			<if test="to != null and from != null">
+			 	o.paid_at between to_date(#{toDate},'yyyy/mm/dd') and to_date(#{fromDate},'yyyy/mm/dd')
+			</if>
+		</where>
+		order by paid_at desc
+	</select>
+	
+	<!-- 주희 코드 -->
+	<update id="updateProduct">
+		update
+			product
+		set
+			pname = #{pname},
+			manu = #{manu},
+			amount = #{amount},
+			price = #{price},
+			discount = #{discount},
+			sale_status = #{saleStatus},
+			category_id = #{categoryId},
+			updated_at = sysdate
+		where
+			pcode = #{pcode}
+	</update>
+	
+	
+	
+	
+	
+
+</mapper>
