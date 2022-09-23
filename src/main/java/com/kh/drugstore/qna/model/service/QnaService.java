@@ -17,5 +17,12 @@ public interface QnaService {
 
 	int insertQnaComment(Qna qna);
 
+	// 주희 코드 시작
+	Qna selectOneQna(int qnaId);
+
+	int updateQna(Qna qna);
+
+	int deleteQna(int qnaId);
+
 
 }
