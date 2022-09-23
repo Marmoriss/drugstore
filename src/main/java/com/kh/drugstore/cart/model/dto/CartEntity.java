@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class CartEntity {
 	protected int cartNo;
 	protected String memberId;
-	protected String pcode;
+	protected int pcode;
 	protected int amount;
 }

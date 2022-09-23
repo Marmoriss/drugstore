@@ -112,8 +112,31 @@ public class CartController {
 		return ResponseEntity.ok(result);
 	}
 	
+	@GetMapping("/findCart.do")
+	public ResponseEntity<?> findCart(Authentication authentication, @RequestParam int pcode){
+		log.debug("pcode = {}", pcode);
+		Member member = (Member) authentication.getPrincipal();
+		String memberId = member.getMemberId();
+		log.debug("memberId = {}", memberId);
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("memberId", memberId);
+		param.put("pcode", pcode);
+		log.debug("param = {}", param);
+		
+		int result = cartService.findCart(param);
+		return ResponseEntity.ok(result);
+	}
 	
-	
+	@PostMapping("/addCart.do")
+	public ResponseEntity<?> addCart(Authentication authentication, @RequestBody Map<String, Object> cartList){
+		Member member = (Member) authentication.getPrincipal();
+		String memberId = member.getMemberId();
+		cartList.put("memberId", memberId);
+		log.debug("cartList = {}", cartList);
+		int result = cartService.addCart(cartList);
+		return ResponseEntity.ok(result);
+	}
 	
 }	
 
