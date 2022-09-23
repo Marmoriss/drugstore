@@ -39,7 +39,8 @@ public class ProductListController {
 	
 	
 	// 페이징 메소드
-	public void pageInit(@RequestParam(defaultValue = "1") int cPage, Model model, HttpServletRequest request) {
+	@RequestMapping("")
+	public void pageInit(@RequestParam(defaultValue = "1", required=false) int cPage, Model model, HttpServletRequest request) {
 		//페이징 시작. 콘텐츠 영역
 		Map<String, Integer> param = new HashMap<>();
 		
@@ -48,23 +49,22 @@ public class ProductListController {
 		param.put("limit", limit);
 		
 		List<Product> list = productService.findAllProduct(param); //모든 제품찾기 
-		log.debug("list = {}", list);
+//		log.debug("list = {}", list);
 		model.addAttribute("list", list);
 		
 		//2. 페이지바
 		int totalContent = productService.getTotalContent();
-		log.debug("totalContent = {}", totalContent);
+//		log.debug("totalContent = {}", totalContent);
 		String url = request.getRequestURI();
 		String pagebar = DrugstoreUtils.getPagebar(cPage, limit, totalContent, url);
 		model.addAttribute("pagebar", pagebar);
-		
-		log.debug("list = {}", list);
+//		log.debug("pagebar={}", pagebar);
 		
 	}
 	
 	// 카테고리 id로 상품 리스트 조회
 	@GetMapping("/productList.do")
-	public void productListByCategory(@RequestParam int categoryId, Model model) {
+	public void productListByCategory(@RequestParam(value="categoryId", required=false) int categoryId, Model model) {
 		log.debug("categoryId = {}", categoryId);
 		List<Product> list = productService.selectProductByCategoryId(categoryId);
 		
@@ -82,8 +82,7 @@ public class ProductListController {
 		model.addAttribute("product", product);
 		
 	}
-	
-	
+
 	@GetMapping("/autocompletePname.do")
 	public ResponseEntity<?> autocompletePname(@RequestParam String term){
 		List<String> resultList = productService.autocompletePname(term);
@@ -93,6 +92,10 @@ public class ProductListController {
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
 				.body(resultList);
 	}
+	
+	//최신순/가격높은순/인기순 코드 
+	//option 누르면 
+	
 	
 	
 	@PostMapping("/checkCategory.do")
