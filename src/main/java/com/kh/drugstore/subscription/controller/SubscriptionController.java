@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.drugstore.cart.model.service.CartService;
 import com.kh.drugstore.member.model.dto.Member;
@@ -112,5 +113,14 @@ public class SubscriptionController {
 		boolean isEmpty = subscription == null;
 		
 		return ResponseEntity.status(HttpStatus.OK).body(isEmpty);
+	}
+	
+	@PostMapping("/subscriptionDel.do")
+	public String subscriptionDel(@RequestParam int subNo, RedirectAttributes redirectAttr){
+		int result = subscriptionService.subscriptionDel(subNo);
+		result = subscriptionService.subscriptionProductDel(subNo);
+		redirectAttr.addFlashAttribute("msg", "구독 상품을 삭제했습니다.");
+		
+		return "redirect:/member/memberSubscription.do";
 	}
 }

@@ -361,15 +361,20 @@ public class MemberController {
 		
 		// 구독 번호 가져오기
 		SubscriptionProduct subscription = subscriptionService.getSubscription(memberId);
-		log.debug("subscriptoin = {}",subscription);
-		int subNo = subscription.getSubNo();
-		
-		int pcode = subscriptionService.getPcodeBySubNo(subNo);
-		// 구독 번호로 상품 코드 가져오기
-		
-		Product product = productService.getProductBySubNo(pcode);
-		model.addAttribute("subscription", subscription);
-		model.addAttribute("product", product);
+		if(subscription == null) {
+			model.addAttribute("alert", "구독 상품이 없습니다.");
+		}
+		else {
+			log.debug("subscriptoin = {}",subscription);
+			int subNo = subscription.getSubNo();
+			
+			int pcode = subscriptionService.getPcodeBySubNo(subNo);
+			// 구독 번호로 상품 코드 가져오기
+			
+			Product product = productService.getProductBySubNo(pcode);
+			model.addAttribute("subscription", subscription);
+			model.addAttribute("product", product);			
+		}
 		
 	}
 	

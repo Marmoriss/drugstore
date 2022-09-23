@@ -44,4 +44,14 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	public SubscriptionProduct subscriptionCheck(String memberId) {
 		return subscriptionDao.subscriptionCheck(memberId);
 	}
+	
+	@Override
+	public int subscriptionDel(int subNo) {
+		return subscriptionDao.subscriptionDel(subNo);
+	}
+	
+	@Override
+	public int subscriptionProductDel(int subNo) {
+		return subscriptionDao.subscriptionProductDel(subNo);
+	}
 }

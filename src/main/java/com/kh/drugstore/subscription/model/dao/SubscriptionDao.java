@@ -1,6 +1,7 @@
 package com.kh.drugstore.subscription.model.dao;
 
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -28,5 +29,11 @@ public interface SubscriptionDao {
 
 	@Select("select * from subscription where member_id = #{memberId}")
 	SubscriptionProduct subscriptionCheck(String memberId);
+
+	@Delete("delete subscription where sub_no = #{subNo}")
+	int subscriptionDel(int subNo);
+
+	@Delete("delete subscription_product where sub_no = #{subNo}")
+	int subscriptionProductDel(int subNo);
 
 }
