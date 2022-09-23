@@ -100,8 +100,8 @@
 							</h2>
 						</div>
 						<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-							<div class="card-body text-center">1:1 문의</div>
-							<div class="card-body text-center">FAQ</div>
+							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/">1:1 문의</a></div>
+							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/faq/faqForm.do">FAQ</a></div>
 							<div class="card-body text-center">리뷰</div>
 						</div>
 					</div>
