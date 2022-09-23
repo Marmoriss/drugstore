@@ -33,7 +33,7 @@
                     <dt class="product-view__thumb-wrap">
                         <div id="product_thumbs" class="product-view__thumb">
                             <div class="product-view__thumb-img-wrap">
-                                <img src="" alt="" class="product-view__thumb-img" />
+                                <img src="${pageContext.request.contextPath}/resources/upload/product/${product.attachments[0].renamedFilename}" alt="상품메인이미지" class="product-view__thumb-img" />
                             </div>
                         </div>
                     </dt>
@@ -157,8 +157,11 @@
                     <div id="product_description" class="product-view__description">
                         <a href="" name="product_description"></a>
                         <div class="product_description product-view__description-contents">
-                            <!-- 상품 상세 정보 사진들 들어갈 자리 -->
-                            상세 정보 사진 들어갑니다.
+                            <c:if test="${not empty product.attachments}">
+                            	<c:forEach items="${product.attachments}" var="attach" begin="1" varStatus="vs">
+                            		<img src="${pageContext.request.contextPath}/resources/upload/product/${attach.renamedFilename}" alt="상품상세이미지"/>
+                            	</c:forEach>
+                            </c:if>
                         </div>
                         <!-- 상품 정보 제공 공시 -->
                         <div class="product-view__guide">
@@ -703,6 +706,7 @@
 </body>
 
 <script>
+<<<<<<< HEAD
 const headers = {};
 headers['${_csrf.headerName}'] = '${_csrf.token}';
 document.querySelector("#addCart").addEventListener('click', (e) => {
@@ -746,6 +750,13 @@ const addCart = (cartList) => {
 	error : console.log
 	});
 };
+=======
+// 위시리스트 추가
+const wish_chg = () => {
+	
+};
+
+>>>>>>> branch 'master' of https://github.com/Marmoriss/drugstore.git
 // 문의 수정 폼 연결
 const updateQna = () => {
 	const qnaId = 41;
