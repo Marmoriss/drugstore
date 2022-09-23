@@ -3,8 +3,10 @@ package com.kh.drugstore.member.controller;
 import java.security.Principal;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +39,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.drugstore.auth.model.service.AuthService;
+import com.kh.drugstore.common.DrugstoreUtils;
 import com.kh.drugstore.member.model.dto.KakaoProfile;
 import com.kh.drugstore.member.model.dto.Member;
 import com.kh.drugstore.member.model.dto.MemberEntity;
 import com.kh.drugstore.member.model.dto.OAuthToken;
+import com.kh.drugstore.member.model.dto.User;
 import com.kh.drugstore.member.model.service.MemberService;
+import com.kh.drugstore.orders.model.dto.Orders;
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.service.ProductService;
 import com.kh.drugstore.subscription.model.dto.Subscription;
@@ -396,9 +401,33 @@ public class MemberController {
 		
 	}
 	
+	// 건우
 	@GetMapping("/memberOrder.do")
-	public void memberOrder() {
-		
+	public void memberOrder(Authentication authentication, @RequestParam(defaultValue = "1") int cPage, 
+			Model model, 
+			HttpServletRequest request) {
+		// 1. content영역
+				Map<String, Object> param = new HashMap<>();
+				int limit = 10;
+				param.put("cPage", cPage);
+				param.put("limit", limit);
+				
+				Member member = (Member) authentication.getPrincipal();
+				String memberId = member.getMemberId();
+				param.put("memberId", memberId);
+				
+				List<Orders> list = memberService.getOrderById(param);
+				log.debug("list = {}", list);
+				
+				model.addAttribute("list", list);
+				
+				// 2. pagebar영역
+				int totalContent = memberService.getTotalContent(param);
+				log.debug("totalContent = {}", totalContent);
+				String url = request.getRequestURI() + "?memberId=" + memberId;
+				//String url = request.getRequestURI(); 
+				String pagebar = DrugstoreUtils.getPagebar(cPage, limit, totalContent, url);
+				model.addAttribute("pagebar", pagebar);
 	}
 	
 

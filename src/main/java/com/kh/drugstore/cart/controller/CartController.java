@@ -106,7 +106,7 @@ public class CartController {
 	**/
 	
 	@PostMapping("/insertOrder.do")
-	public ResponseEntity<?> insertOrder(@RequestBody CartOrder cartOrder){
+	public ResponseEntity<?> insertOrder(@RequestBody Map<String, Object> cartOrder){
 		log.debug("cartOrder = {}", cartOrder);
 		int result = cartService.insertOrder(cartOrder);
 		return ResponseEntity.ok(result);

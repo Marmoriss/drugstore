@@ -127,10 +127,8 @@ a {
 	margin:0 auto; 
 	font-size:20px;
 	width:900px;
-	height:500px;
-	background-color:lightgray;
-	opacity:0.5;
-	color:black;
+	height:620px;
+	background-color:#f4f4f4;
 
 }
 
@@ -159,7 +157,7 @@ a {
 }
 
 .btn-add {	
-	margin-left:940px;
+	margin-left:840px;
     margin-top:10px;
 	width: 70px;
 	border-radius: 5px;

@@ -66,6 +66,8 @@ public interface AdminService {
 
 	int serveyMcount();
 
+	List<Orders> findOrders(Map<String, Object> param);
+
 
 
 

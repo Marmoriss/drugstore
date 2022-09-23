@@ -21,13 +21,11 @@ public interface CartService {
 
 	List<Cart> findOrderListByCartNo(int[] checkbox);
 
-	int insertOrder(CartOrder cartOrder);
-
+	int insertOrder(Map<String, Object> cartOrder);
+	
 	int insertCart(Map<String, Object> map);
 
 	List<Cart> getPcode(int[] checkCategoryByCartNo);
-
-	
 	
 //	Map<String, List> findCartListByMemberId(String memberId);
 }

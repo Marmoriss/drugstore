@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Notice {
 	private int no;
+	private String writer;
 	private String title;
 	private String content;
-	private String writer;
 	private LocalDateTime regDate;
 	private int next;
 	private int last;
