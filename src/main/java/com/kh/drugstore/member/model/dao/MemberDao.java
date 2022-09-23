@@ -1,12 +1,17 @@
 package com.kh.drugstore.member.model.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.session.RowBounds;
 
 import com.kh.drugstore.member.model.dto.Member;
 import com.kh.drugstore.member.model.dto.MemberEntity;
+import com.kh.drugstore.orders.model.dto.Orders;
 
 import lombok.NonNull;
 
@@ -35,6 +40,10 @@ public interface MemberDao {
 
 	@Select("select * from member where name = #{name} and phone = #{phone}")
 	Member selecOneMemberByName(Member member);
+
+	List<Orders> getOrderById(RowBounds rowBounds, Map<String, Object> param);
+	
+	int getTotalContent(Map<String, Object> param);
 	
 
 
