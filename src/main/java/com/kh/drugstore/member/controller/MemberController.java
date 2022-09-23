@@ -1,5 +1,6 @@
 package com.kh.drugstore.member.controller;
 
+import java.security.Principal;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +13,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,11 +36,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kh.drugstore.auth.model.service.AuthService;
 import com.kh.drugstore.member.model.dto.KakaoProfile;
 import com.kh.drugstore.member.model.dto.Member;
 import com.kh.drugstore.member.model.dto.MemberEntity;
 import com.kh.drugstore.member.model.dto.OAuthToken;
 import com.kh.drugstore.member.model.service.MemberService;
+import com.kh.drugstore.product.model.dto.Product;
+import com.kh.drugstore.product.model.service.ProductService;
+import com.kh.drugstore.subscription.model.dto.Subscription;
+import com.kh.drugstore.subscription.model.dto.SubscriptionProduct;
+import com.kh.drugstore.subscription.model.service.SubscriptionService;
 import com.kh.security.model.service.MemberSecurityService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -55,15 +61,65 @@ public class MemberController {
 	
 	@Autowired
 	private MemberSecurityService memberSecurityService;
+	
+	@Autowired
+	private AuthService authService;
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	@Autowired
+	private SubscriptionService subscriptionService;
+	
+	@Autowired
+	private ProductService productService;
 
 	
 	
 	@GetMapping("/memberEnroll.do")
 	public String memberEnroll() {
 		return "member/memberEnroll";
+	}
+	
+	/**
+	 *  아이디/비밀번호 찾기
+	 */
+	@GetMapping("/findInfo.do")
+	public void findMemberInfo() {
+		
+	}
+	
+	@PostMapping("/findInfo.do")
+	public ModelAndView findPw(@RequestParam String memberId, @RequestParam String phone, ModelAndView mav) {
+		Member member = memberService.selectOneMember(memberId);
+		int rnd = (int) (Math.random() * (10000-1000) + 1000);
+		String password = String.valueOf(rnd);
+		String encodedPassword = bcryptPasswordEncoder.encode(password);
+		member.setPassword(encodedPassword);
+
+		// 1. db row 수정
+		int result = memberService.updateMember(member);
+
+		UserDetails updatedMember = memberSecurityService.loadUserByUsername(member.getMemberId());
+		
+		// 2. authentication 수정
+		Authentication newAuthentication = new UsernamePasswordAuthenticationToken(updatedMember,
+				updatedMember.getPassword(), updatedMember.getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+
+		mav.addObject("password", password);
+		mav.setViewName("/member/findInfo");
+		return mav;
+	}
+	
+	@PostMapping("/findId.do")
+	public ModelAndView findId(Member member, ModelAndView mav) {
+		log.debug("멈버 = {}",member);
+		Member findMember = memberService.selectOneMemberByName(member);
+		log.debug("memberId = {}",findMember.getMemberId());
+		mav.addObject("memberId", findMember.getMemberId());
+		mav.setViewName("/member/findInfo");
+		return mav;
 	}
 
 	/**
@@ -84,8 +140,14 @@ public class MemberController {
 			String encodedPassword = bcryptPasswordEncoder.encode(rawPassword);
 			member.setPassword(encodedPassword);
 			log.debug("encodedPassword = {}", encodedPassword);
-
+			
+			// 전화번호 - 빼기
+			String rawPhone = member.getPhone();
+			String phone = rawPhone.replace("-", "");
+			member.setPhone(phone);
+			
 			int result = memberService.insertMember(member);
+			result = authService.insertAuth(member.getMemberId());
 			redirectAttr.addFlashAttribute("msg", "회원 가입이 정상적으로 처리되었습니다.");
 			return "redirect:/";
 		} catch (Exception e) {
@@ -165,13 +227,19 @@ public class MemberController {
 	}
 
 	@PostMapping("/memberUpdate.do")
-	public String memberUpdate(@ModelAttribute Member member, RedirectAttributes redirectAttr, Model model) {
+	public String memberUpdate(@ModelAttribute Member member,String newPassword, RedirectAttributes redirectAttr, Model model) {
 		log.debug("member = {}", member);
+		
 		// 비밀번호 암호화
-		String rawPassword = member.getPassword();
-		String encodedPassword = bcryptPasswordEncoder.encode(rawPassword);
+		
+		String encodedPassword = bcryptPasswordEncoder.encode(newPassword);
 		member.setPassword(encodedPassword);
 		log.debug("encodedPassword = {}", encodedPassword);
+		
+		// 전화번호 - 빼기
+		String rawPhone = member.getPhone();
+		String phone = rawPhone.replace("-", "");
+		member.setPhone(phone);
 
 		// 1. db row 수정
 		int result = memberService.updateMember(member);
@@ -286,8 +354,48 @@ public class MemberController {
 			return "redirect:/";
 	}
 	
-	@GetMapping("/memberSubscription")
-	public void memberSubscription() {
+	@GetMapping("/memberSubscription.do")
+	public void memberSubscription(Authentication authentication, Model model) {
+		Member member = (Member) authentication.getPrincipal();
+		String memberId = member.getMemberId();
+		
+		// 구독 번호 가져오기
+		SubscriptionProduct subscription = subscriptionService.getSubscription(memberId);
+		log.debug("subscriptoin = {}",subscription);
+		int subNo = subscription.getSubNo();
+		
+		int pcode = subscriptionService.getPcodeBySubNo(subNo);
+		// 구독 번호로 상품 코드 가져오기
+		
+		Product product = productService.getProductBySubNo(pcode);
+		model.addAttribute("subscription", subscription);
+		model.addAttribute("product", product);
 		
 	}
+	
+	@PostMapping("/passwordCheck.do")
+	public ResponseEntity<?> passwordCheck(@RequestParam("password") String password , Principal principal) {
+		log.debug("프린시발 = {}",principal.getName());
+		Member member = memberService.selectOneMember(principal.getName());
+		log.debug("password = {}",member.getPassword());
+		log.debug("password = {}",password);
+		// 비밀번호 암호화
+		
+		String encodedPassword = bcryptPasswordEncoder.encode(password);
+		boolean isMatched = bcryptPasswordEncoder.matches(password, member.getPassword());
+		
+		
+		 
+		return ResponseEntity.status(HttpStatus.OK).body(isMatched);
+		
+		
+	}
+	
+	@GetMapping("/memberOrder.do")
+	public void memberOrder() {
+		
+	}
+	
+
+	
 }

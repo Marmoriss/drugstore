@@ -81,9 +81,21 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.findServeyProduct(body);
 	}
 	
+	@Override
+	public List<Product> selectSubscriptionAllProduct() {
+		return productDao.selectSubscriptionAllProduct();
+	}
+	
+	@Override
+	public List<Product> checkCategory(int[] checkCategoryByCartNo) {
+		return productDao.checkCategory(checkCategoryByCartNo);
+	}
 	
 	
-	
+	@Override
+	public Product getProductBySubNo(int pcode) {
+		return productDao.getProductBySubNo(pcode);
+	}
 	
 	
 	

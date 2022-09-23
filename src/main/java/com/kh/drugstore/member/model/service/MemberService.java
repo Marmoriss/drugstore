@@ -22,6 +22,8 @@ public interface MemberService {
 
 	int insertKakaoMember(MemberEntity memberK);
 
+	Member selectOneMemberByName(Member member);
+
 
 	
 

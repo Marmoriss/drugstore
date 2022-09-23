@@ -37,7 +37,7 @@
 </head>
 <body>
 
-<header class>
+<header>
    <div id="header-container">
       <!-- 띠 배너 -->
       <div class="header-line">
@@ -50,7 +50,7 @@
          <div class="nav header-nav-list-wrap">
             <ul class="header-nav-list">
                <li class="header-nav-item"><a href="${pageContext.request.contextPath}/servey/servey.do" class="header-nav-text">건강설문</a></li>
-               <li class="header-nav-item"><a href="" class="header-nav-text">정기구독</a></li>
+               <li class="header-nav-item"><a href="${pageContext.request.contextPath}/subscription/product.do" class="header-nav-text">정기구독</a></li>
                <li class="header-nav-item"><a class="header-nav-text" href="${pageContext.request.contextPath}/notice/noticeList.do">고객센터</a></li>
                
                <sec:authorize access="isAnonymous()">
@@ -79,7 +79,7 @@
       </div>
       <!-- 로고 -->
       <div class="header-logo">
-         <a href="/" class="header-logo-link">
+         <a href="${pageContext.request.contextPath}/" class="header-logo-link">
             <img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="logo" class="header-logo-img"/>
          </a>
       </div>
@@ -92,16 +92,15 @@
                      <a href="javascript:;" class="categoryAllBtn">
                         <i class="fa-solid fa-bars"></i>
                      </a>
-                     <!-- 전체카테고리 -> 성분별로 이동 -->
-                     <a href="${pageContext.request.contextPath}/product/productList.do?categoryId=350001" class="header-menu-open-title">전체 카테고리</a>
+                     <a href="#" class="header-menu-open-title">전체 카테고리</a>
                   </li>
                   <!-- 추후 반복문으로 카테고리 헤더 불러오기 -->
-<!--                   <li class="categoryList1 header-menu-item">
+                  <li class="categoryList1 header-menu-item">
                      <a href="#" class="header-menu-title">이벤트</a>
                   </li>
                   <li class="categoryList1 header-menu-item">
                      <a href="#" class="header-menu-title">베스트</a>
-                  </li> -->
+                  </li>
                </ul>
             </div>
             <!-- 호버시 보일 메뉴 작성 -->
@@ -123,3 +122,27 @@
       </div>
    </div>
 </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

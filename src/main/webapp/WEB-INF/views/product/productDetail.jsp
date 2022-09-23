@@ -589,7 +589,7 @@
                                                                 	<c:if test="${qna.writer eq principal.memberId || qna.writer eq hasRole('ADMIN')}">
 			                                                              <div class="board_cont product-qna__contents hand boad_view_btn_mbno">
 			                                                                    <div>
-			                                                                        <span class="product-qna__secret">${msg}</span>
+			                                                                        <span class="product-qna__secret"></span>
 			                                                                        <span class="product-qna__contents-text">
 			                                                                            비밀글입니다
 			                                                                        </span>
@@ -598,23 +598,20 @@
 					                                                           		<img src="${pageContext.request.contextPath}/resources/css/images/angle-down-solid.svg" class="product-review__arrow-btn-img">
 					                                                           </div>
 			                                                                 </div>
-
 	                                                                	</c:if>
-			                                                    	</div>
+			                                                  		</div>
                                                               <div class="product-qna__item-info">
                                                                     <p class="product-qna__status product-qna__status--complete">답변완료</p>
                                                                     <div class="product-qna__item-info-right">
                                                                         <div class="product-qna__item-writer">pota**</div>
                                                                         <div class="product-qna__item-date">2022.09.18</div>
                                                                     </div>
-                                                                </div>
-                                                            </div>
+                                                              </div>
                                                         </td>
                                                     </tr>
                                                     <tr class="datalist product-qna__item-header">
                                                         <td class="product-qna__item pd0">
                                                             <!-- 비밀글 아닐 때 -->
-	                                                        <c:if test="${q}">
                                                             <div class="product-qna__item-contents relative">
                                                                 <div class="board_cont product-qna__contents hand boad_view_btn">
                                                                     <div>
@@ -626,8 +623,7 @@
                                                                         <img src="${pageContext.request.contextPath}/resources/css/images/angle-down-solid.svg" class="product-review__arrow-btn-img">
                                                                     </div>
                                                                 </div>
-
-                                                            </c:if>
+															</div>
                                                                 <div class="product-qna__item-info">
                                                                     <p class="product-qna__status product-qna__status--complete">답변완료</p>
                                                                     <div class="product-qna__item-info-right">
