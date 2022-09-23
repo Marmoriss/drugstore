@@ -9,7 +9,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,7 @@ import org.springframework.stereotype.Service;
 import com.kh.drugstore.member.model.dao.MemberDao;
 import com.kh.drugstore.member.model.dto.Member;
 import com.kh.drugstore.member.model.dto.MemberEntity;
+import com.kh.drugstore.orders.model.dto.Orders;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -63,6 +67,17 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member selectOneMemberByName(Member member) {
 		return memberDao.selecOneMemberByName(member);
+	}
+	@Override
+	public List<Orders> getOrderById(Map<String, Object> param) {
+		int limit = (int) param.get("limit"); 
+		 int offset = (int)param.get("cPage") - 1 * limit; 
+		 RowBounds rowBounds = new RowBounds(offset, limit); 
+		 return memberDao.getOrderById(rowBounds,param);
+	}
+	@Override
+	public int getTotalContent(Map<String, Object> param) {
+		 return memberDao.getTotalContent(param); 
 	}
 	
 }

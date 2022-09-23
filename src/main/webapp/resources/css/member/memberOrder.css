@@ -1,0 +1,48 @@
+.n-table {
+    width: 100%;
+    font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    line-height: 1.5;
+    font-size: 14px;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.n-table.table-col {
+    border-top: 1px solid #000000;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+#memberorder-wrapper{
+	width : 70%;
+}
+#order-list-tbl{
+	position: relative;
+	left : 550px;
+	bottom : 700px;
+	width : 80%;
+}
+
+.pagebar{
+	position : relative;
+	left : 400px;
+	bottom : 150px;
+}
+
+thead{
+	font-size : 18px;
+	border-bottom: 1px solid #000000;
+	padding-botton : 20px;
+	font-weight: 200; 
+}
+td{
+	padding : 15px;
+}
+tbody{
+	border-bottom: 1px solid #e5e5e5;
+	font-size : 16px;
+	text-align : center;
+}
