@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <fmt:requestEncoding value="utf-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
@@ -41,6 +42,7 @@
      <h3>정기구독 내역</h3>
     </div>
 	<div class="main">
+		<c:if test="${not empty subscription}">
 	 	<span>구독 시작 : ${subscription.startDate}</span>
 	 	<br />
 	 	<span>배송 시기 : ${subscription.sendDate}</span>
@@ -49,7 +51,15 @@
 	 	<span>${product.pcode}</span>
 	 	<span>${product.pname}</span>
 	 	<br />
+	 	
+	 	<form:form action="${pageContext.request.contextPath}/subscription/subscriptionDel.do" method="post">
+	 	<input type="hidden" name="subNo" value="${subscription.subNo}" />
 	 	<button>구독 취소</button>
+	 	</form:form>
+		</c:if>
+		<c:if test="${not empty alert}">
+			<span>${alert}</span>
+		</c:if>
 	</div>    
   </div>
 </div>

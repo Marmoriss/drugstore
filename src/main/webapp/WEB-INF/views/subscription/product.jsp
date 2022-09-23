@@ -35,7 +35,7 @@
 								</div>
 								
 								<div id="footer">
-								<form:form id="subscriptionFrm" action="" method="post">
+								<form:form id="subscriptionFrm" action="${pageContext.request.contextPath}/subscription/subscriptionEnroll.do" method="post">
 									<input type="hidden" name="memberId" value='<sec:authentication property="principal.memberId"/>' />	
 									<input type="hidden" name="pcode" value="${product.pcode}" />
 									<button type="button" onclick="checkSubscription()" >구독하기</button>
@@ -58,14 +58,11 @@ headers['${_csrf.headerName}'] = '${_csrf.token}';
 		
 		success(response){
 			
-			if(response){
+			if(!response){
 				alert("이미 구독 중인 상품이 있습니다.");
 				location.href = "${pageContext.request.contextPath}/member/memberSubscription.do";
 				
-				
-				
 			}else{				
-				$('#subscriptionFrm').action = "${pageContext.request.contextPath}/subscription/subscriptionEnroll.do";
 				$('#subscriptionFrm').submit();
 			}
 			

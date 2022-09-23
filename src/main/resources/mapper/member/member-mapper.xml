@@ -13,4 +13,37 @@
 			member_id = #{memberId}
 	</select>
   
+  	<select id="getOrderById" resultMap="orderMap" parameterType="map">
+		select 
+			*
+		from
+			orders
+		where
+			member_id = #{memberId}
+		order by paid_at desc
+	</select>
+	
+	<resultMap type="orders" id="orderMap">
+		<id property="merchantUid" column="merchant_uid" />
+			<result column="member_id" property="memberId"/>
+			<result property="paidAt" column="paid_at" />
+			<result column="total_price" property="totalPrice"/>
+			<result column="delivery_price" property="deliveryPrice"/>
+			<result property="recipient" column="recipient"/> 
+			<result property="address" column="address"/>
+			<result property="status" column="status"/> 
+	</resultMap>
+	
+	<select id="getTotalContent" resultType="_int" parameterType="map">
+		select count(*) 
+		from(
+		select 
+			*
+		from
+			orders
+		where
+			member_id = #{memberId})
+		
+	
+</select>
 </mapper>

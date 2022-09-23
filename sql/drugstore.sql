@@ -262,7 +262,7 @@ create table visit(
     v_date date
 );
 
--- 날짜별 판매량
+-- 날짜별 판매량(사용x)
 create table sales_by_date(
     no number,
     by_date date default sysdate,
@@ -382,8 +382,28 @@ values(seq_product_no.nextval, '잘보여 루테인', '여기제약', '2000', '1
 insert into
     product(pcode, pname, manu, price, amount)
 values(seq_product_no.nextval, '든든 철분', 'KH제약', '1500', '10');
-
+select*from attachment;
 select * from product;
+		select
+			p.*,
+			a.attach_no,
+			a.pcode,
+			a.original_filename,
+			a.renamed_filename,
+			a.created_at attach_created_at
+		from
+			product p
+				left join product_attachment a
+					on p.pcode = a.pcode
+		where
+			p.pcode;
+            
+            
+select p.pname, p.price, p.product_attachment 
+from product p 
+inner join category c 
+on p.category_id = c.category_id 
+where p.category_id = category_id;
 
 --태연 코드--
 -- 공지사항 샘플 데이터
@@ -404,8 +424,8 @@ select count(*) from member m left join servey s on (m.member_id = s.member_id) 
 
 select m.member_id,merchant_uid, imp_uid, receiptid, method, product_price, total_price,paid_at,status from member m right join orders o on
 		(m.member_id = o.member_id) order by paid_at desc;
+select * from notice;
 --태연 코드 끝--
-
 -- 주희 코드 --
 -- 카테고리 샘플 데이터
 select * from orders;
