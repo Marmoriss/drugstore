@@ -24,7 +24,7 @@
                             <a href="${pageContext.request.contextPath}/member/memberOrder.do">주문/배송내역</a>
                         </li>
                         <li class="mypage-common-side__link">
-                            <a href="">위시리스트</a>
+                            <a href="${pageContext.request.contextPath}/wish/wishList.do">위시리스트</a>
                         </li>
                     </ul>
                 </div>
@@ -87,10 +87,10 @@
                 <div class="mypage-main__wish-wraper">
                     <div class="mypage-main__title-wrapper">
                         <div class="mypage-main__title">위시리스트</div>
-                        <a href="" class="mypage-main__title-more">
+                        <a href="${pageContext.request.contextPath}/wish/wishList.do" class="mypage-main__title-more">
                             <div class="mypage-main__title-more-text">더보기</div>
                             <div class="mypage-main__title-more-icon">
-                                <!-- > 이미지 넣기 -->
+                               <img src="${pageContext.request.contextPath}/resources/css/images/chevron-right-solid.svg" />
                             </div>
                         </a>
                     </div>
