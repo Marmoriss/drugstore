@@ -70,7 +70,7 @@
 			<div class="nav header-nav-list-wrap">
 				<ul class="header-nav-list">
 					<li class="header-nav-item"><a href="${pageContext.request.contextPath}/servey/servey.do" class="header-nav-text">건강설문</a></li>
-					<li class="header-nav-item"><a href="" class="header-nav-text">정기구독</a></li>
+					<li class="header-nav-item"><a href="${pageContext.request.contextPath}/subscription/product.do" class="header-nav-text">정기구독</a></li>
 					<li class="header-nav-item"><a class="header-nav-text" href="${pageContext.request.contextPath}/notice/noticeList.do">고객센터</a></li>
 					
 					<sec:authorize access="isAnonymous()">
@@ -99,7 +99,7 @@
 		</div>
 		<!-- 로고 -->
 		<div class="header-logo">
-			<a href="/" class="header-logo-link">
+			<a href="${pageContext.request.contextPath}/" class="header-logo-link">
 				<img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="logo" class="header-logo-img"/>
 			</a>
 		</div>

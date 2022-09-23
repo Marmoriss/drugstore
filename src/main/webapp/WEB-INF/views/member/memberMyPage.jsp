@@ -24,7 +24,7 @@
                             <a href="${pageContext.request.contextPath}/member/memberOrder.do">주문/배송내역</a>
                         </li>
                         <li class="mypage-common-side__link">
-                            <a href="">위시리스트</a>
+                            <a href="${pageContext.request.contextPath}/member/memberMyPage.do">위시리스트</a>
                         </li>
                     </ul>
                 </div>
@@ -69,7 +69,7 @@
                                 <sec:authentication property="principal.name"/>
                                 <span>님</span>
                             </div>
-                            <a href="" class="mypage-main__user-modi-btn">회원정보 수정 ></a>
+                             <a href="${pageContext.request.contextPath}/member/updateMember.do" class="mypage-main__user-modi-btn">회원정보 수정 ></a>
                         </div>
                     </div>
                     <div class="mypage-main__user-info-wrapper">

@@ -14,23 +14,27 @@ ul,li{
     align-items: center;
 }
 #bmi__header{
-	background-color: #D9AFD9;
-	background-image: -webkit-linear-gradient(#D9AFD9 0%, #97D9E1 100%);
-	background-image: -moz-linear-gradient(#D9AFD9 0%, #97D9E1 100%);
-	background-image: -o-linear-gradient(#D9AFD9 0%, #97D9E1 100%);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#D9AFD9), to(#97D9E1));
-	background-image: linear-gradient(#D9AFD9 0%, #97D9E1 100%);
+	background-image: linear-gradient(to top, #b4d6d9, #abb5d7);
 	padding: 40px;
 	width: 1235.48px;
 	
 }
 #header__title{
 	    display: flex;
-	    flex-direction : column;
     justify-content: space-evenly;
     margin-bottom: 84px;
     align-items: center;
 }
+
+#header__title__word{
+    position: relative;
+    top: 27px;
+}
+#header__title__word span{
+	font-size: 20px;
+	    font-weight: bold;
+}
+
 #bmiImg{
 	display: flex;
 	flex-direction: column;
@@ -71,20 +75,21 @@ header__title img{
     flex-direction: column;
     justify-content: center;
 	width: 80%;
-	height: 120px;
+	height: 173px;
 	border: 1px solid white;
 	border-radius: 30px;
 	background-color: white;
 }
-.bmi__result span{
-	font-size: 10px;
+.bmi__result span:first-child{
+	font-size: 20px;
 }
-.bmi_result i{
-	font-size: 34px;
+.bmi__result span:last-child{
+	font-size: 14px;
 }
+
 #product{
 	padding : 40px;
-	background-color : #C2DCDE;
+	background-color : #EEEEEE;
 	display: flex;
 	flex-direction : column;
 	width: 1235.48px;
@@ -112,5 +117,5 @@ header__title img{
 
 #reServey{
 	    position: relative;
-    bottom: 39px;
+    bottom: 35px;
 }

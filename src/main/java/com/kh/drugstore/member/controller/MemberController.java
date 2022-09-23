@@ -101,16 +101,14 @@ public class MemberController {
 		String password = String.valueOf(rnd);
 		String encodedPassword = bcryptPasswordEncoder.encode(password);
 		member.setPassword(encodedPassword);
+		phone = phone.replaceAll("-","");
 
 		// 1. db row 수정
 		int result = memberService.updateMember(member);
 
 		UserDetails updatedMember = memberSecurityService.loadUserByUsername(member.getMemberId());
 		
-		// 2. authentication 수정
-		Authentication newAuthentication = new UsernamePasswordAuthenticationToken(updatedMember,
-				updatedMember.getPassword(), updatedMember.getAuthorities());
-		SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+		
 
 		mav.addObject("password", password);
 		mav.setViewName("/member/findInfo");
@@ -119,7 +117,9 @@ public class MemberController {
 	
 	@PostMapping("/findId.do")
 	public ModelAndView findId(Member member, ModelAndView mav) {
-		log.debug("멈버 = {}",member);
+		log.debug("멈버 = {}",member.getPhone());
+		String phone = member.getPhone().replaceAll("-", "");
+		member.setPhone(phone);
 		Member findMember = memberService.selectOneMemberByName(member);
 		log.debug("memberId = {}",findMember.getMemberId());
 		mav.addObject("memberId", findMember.getMemberId());
@@ -346,6 +346,14 @@ public class MemberController {
 			
 			
 			String encodedPassword = bcryptPasswordEncoder.encode("1234");
+			
+			// 2. authentication 수정 -> 자동 로그인 되더라 
+			/*
+			 * Authentication newAuthentication = new
+			 * UsernamePasswordAuthenticationToken(updatedMember,
+			 * updatedMember.getPassword(), updatedMember.getAuthorities());
+			 * SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+			 */
 			
 			MemberEntity member =  new MemberEntity(kakaoProfile.getKakao_account().getEmail()+"k", kakaoProfile.getProperties().getNickname(), encodedPassword, "01011112222", null, null, true, null, null, null, null, null);
 			Member member2 = memberService.findKakaoMember(member.getMemberId());
