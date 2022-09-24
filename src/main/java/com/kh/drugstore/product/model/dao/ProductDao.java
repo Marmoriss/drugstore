@@ -23,8 +23,22 @@ public interface ProductDao {
 	@Select("select * from product_attachment where pcode = #{pcode}")
 	List<ProductAttachment> findAttachmentByProductCode(int pcode);
 
+	//소분류 카테고리 리스트
 //	@Select("select*from product where category_id = #{categoryId}")
-	List<Product> selectProductByCategoryId(int categoryId);
+	List<Product> selectProductBysmallCategoryId(int categoryId);
+
+	//대분류 카테고리 리스트 
+	List<Product> selectProductBybigCategoryId(int categoryId);
+
+	//최신순 
+	@Select("select*from product order by pcode desc")
+	List<Product> sortProductByRecent(int pcode);
+	
+	//낮은가격순
+	List<Product> sortProductByPrice(int price);
+
+	//높은가격순
+	List<Product> sortProductByPriceDesc(int price);
 
 	Product selectOneProductCollection(int pcode);
 
@@ -49,6 +63,10 @@ public interface ProductDao {
 	
 	@Select("select * from product where pcode = #{pcode}")
 	Product getProductBySubNo(int pcode);
+
+
+
+
 
 	
 	
