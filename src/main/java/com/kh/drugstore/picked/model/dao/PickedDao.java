@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -17,6 +18,9 @@ public interface PickedDao {
 
 	@Delete("delete from picked where member_id = #{memberId} and pcode = #{pcode}")
 	int deletePickedList(Map<String, Object> map);
+
+	@Insert("insert into picked values(#{memberId}, #{pcode})")
+	int insertPickedList(Map<String, Object> map);
 
 
 }
