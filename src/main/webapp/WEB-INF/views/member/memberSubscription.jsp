@@ -24,7 +24,7 @@
                             <a href="${pageContext.request.contextPath}/member/memberOrder.do">주문/배송내역</a>
                         </li>
                         <li class="mypage-common-side__link">
-                            <a href="${pageContext.request.contextPath}/member/memberMyPage.do">위시리스트</a>
+                            <a href="${pageContext.request.contextPath}/wish/wishList.do">위시리스트</a>
                         </li>
                     </ul>
                 </div>
@@ -62,55 +62,28 @@
         <div id="layout_config_body">
             <!-- 본문내용 시작 -->
             <div class="mypage-main__wraper">
-                <div class="mypage-main__top-wrapper">
-                    <div class="mypage-main__user-wrapper">
-                        <div class="mypage-main__user-right">
-                            <div class="mypage-main__user-name">
-                                <sec:authentication property="principal.name"/>
-                                <span>님</span>
-                            </div>
-                            <a href="${pageContext.request.contextPath}/member/updateMember.do" class="mypage-main__user-modi-btn">회원정보 수정 ></a>
-                        </div>
-                    </div>
-                    <div class="mypage-main__user-info-wrapper">
-                        <div class="mapage-main__user-info-item hand">
-                            <div class="mypage-main__user-info-title">정기구독</div>
-                            <div class="mypage-main__user-info-num-wrapper">
-                                <div class="mypage-main__user-info-num-icon">
-                                    <!--하트 이미지 넣기-->
-                                </div>
-                                <div class="mypage-main__user-info-num mypage-main__user-info-num--wish"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="mypage-main__wish-wraper">
-                    <div class="mypage-main__title-wrapper">
-                        <div class="mypage-main__title">정기구독</div>
-                        <a href="" class="mypage-main__title-more">
-                            <div class="mypage-main__title-more-text">더보기</div>
-                            <div class="mypage-main__title-more-icon">
-                                <!-- > 이미지 넣기 -->
-                            </div>
-                        </a>
-                    </div>
+                        <h3>정기구독</h3>
                     <div class="mypage-main__wish-item-wrapper">
                         <div
                             class="swiper mypage-main__wish-swiper swiper-container-initialized swiper-container-horizontal">
 									<div id="subscription_info">
 									<c:if test="${not empty subscription}">
-									 	<span>상품 정보</span>
-									 	<span>${product.pcode}</span>
-									 	<span>${product.pname}</span>									 	
-									 	<span>구독 시작 : ${subscription.startDate}</span>
-									 	<br />
-									 	<span>배송 시기 : ${subscription.sendDate}</span>
-									 	<br />
-									 										 	
-									 	<form:form action="${pageContext.request.contextPath}/subscription/subscriptionDel.do" method="post">
-									 	<input type="hidden" name="subNo" value="${subscription.subNo}" />
-									 	<button>구독 취소</button>
-									 	</form:form>
+										<a href="">
+										<div id="subscription__info-product">
+										 	<span>(${product.pcode})</span><span>${product.pname}</span>
+										</div>
+										</a>
+									 	<div id="subscription__info-date">
+										 	<span>구독 시작 : ${subscription.startDate}</span>
+										 	<span>배송 시기 : ${subscription.sendDate}</span>
+									 	</div>									 	
+									 	<div id="subscription__info-button">
+										 	<form:form action="${pageContext.request.contextPath}/subscription/subscriptionDel.do" method="post">
+										 	<input type="hidden" name="subNo" value="${subscription.subNo}" />
+										 	<button type="button" class="btn btn-danger">구독 취소</button>
+										 	</form:form>
+									 	</div>									 	
 									</c:if>
 									<c:if test="${not empty alert}">
 										<span>${alert}</span>

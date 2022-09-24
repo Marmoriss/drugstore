@@ -404,5 +404,16 @@ img {
 
 /* 구독확인 */
 #subscription_info{
-	
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4px;
 }
+#subscription__info-product{
+	font-size : 18px;
+}
+#subscription__info-date
+{
+	display: flex;
+    flex-direction: column;
+    }
