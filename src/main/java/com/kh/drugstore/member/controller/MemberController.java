@@ -352,20 +352,23 @@ public class MemberController {
 			
 			
 			String encodedPassword = bcryptPasswordEncoder.encode("1234");
+			Member kMember = new Member();
+			kMember.setMemberId(kakaoProfile.getKakao_account().getEmail()+"k");
+			kMember.setName(kakaoProfile.getProperties().getNickname());
+			kMember.setPhone("01044443333");
+			kMember.setPassword(encodedPassword);
 			
 			// 2. authentication 수정 -> 자동 로그인 되더라 
-			/*
-			 * Authentication newAuthentication = new
-			 * UsernamePasswordAuthenticationToken(updatedMember,
-			 * updatedMember.getPassword(), updatedMember.getAuthorities());
-			 * SecurityContextHolder.getContext().setAuthentication(newAuthentication);
-			 */
 			
-			MemberEntity member =  new MemberEntity(kakaoProfile.getKakao_account().getEmail()+"k", kakaoProfile.getProperties().getNickname(), encodedPassword, "01011112222", null, null, true, null, null, null, null, null);
-			Member member2 = memberService.findKakaoMember(member.getMemberId());
+			 Authentication newAuthentication = new UsernamePasswordAuthenticationToken(kMember,kMember.getPassword(), kMember.getAuthorities());
+			 SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+			 
+			
+			
+			Member member2 = memberService.findKakaoMember(kMember.getMemberId());
 			
 			if(member2 == null) {
-				memberService.insertKakaoMember(member);
+				memberService.insertKakaoMember(kMember);
 			}
 			
 			

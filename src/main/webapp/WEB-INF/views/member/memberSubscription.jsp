@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <fmt:requestEncoding value="utf-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
@@ -62,9 +63,9 @@
         <div id="layout_config_body">
             <!-- 본문내용 시작 -->
             <div class="mypage-main__wraper">
-                <div class="mypage-main__wish-wraper">
+                <div class="mypage-main__subscription-wraper">
                         <h3>정기구독</h3>
-                    <div class="mypage-main__wish-item-wrapper">
+                    <div class="mypage-main__subscription-item-wrapper">
                         <div
                             class="swiper mypage-main__wish-swiper swiper-container-initialized swiper-container-horizontal">
 									<div id="subscription_info">
@@ -81,7 +82,7 @@
 									 	<div id="subscription__info-button">
 										 	<form:form action="${pageContext.request.contextPath}/subscription/subscriptionDel.do" method="post">
 										 	<input type="hidden" name="subNo" value="${subscription.subNo}" />
-										 	<button type="button" class="btn btn-danger">구독 취소</button>
+										 	<button type="submit" class="btn btn-danger">구독 취소</button>
 										 	</form:form>
 									 	</div>									 	
 									</c:if>
