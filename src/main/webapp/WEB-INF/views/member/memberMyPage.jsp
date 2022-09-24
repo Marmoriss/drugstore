@@ -24,7 +24,7 @@
                             <a href="${pageContext.request.contextPath}/member/memberOrder.do">주문/배송내역</a>
                         </li>
                         <li class="mypage-common-side__link">
-                            <a href="">위시리스트</a>
+                            <a href="${pageContext.request.contextPath}/wish/wishList.do">위시리스트</a>
                         </li>
                     </ul>
                 </div>
@@ -77,9 +77,9 @@
                             <div class="mypage-main__user-info-title">위시리스트</div>
                             <div class="mypage-main__user-info-num-wrapper">
                                 <div class="mypage-main__user-info-num-icon">
-                                    <!--하트 이미지 넣기-->
+                                    <img src="${pageContext.request.contextPath}/resources/css/images/heart-solid.svg"/>
                                 </div>
-                                <div class="mypage-main__user-info-num mypage-main__user-info-num--wish"></div>
+                                <div class="mypage-main__user-info-num mypage-main__user-info-num--wish">${fn:length(list)}</div>
                             </div>
                         </div>
                     </div>
@@ -87,10 +87,10 @@
                 <div class="mypage-main__wish-wraper">
                     <div class="mypage-main__title-wrapper">
                         <div class="mypage-main__title">위시리스트</div>
-                        <a href="" class="mypage-main__title-more">
+                        <a href="${pageContext.request.contextPath}/wish/wishList.do" class="mypage-main__title-more">
                             <div class="mypage-main__title-more-text">더보기</div>
                             <div class="mypage-main__title-more-icon">
-                                <!-- > 이미지 넣기 -->
+                               <img src="${pageContext.request.contextPath}/resources/css/images/chevron-right-solid.svg" />
                             </div>
                         </a>
                     </div>
@@ -98,24 +98,31 @@
                         <div
                             class="swiper mypage-main__wish-swiper swiper-container-initialized swiper-container-horizontal">
                             <ul class="swiper-wrapper mypage-main__wish-swiper-wrapper">
-                                <li class="mypage-main__wish-item swiper-slide swiper-slide-active">
-                                    <div class="mypage-main__wish-img">
-                                        <a href="" class="mypage-main__wish-link">
-                                            <!-- 상품 이미지 -->
-                                        </a>
-                                    </div>
-                                    <div class="mypage-main__wish-info">
-                                        <div class="mypage-main__wish-name">
-                                            <a href="" class="mypage-main__wish-link">
-                                                <!-- 상품명 -->
-                                            </a>
-                                        </div>
-                                        <div class="mypage-main__wish-price-wrapper">
-                                            <div class="mypage-main__wish-price mypage-main__wish-price--sale"></div>
-                                            <div class="mypage-main__wish-price mypage-main__wish-price--org"></div>
-                                        </div>
-                                    </div>
-                                </li>
+                                <c:forEach items="${list}" var="picked" varStatus="vs">
+	                                <li class="mypage-main__wish-item swiper-slide swiper-slide-active">
+	                                    <div class="mypage-main__wish-img">
+	                                        <a href="${pageContext.request.contextPath}/product/productDetail.do?pcode=${picked.pcode}" class="mypage-main__wish-link">
+	                                            <img src="${pageContext.request.contextPath}/resources/upload/product/${picked.renamedFilename}" 
+	                                            width="300" align="absmiddle" hspace="5" height="216"  style="object-fit:cover;"/>
+	                                        </a>
+	                                    </div>
+	                                    <div class="mypage-main__wish-info">
+	                                        <div class="mypage-main__wish-name">
+	                                            <a href="${pageContext.request.contextPath}/product/productDetail.do?pcode=${picked.pcode}" class="mypage-main__wish-link">
+	                                                ${picked.pname}
+	                                            </a>
+	                                        </div>
+	                                        <div class="mypage-main__wish-price-wrapper">
+	                                            <div class="mypage-main__wish-price mypage-main__wish-price--sale">
+													<fmt:formatNumber value="${picked.price - picked.discount}" pattern="#,###"/>
+												</div>
+	                                            <div class="mypage-main__wish-price mypage-main__wish-price--org">
+	                                            	<fmt:formatNumber value="${picked.price}" pattern="#,###"/>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </li>
+                                </c:forEach>
                             </ul>
                         </div>
                     </div>

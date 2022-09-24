@@ -63,9 +63,15 @@ public class QnaServiceImpl implements QnaService {
 		return qnaDao.deleteQna(qnaId);
 	}
 	
+	@Override
+	public List<Qna> selectQnaListByPcode(int pcode) {
+		return qnaDao.selectQnaListByPcode(pcode);
+	}
 	
-	
-	
+	@Override
+	public Qna selectOneAnswer(int qnaId) {
+		return qnaDao.selectOneAnswer(qnaId);
+	}
 	
 	
 	

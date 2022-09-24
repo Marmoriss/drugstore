@@ -17,6 +17,11 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/admin/product-enroll.css" />
 
+<c:if test="${not empty msg}">
+	<script>
+		alert("msg");
+	</script>
+</c:if>
 <!-- admin content 시작 -->
 <div class="admin-content">
 	<div id="admin-content" class="admin-sub-frame">
@@ -150,7 +155,7 @@ document.productEnrollFrm.addEventListener('submit', (e) => {
 			document.querySelector('.small-category').value == '소분류' ? null : document.querySelector('.small-category').value;
 	document.querySelector('#categoryId').value = category;
 	
-	if(category == null) {
+	if(category == '') {
 		alert("카테고리를 선택해주세요.");
 		return;
 	}
