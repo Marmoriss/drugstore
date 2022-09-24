@@ -44,12 +44,12 @@ import com.kh.drugstore.member.model.dto.KakaoProfile;
 import com.kh.drugstore.member.model.dto.Member;
 import com.kh.drugstore.member.model.dto.MemberEntity;
 import com.kh.drugstore.member.model.dto.OAuthToken;
-import com.kh.drugstore.member.model.dto.User;
 import com.kh.drugstore.member.model.service.MemberService;
 import com.kh.drugstore.orders.model.dto.Orders;
+import com.kh.drugstore.picked.model.dto.PickedExtends;
+import com.kh.drugstore.picked.model.service.PickedService;
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.service.ProductService;
-import com.kh.drugstore.subscription.model.dto.Subscription;
 import com.kh.drugstore.subscription.model.dto.SubscriptionProduct;
 import com.kh.drugstore.subscription.model.service.SubscriptionService;
 import com.kh.security.model.service.MemberSecurityService;
@@ -79,7 +79,8 @@ public class MemberController {
 	@Autowired
 	private ProductService productService;
 
-	
+	@Autowired
+	private PickedService pickedService;
 	
 	@GetMapping("/memberEnroll.do")
 	public String memberEnroll() {
@@ -198,7 +199,12 @@ public class MemberController {
 		log.debug("principal = {}", principal);
 		log.debug("credentials = {}", credentials);
 		log.debug("authorities = {}", authorities);
-
+		
+		// 주희 코드
+		List<PickedExtends> list = pickedService.selectPickedList(authentication.getName());
+		log.debug("list = {}", list);
+		
+		mav.addObject("list", list);
 		mav.setViewName("/member/memberMyPage");
 		return mav;
 	}

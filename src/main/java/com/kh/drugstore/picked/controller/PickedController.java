@@ -4,8 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,11 +61,36 @@ public class PickedController {
 		return "redirect:/wish/wishList.do";
 	}
 	
-	
-	
-	
-	
-	
+	@PostMapping("/insertPickedList.do")
+	public ResponseEntity<?> insertPickedList(
+					RedirectAttributes redirectAttr,
+					@RequestParam int pcode,
+					Authentication authentication) {
+		
+		log.debug("pcode = {}", pcode);
+		String memberId = authentication.getName();
+		
+		Map<String, Object> param = new HashMap<>();
+		
+		List<PickedExtends> list = pickedService.selectPickedList(memberId);
+		for(PickedExtends product : list) {
+			if(product.getPcode() == pcode) {
+				param.put("msg", "이미 찜리스트에 추가하였습니다.");
+				return ResponseEntity.ok(param);
+			}
+		}
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("pcode", pcode);
+		
+		int result = pickedService.insertPickedList(map);
+		
+		param.put("msg", "찜 추가 완료!");
+		
+		
+		return ResponseEntity.ok(param);
+	}
 	
 	
 	
