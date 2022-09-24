@@ -24,5 +24,9 @@ public interface QnaService {
 
 	int deleteQna(int qnaId);
 
+	List<Qna> selectQnaListByPcode(int pcode);
+
+	Qna selectOneAnswer(int qnaId);
+
 
 }
