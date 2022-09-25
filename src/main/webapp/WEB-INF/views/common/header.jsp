@@ -123,8 +123,8 @@
                   </li>
                   <sec:authorize access="isAuthenticated() && !hasRole('ADMIN')"> >
                   <li class="categoryList1 header-menu-item">
-                     <a href="${pageContext.request.contextPath}/chat/chat.do" class="header-menu-title">chat
-                        <img style="width:20px; height:20px;" src="${pageContext.request.contextPath}/resources/images/792.gif" alt="chat"/></a>
+                     <a href="${pageContext.request.contextPath}/chat/chat.do" class="header-menu-title">
+                        <img id="chatImg" src="${pageContext.request.contextPath}/resources/images/792.gif" alt="chat"/></a>
                   </sec:authorize>
                   </li>
                </ul>

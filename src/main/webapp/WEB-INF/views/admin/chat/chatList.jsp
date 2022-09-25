@@ -7,11 +7,17 @@
 	<jsp:param name="title" value="채팅 관리" />
 </jsp:include>
 <style>
+.navbar-brand {
+	margin-left: 250px;
+}
 #tbl-chat-list{
-	padding-top : 350px; 
+ 	margin-left: 470px;
 }
 </style>
-<table class="table text-center" id="tbl-chat-list">
+	<nav class="navbar navbar-light bg-light">
+			<a class="navbar-brand">채팅 내역</a> </nav>
+<br /><br />
+<table id="tbl-chat-list" class="table w-50" > 
   <thead>
     <tr>
       <th scope="col">회원아이디</th>
@@ -27,6 +33,7 @@
   	</c:forEach>
   </tbody>
 </table>
+
 <script>
 const trClickHandler = (e) => {
 	const parent = e.target.parentElement;
