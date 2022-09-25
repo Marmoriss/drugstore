@@ -53,6 +53,12 @@ public interface QnaDao {
 
 	@Delete("delete from qna where qna_id = #{qnaId}")
 	public int deleteQna(int qnaId);
+
+	@Select("select * from qna where pcode = #{pcode}")
+	public List<Qna> selectQnaListByPcode(int pcode);
+
+	@Select("select * from qna where comment_ref = #{qnaId}")
+	public Qna selectOneAnswer(int qnaId);
 	
 	
 	

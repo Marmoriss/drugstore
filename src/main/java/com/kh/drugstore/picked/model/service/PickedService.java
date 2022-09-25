@@ -11,4 +11,6 @@ public interface PickedService {
 
 	int deletePickedList(Map<String, Object> map);
 
+	int insertPickedList(Map<String, Object> map);
+
 }

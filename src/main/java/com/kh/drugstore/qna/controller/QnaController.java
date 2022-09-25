@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -142,8 +143,15 @@ public class QnaController {
 		return "redirect:/product/productDetail.do?pcode=" + pcode;
 	}
 	
-	
-	
+	@GetMapping("/selectOneAnswer.do")
+	public ResponseEntity<?> selectOneAnswer(@RequestParam int qnaId){
+		log.debug("qnaId = {}", qnaId);
+		
+		Qna qna = qnaService.selectOneAnswer(qnaId);
+		log.debug("qna = {}", qna);
+		
+		return ResponseEntity.ok(qna);
+	}
 	
 	
 	
