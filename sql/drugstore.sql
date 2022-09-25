@@ -491,4 +491,13 @@ alter table orders drop column created_at;
 alter table orders drop column failed_at;
 
 select i.*, p.pname from intake_check i left join product p on i.pcode = p.pcode where member_id = 'potato';
-select * from qna;
+select * from qna order by qna_id;
+insert into qna values(seq_qna_id.nextval, default, 184, 'honggd', 'N', sysdate, '샘플 6', 2468, 1);
+insert into qna values(seq_qna_id.nextval, 66, 184, 'honggd', 'Y', sysdate, '샘플 6 답변', 0, 2);
+
+update qna set answered = 'Y' where qna_id between 42 and 67;
+
+-- 1:1 테이블에 비밀글 여부 체크 컬럼 추가
+alter table question add (
+    secret number default 0
+);
