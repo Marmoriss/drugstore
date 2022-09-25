@@ -126,11 +126,11 @@
 									</div>
 								</li>
 								<li class="btn_wrap product-view__btn-wrap">
-									<button class="btn_move medium product-view__btn" id="addCart">장바구니</button>
-									<button
-										class="btn_chg medium product-view__btn product-view__btn-red-bg"
-										id="buy">바로구매</button>
-								</li>
+                                    <input type="hidden" name="cartPcode" id="cartPcode" value="${product.pcode}" />
+                                    <input type="hidden" name="cartAmount" id="cartAmount" value="1" />
+                                    <button type="button" class="btn_move medium product-view__btn" id="addCart">장바구니</button>
+                                    <button class="btn_chg medium product-view__btn product-view__btn-red-bg" id="buy">바로구매</button>
+                                </li>
 							</ul>
 						</form:form>
 					</dd>
@@ -729,13 +729,11 @@
         document.querySelector('#product_review').style.display = "none";
         document.querySelector('#product_qna').style.displqy = "none";
     });
-
     document.querySelector('.tab_02').addEventListener('click', (e) => {
         document.querySelector('#product_description').style.display = "none";
         document.querySelector('#product_review').style.display = "inline-block";
         document.querySelector('#product_qna').style.displqy = "none";
     });
-
     document.querySelector('.tab_03').addEventListener('click', (e) => {
         document.querySelector('#product_description').style.display = "none";
         document.querySelector('#product_review').style.display = "none";
@@ -743,14 +741,54 @@
     });
 </script>
 <script>
+const headers = {};
+headers['${_csrf.headerName}'] = '${_csrf.token}';
+document.querySelector("#addCart").addEventListener('click', (e) => {
+	e.preventDefault(); // 제출방지
+	const pcode = document.querySelector("[name=cartPcode]").value;
+	const amount = document.querySelector("[name=cartAmount]").value;
+	console.log(pcode);
+	console.log(amount);
+	const cartList = {pcode, amount};
+	console.log(cartList);
+	$.ajax({
+		url : "${pageContext.request.contextPath}/cart/findCart.do",
+		type : "GET",
+		headers,
+		data : {pcode},
+		success(response) {
+			if(response) {
+				if(confirm('장바구니에 존재하는 상품입니다. 그래도 추가하시겠습니까?')) {
+					addCart(cartList);
+				} else return;
+			} else {
+				addCart(cartList);
+			}
+		},
+		error : console.log
+		});
+	});
+const addCart = (cartList) => {
+	$.ajax({
+	url : "${pageContext.request.contextPath}/cart/addCart.do",
+	type : "POST",
+	headers,
+	data : JSON.stringify(cartList),
+	contentType : 'application/json; charset=utf-8',
+	success(response) {
+		if(confirm('장바구니로 이동하시겠습니까?')){
+			location.href = "${pageContext.request.contextPath}/cart/cartList.do";
+			return;
+		}
+	},
+	error : console.log
+	});
+};
 // 위시리스트 추가
 document.querySelector('.product-view__whish').addEventListener('click', (e) => {
-
     const headers = {};
     headers['${_csrf.headerName}'] = '${_csrf.token}';
-
     const pcode = ${ product.pcode };
-
     $.ajax({
         url: "${pageContext.request.contextPath}/wish/insertPickedList.do",
         data: { pcode },
@@ -764,13 +802,11 @@ document.querySelector('.product-view__whish').addEventListener('click', (e) => 
         error: console.log
     });
 });
-
 // 문의 수정 폼 연결
 const updateQna = (e) => {
     const qnaId = e.value;
     location.href = "${pageContext.request.contextPath}/qna/qnaUpdateForm.do?qnaId=" + qnaId;
 }
-
 // 문의 삭제 전 확인 메세지
 document.querySelectorAll('[name=qnaDeleteForm]').forEach((form) => {
 	form.addEventListener('submit', (e) => {
@@ -782,7 +818,6 @@ document.querySelectorAll('[name=qnaDeleteForm]').forEach((form) => {
 		}
 	});
 });
-
 // 수량 변경
 document.querySelector('.btn-minus').addEventListener('click', (e) => {
     // 수량 마이너스 처리
@@ -790,12 +825,10 @@ document.querySelector('.btn-minus').addEventListener('click', (e) => {
     count = parseInt(count);
     document.querySelector('.count').value = count - 1;
     if (count < 0) count = 0;
-
     // 총 금액
     const totalPrice = document.querySelector('#total_product_price');
     const productPrice = ${ product.price };
     const discount = ${ product.discount };
-
     let price = (productPrice - discount) * count;
     totalPrice.innerHTML = price;
 });
@@ -803,16 +836,13 @@ document.querySelector('.btn-plus').addEventListener('click', (e) => {
     let count = document.querySelector('.count').value;
     count = parseInt(count);
     document.querySelector('.count').value = count + 1;
-
     // 총 금액
     const totalPrice = document.querySelector('#total_product_price');
     const productPrice = ${ product.price };
     const discount = ${ product.discount };
-
     let price = (productPrice - discount) * count;
     totalPrice.innerHTML = price;
 });
-
 $(document).ready(function () {
     // 상품 정보 토글
     $('.product-view__guide-item-title:eq(0)').on('click', function () {
@@ -842,7 +872,6 @@ $(document).ready(function () {
             $('.product-view__guide-item-arrow:eq(2)').removeClass('product-view__guide-item-arrow--active');
         }
     });
-
     // 리뷰 토글
     const trs = document.querySelectorAll('.review');
     trs.forEach(function (tr, item) {
@@ -872,7 +901,6 @@ $(document).ready(function () {
             }
         });
     });
-
     // 문의 토글
     const qnaTrs = document.querySelectorAll('.product-qna__item-header');
     qnaTrs.forEach(function (qnaTr, item) {

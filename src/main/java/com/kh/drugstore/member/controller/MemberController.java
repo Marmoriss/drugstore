@@ -447,6 +447,23 @@ public class MemberController {
 				model.addAttribute("pagebar", pagebar);
 	}
 	
+	@GetMapping("/findByValues.do")
+	public String findByValues(Authentication authentication, @RequestParam String to, @RequestParam String from, @RequestParam String status, Model model) {
+		Member member = (Member) authentication.getPrincipal();
+		String memberId = member.getMemberId();
+		log.debug("to = {}", to);
+		log.debug("from = {}", from);
+		Map<String, Object> param = new HashMap<>();
+		param.put("status", status);
+		param.put("to", to);
+		param.put("from", from);
+		param.put("memberId", memberId);
+		List<Orders> list = memberService.findByValues(param);
+		log.debug("list = {}", list);
+		model.addAttribute("list", list);
+		
+		return "/member/memberOrder";
+	}
 
 	
 }
