@@ -21,8 +21,8 @@
 			<div class="border-bot"></div><br />
 			<ul class=space_list>
 				<li class="menu-list"><a href="${pageContext.request.contextPath}/notice/noticeList.do">공지사항</a></li>
-				<li class="menu-list"><a href="${pageContext.request.contextPath}/faq/faqList.do">1:1 문의하기</a></li>
-				<li class="menu-list"><a href="#">FAQ</a></li>
+				<li class="menu-list"><a href="${pageContext.request.contextPath}/question/questionList.do">1:1 문의하기</a></li>
+				<li class="menu-list"><a href="${pageContext.request.contextPath}/faq/faqList.do">FAQ</a></li>
 			</ul>
 		</section>
 		<!-- 전체 제품 회원관리 주문결제 교환반품 배송 드럭스토어 기타-->
