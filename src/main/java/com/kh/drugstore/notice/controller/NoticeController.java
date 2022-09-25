@@ -1,6 +1,10 @@
 package com.kh.drugstore.notice.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.drugstore.common.DrugstoreUtils;
+import com.kh.drugstore.member.model.dto.User;
 import com.kh.drugstore.notice.model.dao.NoticeDao;
 import com.kh.drugstore.notice.model.dto.Notice;
 import com.kh.drugstore.notice.model.service.NoticeService;
@@ -30,10 +36,26 @@ public class NoticeController {
 	
 	// 공지사항 전체조회
 	@GetMapping("/noticeList.do")
-	public void noticeList(Model model) {
-		List<Notice> list = noticeService.selectNoticeList();
-//		log.debug("list = {}", list);
-		model.addAttribute("list", list);
+	public void noticeList(
+			@RequestParam(defaultValue = "1") int cPage, 
+			Model model, 
+			HttpServletRequest request) {
+		
+			Map<String, Integer> param = new HashMap<>();
+			int limit = 5;
+			param.put("cPage", cPage);
+			param.put("limit", limit);
+			List<Notice> list = noticeService.selectNoticeList(param);
+			log.debug("list = {}", list);
+		
+			model.addAttribute("list", list);
+		
+			// 2. pagebar영역
+			int totalContent =noticeService.getTotalContent();
+			log.debug("totalContent = {}", totalContent);
+			String url = request.getRequestURI(); 
+			String pagebar = DrugstoreUtils.getPagebar(cPage, limit, totalContent, url);
+			model.addAttribute("pagebar", pagebar);
 	}
 
 	@GetMapping("/noticeForm.do")
