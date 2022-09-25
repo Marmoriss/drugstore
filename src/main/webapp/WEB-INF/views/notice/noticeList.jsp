@@ -20,7 +20,7 @@
 			<ul class=space_list>
 				<li class="menu-list"><a href="#">공지사항</a></li>
 				<li class="menu-list"><a href="#">1:1 문의하기</a></li>
-				<li class="menu-list"><a href="#">FAQ</a></li>
+				<li class="menu-list"><a href="${pageContext.request.contextPath}/faq/faqList.do">FAQ</a></li>
 			</ul>
 		</section>
 
