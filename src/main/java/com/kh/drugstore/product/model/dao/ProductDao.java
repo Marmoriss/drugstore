@@ -19,6 +19,12 @@ public interface ProductDao {
 
 	@Select("select count(*) from product")
 	int getTotalContent();
+	
+//	@Select("select count(*) from category join product p on (c.category_id = p.category_id) where c.category_id (select category_id from category where category_parent_lev = #{category_parent_lev})")
+//	int getBigTotalContent();
+//	
+//	@Select("select count(*) from product p left join product_attachment a on p.pcode = a.pcode where category_id = #{category_id}")
+//	int getSmallTotalContent();
 
 	@Select("select * from product_attachment where pcode = #{pcode}")
 	List<ProductAttachment> findAttachmentByProductCode(int pcode);

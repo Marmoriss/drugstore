@@ -81,17 +81,17 @@
 		where
 			p.pcode = #{pcode}
 	</select>
+	
 	<select id="selectProductBysmallCategoryId" resultMap="productCollectionMap">
 		select 
 			* 
 		from 
 			product p 
 				left join product_attachment a 
-					on p.pcode = a.pcode
-		where 
-			category_id = #{category_id}
+					on p.pcode = a.pcode 
+		where category_id = #{category_id}
 	</select>
-	
+
 	<select id="selectProductBybigCategoryId" resultMap="productCollectionMap">
 		select
 			*

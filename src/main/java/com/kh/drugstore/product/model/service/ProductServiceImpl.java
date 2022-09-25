@@ -33,11 +33,20 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.findAllProduct(rowBounds);
 	}
 	
-	//전체개수
 	@Override
 	public int getTotalContent() {
 		return productDao.getTotalContent();
 	}
+	
+//	@Override
+//	public int getBigTotalContent() {
+//		return productDao.getBigTotalContent();
+//	}
+//	
+//	@Override
+//	public int getSmallTotalContent() {
+//		return productDao.getSmallTotalContent();
+//	}
 	
 	//상품코드로 상품첨부파일 조회
 	@Override
@@ -116,6 +125,8 @@ public class ProductServiceImpl implements ProductService {
 	public Product getProductBySubNo(int pcode) {
 		return productDao.getProductBySubNo(pcode);
 	}
+
+
 	
 	
 	

@@ -13,7 +13,7 @@ public interface ProductService {
 	List<Product> findAllProduct(Map<String, Integer> param);
 
 	int getTotalContent();
-
+	
 	List<ProductAttachment> findAttachmentByProductCode(int pCode);
 
 	//대분류 카테고리 리스트 갖고오기 
@@ -54,6 +54,8 @@ public interface ProductService {
 	List<Product> checkCategory(int[] checkCategoryByCartNo);
 
 	Product getProductBySubNo(int pcode);
+
+
 
 
 

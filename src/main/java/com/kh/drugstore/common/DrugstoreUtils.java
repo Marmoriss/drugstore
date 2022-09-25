@@ -17,6 +17,7 @@ public class DrugstoreUtils {
 	 * cPage 현재 페이지 
 	 * offset = (현재페이지-1)*한 페이지에 표시할 컨텐츠 수 
 	 * int limit = 한 페이지에 표시할 컨텐츠 수 
+	 * @param smallTotalContent 
 	 * 
 	 */
 	public static String getPagebar(int cPage, int limit, int totalContent, String url) {
