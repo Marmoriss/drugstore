@@ -1,4 +1,3 @@
-chat.jsp
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.kh.drugstore.chat.model.dto.ChatLog"%>
