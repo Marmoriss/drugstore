@@ -48,7 +48,7 @@ public interface ProductDao {
 
 	Product selectOneProductCollection(int pcode);
 
-	List<ProductEntity> findByValues(Map<String, Object> param);
+	List<ProductEntity> findByValues(ProductEntity product);
 
 	@Select("select * from (select * from product where main_fnctn like concat('%' || #{symptom},'%')) where rownum <= 3")
 	List<Product> findServeyProduct(String symptom);
@@ -61,6 +61,8 @@ public interface ProductDao {
 	@Select("select pname from product where pname like '%' || #{pname} || '%' ")
 	List<String> autocompletePname(String pname);
 	
+	@Select("select * from product")
+	List<Product> selectProductList();
 
 	// 동하
 	List<Product> selectSubscriptionAllProduct();
@@ -69,6 +71,7 @@ public interface ProductDao {
 	
 	@Select("select * from product where pcode = #{pcode}")
 	Product getProductBySubNo(int pcode);
+
 
 
 

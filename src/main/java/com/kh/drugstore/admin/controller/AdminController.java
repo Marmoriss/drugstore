@@ -2,6 +2,9 @@ package com.kh.drugstore.admin.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +24,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,6 +37,7 @@ import com.kh.drugstore.product.model.dto.Category;
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.dto.ProductAttachment;
 import com.kh.drugstore.product.model.dto.ProductEntity;
+import com.kh.drugstore.product.model.dto.SaleStatus;
 import com.kh.drugstore.product.model.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -65,29 +68,30 @@ public class AdminController {
 
 // 주희코드 시작	
 	@GetMapping("/product/productList.do")
-	public void productList(
-			@RequestParam(defaultValue = "1") int cPage, 
-			HttpServletRequest request, 
-			Model model) {
+	public void productList(Model model) {
 		
-		// 콘텐츠
-		Map<String, Integer> param = new HashMap<>();
+		// 전체 상품 조회
+		List<Product> allList = productService.selectProductList();
+		log.debug("allList = {}", allList);
+		model.addAttribute("allList", allList);
 		
-		int limit = 20;
-		param.put("cPage", cPage);
-		param.put("limit", limit);
+		int y = 0;
+		int n = 0;
+		int s = 0;
+		for(Product product : allList) {
+			if(SaleStatus.Y == product.getSaleStatus()) {
+				y++;
+			} else if(SaleStatus.N == product.getSaleStatus()) {
+				n++;
+			} else {
+				s++;
+			}
+		}
 		
-		List<Product> list = productService.findAllProduct(param);
-		log.debug("list = {}", list);
-//		model.addAttribute("list", list);
+		model.addAttribute("y", y);
+		model.addAttribute("n", n);
+		model.addAttribute("s", s);
 		
-		// 페이지바
-		int totalContent = productService.getTotalContent();
-		log.debug("totalContent = {}", totalContent);
-		String url = request.getRequestURI();
-		String pagebar = DrugstoreUtils.getPagebar(cPage, limit, totalContent, url);
-//		model.addAttribute("pagebar", pagebar);
-//		model.addAttribute("totalContent", totalContent);
 	}
 	
 	@GetMapping("/product/productEnroll.do")
@@ -123,33 +127,61 @@ public class AdminController {
 	
 	@GetMapping("/product/findByValues.do")
 	public String findByValues(
-							@RequestParam String pcode,
-							@RequestParam String pname,
-							@RequestParam String manu,
-							@RequestParam String saleStatus,
-							@RequestParam String categoryId,
+							ProductEntity product,
 							@RequestParam String toDate,
 							@RequestParam String fromDate,
+							@RequestParam String enrollOrUpdate,
 							Model model){
 		
-//		log.debug("pcode = {}", pcode);
-//		log.debug("pname = {}", pname);
-//		log.debug("manu = {}", manu);
-//		log.debug("saleStatus = {}", saleStatus);
-//		log.debug("categoryId = {}", categoryId);
-//		log.debug("toDate = {}", toDate);
-//		log.debug("fromDate = {}", fromDate);
+		// 전체 상품 조회
+		List<Product> allList = productService.selectProductList();
 		
-		Map<String, Object> param = new HashMap<>();
-		param.put("pcode", pcode);
-		param.put("pname", pname);
-		param.put("manu", manu);
-		param.put("saleStatus", saleStatus);
-		param.put("categoryId", categoryId);
-		param.put("toDate", toDate);
-		param.put("fromDate", fromDate);
+		int y = 0;
+		int n = 0;
+		int s = 0;
+		for(Product p : allList) {
+			if(SaleStatus.Y == p.getSaleStatus()) {
+				y++;
+			} else if(SaleStatus.N == p.getSaleStatus()) {
+				n++;
+			} else {
+				s++;
+			}
+		}
 		
-		List<ProductEntity> list = productService.findByValues(param);
+		model.addAttribute("y", y);
+		model.addAttribute("n", n);
+		model.addAttribute("s", s);
+		model.addAttribute("allList", allList);
+		
+		List<ProductEntity> productList = productService.findByValues(product);
+		List<ProductEntity> list = new ArrayList<>();
+		
+		if("".equals(toDate) || "".equals(fromDate)){
+			toDate = "1111-01-01";
+			fromDate = "9999-12-31";
+			log.debug("LocalDate.parse(toDate) = {}", LocalDate.parse(toDate));
+			log.debug("LocalDate.parse(fromDate) = {}", LocalDate.parse(fromDate));
+		}
+		
+		for(ProductEntity _product : productList) {
+			// 검색 조건이 생성일이고, 시작일보다 생성일이 크고, 종료일보다 생성일이 작을 때
+			if("createdAt".equals(enrollOrUpdate)
+					&& (_product.getCreatedAt().compareTo(LocalDate.parse(toDate)) >= 0) 
+					&& (_product.getCreatedAt().compareTo(LocalDate.parse(fromDate)) <= 0)
+					){
+				list.add(_product);
+				log.debug("통과");
+			// 검색 조건이 수정일이고, 수정일이 null이 아니고, 수정일보다 생성일이 크고, 종료일보다 생성일이 작을 때
+			} else if("updatedAt".equals(enrollOrUpdate) && product.getUpdatedAt() != null
+					&& (_product.getCreatedAt().compareTo(LocalDate.parse(toDate)) >= 0) 
+					&& (_product.getCreatedAt().compareTo(LocalDate.parse(fromDate)) <= 0)
+					) {
+				list.add(_product);
+				log.debug("수정일 통과");
+			}
+		}
+		
 		log.debug("list = {}", list);
 		model.addAttribute("list", list);
 		
