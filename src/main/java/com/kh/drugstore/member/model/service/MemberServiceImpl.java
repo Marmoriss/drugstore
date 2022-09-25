@@ -79,5 +79,9 @@ public class MemberServiceImpl implements MemberService {
 	public int getTotalContent(Map<String, Object> param) {
 		 return memberDao.getTotalContent(param); 
 	}
+	@Override
+	public List<Orders> findByValues(Map<String, Object> param) {
+		return memberDao.findByValues(param);
+	}
 	
 }
