@@ -15,7 +15,7 @@ import java.util.Map;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.drugstore.member.model.dao.MemberDao;
 import com.kh.drugstore.member.model.dto.Member;
@@ -27,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@Transactional(rollbackFor = Exception.class)
 public class MemberServiceImpl implements MemberService {
 
 	
@@ -77,7 +78,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	@Override
 	public int getTotalContent(Map<String, Object> param) {
-		 return memberDao.getTotalContent(param); 
+		 return memberDao.getTotalContent(param);
 	}
 	@Override
 	public List<Orders> findByValues(Map<String, Object> param) {
