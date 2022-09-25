@@ -1,3 +1,4 @@
+chat.jsp
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.kh.drugstore.chat.model.dto.ChatLog"%>
@@ -14,17 +15,31 @@
 <style>
 #chatFrm{
 	padding-top : 350px;
+	margin: 0 auto;
+	width: 500px;
+	border-top:1px solid #ddd;
+}
+#sendBtn{
+	outline: none;
+    border: none;
+    background-color: rgb(122, 158, 177);
+    color: white;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius:30px;
+}
+#chatHeader {
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    font-size: 25px;
+    font-weight: 700;
+    border-bottom: 1px solid #ddd;
 }
 
 </style>
-<div id="chatFrm" class="input-group mb-3">
-	<input type="text" id="msg" class="form-control"
-		placeholder="문의 내용 작성">
-	<div class="input-group-append" style="padding: 0px;">
-		<button id="sendBtn" class="btn btn-outline" type="button">Send</button>
-	</div>
-</div>
-<div>
+<div id="chatFrm">
+<div id="chatHeader">Drug Store 관리자 채팅</div>
     <ul class="list-group list-group-flush" id="data">
 	<%-- 전 채팅 내역 불러오기 --%>
 	<c:forEach items="${chatLogs}" var="chat">
@@ -33,9 +48,17 @@
     			String time = new Date(chat.getTime()).toString(); 
     			
     		%>
-    		<li class="list-group-item" title="<%= time %>">${chat.time}>> ${chat.memberId} : ${chat.msg}</li>
+    		<li class="list-group-item">${chat.memberId} : ${chat.msg}</li>
     	</c:forEach> 
     </ul>
+
+<div class="col-xs-4">
+	<input type="text" id="msg" class="form-control"
+		placeholder="문의 내용 작성"> </div>
+	<div class="input-group-append">
+		<button id="sendBtn" class="btn btn-outline" type="button">전송</button>
+	</div>
+
 </div>
 <script>
 document.querySelector("#sendBtn").addEventListener('click', () => {

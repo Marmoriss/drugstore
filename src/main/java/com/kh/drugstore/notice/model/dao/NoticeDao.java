@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.session.RowBounds;
 
 import com.kh.drugstore.notice.model.dto.Notice;
 
@@ -14,7 +15,7 @@ import com.kh.drugstore.notice.model.dto.Notice;
 public interface NoticeDao {
 
 	@Select("select * from notice order by no desc")
-	List<Notice> selectNoticeList();
+	List<Notice> selectNoticeList(RowBounds rowBounds);
 
 	@Insert("insert into notice values (seq_notice_no.nextval, #{writer}, #{title}, #{content}, default, #{next}, #{last}, #{nexttitle}, #{lasttitle})")
 	int insertNotice(Notice notice);
@@ -34,6 +35,9 @@ public interface NoticeDao {
 			+ "lag(title,1,9999) over(order by no) as lasttitle\r\n"
 			+ "from notice order by no desc) where no=#{no}")
 	Notice movePage(int no);
+
+	@Select("select count(*) from notice")
+	int getTotalContent();
 	
 	
 
