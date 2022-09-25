@@ -48,7 +48,9 @@ public class SubscriptionController {
 	 */
 	@GetMapping("/product.do")
 	public void subscription(Model model) {
-		List<Product> productList = productService.selectSubscriptionAllProduct();
+		int categoryId = 350017;
+		List<Product> productList = productService.selectProductBysmallCategoryId(categoryId);
+		log.debug("productList = {}",productList);
 		model.addAttribute("productList", productList);
 	}
 	
@@ -63,6 +65,8 @@ public class SubscriptionController {
 		map.put("memberId", memberId);
 		map.put("pcode", pcode);
 		
+		
+		// 여기서 문제 발생할 수도 있음
 		int result = cartService.insertCart(map);
 		
 		return "redirect:/cart/cartList.do";

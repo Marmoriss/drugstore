@@ -51,8 +51,8 @@ public class ServeyController {
 		double bmiOrigin = (weight / (height * height)) * 10000;
 		double bmi = Math.round(bmiOrigin * 100) / 100;
 		
-		
-		List<Product> serveyProductList = productService.findServeyProduct(servey.getBody());
+		int category = Integer.parseInt(servey.getBody());
+		List<Product> serveyProductList = productService.selectProductBysmallCategoryId(category);
 		
 		model.addAttribute("servey", servey);
 		model.addAttribute("bmi", bmi);
@@ -75,7 +75,8 @@ public class ServeyController {
 		double bmiOrigin = (weight / (height * height)) * 10000;
 		double bmi = Math.round(bmiOrigin * 100) / 100;
 		
-		List<Product> serveyProductList = productService.findServeyProduct(servey.getBody());
+		int category = Integer.parseInt(servey.getBody());
+		List<Product> serveyProductList = productService.selectProductBysmallCategoryId(category);
 		
 		model.addAttribute("servey",servey);
 		model.addAttribute("bmi", bmi);

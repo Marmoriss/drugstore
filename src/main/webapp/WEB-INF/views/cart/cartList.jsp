@@ -171,8 +171,7 @@ document.querySelector("#order-btn").addEventListener('click', (e) => {
 			dataType : "json",
 			success(response) {
 				for(var i=0; i< response.length; i++){
-					
-					if(response[i].product.categoryId == 350004){
+					if(response[i].product.categoryId == 350017){
 						document.memberOrderFrm.action = "${pageContext.request.contextPath}/subscription/enrollInfo.do";
 						document.memberOrderFrm.submit();
 					}

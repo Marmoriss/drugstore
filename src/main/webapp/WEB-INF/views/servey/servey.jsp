@@ -43,11 +43,11 @@
 				</div>
 				<div style="display: none" class="mx-auto">
 					<h3>불편하시거나 걱정되는 부분을 선택해주세요</h3>
-						<label><input type="radio" name="body" value="혈액"/>혈관</label>
-						<label><input type="radio" name="body" value="장"/>소화</label>
-						<label><input type="radio" name="body" value="눈"/>눈</label>
-						<label><input type="radio" name="body" value="피로"/>피로감</label>
-						<label><input type="radio" name="body" value="면역"/>면역</label>
+						<label><input type="radio" name="body" value="350016"/>심혈관계</label>
+						<label><input type="radio" name="body" value="350013"/>소화</label>
+						<label><input type="radio" name="body" value="350012"/>눈</label>
+						<label><input type="radio" name="body" value="350014"/>피로감</label>
+						<label><input type="radio" name="body" value="350015"/>면역</label>
 						<br />
 						<div class="btn-wrapper">
 							<span onclick="prev(1)" class="btn btn-light prev" >이전</span>
@@ -138,7 +138,7 @@
 		console.log(symptom);
 		next(cnt);
 		switch(symptom){
-		case "혈액" : symptomDiv.innerHTML = ` <h3>세부 증상을 선택하세요</h3> 
+		case "350016" : symptomDiv.innerHTML = ` <h3>세부 증상을 선택하세요</h3> 
 											<div class="form-check">
 											<input type="checkbox" class="form-check-input" name="symptom" value="상처가 생기면 잘 아물지 않아요" id="op1"/>
 											<label for="op1" class="form-check-label">상처가 생기면 잘 아물지 않아요</label>
@@ -158,7 +158,7 @@
 											`;
 											
 											break;
-		case "장" :symptomDiv.innerHTML = ` <h3>세부 증상을 선택하세요</h3> 
+		case "350013" :symptomDiv.innerHTML = ` <h3>세부 증상을 선택하세요</h3> 
 											<div class="form-check">
 											<input type="checkbox" class="form-check-input" name="symptom" value="복통이나 속 쓰림이 자주 발생해요" id="op4"/>
 											<label for="op4" class="form-check-label">복통이나 속 쓰림이 자주 발생해요</label>											</div>
@@ -181,7 +181,7 @@
 											`;
 			
 											break;
-		case "눈" : symptomDiv.innerHTML = ` <h3>세부 증상을 선택하세요</h3>
+		case "350012" : symptomDiv.innerHTML = ` <h3>세부 증상을 선택하세요</h3>
 											<div class="form-check">
 											<input type="checkbox" class="form-check-input" name="symptom" value="눈이 건조하여 뻑뻑하고 가려움을 느껴요" id="op8"/>
 											<label for="op8" class="form-check-label">눈이 건조하여 뻑뻑하고 가려움을 느껴요</label>
@@ -205,7 +205,7 @@
 											`;
 								
 											break;
-		case "피로" : symptomDiv.innerHTML = ` <h3>세부 증상을 선택하세요</h3> 										
+		case "350014" : symptomDiv.innerHTML = ` <h3>세부 증상을 선택하세요</h3> 										
 											<div class="form-check">
 											<input type="checkbox" class="form-check-input" name="symptom" value="무기력하고 식욕이 없어요" id="op12"/>
 											<label for="op12" class="form-check-label">무기력하고 식욕이 없어요</label>
@@ -229,7 +229,7 @@
 											`;
 								
 											break;
-		case "면역" : symptomDiv.innerHTML = ` <h3>세부 증상을 선택하세요</h3> 
+		case "350015" : symptomDiv.innerHTML = ` <h3>세부 증상을 선택하세요</h3> 
 											<div class="form-check">
 											<input type="checkbox" class="form-check-input" name="symptom" value="스트레스가 매우 많아요" id="op16"/>
 											<label for="op16" class="form-check-label">스트레스가 매우 많아요</label>

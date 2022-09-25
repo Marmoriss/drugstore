@@ -70,9 +70,9 @@
                             class="swiper mypage-main__wish-swiper swiper-container-initialized swiper-container-horizontal">
 									<div id="subscription_info">
 									<c:if test="${not empty subscription}">
-										<a href="">
+										<a href="${pageContext.request.contextPath}/product/productDetail.do?pcode=${product.pcode}">
 										<div id="subscription__info-product">
-										 	<span>(${product.pcode})</span><span>${product.pname}</span>
+										 	<span>${product.pname}</span>
 										</div>
 										</a>
 									 	<div id="subscription__info-date">

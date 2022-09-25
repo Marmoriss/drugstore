@@ -25,8 +25,9 @@
 								<h4>${product.pname}</h4>
 								</div>
 								<div id="img-container">
-									<img src="${pageContext.request.contextPath}/resources/images/products/${product.pname}.jpg" style="width: 300px; height: 200px; border-radius: 20px;" alt="" />
-									
+										<a href="${pageContext.request.contextPath}/product/productDetail.do?pcode=${product.pcode}">
+									<img src="${pageContext.request.contextPath}/resources/images/product/${product.attachments[0].renamedFilename}" alt="이미지" />
+										</a>
 								</div>
 								<div id="content">
 								<p align="left">
@@ -38,6 +39,7 @@
 								<form:form id="subscriptionFrm" action="${pageContext.request.contextPath}/subscription/subscriptionEnroll.do" method="post">
 									<input type="hidden" name="memberId" value='<sec:authentication property="principal.memberId"/>' />	
 									<input type="hidden" name="pcode" value="${product.pcode}" />
+									<input type="hidden" name="categoryId" value="${product.categoryId}" />
 									<button type="button" onclick="checkSubscription()" >구독하기</button>
 								</form:form>
 								</div>
