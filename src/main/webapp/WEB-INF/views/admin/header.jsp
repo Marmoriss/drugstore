@@ -95,9 +95,6 @@
 						</div>
 						<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
 							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/orders/ordersList.do">주문&배송 관리</a></div>
-							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/orders/ordersCancelList.do">취소 관리</a></div>
-							<div class="card-body text-center"><a href="${pageContext.request.contextPath}/admin/orders/ordersReturnList.do">반품 관리</a></div>
-							<div class="card-body text-center">환불 내역 조회</div>
 						</div>
 					</div>
 					<div class="card">
