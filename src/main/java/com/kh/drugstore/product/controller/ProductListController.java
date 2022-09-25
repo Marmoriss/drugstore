@@ -45,38 +45,67 @@ public class ProductListController {
 //	@Autowired
 //	ReviewService reviewService;
 	
-	// 페이징 메소드
-	@RequestMapping("")
-	public void pageInit(@RequestParam(defaultValue = "1", required=false) int cPage, Model model, HttpServletRequest request) {
-		//페이징 시작. 콘텐츠 영역
+	// 카테고리 id로 상품 리스트 조회
+	@GetMapping("/productList.do")
+	public void productListByCategory(@RequestParam(defaultValue = "1") int cPage,
+								HttpServletRequest request,
+								@RequestParam(value="categoryId", required=false) 
+								int categoryId, 
+								Model model) {
+		
 		Map<String, Integer> param = new HashMap<>();
 		
-		int limit = 15;
+		int limit = 20;
 		param.put("cPage", cPage);
 		param.put("limit", limit);
 		
-		List<Product> list = productService.findAllProduct(param); //모든 제품찾기 
+		List<Product> list = productService.findAllProduct(param);
 //		log.debug("list = {}", list);
 		model.addAttribute("list", list);
 		
-		//2. 페이지바
+		// 페이지바
 		int totalContent = productService.getTotalContent();
 //		log.debug("totalContent = {}", totalContent);
 		String url = request.getRequestURI();
 		String pagebar = DrugstoreUtils.getPagebar(cPage, limit, totalContent, url);
 		model.addAttribute("pagebar", pagebar);
-//		log.debug("pagebar={}", pagebar);
+		//카테고리 리스트 시작
+//		log.debug("categoryId = {}", categoryId);	
+		//소분류 카테고리 리스트 
+		List<Product> smallList = productService.selectProductBysmallCategoryId(categoryId);
+		log.debug("smallList = {}", smallList);
+		model.addAttribute("smallList", smallList);
 		
+		//대분류 카테고리 리스트
+		List<Product> bigList = productService.selectProductByBigCategoryId(categoryId);
+		log.debug("bigList = {}", bigList);
+		model.addAttribute("bigList", bigList);		
+
 	}
 	
-	// 카테고리 id로 상품 리스트 조회
-	@GetMapping("/productList.do")
-	public void productListByCategory(@RequestParam(value="categoryId", required=false) int categoryId, Model model) {
-		log.debug("categoryId = {}", categoryId);
-		List<Product> list = productService.selectProductByCategoryId(categoryId);
+	//최신순/낮은 가격순/높은가격순
+	@GetMapping("/recentList")
+	//최신등록순 
+	public void recentList(@RequestParam int pcode, Model model) {
+		List<Product> recentList = productService.sortProductByRecent(pcode);
+		log.debug("recentList = {}", recentList);
+		model.addAttribute("recentList", recentList);
+	}
+	@GetMapping("/priceList")
+	//낮은 가격순
+	public void priceList(@RequestParam int price, Model model) {
+		List<Product> priceList = productService.sortProductByPrice(price);
+		log.debug("priceList = {}", priceList);
+		model.addAttribute("priceList", priceList);
+	}
+	
+	//높은 가격순 
+	@GetMapping("/priceListDesc")
+	public void priceListDesc(@RequestParam int price, Model model) {
+		List<Product> priceListDesc = productService.sortProductByPriceDesc(price);
+		log.debug("priceListDesc = {}", priceListDesc);
+		model.addAttribute("priceListDesc = {}", priceListDesc);
 		
-		log.debug("list = {}", list);
-		model.addAttribute("list", list);
 	}
 	
 	// 주희 코드 시작
@@ -104,11 +133,6 @@ public class ProductListController {
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
 				.body(resultList);
 	}
-	
-	//최신순/가격높은순/인기순 코드 
-	//option 누르면 
-	
-	
 	
 	@PostMapping("/checkCategory.do")
 	public ResponseEntity<?> checkCategory(@RequestParam int[] checkCategoryByCartNo){

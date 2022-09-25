@@ -33,11 +33,20 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.findAllProduct(rowBounds);
 	}
 	
-	//전체개수
 	@Override
 	public int getTotalContent() {
 		return productDao.getTotalContent();
 	}
+	
+//	@Override
+//	public int getBigTotalContent() {
+//		return productDao.getBigTotalContent();
+//	}
+//	
+//	@Override
+//	public int getSmallTotalContent() {
+//		return productDao.getSmallTotalContent();
+//	}
 	
 	//상품코드로 상품첨부파일 조회
 	@Override
@@ -46,8 +55,28 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public List<Product> selectProductByCategoryId(int categoryId) {
-		return productDao.selectProductByCategoryId(categoryId);
+	public List<Product> selectProductByBigCategoryId(int categoryId) {
+		return productDao.selectProductBybigCategoryId(categoryId);
+	}
+	
+	@Override
+	public List<Product> selectProductBysmallCategoryId(int categoryId) {
+		return productDao.selectProductBysmallCategoryId(categoryId);
+	}
+	
+	@Override
+	public List<Product> sortProductByRecent(int pcode) {
+		return productDao.sortProductByRecent(pcode);
+	}
+	
+	@Override
+	public List<Product> sortProductByPrice(int price) {
+		return productDao.sortProductByPrice(price);
+	}
+	
+	@Override
+	public List<Product> sortProductByPriceDesc(int price) {
+		return productDao.sortProductByPriceDesc(price);
 	}
 	
 	@Override
@@ -96,6 +125,8 @@ public class ProductServiceImpl implements ProductService {
 	public Product getProductBySubNo(int pcode) {
 		return productDao.getProductBySubNo(pcode);
 	}
+
+
 	
 	
 	

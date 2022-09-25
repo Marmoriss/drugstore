@@ -81,18 +81,32 @@
 		where
 			p.pcode = #{pcode}
 	</select>
-	<select id="selectProductByCategoryId" resultMap="productCollectionMap">
+	
+	<select id="selectProductBysmallCategoryId" resultMap="productCollectionMap">
 		select 
-			pname, 
-			price,
-			a.original_filename
+			* 
 		from 
 			product p 
-		full outer join 
-			product_attachment a 
-				on p.pcode = a.pcode
-		where
-			category_id = #{category_id}
+				left join product_attachment a 
+					on p.pcode = a.pcode 
+		where category_id = #{category_id}
+	</select>
+
+	<select id="selectProductBybigCategoryId" resultMap="productCollectionMap">
+		select
+			*
+		from 
+			category c 
+				join product p 
+					on (c.category_id = p.category_id) 
+		where c.category_id 
+		in 
+		(select 
+			category_id 
+		from 
+			category 
+		where 
+			category_parent_lev = #{category_parent_lev})
 	</select>
 	
 	<select id="selectSubscriptionAllProduct" resultMap="productCollectionMap">
