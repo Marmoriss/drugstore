@@ -303,5 +303,10 @@ a.header-menu-open-title{
 .header-mypage i{
 	font-size: 25px;	
 }
+#chatImg{
+	position:fixed; 
+	bottom:25px; 
+	right:12px;
+}
 /********** footer **********/
 footer {background-color:#FFE1B6; backgrount-clip:content-box; clear:both; height:95px; text-align:center;}

@@ -239,7 +239,7 @@ create table faq(
     constraint pk_faq_no primary key(no)
 );
 
--- 공지사항
+-- 공지사항(수정)
 create table notice(
     no number,
     writer varchar2(50),
@@ -247,9 +247,11 @@ create table notice(
     content varchar2(3000),
     reg_date date default sysdate,
     constraint pk_notice_no primary key(no)
+    --alter table notice add constraint fk_notice_writer foreign key(writer) references member(member_id) on delete cascade;
 );
 
 -- 날짜별 가입자 수(사용x)
+-- drop table user_by_date;
 create table user_by_date(
     no number,
     by_date date default sysdate,
@@ -257,12 +259,14 @@ create table user_by_date(
     constraint pk_user_by_date_no primary key(no)
 );
 
+
 -- 날짜별 방문자 수(수정)
 create table visit(
     v_date date
 );
 
 -- 날짜별 판매량(사용x)
+-- drop table sales_by_date;
 create table sales_by_date(
     no number,
     by_date date default sysdate,
@@ -278,7 +282,7 @@ create table orders(
     receiptId varchar2(100) not null,
     method varchar2(10) not null,
     name varchar2(50),
-    status varchar2(20),
+    status varchar2(20), --alter table orders add status varchar2(20) default '배송준비중';
     created_at date default sysdate,
     paid_at date,
     failed_at date,
@@ -307,6 +311,7 @@ create table orders(
     memo varchar2(100),
     constraint pk_orders_merchant_uid primary key(merchant_uid),
     constraint fk_orders_member_id foreign key(member_id) references member(member_id)
+    
 );
 
 --상품 - 주문
@@ -411,8 +416,6 @@ insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.ne
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다2', '배송관련입니다2', default); 
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다3', '배송관련입니다3', default); 
 insert into notice(no, writer, title, content, reg_date) values(seq_notice_no.nextval, 'admin', '공지사항 입니다4', '배송관련입니다4', default); 
---alter table notice add constraint fk_notice_writer foreign key(writer) references member(member_id) on delete cascade;
---alter table orders add status varchar2(20) default '배송준비중';
 desc orders;
 insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price,paid_at,status) values(524589565, 'sinsa', '1', '김태연','post', 15000, 30000,to_date('22/07/12','RR/MM/DD'),default); 
 insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price,paid_at,status) values(125478569, 'cat', '2', '김서연','post', 20000, 20000,to_date('22/05/10','RR/MM/DD'),default); 
@@ -424,7 +427,9 @@ select count(*) from member m left join servey s on (m.member_id = s.member_id) 
 
 select m.member_id,merchant_uid, imp_uid, receiptid, method, product_price, total_price,paid_at,status from member m right join orders o on
 		(m.member_id = o.member_id) order by paid_at desc;
-select * from notice;
+select o.merchant_uid, a.pname, o.member_id, o.paid_at, o.status 
+from product_orders po join orders o on po.merchant_uid = o.merchant_uid join product a on po.pcode=a.pcode
+where o.paid_at between to_date('2022/01/05') and to_date('2022/01/10');
 --태연 코드 끝--
 -- 주희 코드 --
 -- 카테고리 샘플 데이터

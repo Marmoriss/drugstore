@@ -125,20 +125,6 @@ window.addEventListener('load', (e) => {
 
 	</div>
 </nav>	
-<!-- <script>
-	document.getElementById("searchBtn").onclick = function() {
-
-		let searchType = document.getElementsByName("searchType")[0].value;
-		let keyword = document.getElementsByName("keyword")[0].value;
-
-		
-		 console.log(searchType)
-		 console.log(keyword)
-
-		location.href = "${pageContext.request.contextPath}/admin/user/userList.do?"
-				+ "&searchType=" + searchType + "&keyword=" + keyword;
-	};
-</script> -->
 
 <table id="userList" class="table table-striped table-hover w-50">
 	<thead class="table-light">
