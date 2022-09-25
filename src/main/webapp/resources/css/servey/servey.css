@@ -1,8 +1,11 @@
 @charset "UTF-8";
 
-span{
+body span{
 	font-size : 22px;
 }
+
+
+
 #container{
 	height: 600px;
 }
@@ -19,6 +22,7 @@ form{
 	height: 50px;
     padding: 10px;
     margin-top: 70px;
+    font-size: 20px;
 }
 button{
 	color : white;
@@ -46,8 +50,8 @@ button{
 }
 /* input radio,number 크기 조절 */
 .qBox div label{
-	    margin: 20px 20px;
-	    font-size: 23px;
+	        margin: 20px 36px;
+    font-size: 22px;
 }
 .qBox div input[type=radio]{
 	width: 30px;

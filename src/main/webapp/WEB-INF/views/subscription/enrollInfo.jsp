@@ -20,17 +20,20 @@
 <body>
 	<div id="main-div">
 	<h3>구독 정보 등록</h3>		
+	<br />
 	<form:form action="${pageContext.request.contextPath}/subscription/enrollSubscriptionInfo.do" method="post">
-		<input type="text" value='<sec:authentication property="principal.memberId"/>' readonly="readonly"/>
+		<input type="text" class="form-control" value='<sec:authentication property="principal.memberId"/>' readonly="readonly"/>
 		<!-- datepicker 위젯 넣기 -->
          <div class="dates">
-            <input type="date" class="datepicker" id="to" name="toDate" placeholder="구독 시작일" required/>
+         	<label for="to">시작 날짜</label>
+            <input type="date" class="datepicker form-control"  id="to" name="toDate" placeholder="구독 시작일" required/>
             <br />
-            <input type="date" class="datepicker" id="from" name="fromDate" placeholder="구독 종료일" required />
+         	<label for="from">배송 날짜</label>
+            <input type="date" class="datepicker form-control" id="from" name="fromDate" placeholder="구독 종료일" required />
          </div>
          <input type="hidden" name="pcode" value="${pcode}" />
          <input type="hidden" name="cartNo" value="${cartNo}" />
-         <button type="submit">제출</button>
+         <button type="submit" class="btn btn-primary">다음</button>
 	</form:form>
 	</div>
 <script>

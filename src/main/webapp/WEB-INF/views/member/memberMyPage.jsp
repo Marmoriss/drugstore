@@ -69,7 +69,7 @@
                                 <sec:authentication property="principal.name"/>
                                 <span>님</span>
                             </div>
-                            <a href="" class="mypage-main__user-modi-btn">회원정보 수정 ></a>
+                             <a href="${pageContext.request.contextPath}/member/updateMember.do" class="mypage-main__user-modi-btn">회원정보 수정 ></a>
                         </div>
                     </div>
                     <div class="mypage-main__user-info-wrapper">

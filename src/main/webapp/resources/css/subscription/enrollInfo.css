@@ -8,6 +8,8 @@
 }
 #main-div input{
 	margin-bottom: 40px;
+	width: 200px;
+    height: 40px;
 }
 
 
@@ -16,7 +18,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
     -webkit-appearance: none;
 }
+form{
+	display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
 
+.ui-datepicker-trigger
+{
+	background-color: white;
+position: relative;
+    left: 166px;
+    top: -76px;
+}
+
+.ui-datepicker-trigger img
+{
+       width: 20px;
+    height: 30px;
+}
 /**************** 달력 ****************/
 .ui-widget-header {
 	border: 0px solid #dddddd;

@@ -1,13 +1,10 @@
 @charset "UTF-8";
 
 #login{
-	display: flex;
-	justify-content: center;
-	align-content: center;
+	margin-bottom: 30px;
 }
  
 #login .container #login-row #login-column #login-box {
-  margin-top: 120px;
   max-width: 600px;
   height: 320px;
   border: 1px solid #9C9C9C;
@@ -16,6 +13,52 @@
 #login .container #login-row #login-column #login-box #login-form {
   padding: 20px;
 }
-#login .container #login-row #login-column #login-box #login-form #register-link {
-  margin-top: -85px;
+
+a[name=kakaoLogin] img{
+	width: 68px;
+    height: 35px;
 }
+
+#register-link{
+	display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+#remember-div input{
+	position: relative;
+    top: -4px;
+    right: -3px;
+}
+#height-balance{
+	height: 60px;
+}
+.login-err{
+background: #de1b17a6;
+    border-radius: 10px;
+    padding: 10px 33px;
+    position: relative;
+    bottom: -42px;
+    width: 300px;
+    display: flex;
+    height: 60px;
+    color: white;
+    justify-content: center;
+    align-content: center;
+}
+#icon{
+	margin-right: 10px;
+}
+
+
+
+@keyframes fadeout {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+} */

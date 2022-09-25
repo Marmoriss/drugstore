@@ -19,8 +19,12 @@
 		<div id="bmi">
 			<div id="bmi__header">
 				<div id="header__title">
-					<div>
-						<h4><sec:authentication property="principal.name"/>님의 건강설문 결과표</h4>
+					<div id="header__title__word">
+						<span>
+							<sec:authentication property="principal.name"/>님의
+							<br />
+							 건강설문 결과표
+						</span>
 					</div>
 					<div id="bmiImg">
 						<div>
@@ -34,7 +38,7 @@
 					<c:choose>
 					<c:when test="${bmi < 18.5}">
 						<div class="bmi__result">
-							<i class="fa-solid fa-thumbs-down"></i>
+							<i class="fa-solid fa-face-meh fa-4x"></i>
 							<h3>저체중</h3>
 							<span>성별 : ${servey.gender eq 'M' ? '남' : '여'}</span>
 							<span>BMI : ${bmi}</span>
@@ -42,7 +46,7 @@
 					</c:when>
 					<c:when test="${bmi >= 18.5 and bmi < 23}">
 					<div class="bmi__result">
-						<i class="fa-solid fa-thumbs-up"></i>
+						<i class="fa-regular fa-face-smile fa-4x" style="color:  Dodgerblue;"></i>
 						<h3>정상</h3>
 						<span>성별 : ${servey.gender eq 'M' ? '남' : '여'}</span>
 						<span>BMI : ${bmi}</span>
@@ -50,7 +54,7 @@
 					</c:when>
 					<c:when test="${bmi >= 23 and bmi < 25}">
 						<div class="bmi__result">
-						<i class="fa-solid fa-thumbs-up"></i>
+						<i class="fa-solid fa-face-meh fa-4x"></i>
 						<h3>과체중</h3>
 						<span>성별 : ${servey.gender eq 'M' ? '남' : '여'}</span>
 						<span>BMI : ${bmi}</span>
@@ -58,7 +62,7 @@
 					</c:when>
 					<c:when test="${bmi >= 25 }">
 						<div class="bmi__result">
-						<i class="fa-solid fa-thumbs-down"></i>
+						<i class="fa-solid fa-face-tired fa-4x" style="color: red;"></i>
 						<h3>비만</h3>
 						<span>성별 : ${servey.gender eq 'M' ? '남' : '여'}</span>
 						<span>BMI : ${bmi}</span>
@@ -71,6 +75,7 @@
 			</div>
 			<div id="bmi__result">
 				<div id="product">
+					
 					<h3>${servey.body}이 좋지않은 당신을 위해 준비했어요</h3>
 					<c:forEach items="${serveyProductList}" var="product">
 						<div class="productInfo">
