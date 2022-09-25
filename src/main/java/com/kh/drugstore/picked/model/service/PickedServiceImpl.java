@@ -38,7 +38,10 @@ public class PickedServiceImpl implements PickedService {
 		return result;
 	}
 	
-	
+	@Override
+	public int insertPickedList(Map<String, Object> map) {
+		return pickedDao.insertPickedList(map);
+	}
 	
 	
 	

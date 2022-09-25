@@ -55,9 +55,9 @@ headers['${_csrf.headerName}'] = '${_csrf.token}';
 		url : "${pageContext.request.contextPath}/subscription/subscriptionCheck.do",
 		type : "post",
 		headers,
-		
+		dataType : "json",
 		success(response){
-			
+			console.log(response);
 			if(!response){
 				alert("이미 구독 중인 상품이 있습니다.");
 				location.href = "${pageContext.request.contextPath}/member/memberSubscription.do";

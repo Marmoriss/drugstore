@@ -28,6 +28,9 @@
 		<intercept-url pattern="/member/kakao/callback.do" access="permitAll"/>
 		<intercept-url pattern="/member/memberPage.do" access="isAuthenticated()"/>
 		
+		
+		<intercept-url pattern="/subscription/**" access="isAuthenticated()"/>
+		
 		<intercept-url pattern="/servey/**" access="isAuthenticated()"/>
 		<intercept-url pattern="/subscription/product.do" access="permitAll()"/>
 		

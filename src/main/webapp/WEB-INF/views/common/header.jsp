@@ -70,7 +70,7 @@
          <div class="nav header-nav-list-wrap">
             <ul class="header-nav-list">
                <li class="header-nav-item"><a href="${pageContext.request.contextPath}/servey/servey.do" class="header-nav-text">건강설문</a></li>
-               <li class="header-nav-item"><a href="" class="header-nav-text">정기구독</a></li>
+               <li class="header-nav-item"><a href="${pageContext.request.contextPath}/subscription/product.do" class="header-nav-text">정기구독</a></li>
                <li class="header-nav-item"><a class="header-nav-text" href="${pageContext.request.contextPath}/notice/noticeList.do">고객센터</a></li>
                
                <sec:authorize access="isAnonymous()">
@@ -99,7 +99,7 @@
       </div>
       <!-- 로고 -->
       <div class="header-logo">
-         <a href="/" class="header-logo-link">
+         <a href="${pageContext.request.contextPath}" class="header-logo-link">
             <img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="logo" class="header-logo-img"/>
          </a>
       </div>
@@ -112,7 +112,7 @@
                      <a href="javascript:;" class="categoryAllBtn">
                         <i class="fa-solid fa-bars"></i>
                      </a>
-                     <a href="#" class="header-menu-open-title">전체 카테고리</a>
+                     <a href="${pageContext.request.contextPath}/product/productList.do?categoryId=350001" class="header-menu-open-title">전체 카테고리</a>
                   </li>
                   <!-- 추후 반복문으로 카테고리 헤더 불러오기 -->
                   <li class="categoryList1 header-menu-item">
@@ -123,8 +123,8 @@
                   </li>
                   <sec:authorize access="isAuthenticated() && !hasRole('ADMIN')"> >
                   <li class="categoryList1 header-menu-item">
-                     <a href="${pageContext.request.contextPath}/chat/chat.do" class="header-menu-title">chat
-                        <img style="width:20px; height:20px;" src="${pageContext.request.contextPath}/resources/images/792.gif" alt="chat"/></a>
+                     <a href="${pageContext.request.contextPath}/chat/chat.do" class="header-menu-title">
+                        <img id="chatImg" src="${pageContext.request.contextPath}/resources/images/792.gif" alt="chat"/></a>
                   </sec:authorize>
                   </li>
                </ul>

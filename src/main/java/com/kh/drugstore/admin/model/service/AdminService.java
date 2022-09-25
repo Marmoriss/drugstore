@@ -36,10 +36,8 @@ public interface AdminService {
 	
 	int getTotalContent();
 
-//	List<User> userFinder(Map<String, Object> param);
 	List<User> userFinder(Map<String, Object> param);
-	
-//	int getTotalContentLike(Map<String, Object> param, String searchType, String keyword);
+
 	int getTotalContentLike(Map<String, Object> param);
 
 	

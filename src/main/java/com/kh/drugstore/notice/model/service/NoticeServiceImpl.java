@@ -1,7 +1,9 @@
 package com.kh.drugstore.notice.model.service;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +16,11 @@ public class NoticeServiceImpl implements NoticeService {
 	NoticeDao noticeDao;
 	
 	@Override
-	public List<Notice> selectNoticeList() {
-		return noticeDao.selectNoticeList();
+	public List<Notice> selectNoticeList(Map<String, Integer> param) {
+		int limit = param.get("limit");
+		int offset = (param.get("cPage") - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return noticeDao.selectNoticeList(rowBounds);
 	}
 
 	@Override
@@ -43,4 +48,8 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDao.movePage(no);
 	}
 	
+	@Override
+	public int getTotalContent() {
+		return noticeDao.getTotalContent();
+	}
 }

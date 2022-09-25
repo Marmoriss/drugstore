@@ -60,7 +60,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public int insertKakaoMember(MemberEntity memberK) {
+	public int insertKakaoMember(Member memberK) {
 		return memberDao.insertkakaoMember(memberK);
 	}
 	

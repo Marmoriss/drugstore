@@ -54,7 +54,7 @@
 &nbsp;&nbsp;&nbsp;
 	<input type="text" class="datepicker" id="to" name="toDate" placeholder="시작일" />~
 	<input type="text" class="datepicker" id="from" name="fromDate" placeholder="종료일" />
-	<button style=""type="submit">조회</button>
+	<button type="submit">조회</button>
 </div> 
 </form>
 <br />
@@ -102,6 +102,7 @@
 		</c:if>
 	
 	</table>
+
 <script>
 document.querySelectorAll("#statusBtn").forEach((btn)=>{
 	btn.addEventListener('click', (e) => {

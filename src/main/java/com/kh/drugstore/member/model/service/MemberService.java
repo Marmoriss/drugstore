@@ -23,7 +23,7 @@ public interface MemberService {
 
 	Member findKakaoMember(@NonNull String memberId);
 
-	int insertKakaoMember(MemberEntity memberK);
+	int insertKakaoMember(Member memberK);
 
 	Member selectOneMemberByName(Member member);
 

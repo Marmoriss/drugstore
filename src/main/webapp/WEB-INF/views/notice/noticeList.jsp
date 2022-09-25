@@ -20,7 +20,7 @@
 			<ul class=space_list>
 				<li class="menu-list"><a href="#">공지사항</a></li>
 				<li class="menu-list"><a href="#">1:1 문의하기</a></li>
-				<li class="menu-list"><a href="#">FAQ</a></li>
+				<li class="menu-list"><a href="${pageContext.request.contextPath}/faq/faqList.do">FAQ</a></li>
 			</ul>
 		</section>
 
@@ -52,9 +52,10 @@
 				</c:if>
 
 			</table>
+			<nav class="pagebar">${pagebar}</nav>
 			
 		<sec:authorize access="hasRole('ADMIN')">
-		<input type="button" value="글쓰기" id="btn-write" class="btn-write" 
+		<input type="button" value="글작성" id="btn-write" class="btn-write" 
 			onclick="location.href='${pageContext.request.contextPath}/notice/noticeForm.do';"/>
 		</sec:authorize>
 <br />

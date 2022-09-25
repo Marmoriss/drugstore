@@ -44,12 +44,12 @@ import com.kh.drugstore.member.model.dto.KakaoProfile;
 import com.kh.drugstore.member.model.dto.Member;
 import com.kh.drugstore.member.model.dto.MemberEntity;
 import com.kh.drugstore.member.model.dto.OAuthToken;
-import com.kh.drugstore.member.model.dto.User;
 import com.kh.drugstore.member.model.service.MemberService;
 import com.kh.drugstore.orders.model.dto.Orders;
+import com.kh.drugstore.picked.model.dto.PickedExtends;
+import com.kh.drugstore.picked.model.service.PickedService;
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.service.ProductService;
-import com.kh.drugstore.subscription.model.dto.Subscription;
 import com.kh.drugstore.subscription.model.dto.SubscriptionProduct;
 import com.kh.drugstore.subscription.model.service.SubscriptionService;
 import com.kh.security.model.service.MemberSecurityService;
@@ -79,7 +79,8 @@ public class MemberController {
 	@Autowired
 	private ProductService productService;
 
-	
+	@Autowired
+	private PickedService pickedService;
 	
 	@GetMapping("/memberEnroll.do")
 	public String memberEnroll() {
@@ -101,16 +102,14 @@ public class MemberController {
 		String password = String.valueOf(rnd);
 		String encodedPassword = bcryptPasswordEncoder.encode(password);
 		member.setPassword(encodedPassword);
+		phone = phone.replaceAll("-","");
 
 		// 1. db row 수정
 		int result = memberService.updateMember(member);
 
 		UserDetails updatedMember = memberSecurityService.loadUserByUsername(member.getMemberId());
 		
-		// 2. authentication 수정
-		Authentication newAuthentication = new UsernamePasswordAuthenticationToken(updatedMember,
-				updatedMember.getPassword(), updatedMember.getAuthorities());
-		SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+		
 
 		mav.addObject("password", password);
 		mav.setViewName("/member/findInfo");
@@ -119,7 +118,9 @@ public class MemberController {
 	
 	@PostMapping("/findId.do")
 	public ModelAndView findId(Member member, ModelAndView mav) {
-		log.debug("멈버 = {}",member);
+		log.debug("멈버 = {}",member.getPhone());
+		String phone = member.getPhone().replaceAll("-", "");
+		member.setPhone(phone);
 		Member findMember = memberService.selectOneMemberByName(member);
 		log.debug("memberId = {}",findMember.getMemberId());
 		mav.addObject("memberId", findMember.getMemberId());
@@ -198,7 +199,12 @@ public class MemberController {
 		log.debug("principal = {}", principal);
 		log.debug("credentials = {}", credentials);
 		log.debug("authorities = {}", authorities);
-
+		
+		// 주희 코드
+		List<PickedExtends> list = pickedService.selectPickedList(authentication.getName());
+		log.debug("list = {}", list);
+		
+		mav.addObject("list", list);
 		mav.setViewName("/member/memberMyPage");
 		return mav;
 	}
@@ -346,12 +352,23 @@ public class MemberController {
 			
 			
 			String encodedPassword = bcryptPasswordEncoder.encode("1234");
+			Member kMember = new Member();
+			kMember.setMemberId(kakaoProfile.getKakao_account().getEmail()+"k");
+			kMember.setName(kakaoProfile.getProperties().getNickname());
+			kMember.setPhone("01044443333");
+			kMember.setPassword(encodedPassword);
 			
-			MemberEntity member =  new MemberEntity(kakaoProfile.getKakao_account().getEmail()+"k", kakaoProfile.getProperties().getNickname(), encodedPassword, "01011112222", null, null, true, null, null, null, null, null);
-			Member member2 = memberService.findKakaoMember(member.getMemberId());
+			// 2. authentication 수정 -> 자동 로그인 되더라 
+			
+			 Authentication newAuthentication = new UsernamePasswordAuthenticationToken(kMember,kMember.getPassword(), kMember.getAuthorities());
+			 SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+			 
+			
+			
+			Member member2 = memberService.findKakaoMember(kMember.getMemberId());
 			
 			if(member2 == null) {
-				memberService.insertKakaoMember(member);
+				memberService.insertKakaoMember(kMember);
 			}
 			
 			
