@@ -44,6 +44,8 @@ public interface MemberDao {
 	List<Orders> getOrderById(RowBounds rowBounds, Map<String, Object> param);
 	
 	int getTotalContent(Map<String, Object> param);
+
+	List<Orders> findByValues(Map<String, Object> param);
 	
 
 

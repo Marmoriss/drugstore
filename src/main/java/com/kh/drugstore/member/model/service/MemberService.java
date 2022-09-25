@@ -31,6 +31,8 @@ public interface MemberService {
 
 	int getTotalContent(Map<String, Object> param);
 
+	List<Orders> findByValues(Map<String, Object> param);
+
 
 	
 

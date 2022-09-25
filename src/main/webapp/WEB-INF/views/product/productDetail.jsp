@@ -706,7 +706,6 @@
 </body>
 
 <script>
-<<<<<<< HEAD
 const headers = {};
 headers['${_csrf.headerName}'] = '${_csrf.token}';
 document.querySelector("#addCart").addEventListener('click', (e) => {
@@ -750,13 +749,11 @@ const addCart = (cartList) => {
 	error : console.log
 	});
 };
-=======
 // 위시리스트 추가
 const wish_chg = () => {
 	
 };
 
->>>>>>> branch 'master' of https://github.com/Marmoriss/drugstore.git
 // 문의 수정 폼 연결
 const updateQna = () => {
 	const qnaId = 41;
