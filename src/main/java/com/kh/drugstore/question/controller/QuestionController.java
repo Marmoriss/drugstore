@@ -78,9 +78,6 @@ public class QuestionController {
 		return "redirect:/question/questionList.do";
 	}
 	
-	
-	
-	
-	
+
 	
 }
