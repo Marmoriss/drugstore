@@ -170,7 +170,6 @@ a {
 
 .btn-write {	
 	margin-left:650px;
-    margin-top:10px;
 	width: 70px;
 	border-radius: 5px;
 	height: 35px;
@@ -209,4 +208,15 @@ h2{
 	color:white;
 	width: 50px;
 	height: 30px;
+}
+
+.pagebar {
+	background-color: transparent;
+	/* margin-top: 35px; */
+	margin-left: 280px;
+}
+
+.page-item.active .page-link {
+	border-color: rgb(65, 88, 101);
+	background-color: rgb(65, 88, 101);
 }

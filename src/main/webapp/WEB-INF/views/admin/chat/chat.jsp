@@ -15,21 +15,43 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.js"></script>
 <!-- WebSocket: stomp.js CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+<style>
+#chatFrm{
+	margin: 0 auto;
+	width: 400px;
+
+}
+#sendBtn{
+	outline: none;
+    border: none;
+    background-color: rgb(122, 158, 177);
+    color: white;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius:30px;
+}
+#header{
+  height: 15px;
+  background-color: rgb(255, 225, 182);
+}
+</style>
 </head>
 <body>
-
-<div class="input-group mb-3">
-  <input type="text" id="message" class="form-control" placeholder="Message">
-  <div class="input-group-append" style="padding: 0px;">
-    <button id="sendBtn" class="btn btn-outline-secondary" type="button">Send</button>
-  </div>
-</div>
-<div>
+<div id="header"> </div>
+<div id="chatFrm">
     <ul class="list-group list-group-flush" id="data">
     	<c:forEach items="${chatLogs}" var="chat">
     		<li class="list-group-item">${chat.memberId} : ${chat.msg}</li>
     	</c:forEach>  
     </ul>
+    
+	<input type="text" id="msg" class="form-control"
+		placeholder="답변"> 
+	<div class="input-group-append">
+		<button id="sendBtn" class="btn btn-outline" type="button">전송</button>
+	</div>
+<div>
+</div>
 </div>
 <script>
 document.querySelector("#sendBtn").addEventListener('click', (e) => {

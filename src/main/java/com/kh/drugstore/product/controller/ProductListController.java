@@ -23,6 +23,8 @@ import com.kh.drugstore.cart.model.service.CartService;
 import com.kh.drugstore.common.DrugstoreUtils;
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.service.ProductService;
+import com.kh.drugstore.qna.model.dto.Qna;
+import com.kh.drugstore.qna.model.service.QnaService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,6 +39,11 @@ public class ProductListController {
 	@Autowired
 	CartService cartService;
 	
+	@Autowired
+	QnaService qnaService;
+	
+//	@Autowired
+//	ReviewService reviewService;
 	
 	// 페이징 메소드
 	@RequestMapping("")
@@ -79,8 +86,13 @@ public class ProductListController {
 		log.debug("pcode = {}", pcode);
 		Product product = productService.selectOneProductCollection(pcode);
 		log.debug("product = {}", product);
-		model.addAttribute("product", product);
 		
+		List<Qna> qnaList = qnaService.selectQnaListByPcode(pcode);
+		log.debug("qnaList = {}", qnaList);
+		
+//		List<Review> reviewList = reviewService.selectReviewListByPcode(pcode);
+		model.addAttribute("product", product);
+		model.addAttribute("qnaList", qnaList);
 	}
 
 	@GetMapping("/autocompletePname.do")

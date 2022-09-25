@@ -712,7 +712,7 @@ em{
 }
 
 .hide {
-	display: none;
+	display: block;
 }
 
 .product-view__detail-title {

@@ -52,9 +52,10 @@
 				</c:if>
 
 			</table>
+			<nav class="pagebar">${pagebar}</nav>
 			
 		<sec:authorize access="hasRole('ADMIN')">
-		<input type="button" value="글쓰기" id="btn-write" class="btn-write" 
+		<input type="button" value="글작성" id="btn-write" class="btn-write" 
 			onclick="location.href='${pageContext.request.contextPath}/notice/noticeForm.do';"/>
 		</sec:authorize>
 <br />

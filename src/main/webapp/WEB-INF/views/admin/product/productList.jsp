@@ -468,6 +468,27 @@ $('#total-btn').on('click', (e) => {
 	from.value='';
 	$('.datepicker').datepicker('option', 'disabled', true); // input 박스 비활성화
 });
+// 시작일
+$('#to').datepicker({
+	showOn: "both", // 달력을 표시할 타이밍 (both: focus or button)
+	buttonImage: "${pageContext.request.contextPath}/resources/images/calendar.png", // 버튼 이미지
+	onClose: function( selectedDate ) {    
+	// 시작일(to) datepicker가 닫힐때
+	// 종료일(from)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+		$("#from").datepicker( "option", "minDate", selectedDate );
+	}                
+});
+
+//종료일
+$('#from').datepicker({
+    showOn: "both", 
+    buttonImage: "${pageContext.request.contextPath}/resources/images/calendar.png", // 버튼 이미지
+    onClose: function( selectedDate ) {
+        // 종료일(from) datepicker가 닫힐때
+        // 시작일(to)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
+        $("#to").datepicker( "option", "maxDate", selectedDate );
+    }                
+});
 </script>
 	</div>
 </div>
