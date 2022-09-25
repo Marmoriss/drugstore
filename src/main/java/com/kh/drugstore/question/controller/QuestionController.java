@@ -51,7 +51,7 @@ public class QuestionController {
 	public String questionInsert(Question question, RedirectAttributes redirectAttr) {
 		int result = questionService.insertQuestion(question);
 		redirectAttr.addFlashAttribute("msg", "문의글을 등록하였습니다.");
-		return "question/questionList";
+		return "redirect:/question/questionList.do";
 	}
 	
 	// 1:1문의 게시글보기 -> 비밀번호 입력 후 본인 확인 거치기 -> 주말에 구현해야하남?

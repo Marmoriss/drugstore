@@ -20,7 +20,8 @@
   				#{content},
   				#{title},
   				#{commentLevel},
-  				#{questionCategory}
+  				#{questionCategory},
+  				default
   		)
   	</insert>
   	
