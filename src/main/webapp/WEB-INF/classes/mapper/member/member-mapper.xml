@@ -13,6 +13,7 @@
 			member_id = #{memberId}
 	</select>
   
+  <!-- 건우 -->
   	<select id="getOrderById" resultMap="orderMap" parameterType="map">
 		select 
 			*
@@ -45,5 +46,28 @@
 			member_id = #{memberId})
 		
 	
-</select>
+	</select>
+	
+	<select id="findByValues" resultMap="orderMap">
+		select
+			*
+		from
+			orders
+		<where>
+			
+			<if test="status != null and status != ''">
+				<if test="status == 'total'">
+					status in ('배송준비중', '배송중', '배송완료')
+				</if>
+					status = #{status}
+			</if>
+			<if test="to != null and from != null">
+				or paid_at 
+				between to_date(#{to}, 'yyyy/mm/dd') and to_date(#{from}, 'yyyy/mm/dd')
+			</if>
+			
+				and	member_id = #{memberId}
+			
+		</where>
+	</select>
 </mapper>

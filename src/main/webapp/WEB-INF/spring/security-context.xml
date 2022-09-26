@@ -42,6 +42,8 @@
 		<intercept-url pattern="/notice/noticeForm.do" access="hasRole('ADMIN')"/>
 		<intercept-url pattern="/notice/noticeUpdate.do" access="hasRole('ADMIN')"/>
 		<intercept-url pattern="/notice/noticeDelete.do" access="hasRole('ADMIN')"/>
+
+		<intercept-url pattern="/product/**" access="isAuthenticated()"/>
 		
 		<form-login 
 			login-page="/member/memberLogin.do"
