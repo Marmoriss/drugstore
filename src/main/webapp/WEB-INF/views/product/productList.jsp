@@ -186,6 +186,50 @@ td a {
 <div class="goods-totalList-wrapper">
 	<!-- 상품 리스트 목록 보여야함. 이미지/상품명/가격 -->
 	<!-- 만약 대분류였다면 -->
+<<<<<<< HEAD
+			<div class="goods-sort-wrapper">
+				<select class="goods-sort-select">
+					<option selected>전체보기</option>
+					<option id="recentList">최신순</option>
+					<option id="priceList">낮은 가격순</option>
+					<option id="priceListDesc">높은 가격순</option>			
+				</select>
+			</div>
+			<br />
+			<br />
+			<div class="goods-setting-wrapper">
+				<c:forEach var="cri" items="${bigList}">
+					<ul class="goods-box">
+						<li class="goods-item">
+							<div class="goodsImg">
+								<!-- 리스트로 불러왔을때 여러장의 사진으로 상품코드는 하나이나 여러개가 나옴. 썸네일 1개만 갖고오는 방법 -->
+								<img src="${pageContext.request.contextPath}/resources/upload/product/${cri.attachments[0].renamedFilename}" alt="" width="300px" height="300px"/>
+							</div>
+							<div class="goodsTitle">
+								<a href="${pageContext.request.contextPath}/product/productDetail.do?categoryId=${cri.pcode}">${cri.pname}</a>
+							</div>
+							<div class="goodsPrice"><fmt:formatNumber value="${cri.price}" pattern="#,###원" /></div>
+						</li>
+					</ul>
+				</c:forEach>
+			</div>
+		<!-- 만약 소분류였다면 -->
+	 	<div class="goods-setting-wrapper">
+				<c:forEach var="cri" items="${smallList}">
+					<ul class="goods-box">
+						<li class="goods-item">
+							<div class="goodsImg">
+								<!-- 리스트로 불러왔을때 여러장의 사진으로 상품코드는 하나이나 여러개가 나옴. 썸네일 1개만 갖고오는 방법 -->
+								<img src="${pageContext.request.contextPath}/resources/upload/product/${cri.attachments[0].renamedFilename}" alt="" style="width: 300px;"/>
+							</div>
+							<div class="goodsTitle">
+								<a href="${pageContext.request.contextPath}/product/productDetail.do?categoryId=${cri.pcode}">${cri.pname}</a>
+							</div>
+							<div class="goodsPrice"><fmt:formatNumber value="${cri.price}" pattern="#,###원" /></div>
+						</li>		
+					</ul>
+				</c:forEach>
+		</div>
 	<div class="goods-sort-wrapper">
 		<select class="goods-sort-select" name="searchList">
 			<option selected>전체보기</option>

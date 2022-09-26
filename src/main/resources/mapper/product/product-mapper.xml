@@ -94,6 +94,8 @@
 			category c 
 				join product p 
 					on (c.category_id = p.category_id) 
+                left join product_attachment a 
+                    on (p.pcode = a.pcode) 
 		where c.category_id 
 		in 
 		(select 
