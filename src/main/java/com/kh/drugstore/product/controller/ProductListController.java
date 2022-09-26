@@ -55,7 +55,7 @@ public class ProductListController {
 		
 		Map<String, Integer> param = new HashMap<>();
 		
-		int limit = 20;
+		int limit = 12;
 		param.put("cPage", cPage);
 		param.put("limit", limit);
 		
@@ -69,6 +69,7 @@ public class ProductListController {
 		String url = request.getRequestURI();
 		String pagebar = DrugstoreUtils.getPagebar(cPage, limit, totalContent, url);
 		model.addAttribute("pagebar", pagebar);
+		
 		//카테고리 리스트 시작
 //		log.debug("categoryId = {}", categoryId);	
 		//소분류 카테고리 리스트 
@@ -84,27 +85,27 @@ public class ProductListController {
 	}
 	
 	//최신순/낮은 가격순/높은가격순
-	@GetMapping("/recentList")
+	@GetMapping("/recentList.do")
 	//최신등록순 
-	public void recentList(@RequestParam int pcode, Model model) {
-		List<Product> recentList = productService.sortProductByRecent(pcode);
+	public ResponseEntity<?> recentList(@RequestParam int categoryId) {
+		List<Product> recentList = productService.sortProductByRecent(categoryId);
 		log.debug("recentList = {}", recentList);
-		model.addAttribute("recentList", recentList);
+		return ResponseEntity.ok(recentList);
 	}
-	@GetMapping("/priceList")
+	@GetMapping("/priceList.do")
 	//낮은 가격순
-	public void priceList(@RequestParam int price, Model model) {
-		List<Product> priceList = productService.sortProductByPrice(price);
+	public ResponseEntity<?> priceList(@RequestParam int categoryId) {
+		List<Product> priceList = productService.sortProductByPrice(categoryId);
 		log.debug("priceList = {}", priceList);
-		model.addAttribute("priceList", priceList);
+		return ResponseEntity.ok(priceList);
 	}
 	
 	//높은 가격순 
-	@GetMapping("/priceListDesc")
-	public void priceListDesc(@RequestParam int price, Model model) {
-		List<Product> priceListDesc = productService.sortProductByPriceDesc(price);
+	@GetMapping("/priceListDesc.do")
+	public ResponseEntity<?> priceListDesc(@RequestParam int categoryId) {
+		List<Product> priceListDesc = productService.sortProductByPriceDesc(categoryId);
 		log.debug("priceListDesc = {}", priceListDesc);
-		model.addAttribute("priceListDesc = {}", priceListDesc);
+		return ResponseEntity.ok(priceListDesc);
 		
 	}
 	
