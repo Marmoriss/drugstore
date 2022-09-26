@@ -203,7 +203,7 @@ td a {
 						<!-- 리스트로 불러왔을때 여러장의 사진으로 상품코드는 하나이나 여러개가 나옴. 썸네일 1개만 갖고오는 방법 -->
 						<img
 							src="${pageContext.request.contextPath}/resources/upload/product/"
-							${product.attachments[0].renamedFilename}" alt="" width="300px"
+							${cri.attachments[0].renamedFilename}" alt="" width="300px"
 							height="300px" />
 					</div>
 					<div class="goodsTitle">
@@ -251,7 +251,7 @@ document.querySelector('.goods-sort-select').addEventListener('change', (e) => {
     const pcode = ${cri.pcode};
     const pname = ${cri.pname};
     const price = ${cri.price};
-    const discount = ${cri.discount};
+    const discount = ${cri.price};
     
 	if($("select[name=searchList]").val() == 0) {
 		console.log($(this).val());
@@ -269,7 +269,7 @@ document.querySelector('.goods-sort-select').addEventListener('change', (e) => {
 										<li class="goods-item">
 											<div class="goodsImg">
 												<img
-													src="${pageContext.request.contextPath}/resources/upload/product/\${cri.attachments[0].renamedFilename}"
+													src="${pageContext.request.contextPath}/resources/upload/product/${cri.attachments[0].renamedFilename}"
 													alt="" style="width: 300px;" />
 											</div>
 											<div class="goodsTitle">
@@ -277,15 +277,16 @@ document.querySelector('.goods-sort-select').addEventListener('change', (e) => {
 													href="${pageContext.request.contextPath}/product/productDetail.do?pcode=${cri.pcode}">\${cri.pname}</a>
 											</div>
 											<div class="goodsPrice">
-												<fmt:formatNumber value="\${cri.price}" pattern="#,###원" />
+												<fmt:formatNumber value="${cri.price}" pattern="#,###원" />
 											</div>
 										</li>
 									</ul>`;
 									categoryId.forEach(({attachment, pcode, pname, price}) => {
-										wrapper.querySelector("#goods-box").innerHTML += `										<li class="goods-item">
+										wrapper.querySelector("#goods-box").innerHTML += `										
+										<li class="goods-item">
 											<div class="goodsImg">
 											<img
-												src="${pageContext.request.contextPath}/resources/upload/product/\${cri.attachments[0].renamedFilename}"
+												src="${pageContext.request.contextPath}/resources/upload/product/${cri.attachments[0].renamedFilename}"
 												alt="" style="width: 300px;" />
 											</div>
 											<div class="goodsTitle">
@@ -293,7 +294,7 @@ document.querySelector('.goods-sort-select').addEventListener('change', (e) => {
 													href="${pageContext.request.contextPath}/product/productDetail.do?pcode=${cri.pcode}">\${cri.pname}</a>
 											</div>
 											<div class="goodsPrice">
-												<fmt:formatNumber value="\${cri.price}" pattern="#,###원" />
+												<fmt:formatNumber value="${cri.price}" pattern="#,###원" />
 											</div>`
 										})
 									})
@@ -317,13 +318,46 @@ document.querySelector('.goods-sort-select').addEventListener('change', (e) => {
 			method: "GET",
 			dataType: "json",
 			success(response) {
-				   console.log($(this).val());
-				   console.log($("select[name=searchtList] option:selected".text());
 				   console.log(response);
 				   alert(response.msg);
+		            const wrapper = document.querySelector('#goods-setting-wrapper');
+		            wrapper.innerHTML = `<ul class="goods-box" id="goods-box">
+											<li class="goods-item">
+												<div class="goodsImg">
+													<img
+														src="${pageContext.request.contextPath}/resources/upload/product/${cri.attachments[0].renamedFilename}"
+														alt="" style="width: 300px;" />
+												</div>
+												<div class="goodsTitle">
+													<a
+														href="${pageContext.request.contextPath}/product/productDetail.do?pcode=${cri.pcode}">\${cri.pname}</a>
+												</div>
+												<div class="goodsPrice">
+													<fmt:formatNumber value="${cri.price}" pattern="#,###원" />
+												</div>
+											</li>
+										</ul>`;
+					categoryId.forEach(({attachment, pcode, pname, price}) => {
+						wrapper.querySelector("#goods-box").innerHTML += `										
+						<li class="goods-item">
+							<div class="goodsImg">
+							<img
+								src="${pageContext.request.contextPath}/resources/upload/product/${cri.attachments[0].renamedFilename}"
+								alt="" style="width: 300px;" />
+							</div>
+							<div class="goodsTitle">
+								<a
+									href="${pageContext.request.contextPath}/product/productDetail.do?pcode=${cri.pcode}">\${cri.pname}</a>
+							</div>
+							<div class="goodsPrice">
+								<fmt:formatNumber value="${cri.price}" pattern="#,###원" />
+							</div>`
+						})
+					})
+				alert(response.msg);
 			},
 			error: console.log
-		}) // 여기가 ajax  끝 
+		}); // ajax 끝
 	} else {
 		alert('상품을 불러오는데 실패했습니다.');
 	}
@@ -340,8 +374,42 @@ document.querySelector('.goods-sort-select').addEventListener('change', (e) => {
 			dataType: "json",
 			success(response) {
 				console.log(response);
-				alert(response.msg);
-			},
+	            const wrapper = document.querySelector('#goods-setting-wrapper');
+	            wrapper.innerHTML = `<ul class="goods-box" id="goods-box">
+										<li class="goods-item">
+											<div class="goodsImg">
+												<img
+													src="${pageContext.request.contextPath}/resources/upload/product/${cri.attachments[0].renamedFilename}"
+													alt="" style="width: 300px;" />
+											</div>
+											<div class="goodsTitle">
+												<a
+													href="${pageContext.request.contextPath}/product/productDetail.do?pcode=${cri.pcode}">\${cri.pname}</a>
+											</div>
+											<div class="goodsPrice">
+												<fmt:formatNumber value="${cri.price}" pattern="#,###원" />
+											</div>
+										</li>
+									</ul>`;
+									categoryId.forEach(({attachment, pcode, pname, price}) => {
+										wrapper.querySelector("#goods-box").innerHTML += `										
+										<li class="goods-item">
+											<div class="goodsImg">
+											<img
+												src="${pageContext.request.contextPath}/resources/upload/product/${cri.attachments[0].renamedFilename}"
+												alt="" style="width: 300px;" />
+											</div>
+											<div class="goodsTitle">
+												<a
+													href="${pageContext.request.contextPath}/product/productDetail.do?pcode=${cri.pcode}">\${cri.pname}</a>
+											</div>
+											<div class="goodsPrice">
+												<fmt:formatNumber value="${cri.price}" pattern="#,###원" />
+											</div>`
+										})
+									})
+	            alert(response.msg);
+	        },
 			error: console.log
 		}); // ajax 끝
 		
@@ -350,7 +418,7 @@ document.querySelector('.goods-sort-select').addEventListener('change', (e) => {
     }
 	
 });
-    
+
 
 </script>
 
