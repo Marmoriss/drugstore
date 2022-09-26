@@ -77,10 +77,11 @@ public class CartServiceImpl implements CartService{
 		return result;
 	}
 	
-	@Override
-	public int insertCart(Map<String, Object> map) {
-		return cartDao.insertCart(map);
+	
+	@Override public int insertCart(Map<String, Object> map) {
+	  return cartDao.insertCart(map); 
 	}
+	 
 	
 	@Override
 	public List<Cart> getPcode(int[] checkCategoryByCartNo) {

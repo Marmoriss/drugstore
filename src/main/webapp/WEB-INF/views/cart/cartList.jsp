@@ -60,7 +60,6 @@
 									<div class="productName" class="strong">${cartlist.product.pname}</div>
 									<input type="hidden" name="productCode" value="${cartlist.product.pcode}" />
 									<input type="hidden" name="cartNo" value="${cartlist.cartNo}" />
-							
 							</td>
 							<td>  <span><span><fmt:formatNumber value="${cartlist.product.price}" type="number"/></span>원</span> </td>
 							<td>
@@ -173,8 +172,7 @@ document.querySelector("#order-btn").addEventListener('click', (e) => {
 			dataType : "json",
 			success(response) {
 				for(var i=0; i< response.length; i++){
-					
-					if(response[i].product.categoryId == 350004){
+					if(response[i].product.categoryId == 350017){
 						document.memberOrderFrm.action = "${pageContext.request.contextPath}/subscription/enrollInfo.do";
 						document.memberOrderFrm.submit();
 					}

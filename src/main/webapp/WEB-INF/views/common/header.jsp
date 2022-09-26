@@ -72,7 +72,9 @@
                <li class="header-nav-item"><a href="${pageContext.request.contextPath}/servey/servey.do" class="header-nav-text">건강설문</a></li>
                <li class="header-nav-item"><a href="${pageContext.request.contextPath}/subscription/product.do" class="header-nav-text">정기구독</a></li>
                <li class="header-nav-item"><a class="header-nav-text" href="${pageContext.request.contextPath}/notice/noticeList.do">고객센터</a></li>
-               
+               <sec:authorize access="hasRole('ADMIN')">
+               <li class="header-nav-item"><a class="header-nav-text" href="${pageContext.request.contextPath}/admin/user/userList.do">관리자</a></li>               
+               </sec:authorize>
                <sec:authorize access="isAnonymous()">
                <li class="header-nav-item"><a href="${pageContext.request.contextPath}/member/memberLogin.do" class="header-nav-text">로그인</a></li>
                </sec:authorize>               

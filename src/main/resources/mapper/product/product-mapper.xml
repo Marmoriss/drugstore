@@ -104,7 +104,7 @@
 			category_parent_lev = #{category_parent_lev})
 	</select>
 	
-	<select id="selectSubscriptionAllProduct" resultMap="productCollectionMap">
+	<!-- <select id="selectSubscriptionAllProduct" resultMap="productCollectionMap">
 		select
 			p.*,
 			a.attach_no,
@@ -118,7 +118,7 @@
 					on p.pcode = a.pcode
 		where
 			p.category_id = 350004
-	</select>
+	</select> -->
 	
 	<!-- 이동하 코드 시작 -->
 	
@@ -128,7 +128,7 @@
   	from 
   		cart c inner join product p 
   			on c.pcode = p.pcode 
-  	where p.category_id = 350004 and
+  	where p.category_id = 350017 and
   	<foreach collection="array" item="no" open="" close="" separator=" OR ">
       cart_no = #{no}
     </foreach> 

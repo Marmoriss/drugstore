@@ -76,12 +76,12 @@
 			<div id="bmi__result">
 				<div id="product">
 					
-					<h3>${servey.body}이 좋지않은 당신을 위해 준비했어요</h3>
+					<h3>추천 상품</h3>
 					<c:forEach items="${serveyProductList}" var="product">
 						<div class="productInfo">
-							
-							<img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="" />
-							<a href="">
+							<!-- 사진 넣기 -->
+							<img src="${pageContext.request.contextPath}/resources/upload/product/${product.attachments[0].renamedFilename}" alt="이미지" style="margin-right: 40px;" />
+							<a href="${pageContext.request.contextPath}/product/productDetail.do?pcode=${product.pcode}">
 								<h4>${product.pname}</h4>
 								<br />
 								<p align="left">${product.mainFnctn}</p>

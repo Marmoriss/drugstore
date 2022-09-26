@@ -36,7 +36,7 @@
                             <a href="${pageContext.request.contextPath}/member/memberSubscription.do">정기구독</a>
                         </li>
                         <li class="mypage-common-side__link">
-                            <a href="${pageContext.request.contextPath}/notice/noticeList.do">1:1문의</a>
+                           <a href="${pageContext.request.contextPath}/question/questionList.do">1:1문의</a>
                         </li>
                         <li class="mypage-common-side__link">
                             <a href="">상품 리뷰</a>
@@ -70,9 +70,9 @@
                             class="swiper mypage-main__wish-swiper swiper-container-initialized swiper-container-horizontal">
 									<div id="subscription_info">
 									<c:if test="${not empty subscription}">
-										<a href="">
+										<a href="${pageContext.request.contextPath}/product/productDetail.do?pcode=${product.pcode}">
 										<div id="subscription__info-product">
-										 	<span>(${product.pcode})</span><span>${product.pname}</span>
+										 	<span>${product.pname}</span>
 										</div>
 										</a>
 									 	<div id="subscription__info-date">
