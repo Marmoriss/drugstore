@@ -51,6 +51,12 @@ public interface CartDao {
 	List<Cart> getPcode(int[] checkCategoryByCartNo);
 
 
+	@Insert("insert into cart values(seq_cart_no.nextval,#{memberId},#{pcode},#{amount})")
+	int addCart(Map<String, Object> cartList);
+
+	int findCart(Map<String, Object> param);
+
+
 	
 	
 //	List<Cart> findCartListByMemberId(String memberId);

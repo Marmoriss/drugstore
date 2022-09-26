@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.drugstore.question.model.dao.QuestionDao"> 
+
+	<select id="selectQuestionList" resultMap="questionMap">
+  		select * from question order by no desc
+  	</select>
+  	
+  	<insert id="insertQuestion">
+  		insert into
+  				question
+  		values (
+  				seq_question_no.nextval,
+  				null,
+  				#{writer},
+  				default,
+  				default,
+  				#{content},
+  				#{title},
+  				#{commentLevel},
+  				#{questionCategory},
+  				default
+  		)
+  	</insert>
+  	
+  	<select id="oneQuestion" resultMap="questionMap">
+  		select * from question where no = #{no}
+  	</select>
+  	
+  	<update id="updateQuestion">
+  		update
+  			notice
+  		set
+  			comment_ref = #{commentRef},
+  			writer = #{writer},
+  			answered = #{answered},
+  			reg_date = #{regDate},
+  			content = #{content},
+  			title = #{title},
+  			comment_level = #{commentLevel},
+  			category = #{questionCategory} 
+  		where
+  			no = #{no}
+  	
+  	</update>
+  	
+  	<delete id="deleteQuestioln">
+  		delete from
+  			question
+  		where
+  			no = #{no}
+  	</delete>
+  	
+
+	<resultMap type="question" id="questionMap">
+        <result column="no" property="no"></result>
+        <result column="comment_ref" property="commentRef"></result>
+        <result column="writer" property="writer"></result>
+        <result column="answered" property="answered"></result>
+        <result column="reg_date" property="regDate"></result>
+        <result column="content" property="content"></result>
+        <result column="title" property="title"></result>
+        <result column="comment_level" property="commentLevel"></result>
+        <result column="category" property="questionCategory"></result>
+    </resultMap>
+
+
+</mapper>

@@ -23,13 +23,15 @@ public interface MemberService {
 
 	Member findKakaoMember(@NonNull String memberId);
 
-	int insertKakaoMember(MemberEntity memberK);
+	int insertKakaoMember(Member memberK);
 
 	Member selectOneMemberByName(Member member);
 
 	List<Orders> getOrderById(Map<String, Object> param);
 
 	int getTotalContent(Map<String, Object> param);
+
+	List<Orders> findByValues(Map<String, Object> param);
 
 
 	

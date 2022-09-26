@@ -36,7 +36,7 @@ public interface MemberDao {
 	Member findKakaoMember(String memberId);
 	
 	@Insert("insert into member values(#{memberId},#{name},#{password},#{phone},default,null,default,null,null,null,null,null)")
-	int insertkakaoMember(MemberEntity memberK);
+	int insertkakaoMember(Member memberK);
 
 	@Select("select * from member where name = #{name} and phone = #{phone}")
 	Member selecOneMemberByName(Member member);
@@ -44,6 +44,8 @@ public interface MemberDao {
 	List<Orders> getOrderById(RowBounds rowBounds, Map<String, Object> param);
 	
 	int getTotalContent(Map<String, Object> param);
+
+	List<Orders> findByValues(Map<String, Object> param);
 	
 
 

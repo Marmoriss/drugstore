@@ -1,22 +1,21 @@
 package com.kh.drugstore.question.model.dto;
 
-public enum QuestionCategory {
+import static java.util.stream.Collectors.toMap;
 
-	inquiryProduct("제품문의"),
-	inquiryMember("회원문의"),
-	inquiryDelivery("배송문의"),
-	inquiryOrderPay("주문/결제"),
-	inquiryOrderElse("취소/반품/환불"),
-	inquiryEtc("기타");
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Stream;
+
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public enum QuestionCategory {
 	
-	private String krName;
+	제품문의, 회원문의, 배송문의, 주문결제, 취소반품환불, 기타;
 	
-	QuestionCategory(String krName) {
-		this.krName = krName;
-	}
+
 	
-	public String getKrName() {
-		return krName;
-	}
+	
 }
 

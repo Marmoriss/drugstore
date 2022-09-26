@@ -60,7 +60,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public int insertKakaoMember(MemberEntity memberK) {
+	public int insertKakaoMember(Member memberK) {
 		return memberDao.insertkakaoMember(memberK);
 	}
 	
@@ -78,6 +78,10 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int getTotalContent(Map<String, Object> param) {
 		 return memberDao.getTotalContent(param); 
+	}
+	@Override
+	public List<Orders> findByValues(Map<String, Object> param) {
+		return memberDao.findByValues(param);
 	}
 	
 }

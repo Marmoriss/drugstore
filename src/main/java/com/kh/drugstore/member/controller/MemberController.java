@@ -102,16 +102,14 @@ public class MemberController {
 		String password = String.valueOf(rnd);
 		String encodedPassword = bcryptPasswordEncoder.encode(password);
 		member.setPassword(encodedPassword);
+		phone = phone.replaceAll("-","");
 
 		// 1. db row 수정
 		int result = memberService.updateMember(member);
 
 		UserDetails updatedMember = memberSecurityService.loadUserByUsername(member.getMemberId());
 		
-		// 2. authentication 수정
-		Authentication newAuthentication = new UsernamePasswordAuthenticationToken(updatedMember,
-				updatedMember.getPassword(), updatedMember.getAuthorities());
-		SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+		
 
 		mav.addObject("password", password);
 		mav.setViewName("/member/findInfo");
@@ -120,7 +118,9 @@ public class MemberController {
 	
 	@PostMapping("/findId.do")
 	public ModelAndView findId(Member member, ModelAndView mav) {
-		log.debug("멈버 = {}",member);
+		log.debug("멈버 = {}",member.getPhone());
+		String phone = member.getPhone().replaceAll("-", "");
+		member.setPhone(phone);
 		Member findMember = memberService.selectOneMemberByName(member);
 		log.debug("memberId = {}",findMember.getMemberId());
 		mav.addObject("memberId", findMember.getMemberId());
@@ -352,12 +352,23 @@ public class MemberController {
 			
 			
 			String encodedPassword = bcryptPasswordEncoder.encode("1234");
+			Member kMember = new Member();
+			kMember.setMemberId(kakaoProfile.getKakao_account().getEmail()+"k");
+			kMember.setName(kakaoProfile.getProperties().getNickname());
+			kMember.setPhone("01044443333");
+			kMember.setPassword(encodedPassword);
 			
-			MemberEntity member =  new MemberEntity(kakaoProfile.getKakao_account().getEmail()+"k", kakaoProfile.getProperties().getNickname(), encodedPassword, "01011112222", null, null, true, null, null, null, null, null);
-			Member member2 = memberService.findKakaoMember(member.getMemberId());
+			// 2. authentication 수정 -> 자동 로그인 되더라 
+			
+			 Authentication newAuthentication = new UsernamePasswordAuthenticationToken(kMember,kMember.getPassword(), kMember.getAuthorities());
+			 SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+			 
+			
+			
+			Member member2 = memberService.findKakaoMember(kMember.getMemberId());
 			
 			if(member2 == null) {
-				memberService.insertKakaoMember(member);
+				memberService.insertKakaoMember(kMember);
 			}
 			
 			
@@ -436,6 +447,23 @@ public class MemberController {
 				model.addAttribute("pagebar", pagebar);
 	}
 	
+	@GetMapping("/findByValues.do")
+	public String findByValues(Authentication authentication, @RequestParam String to, @RequestParam String from, @RequestParam String status, Model model) {
+		Member member = (Member) authentication.getPrincipal();
+		String memberId = member.getMemberId();
+		log.debug("to = {}", to);
+		log.debug("from = {}", from);
+		Map<String, Object> param = new HashMap<>();
+		param.put("status", status);
+		param.put("to", to);
+		param.put("from", from);
+		param.put("memberId", memberId);
+		List<Orders> list = memberService.findByValues(param);
+		log.debug("list = {}", list);
+		model.addAttribute("list", list);
+		
+		return "/member/memberOrder";
+	}
 
 	
 }

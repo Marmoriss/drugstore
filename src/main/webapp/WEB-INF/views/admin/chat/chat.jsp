@@ -50,12 +50,10 @@
 	<div class="input-group-append">
 		<button id="sendBtn" class="btn btn-outline" type="button">전송</button>
 	</div>
-<div>
-</div>
 </div>
 <script>
 document.querySelector("#sendBtn").addEventListener('click', (e) => {
-	const msg = document.querySelector("#message").value;
+	const msg = document.querySelector("#msg").value;
 	if(!msg) return;
 	
 	const payload = {
@@ -66,7 +64,7 @@ document.querySelector("#sendBtn").addEventListener('click', (e) => {
 	};
 	stompClient.send(`/app/chat/${param.chatroomId}`, {}, JSON.stringify(payload));
 	
-	document.querySelector("#message").value = "";
+	document.querySelector("#msg").value = "";
 });
 
 
