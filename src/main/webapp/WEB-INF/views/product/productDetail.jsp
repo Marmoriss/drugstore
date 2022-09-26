@@ -23,17 +23,9 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/product/product-detail.css" />
 
-<sec:authorize access="isAuthenticated()">
-	<script>
-	    const memberId = "<sec:authentication property='principal.username'/>";
-	</script>
-</sec:authorize>
-
-<%
-	Member loginMember = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	String memberId = loginMember.getMemberId();
-	pageContext.setAttribute("memberId", memberId);
-%>
+<script>
+	const memberId = ${memberId};
+</script>
 
 <body>
 	<div id="layout-config">
@@ -592,7 +584,8 @@
 														<a href="#">1:1 문의하기</a>
 													</div>
 													<div class="product-qna__top_btn_wrapper">
-														<span>제품 문의</span> <input type="button" value="문의하기"
+														<span>제품 문의</span>
+														<input type="button" value="문의하기"
 															name="board_write_btn" id="product_qna_write_btn"
 															class="btn_chg product-qna__write-btn hand" />
 													</div>

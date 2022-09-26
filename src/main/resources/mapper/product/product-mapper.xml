@@ -60,7 +60,7 @@
 			<result column="attach_created_at" property="createdAt"/>
 		</collection>
 	</resultMap>
-
+	
 	<select id="selectOneProductCollection" resultMap="productCollectionMap">
 		select
 			p.*,
@@ -147,8 +147,63 @@
   </resultMap>
 
 
+	<select id="selectAllProduct" resultMap="productCollectionMap">
+		select
+			*
+		from
+			product p
+				left join product_attachment a
+				on p.pcode = a.pcode
+	</select>
 	
+	<select id="sortProductByRecent" resultMap="productCollectionMap">
+		select
+			*
+		from
+			product p
+		left join product_attachment a
+				on p.pcode = a.pcode
+		where 
+			p.category_id = #{categoryId}
+		order by 
+			p.created_at desc
+	</select>
 	
+	<select id="sortProductByPrice" resultMap="productCollectionMap">
+		select
+			*
+		from
+			product p
+		left join product_attachment a
+				on p.pcode = a.pcode
+		where 
+			p.category_id = #{categoryId}
+		order by 
+			p.price
+	</select>
 	
+	<select id="sortProductByPriceDesc" resultMap="productCollectionMap">
+		select
+			*
+		from
+			product p
+				left join product_attachment a
+				on p.pcode = a.pcode
+		where 
+			p.category_id = #{categoryId}
+		order by 
+			p.price desc
+	</select>
+	
+	<select id="selectListByCategoryId" resultMap="productCollectionMap">
+		select
+			*
+		from
+			product p
+				left join product_attachment a
+				on p.pcode = a.pcode
+		where
+			category_id = #{categoryId}
+	</select>
 	
 </mapper>
