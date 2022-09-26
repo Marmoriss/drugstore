@@ -26,7 +26,7 @@
 								</div>
 								<div id="img-container">
 										<a href="${pageContext.request.contextPath}/product/productDetail.do?pcode=${product.pcode}">
-									<img src="${pageContext.request.contextPath}/resources/upload/product/${product.attachments[0].renamedFilename}" alt="이미지" />
+									<img src="${pageContext.request.contextPath}/resources/upload/product/${product.attachments[0].renamedFilename}" alt="이미지" style="width: 230px; height: 200px;" />
 										</a>
 								</div>
 								<div id="content">
