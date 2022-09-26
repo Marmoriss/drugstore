@@ -55,7 +55,7 @@ public interface CartDao {
 	@Insert("insert into cart values(seq_cart_no.nextval,#{memberId},#{pcode},#{amount})")
 	int addCart(Map<String, Object> cartList);
 
-	int findCart(Map<String, Object> param);
+	Integer findCart(Map<String, Object> param);
 
 
 	

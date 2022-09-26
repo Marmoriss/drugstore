@@ -88,7 +88,7 @@ public class CartServiceImpl implements CartService{
 		return cartDao.getPcode(checkCategoryByCartNo);
 	}
 	@Override
-	public int findCart(Map<String, Object> param) {
+	public Integer findCart(Map<String, Object> param) {
 		return cartDao.findCart(param);
 	}
 	@Override

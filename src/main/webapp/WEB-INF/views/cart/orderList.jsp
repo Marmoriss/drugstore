@@ -27,7 +27,7 @@
 								<th>상품정보</th>
 								<th>가격</th>
 								<th>수량</th>
-								<th>배송비</th>
+								<th>배송구분</th>
 								<th>합계</th>
 							</tr>
 						</thead>
@@ -35,7 +35,9 @@
 							<c:forEach items="${order}" var="cart">
 								<tr class="productInfo">
 									<td id="productImg">
-										<div id="product-img-wrap"></div>
+										<div id="product-img-wrap"><img
+									src="${pageContext.request.contextPath}/resources/upload/product/${cart.product.attachments[0].renamedFilename}"
+									alt="상품메인이미지" class="product-view__thumb-img" /></div>
 									</td>
 									<td id="productInfo">
 										<div class="productName" class="strong">${cart.product.pname}</div>
@@ -49,12 +51,13 @@
 													value="${cart.product.price}" type="number" /></span>원</span></td>
 									<td><span>${cart.amount}</span> <input type="hidden"
 										name="cartAmount" value="${cart.amount}" /></td>
-									<td><span>[기본]</span></td>
+									<td><span>기본</span></td>
 									<td><span><span id="productPrice"><fmt:formatNumber
 													value="${cart.product.price*cart.amount}" type="number" /></span>원</span></td>
 								</tr>
 							</c:forEach>
 						</tbody>
+						
 
 						<tfoot>
 							<tr>
@@ -173,7 +176,7 @@
 							<tbody>
 								<tr>
 									<td><span class="display"><span id="orderPrice"></span>원</span></td>
-									<td><span class="display">= <span id="total"
+									<td><span class="display"><span id="total"
 											class="strong"></span>원
 									</span></td>
 								</tr>
