@@ -34,6 +34,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
+	public List<Product> selectAllProduct() {
+		return productDao.selectAllProduct();
+	}
+	
+	@Override
 	public int getTotalContent() {
 		return productDao.getTotalContent();
 	}
@@ -121,7 +126,10 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.getProductBySubNo(pcode);
 	}
 
-
+	@Override
+	public List<Product> selectListByCategoryId(int categoryId) {
+		return productDao.selectListByCategoryId(categoryId);
+	}
 	
 	
 	

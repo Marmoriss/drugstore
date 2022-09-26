@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,12 +46,10 @@ public class ProductListController {
 //	@Autowired
 //	ReviewService reviewService;
 	
-	// 카테고리 id로 상품 리스트 조회
+	// 전체 조회
 	@GetMapping("/productList.do")
 	public void productListByCategory(@RequestParam(defaultValue = "1") int cPage,
 								HttpServletRequest request,
-								@RequestParam(value="categoryId", required=false) 
-								int categoryId, 
 								Model model) {
 		
 		Map<String, Integer> param = new HashMap<>();
@@ -59,7 +58,7 @@ public class ProductListController {
 		param.put("cPage", cPage);
 		param.put("limit", limit);
 		
-		List<Product> list = productService.findAllProduct(param);
+		List<Product> list = productService.selectAllProduct();
 //		log.debug("list = {}", list);
 		model.addAttribute("list", list);
 		
@@ -72,16 +71,28 @@ public class ProductListController {
 		
 		//카테고리 리스트 시작
 //		log.debug("categoryId = {}", categoryId);	
-		//소분류 카테고리 리스트 
-		List<Product> smallList = productService.selectProductBysmallCategoryId(categoryId);
-		log.debug("smallList = {}", smallList);
-		model.addAttribute("smallList", smallList);
 		
-		//대분류 카테고리 리스트
-		List<Product> bigList = productService.selectProductByBigCategoryId(categoryId);
-		log.debug("bigList = {}", bigList);
-		model.addAttribute("bigList", bigList);		
-
+	}
+	
+	// 카테고리 아이디별 상품 조회
+	@GetMapping("/productListByCategoryId.do")
+	public void selectListByCategoryId(@RequestParam int categoryId, Model model) {
+		log.debug("categoryId = {}", categoryId);
+		
+		List<Product> listByCategoryId = productService.selectListByCategoryId(categoryId);
+		log.debug("listByCategoryId = {}", listByCategoryId);
+		
+		model.addAttribute("listByCategoryId", listByCategoryId);
+		
+	}
+	
+	// 비동기 전체보기
+	@GetMapping("/totalList.do")
+	public ResponseEntity<?> totalList(){
+		
+		List<Product> list = productService.selectAllProduct();
+		
+		return ResponseEntity.ok(list);
 	}
 	
 	//최신순/낮은 가격순/높은가격순
@@ -112,7 +123,7 @@ public class ProductListController {
 	// 주희 코드 시작
 	// 상품 코드로 상세페이지 조회
 	@GetMapping("/productDetail.do")
-	public void productDetail(@RequestParam int pcode, Model model) {
+	public void productDetail(@RequestParam int pcode, Model model, Authentication authentication) {
 		log.debug("pcode = {}", pcode);
 		Product product = productService.selectOneProductCollection(pcode);
 		log.debug("product = {}", product);
@@ -120,9 +131,12 @@ public class ProductListController {
 		List<Qna> qnaList = qnaService.selectQnaListByPcode(pcode);
 		log.debug("qnaList = {}", qnaList);
 		
+		String memberId = authentication.getName();
+		
 //		List<Review> reviewList = reviewService.selectReviewListByPcode(pcode);
 		model.addAttribute("product", product);
 		model.addAttribute("qnaList", qnaList);
+		model.addAttribute("memberId", memberId);
 	}
 
 	@GetMapping("/autocompletePname.do")

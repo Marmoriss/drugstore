@@ -106,8 +106,8 @@
 			</select>
 		</div>
 		<div class="goods-setting-wrapper">
-			<input type="hidden" name="categoryId" id="categoryId" value="${list[0].categoryId}" />
-			<c:forEach items="${list}" var="cri" >
+			<input type="hidden" name="categoryId" id="categoryId" value="${listByCategoryId[0].categoryId}" />
+			<c:forEach items="${listByCategoryId}" var="cri" >
 				<ul class="goods-box">
 					<li class="goods-item">
 						<div class="goodsImg">
@@ -115,7 +115,7 @@
 							<img src="${pageContext.request.contextPath}/resources/upload/product/${cri.attachments[0].renamedFilename}"/>
 						</div>
 						<div class="goodsTitle">
-							<a href="${pageContext.request.contextPath}/product/productDetail.do?pcode=${cri.pcode}">${cri.pname}</a>
+							<a href="${pageContext.request.contextPath}/product/productDetail.do?categoryId=${cri.pcode}">${cri.pname}</a>
 						</div>
 						<div class="goodsPrice"><fmt:formatNumber value="${cri.price}" pattern="#,###원" /></div>
 					</li>

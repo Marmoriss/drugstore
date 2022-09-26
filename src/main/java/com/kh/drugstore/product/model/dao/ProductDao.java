@@ -16,6 +16,8 @@ public interface ProductDao {
 
 	@Select("select p.*, (select count(*) from product_attachment where pcode = p.pcode) attach_count from product p")
 	List<Product> findAllProduct(RowBounds rowBounds);
+	
+	List<Product> selectAllProduct();
 
 	@Select("select count(*) from product")
 	int getTotalContent();
@@ -37,15 +39,12 @@ public interface ProductDao {
 	List<Product> selectProductBybigCategoryId(int categoryId);
 
 	//최신순 
-	@Select("select*from product where category_id = #{categoryId} order by createdAt desc")
 	List<Product> sortProductByRecent(int categoryId);
 	
 	//낮은가격순
-	@Select("select*from product where category_id = #{categoryId} order by price")
 	List<Product> sortProductByPrice(int categoryId);
 
 	//높은가격순
-	@Select("select*from product where category_id = #{categoryId} order by price desc")
 	List<Product> sortProductByPriceDesc(int cateogryId);
 
 	Product selectOneProductCollection(int pcode);
@@ -71,6 +70,8 @@ public interface ProductDao {
 	// attachment 수정
 	@Select("select * from product where pcode = #{pcode}")
 	Product getProductBySubNo(int pcode);
+
+	List<Product> selectListByCategoryId(int categoryId);
 
 
 

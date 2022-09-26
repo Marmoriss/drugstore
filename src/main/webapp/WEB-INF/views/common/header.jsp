@@ -114,7 +114,7 @@
                      <a href="javascript:;" class="categoryAllBtn">
                         <i class="fa-solid fa-bars"></i>
                      </a>
-                     <a href="${pageContext.request.contextPath}/product/productList.do?categoryId=350001" class="header-menu-open-title">전체 카테고리</a>
+                     <a href="${pageContext.request.contextPath}/product/productList.do" class="header-menu-open-title">전체 카테고리</a>
                   </li>
                   <!-- 추후 반복문으로 카테고리 헤더 불러오기 -->
                   <li class="categoryList1 header-menu-item">

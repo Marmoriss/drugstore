@@ -12,6 +12,8 @@ public interface ProductService {
 
 	List<Product> findAllProduct(Map<String, Integer> param);
 
+	List<Product> selectAllProduct();
+
 	int getTotalContent();
 	
 	List<ProductAttachment> findAttachmentByProductCode(int pCode);
@@ -51,6 +53,8 @@ public interface ProductService {
 	List<Product> checkCategory(int[] checkCategoryByCartNo);
 
 	Product getProductBySubNo(int pcode);
+
+	List<Product> selectListByCategoryId(int categoryId);
 
 
 
