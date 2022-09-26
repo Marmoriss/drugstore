@@ -177,7 +177,7 @@
 						<li class="goods-item">
 							<div class="goodsImg">
 								<!-- 리스트로 불러왔을때 여러장의 사진으로 상품코드는 하나이나 여러개가 나옴. 썸네일 1개만 갖고오는 방법 -->
-								<img src="${pageContext.request.contextPath}/resources/upload/product/"${product.attachments[0].renamedFilename}" alt="" width="300px" height="300px"/>
+								<img src="${pageContext.request.contextPath}/resources/upload/product/${cri.attachments[0].renamedFilename}" alt="" width="300px" height="300px"/>
 							</div>
 							<div class="goodsTitle">
 								<a href="${pageContext.request.contextPath}/product/productDetail.do?categoryId=${cri.pcode}">${cri.pname}</a>
@@ -194,7 +194,7 @@
 						<li class="goods-item">
 							<div class="goodsImg">
 								<!-- 리스트로 불러왔을때 여러장의 사진으로 상품코드는 하나이나 여러개가 나옴. 썸네일 1개만 갖고오는 방법 -->
-								<img src="${pageContext.request.contextPath}/resources/upload/product/${product.attachments[0].renamedFilename}" alt="" style="width: 300px;"/>
+								<img src="${pageContext.request.contextPath}/resources/upload/product/${cri.attachments[0].renamedFilename}" alt="" style="width: 300px;"/>
 							</div>
 							<div class="goodsTitle">
 								<a href="${pageContext.request.contextPath}/product/productDetail.do?categoryId=${cri.pcode}">${cri.pname}</a>
