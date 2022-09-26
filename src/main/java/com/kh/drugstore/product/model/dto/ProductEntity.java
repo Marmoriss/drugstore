@@ -37,7 +37,6 @@ public class ProductEntity {
 	private String srvUse; //용법
 	private String distbPd; //유통기한
 	private YesNo subYn; //구독상품 여부 
-	private String baseStandard; //기준규격
 	private SaleStatus saleStatus; // 판매 상태
 	private LocalDate createdAt; // 제품 등록일
 	private LocalDate updatedAt; // 최종 수정일

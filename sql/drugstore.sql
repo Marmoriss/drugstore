@@ -433,7 +433,7 @@ where o.paid_at between to_date('2022/01/05') and to_date('2022/01/10');
 --태연 코드 끝--
 -- 주희 코드 --
 -- 카테고리 샘플 데이터
-select * from orders;
+select * from product;
 select * from category;
 
 --insert into category
@@ -501,3 +501,7 @@ update qna set answered = 'Y' where qna_id between 42 and 67;
 alter table question add (
     secret number default 0
 );
+select * from product;
+select * from product_attachment;
+update product set sub_yn = 'Y' where category_id = 350017;
+insert into product_attachment values(seq_attach_no.nextval, 
