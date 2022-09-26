@@ -422,7 +422,6 @@ insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_
 insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price,paid_at,status) values(425896325, 'dlehdgk', '3', '김지구','post', 20000, 25000,to_date('22/01/10','RR/MM/DD'),default); 
 insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price,paid_at,status) values(548945484, 'potato', '4', '김감자','post', 20000, 25000,to_date('22/01/10','RR/MM/DD'),default); 
 insert into orders(merchant_uid, member_id, imp_uid, receiptid, method, product_price, total_price,paid_at,status) values(201547995, 'tree', '5', '이모씨','post', 20000, 25000,to_date('22/01/10','RR/MM/DD'),default); 
-
 select count(*) from member m left join servey s on (m.member_id = s.member_id) where s.gender='M';
 
 select m.member_id,merchant_uid, imp_uid, receiptid, method, product_price, total_price,paid_at,status from member m right join orders o on

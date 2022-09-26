@@ -66,10 +66,10 @@
 		<csrf disabled="false"/>
 		
 		<!-- remember-me 설정 -->
-		<remember-me 
+		<!-- <remember-me 
 			data-source-ref="dataSource"
 			token-validity-seconds="1209600"
-			/>
+			/> -->
 		
 		<access-denied-handler
 			error-page="/error/acessDenied.do"
