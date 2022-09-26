@@ -758,6 +758,7 @@ document.querySelector("#addCart").addEventListener('click', (e) => {
 		data : {pcode},
 		success(response) {
 			if(response) {
+				console.log(response);
 				if(confirm('장바구니에 존재하는 상품입니다. 그래도 추가하시겠습니까?')) {
 					addCart(cartList);
 				} else return;

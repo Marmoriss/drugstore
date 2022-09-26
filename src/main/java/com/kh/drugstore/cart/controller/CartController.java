@@ -124,7 +124,7 @@ public class CartController {
 		param.put("pcode", pcode);
 		log.debug("param = {}", param);
 		
-		int result = cartService.findCart(param);
+		Integer result = cartService.findCart(param);
 		return ResponseEntity.ok(result);
 	}
 	

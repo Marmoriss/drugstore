@@ -22,10 +22,8 @@ main {
 }
 .cart-product-header {
    padding:10px;
-   border:1px solid #d3d3d385;
-   font-size:13px;
+   font-size:20px;
    font-weight: bold;
-   background-color: rgb(122 158 177 / 16%);
    height:25px;
    display: flex;
    align-items: center;
@@ -52,12 +50,14 @@ table {
 }
 .cart-product tr {
    border-bottom: 1px solid #d3d3d385;
+   
 }
 .cart-product th, .total th {
    height:60px;
    font-weight: 300;
    font-family: 'Noto Sans KR', sans-serif;
    font-size:15px;
+   text-align : center;
 }
 .total th {
    border-top:1px solid lightgray;
@@ -66,6 +66,7 @@ table {
 .cart-product td {
 	font-size:13px;
 	height:110px;
+	text-align : center;
 }
 
 .cart-product tbody td:not(#productInfo) > * {
@@ -75,6 +76,7 @@ table {
 }
 .checkbox {
    width:40px;
+
 }
 #product-img-wrap{
    padding:5px;
@@ -89,7 +91,7 @@ table {
    padding-left: 20px;
 }
 #orderProductPrice {
-   text-align: right;
+   text-align: center;
 }
 .delete-wrap {
    height:80px;
@@ -97,18 +99,21 @@ table {
    align-items: center;
 }
 #delBtn {
+	border-radius: 8px;
    margin-left: 20px;
    height:50px;
    width:100px;
    background-color: white;
    border:1px solid rgb(65, 88, 101);
+    font-family: 'SpoqaHanSans Neo';
+    font-weight: 500 !important;
    color:gray;
    cursor: pointer;
 }
 #delBtn:hover {
-   background-color: rgb(122, 158, 177);
+   background-color: #415865;
    border:none;
-   color:black;
+   color:white;
 }
 .display {
    display:flex;
@@ -116,7 +121,7 @@ table {
 }
 .total td {
    height:100px;
-   border-bottom: 1px solid lightgray;
+   border-bottom: 2px solid lightgray;
    font-size:19px;
 }
 .order-wrap {
@@ -127,16 +132,29 @@ table {
    margin-top: 20px;
 }
 #order-btn {
-    width: 250px;
-    height: 70px;
-   background-color: rgb(122, 158, 177);
-   border:none;
+	background: #415865;
+    color: #ffff;
+	width: 100%;
+    height: 57px;
+    border: 2px solid #415865;
+    line-height: 53px;
+    text-align: center;
+    background: #ffff;
+    font-family: 'SpoqaHanSans Neo';
+    font-size: 20px;
+    font-weight: 500 !important;
+    letter-spacing: -0.02em;
+    color: #415865;
+    margin: 0 0 0 24px;
+    padding: 0;
+    flex: 0 1 auto;
+    border-radius: 8px;
    cursor: pointer;
 }
 #order-btn:hover {
-   background-color: white;
+   background-color: #415865;
    border:1px solid rgb(65, 88, 101);
-   color:gray;
+   color:#ffff;
 }
 
 .strong {
@@ -144,9 +162,13 @@ table {
 }
 .total-info-wrap {
    margin-top: 20px;
+   
 }
 #productImg {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.total th{
+	text-align : center;
 }

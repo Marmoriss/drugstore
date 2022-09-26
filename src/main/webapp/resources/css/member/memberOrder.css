@@ -9,6 +9,10 @@
 
 .n-table.table-col {
     border-top: 1px solid #000000;
+    position : relative;
+    top: -500px; 
+    left: 300px;
+    text-align : center;
 }
 tbody {
     display: table-row-group;
@@ -28,7 +32,7 @@ tbody {
 
 .pagebar{
 	position : relative;
-	left : 400px;
+	left : 700px;
 	bottom : 150px;
 }
 
@@ -86,6 +90,7 @@ tbody{
 	border-radius: 4px;
 	margin-top: 10px;
 	margin-left: 0px;
+	
 	margin-right: 0px;
 	padding: 20px;
 	padding-bottom: 10px;
@@ -185,6 +190,7 @@ tbody{
 }
 
 .ui-icon-circle-triangle-w {
+	
 	background-position: -0px -0px;
 	background-size: 36px;
 }
@@ -227,14 +233,61 @@ tbody{
 /**************** 달력 끝 ****************/
 /**************** 날짜 버튼들 ****************/
 .date-btns{
+	
 	margin-right: 30px;
 }
 
 .date-btn{
+	position: relative;
+	left : 150px;
+	top: 0px;
 	width: 50px;
 	height: 40px;
 }
 
 .date-btn:hover, .date-btn:focus{
 	background-color: rgb(224, 224, 224);
+}
+/**/
+.btn-submit{
+	position : relative;
+	left : 100px;
+	top: -500px;
+	padding: 2px 10px;
+	font-size: 12px;
+	line-height: 24px;
+	border-radius: 0;
+	background-color: rgb(65, 88, 101);
+	color: #fff;
+}
+.custom-select{
+	width : 100px;
+	height : 30px;
+	position : relative;
+	left : 30px;
+	top: 50px;
+	
+}
+.dates{
+	position : relative;
+	left : 550px;
+	top : -27px
+}
+.member-order-list{
+	position : relative;
+	left : -120px;
+	top : -50px;
+}
+.delivery-wrap{
+	position : relative;
+	left : 40px;
+	top : 30px;
+	
+}
+.control-label{
+	font-size : 18px;
+	font-weight : 20px;
+}
+.pagebar{
+	margin-left : 260px;
 }
