@@ -13,7 +13,7 @@
 		from
 			product
 		<where>
-			<if test="pcode != null and pcode != ''">
+			<if test="pcode != null and pcode != '' and pcode != 0">
 				pcode = #{pcode}
 			</if>
 			<if test="pname != null and pname != ''">
@@ -28,12 +28,8 @@
 				</if>
 				or sale_status = #{saleStatus}
 			</if>
-			<if test="categoryId != null and categoryId != ''">
+			<if test="categoryId != 0 and categoryId != ''">
 				or category_id = #{categoryId}
-			</if>
-			<if test="to != null and from != null">
-				or created_at 
-				between to_date(#{toDate}, 'yyyy/mm/dd') and to_date(#{fromDate}, 'yyyy/mm/dd')
 			</if>
 		</where>
 	</select>
@@ -52,7 +48,6 @@
 		<result column="srv_use" property="srvUse"/>
 		<result column="distb_pd" property="distbPd"/>
 		<result column="sub_yn" property="subYn"/>
-		<result column="base_standard" property="baseStandard"/>
 		<result column="sale_status" property="saleStatus"/>
 		<result column="created_at" property="createdAt"/>
 		<result column="updated_at" property="updatedAt"/>

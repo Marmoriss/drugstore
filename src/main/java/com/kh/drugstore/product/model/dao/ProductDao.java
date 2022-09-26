@@ -37,14 +37,16 @@ public interface ProductDao {
 	List<Product> selectProductBybigCategoryId(int categoryId);
 
 	//최신순 
-	@Select("select*from product order by pcode desc")
-	List<Product> sortProductByRecent(int pcode);
+	@Select("select*from product where category_id = #{categoryId} order by createdAt desc")
+	List<Product> sortProductByRecent(int categoryId);
 	
 	//낮은가격순
-	List<Product> sortProductByPrice(int price);
+	@Select("select*from product where category_id = #{categoryId} order by price")
+	List<Product> sortProductByPrice(int categoryId);
 
 	//높은가격순
-	List<Product> sortProductByPriceDesc(int price);
+	@Select("select*from product where category_id = #{categoryId} order by price desc")
+	List<Product> sortProductByPriceDesc(int cateogryId);
 
 	Product selectOneProductCollection(int pcode);
 

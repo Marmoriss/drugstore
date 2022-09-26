@@ -139,6 +139,20 @@
   	
   </resultMap>
   
-
-  
+	<select id="findCart" resultType="_int" parameterType="map">
+	select 
+		* 
+	from 
+		cart
+	where
+		pcode = #{pcode} and member_id = #{memberId}
+	</select>
+	<!-- 
+  	<resultMap type="cart" id="onlyCartMap">
+    <id column="cart_no" property="cartNo"/>
+  	<result column="pcode" property="pcode"/>
+  	<result column="member_id" property="memberId"/>
+  	<result column="amount" property="amount"/>
+  	</resultMap>
+  	 -->
 </mapper>
