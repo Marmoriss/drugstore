@@ -53,7 +53,7 @@ public class ServeyController {
 		switch(body) {
 		case "350013": servey.setBody("장"); break;
 		case "350012": servey.setBody("눈"); break;
-		case "350014": servey.setBody("피로감"); break;
+		case "350014": servey.setBody("피로"); break;
 		case "350015": servey.setBody("면역"); break;
 		case "350016": servey.setBody("심혈관계"); break;
 		}
@@ -71,7 +71,7 @@ public class ServeyController {
 		switch(servey.getBody()) {
 		case "장": servey.setBody("350013"); break;
 		case "눈": servey.setBody("350012"); break;
-		case "피로감": servey.setBody("350014"); break;
+		case "피로": servey.setBody("350014"); break;
 		case "면역": servey.setBody("350015"); break;
 		case "심혈관계": servey.setBody("350016"); break;
 		}
@@ -103,7 +103,7 @@ public class ServeyController {
 		switch(servey.getBody()) {
 		case "장": servey.setBody("350013"); break;
 		case "눈": servey.setBody("350012"); break;
-		case "피로감": servey.setBody("350014"); break;
+		case "피로": servey.setBody("350014"); break;
 		case "면역": servey.setBody("350015"); break;
 		case "심혈관계": servey.setBody("350016"); break;
 		}

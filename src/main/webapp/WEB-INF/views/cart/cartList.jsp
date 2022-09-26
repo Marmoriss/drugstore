@@ -58,7 +58,6 @@
 									<div class="productName" class="strong">${cartlist.product.pname}</div>
 									<input type="hidden" name="productCode" value="${cartlist.product.pcode}" />
 									<input type="hidden" name="cartNo" value="${cartlist.cartNo}" />
-							
 							</td>
 							<td>  <span><span><fmt:formatNumber value="${cartlist.product.price}" type="number"/></span>원</span> </td>
 							<td>

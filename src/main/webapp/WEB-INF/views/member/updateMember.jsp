@@ -158,7 +158,7 @@ const updateMember = () => {
 					newPassword.focus();
 				}
 			}else{
-				alert("비밀번호 확인을 해주세요");
+				alert("기존 비밀번호 확인을 해주세요");
 			}
 			
 			

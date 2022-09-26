@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.drugstore.cart.model.dto.Cart;
 import com.kh.drugstore.cart.model.service.CartService;
 import com.kh.drugstore.member.model.dto.Member;
 import com.kh.drugstore.product.model.dto.Product;
@@ -55,7 +56,7 @@ public class SubscriptionController {
 	}
 	
 	@PostMapping("/subscriptionEnroll.do")
-	public String subscriptionEnroll(ModelAndView mav,Authentication authentication, @RequestParam int pcode) {
+	public String subscriptionEnroll(ModelAndView mav,Authentication authentication, @RequestParam int pcode,Model model) {
 		Member member = (Member) authentication.getPrincipal();
 		String memberId = member.getMemberId();
 		
@@ -66,8 +67,9 @@ public class SubscriptionController {
 		map.put("pcode", pcode);
 		
 		
-		// 여기서 문제 발생할 수도 있음
 		int result = cartService.insertCart(map);
+		List<Cart> list = cartService.findCartListByMemberId(memberId);
+		model.addAttribute("list", list);
 		
 		return "redirect:/cart/cartList.do";
 	}

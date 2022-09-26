@@ -83,16 +83,14 @@
 </div>
 <script>
 
+const password = document.querySelector("#password");
+const passwordCheck = document.querySelector("#passwordCheck");
+const memberId = document.querySelector("#memberId");
+const regexPw = /^[A-Za-z0-9`~!@#\$%\^&\*\(\)\{\}\[\]\-_=\+\\|;:'"<>,\./\?]{8,20}$/;
+const phone = document.querySelector("#phone");
+const phoneCheck = /^(?:(010-\d{4})|(01[1|6|7|8|9]-\d{3,4}))-(\d{4})$/;
 
 document.memberEnrollFrm.addEventListener('submit', (e) => {
-	const password = document.querySelector("#password");
-	const passwordCheck = document.querySelector("#passwordCheck");
-	const memberId = document.querySelector("#memberId");
-	const regexPw = /^[A-Za-z0-9`~!@#\$%\^&\*\(\)\{\}\[\]\-_=\+\\|;:'"<>,\./\?]{8,20}$/;
-	const phone = document.querySelector("#phone");
-	const phoneCheck = /^(?:(010-\d{4})|(01[1|6|7|8|9]-\d{3,4}))-(\d{4})$/;
-	
-	
 	
 	if(idValid.value === "0"){
 		e.preventDefault();
@@ -110,12 +108,14 @@ document.memberEnrollFrm.addEventListener('submit', (e) => {
    if(!regexPw.test(password.value)) {
   		e.preventDefault();
   		alert("8~20자 영문 대소문자, 숫자, 특수문자를 사용하세요.");
-    	return ;
+  		password.focus();
+    	return;
    }
 	
    if(!phoneCheck.test(phone.value)){
 	   e.preventDefault();
  		alert("올바른 전화번호 형식을 입력하세요.");
+ 		phone.focus();
    		return ;
    }
    
