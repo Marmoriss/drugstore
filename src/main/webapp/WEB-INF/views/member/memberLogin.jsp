@@ -32,8 +32,8 @@
                             </div>
                             <div id="register-link" class="text-right">
                             	<div id="remember-div">
-	   	                        	 <input id="remember-me" name="remember-me" type="checkbox" >
-    	                            <label for="remember-me" class="text-info"><span>로그인 유지</span></label>
+	   	                        	 <!-- <input id="remember-me" name="remember-me" type="checkbox" >
+    	                            <label for="remember-me" class="text-info"><span>로그인 유지</span></label> -->
                             	</div>
                             	<div>
 	                                <a href="${pageContext.request.contextPath}/member/memberEnroll.do" class="text-info">회원가입</a>
