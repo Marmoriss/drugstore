@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.drugstore.cart.model.dto.Cart;
 import com.kh.drugstore.cart.model.service.CartService;
 import com.kh.drugstore.member.model.dto.Member;
 import com.kh.drugstore.product.model.dto.Product;
@@ -48,12 +49,14 @@ public class SubscriptionController {
 	 */
 	@GetMapping("/product.do")
 	public void subscription(Model model) {
-		List<Product> productList = productService.selectSubscriptionAllProduct();
+		int categoryId = 350017;
+		List<Product> productList = productService.selectProductBysmallCategoryId(categoryId);
+		log.debug("productList = {}",productList);
 		model.addAttribute("productList", productList);
 	}
 	
 	@PostMapping("/subscriptionEnroll.do")
-	public String subscriptionEnroll(ModelAndView mav,Authentication authentication, @RequestParam int pcode) {
+	public String subscriptionEnroll(ModelAndView mav,Authentication authentication, @RequestParam int pcode,Model model) {
 		Member member = (Member) authentication.getPrincipal();
 		String memberId = member.getMemberId();
 		
@@ -63,7 +66,10 @@ public class SubscriptionController {
 		map.put("memberId", memberId);
 		map.put("pcode", pcode);
 		
+		
 		int result = cartService.insertCart(map);
+		List<Cart> list = cartService.findCartListByMemberId(memberId);
+		model.addAttribute("list", list);
 		
 		return "redirect:/cart/cartList.do";
 	}

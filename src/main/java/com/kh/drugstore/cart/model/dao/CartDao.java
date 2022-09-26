@@ -44,9 +44,10 @@ public interface CartDao {
 	
 	int deleteOrdercart(Map<String, Object> cartOrder);
 	
-	@Insert("insert into cart values(seq_cart_no.nextval,#{memberId},#{pcode},1)")
-	int insertCart(Map<String, Object> map);
-
+	
+	 @Insert("insert into cart values(seq_cart_no.nextval,#{memberId},#{pcode},1)") 
+	 int insertCart(Map<String, Object> map);
+	 
 	
 	List<Cart> getPcode(int[] checkCategoryByCartNo);
 
@@ -54,7 +55,7 @@ public interface CartDao {
 	@Insert("insert into cart values(seq_cart_no.nextval,#{memberId},#{pcode},#{amount})")
 	int addCart(Map<String, Object> cartList);
 
-	int findCart(Map<String, Object> param);
+	Integer findCart(Map<String, Object> param);
 
 
 	

@@ -44,10 +44,8 @@ main {
 }
 .order-product-header {
 	padding:10px;
-	border:1px solid #d3d3d385;
-	font-size:13px;
+	font-size:20px;
 	font-weight: bold;
-	background-color: rgb(122 158 177 / 16%);
 	height:25px;
 	display: flex;
 	align-items: center;
@@ -64,6 +62,7 @@ table {
 	border-bottom: 0.1px solid lightgray;
 	font-weight: normal;
 	font-weight: 400;
+	text-align: center;
 }
 .order-product td {
 	font-size:13px;
@@ -87,13 +86,16 @@ table {
 	padding:10px;
 }
 #orderProductPrice {
-	text-align: right;
+	text-align: center;
 }
 .delivery-info-header, .fee-info-header,  .payment-info-header {
 	height:25px;
-	padding:10px;
-	border-bottom: 1px solid #d3d3d385;
 	margin-top: 50px;
+	margin-bottom: 30px;
+	font-size: 20px;
+}
+.fee-info-header{
+	
 }
 .delivery-product th {
 	height:40px;
@@ -125,6 +127,8 @@ table {
 .total td {
 	height:100px;
 	border-bottom: 1px solid lightgray;
+	text-align: center;
+	
 }
 .discount-info-wrap th {
 	height:80px;
@@ -291,4 +295,8 @@ th {
     line-height: 30px;
     color: #555;
     cursor: pointer;
+}
+.addressInfo_div input{
+	width : 200px;
+	height : 30px;
 }

@@ -52,8 +52,6 @@ public interface ProductDao {
 
 	List<ProductEntity> findByValues(ProductEntity product);
 
-	@Select("select * from (select * from product where main_fnctn like concat('%' || #{symptom},'%')) where rownum <= 3")
-	List<Product> findServeyProduct(String symptom);
 
 	// 주희 코드 시작
 	
@@ -67,10 +65,10 @@ public interface ProductDao {
 	List<Product> selectProductList();
 
 	// 동하
-	List<Product> selectSubscriptionAllProduct();
 
 	List<Product> checkCategory(int[] checkCategoryByCartNo);
 	
+	// attachment 수정
 	@Select("select * from product where pcode = #{pcode}")
 	Product getProductBySubNo(int pcode);
 

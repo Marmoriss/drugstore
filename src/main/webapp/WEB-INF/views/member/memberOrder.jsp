@@ -45,7 +45,7 @@
                             <a href="${pageContext.request.contextPath}/member/memberSubscription.do">정기구독</a>
                         </li>
                         <li class="mypage-common-side__link">
-                            <a href="${pageContext.request.contextPath}/notice/noticeList.do">1:1문의</a>
+                            <a href="${pageContext.request.contextPath}/question/questionList.do">1:1문의</a>
                         </li>
                         <li class="mypage-common-side__link">
                             <a href="">상품 리뷰</a>
@@ -99,6 +99,7 @@
 	</div>
 	<div>
 		<form action="${pageContext.request.contextPath}/member/findByValues.do" name="adminSearchFrm">
+			<div class="">
 			<div class="control-label">배송 상태</div>
 				<div class="form-group checkbox-wrap">
 				<input type="hidden" name="status" id="status" value=""/>
@@ -118,6 +119,7 @@
 						<input type="radio" name="statuses" value="배송완료" id="getArrival"/>
 						<label for="getArrival">배송완료</label>
 					</div>
+			</div>
 			</div>
 			<div class="form-group">
 				<select class="custom-select">
@@ -143,9 +145,9 @@
 					
 				</div>
 			</div>
-			<div class="panel-footer">
-				<div class="admin-button-area">
-					<button type="submit" class="btn btn-primary">검색</button>
+			<div class="panel-footers">
+				<div class="admin-button-areas">
+					<button type="submit" class="btn-submit">검색</button>
 				</div>
 			</div>
 		</form>

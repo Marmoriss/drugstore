@@ -6,7 +6,9 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="장바구니" name="title"/>
 </jsp:include>
-
+<!-- 폰트어썸 -->
+<script src="https://kit.fontawesome.com/34c760bbb4.js"
+	crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/cart/cart.css" />
 
@@ -15,7 +17,7 @@
 		<article>
 	<div class="content-wrap">
 		<form action="${pageContext.request.contextPath}/cart/cartOrder.do" name="memberOrderFrm" method="GET">
-	<div class="cart-product-header">장바구니</div>
+	<div class="cart-product-header">약바구니</div>
 		<table class="cart-product">
 			<thead>
 				<tr>
@@ -24,7 +26,7 @@
 					</th>
 					<th>이미지</th>
 					<th>상품정보</th>
-					<th>판매가</th>
+					<th>가격</th>
 					<th>수량</th>
 					<th>배송구분</th>
 					<th>합계</th>
@@ -48,9 +50,9 @@
 							</td>
 							<td id="productImg">
 									<div id="product-img-wrap">
-										
-									<!--  	<img src="${pageContext.request.contextPath}/upload/admin/${cartList.productAttachment.renamedFilename}" alt="" />
-										-->
+									<img
+									src="${pageContext.request.contextPath}/resources/upload/product/${cartlist.product.attachments[0].renamedFilename}"
+									alt="상품메인이미지" class="product-view__thumb-img" />
 									</div>
 								</td>
 							<td id="productInfo">
@@ -58,7 +60,6 @@
 									<div class="productName" class="strong">${cartlist.product.pname}</div>
 									<input type="hidden" name="productCode" value="${cartlist.product.pcode}" />
 									<input type="hidden" name="cartNo" value="${cartlist.cartNo}" />
-							
 							</td>
 							<td>  <span><span><fmt:formatNumber value="${cartlist.product.price}" type="number"/></span>원</span> </td>
 							<td>
@@ -82,9 +83,9 @@
 													alt="감소" class="down" /></a>
 												</span>
 												
-												<a href="javascript:;"
+											<!--  	<a href="javascript:;"
 												onclick="button_change_amount(${cartlist.cartNo})" 
-												class="df-btn light tiny ml-2">변경</a>
+												class="df-btn light tiny ml-2">변경</a> -->
 												</span> 
 								<input type="hidden" name="cartAmount" value="${cartlist.amount}" />
 							</td>
@@ -96,34 +97,34 @@
 			</tbody>
 			<tfoot>
 				<tr>
-				<td colspan="8" id="orderProductPrice">총 금액<span id="productTotalPrice"></span>원 + 배송비 <span id="fee">3,000</span> = 합계 : <span id="totalPrice" class="strong"></span>원</td>
+				<td colspan="8" id="orderProductPrice">총 <span id="productTotalPrice"></span>원 + 배송비 <span id="fee">3,000</span>  합계 : <span id="totalPrice" class="strong"></span>원</td>
 				</tr>
 			</tfoot>
 		</table>
 		<div class="delete-wrap">
-			<span>선택상품</span>
-			<button id="delBtn" type="button">삭제하기</button>
+			
+			<button class="delBtn" id="delBtn" type="button">약바구니 제거</button>
 		</div>
 			<div class="total-info-wrap">
 				<table class="total">
 					<thead>
 						<tr>
 							<th>총 주문 금액</th>
-							<th>총 배송비</th>
-							<th>총 결제예정 금액</th>
+							<th>배송비</th>
+							<th>결제 금액</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td><span class="display"><span id="orderPrice"></span>원</span></td>
 							<td><span class="display"><span>3,000원</span></span></td>
-							<td><span class="display">= <span id="total" class="strong"></span>원</span></td>
+							<td><span class="display"><span id="total" class="strong"></span>원</span></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div class="order-wrap">
-				<button id="order-btn" type="button">상품주문</button>
+				<button id="order-btn" type="button">주문하기</button>
 			</div>
 		</form>
 	</div>
@@ -171,8 +172,7 @@ document.querySelector("#order-btn").addEventListener('click', (e) => {
 			dataType : "json",
 			success(response) {
 				for(var i=0; i< response.length; i++){
-					
-					if(response[i].product.categoryId == 350004){
+					if(response[i].product.categoryId == 350017){
 						document.memberOrderFrm.action = "${pageContext.request.contextPath}/subscription/enrollInfo.do";
 						document.memberOrderFrm.submit();
 					}

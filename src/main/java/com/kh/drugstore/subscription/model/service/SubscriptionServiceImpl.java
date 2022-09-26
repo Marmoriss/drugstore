@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.drugstore.subscription.model.dao.SubscriptionDao;
 import com.kh.drugstore.subscription.model.dto.Subscription;
 import com.kh.drugstore.subscription.model.dto.SubscriptionProduct;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Autowired

@@ -111,16 +111,6 @@ public class ProductServiceImpl implements ProductService {
 	
 	
 	@Override
-	public List<Product> findServeyProduct(String body) {
-		return productDao.findServeyProduct(body);
-	}
-	
-	@Override
-	public List<Product> selectSubscriptionAllProduct() {
-		return productDao.selectSubscriptionAllProduct();
-	}
-	
-	@Override
 	public List<Product> checkCategory(int[] checkCategoryByCartNo) {
 		return productDao.checkCategory(checkCategoryByCartNo);
 	}

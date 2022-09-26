@@ -139,7 +139,7 @@
   	
   </resultMap>
   
-	<select id="findCart" resultType="_int" parameterType="map">
+	<select id="findCart" resultType="integer" parameterType="map">
 	select 
 		* 
 	from 
