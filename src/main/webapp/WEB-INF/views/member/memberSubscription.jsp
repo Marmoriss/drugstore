@@ -36,7 +36,7 @@
                             <a href="${pageContext.request.contextPath}/member/memberSubscription.do">정기구독</a>
                         </li>
                         <li class="mypage-common-side__link">
-                            <a href="${pageContext.request.contextPath}/notice/noticeList.do">1:1문의</a>
+                           <a href="${pageContext.request.contextPath}/question/questionList.do">1:1문의</a>
                         </li>
                         <li class="mypage-common-side__link">
                             <a href="">상품 리뷰</a>
