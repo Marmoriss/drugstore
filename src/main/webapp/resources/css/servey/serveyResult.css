@@ -98,10 +98,12 @@ header__title img{
 	margin-bottom: 40px;
 }
 .productInfo{
-	margin-bottom: 112px;
+	    margin-bottom: 112px;
     display: flex;
-        width: 1100px;
+    width: 1100px;
     justify-content: center;
+    border-bottom: 1px solid #8080804d;
+    padding: 31px;
 }
 .productInfo a{
 	display: flex;
