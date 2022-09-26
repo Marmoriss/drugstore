@@ -87,8 +87,8 @@ public class ProductServiceImpl implements ProductService {
 	// 주희 코드 시작
 	
 	@Override
-	public List<ProductEntity> findByValues(Map<String, Object> param) {
-		return productDao.findByValues(param);
+	public List<ProductEntity> findByValues(ProductEntity product) {
+		return productDao.findByValues(product);
 	}
 	
 	@Override
@@ -99,6 +99,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<String> autocompletePname(String term) {
 		return productDao.autocompletePname(term);
+	}
+	
+	@Override
+	public List<Product> selectProductList() {
+		return productDao.selectProductList();
 	}
 	
 	

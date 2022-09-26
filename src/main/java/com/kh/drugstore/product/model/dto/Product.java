@@ -26,10 +26,10 @@ public class Product extends ProductEntity {
 
 	public Product(@NonNull int pcode, int categoryId, Long sttenmtNo, String pname, @NonNull String manu,
 			@NonNull int price, @NonNull int amount, String ingreName, String mainFnctn, String intakeHint1,
-			String srvUse, String distbPd, YesNo subYn, String baseStandard, SaleStatus saleStatus, LocalDate createdAt,
+			String srvUse, String distbPd, YesNo subYn, SaleStatus saleStatus, LocalDate createdAt,
 			LocalDate updatedAt, int discount) {
 		super(pcode, categoryId, sttenmtNo, pname, manu, price, amount, ingreName, mainFnctn, intakeHint1, srvUse, distbPd,
-				subYn, baseStandard, saleStatus, createdAt, updatedAt, discount);
+				subYn, saleStatus, createdAt, updatedAt, discount);
 	}
 
 	

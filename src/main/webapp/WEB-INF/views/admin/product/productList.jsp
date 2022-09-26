@@ -35,44 +35,44 @@
 					<div class="form-section admin-status">
 						<ul class="admin-status-list">
 							<li>
-								<a href="" class="status-link-area">
-									<span class="status-icon"></span>
-									<div class="text">
-										<p>전체</p>
-										<strong>${totalContent}</strong>
-										<em>건</em>
-									</div>
-								</a>
+								<span class="status-icon">
+									<img src="${pageContext.request.contextPath}/resources/css/images/pills-solid.svg">
+								</span>
+								<div class="text">
+									<p>전체</p>
+									<strong>${fn:length(allList)}</strong>
+									<em>건</em>
+								</div>
 							</li>
 							<li>
-								<a href="" class="status-link-area">
-									<span class="status-icon"></span>
-									<div class="text">
-										<p>판매중</p>
-										<strong>0</strong>
-										<em>건</em>
-									</div>
-								</a>
+								<span class="status-icon">
+									<img src="${pageContext.request.contextPath}/resources/css/images/face-smile-regular.svg">
+								</span>
+								<div class="text">
+									<p>판매중</p>
+									<strong>${y}</strong>
+									<em>건</em>
+								</div>
 							</li>
 							<li>
-								<a href="" class="status-link-area">
-									<span class="status-icon"></span>
-									<div class="text">
-										<p>품절</p>
-										<strong>0</strong>
-										<em>건</em>
-									</div>
-								</a>
+								<span class="status-icon">
+									<img src="${pageContext.request.contextPath}/resources/css/images/face-grin-squint-tears-regular.svg">
+								</span>
+								<div class="text">
+									<p>품절</p>
+									<strong>${s}</strong>
+									<em>건</em>
+								</div>
 							</li>
 							<li>
-								<a href="" class="status-link-area">
-									<span class="status-icon"></span>
-									<div class="text">
-										<p>판매종료</p>
-										<strong>0</strong>
-										<em>건</em>
-									</div>
-								</a>
+								<span class="status-icon">
+									<img src="${pageContext.request.contextPath}/resources/css/images/circle-exclamation-solid.svg">
+								</span>
+								<div class="text">
+									<p>판매종료</p>
+									<strong>${n}</strong>
+									<em>건</em>
+								</div>
 							</li>
 						</ul>
 					</div>
@@ -133,16 +133,15 @@
 											<div class="control-label">카테고리</div>
 											<div class="form-group category-wrap">
 												<select class="custom-select big-category">
-													<option selected>대분류</option>
+													<option selected value="0">대분류</option>
 													<option value="350001">성분</option>
 													<option value="350002">성별</option>
 													<option value="350003">신체</option>
 													<option value="350004">정기구독</option>
 												</select>
-												<select class="custom-select small-category">
-													<option selected>소분류</option>
+												<select class="custom-select small-category" name="categoryId">
+													<option selected value="0">소분류</option>
 												</select>
-												<input type="hidden" name="categoryId" id="categoryId" value="" />
 											</div>
 										</li>
 										<!-- /카테고리 검색 끝 -->
@@ -150,8 +149,8 @@
 										<li>
 											<div class="controll-label">기간</div>
 											<div class="form-group">
-												<select class="custom-select">
-													<option selected value="cretaedAt">상품 등록일</option>
+												<select class="custom-select" name="enrollOrUpdate">
+													<option selected value="createdAt">상품 등록일</option>
 													<option value="updatedAt">최종 수정일</option>
 												</select>
 											</div>
@@ -197,7 +196,7 @@
 							<div class="pull-left">
 								<h3 class="panel-title">
 									상품목록 (총
-									<span class="text-primary">${totalCount}</span>
+									<span class="text-primary">${fn:length(list)}</span>
 									개)
 								</h3>
 							</div>
@@ -237,7 +236,6 @@
 											<td>용법</td>
 											<td>유통기한</td>
 											<td>구독상품</td>
-											<td>기준규격</td>
 											<td>판매상태</td>
 											<td>상품 등록일</td>
 											<td>최종 수정일</td>
@@ -266,7 +264,6 @@
 													<td>${product.srvUse}</td>
 													<td>${product.distbPd}</td>
 													<td>${product.subYn}</td>
-													<td>${product.baseStandard}</td>
 													<td>${product.saleStatus}</td>
 													<td>${product.createdAt}</td>
 													<td>
@@ -292,11 +289,10 @@ document.adminSearchFrm.addEventListener('submit', (e) => {
 	
 	const status = document.querySelector('[name=saleStatuses]:checked') == null ? null : document.querySelector('[name=saleStatuses]:checked').value;
 	document.querySelector('#saleStatus').value = status;
-	const category = 
-		document.querySelector('.small-category').value == null ? null : 
-			document.querySelector('.small-category').value == '소분류' ? null : document.querySelector('.small-category').value;
-	document.querySelector('#categoryId').value = category;
-		
+	
+	if(document.querySelector('[name=pcode]').value == ''){
+		document.querySelector('[name=pcode]').value = 0;
+	}
 	frm.submit();
 });
 

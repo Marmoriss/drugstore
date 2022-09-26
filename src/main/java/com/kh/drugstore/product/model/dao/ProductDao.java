@@ -48,7 +48,7 @@ public interface ProductDao {
 
 	Product selectOneProductCollection(int pcode);
 
-	List<ProductEntity> findByValues(Map<String, Object> param);
+	List<ProductEntity> findByValues(ProductEntity product);
 
 
 	// 주희 코드 시작
@@ -59,6 +59,8 @@ public interface ProductDao {
 	@Select("select pname from product where pname like '%' || #{pname} || '%' ")
 	List<String> autocompletePname(String pname);
 	
+	@Select("select * from product")
+	List<Product> selectProductList();
 
 	// 동하
 
@@ -67,6 +69,7 @@ public interface ProductDao {
 	// attachment 수정
 	@Select("select * from product where pcode = #{pcode}")
 	Product getProductBySubNo(int pcode);
+
 
 
 

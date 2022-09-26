@@ -35,12 +35,13 @@ public interface ProductService {
 
 
 	// 주희 코드 시작
-	List<ProductEntity> findByValues(Map<String, Object> param);
+	List<ProductEntity> findByValues(ProductEntity product);
 
 	int selectPcodeByPname(String pname);
 	
 	List<String> autocompletePname(String term);
 	
+	List<Product> selectProductList();
 	
 	//주희 코드 끝
 	
@@ -50,6 +51,7 @@ public interface ProductService {
 	List<Product> checkCategory(int[] checkCategoryByCartNo);
 
 	Product getProductBySubNo(int pcode);
+
 
 
 
