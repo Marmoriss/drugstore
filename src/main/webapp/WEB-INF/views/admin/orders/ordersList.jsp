@@ -21,7 +21,7 @@
 	margin-left: 250px;
 }
 #orderList {
-	margin-left: 350px;
+	margin-left: 330px;
 }
 
 #statusBtn {
@@ -35,7 +35,7 @@
 	height: 25px;
 }
 .dateList{
-	margin-left: 350px;
+	margin-left: 330px;
 	float:left;
 	font-size:17px;
 }
@@ -48,19 +48,22 @@
 
 <!-- datepicker 위젯 넣기 --> 
 <form action="${pageContext.request.contextPath}/admin/orders/findOrders.do" name="findFrm">
-<div class="dateList">[날짜별 주문 확인]</div>
+<div class="dateList">날짜별 주문 조회=></div>
 
 <div class="dates" style="float:left;">
 &nbsp;&nbsp;&nbsp;
 	<input type="text" class="datepicker" id="to" name="toDate" placeholder="시작일" />~
 	<input type="text" class="datepicker" id="from" name="fromDate" placeholder="종료일" />
-	<button type="submit">조회</button>
+	<button type="submit">조회 </button>
 </div> 
-</form>
-<br />
-<br />
-<br />
 
+</form>
+
+<div class="total" style="float:left; margin-left:350px;">
+<h5>총 주문 ${fn:length(list)}건</h5>
+</div>
+<br />
+<br />
 <table id="orderList" class="table w-75">
 	  <thead>
 	    <tr>
@@ -100,7 +103,7 @@
 
 			</c:forEach>
 		</c:if>
-	
+
 	</table>
 
 <script>

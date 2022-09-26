@@ -126,7 +126,7 @@
 	
 	</resultMap>
 	
-		<resultMap type="product" id="productMap">
+	<resultMap type="product" id="productMap">
 		<id column="pcode" property="pcode"/>
 		<result column="category_id" property="categoryId"/>
 		<result column="sttenmt_no" property="sttenmtNo"/>
@@ -140,7 +140,6 @@
 		<result column="srv_use" property="srvUse"/>
 		<result column="distb_pd" property="distbPd"/>
 		<result column="sub_yn" property="subYn"/>
-		<result column="base_standard" property="baseStandard"/>
 		<result column="sale_status" property="saleStatus"/>
 		<result column="created_at" property="createdAt"/>
 		<result column="updated_at" property="updatedAt"/>
@@ -166,11 +165,7 @@
 	<select id="findOrders" resultMap="orderListMap">
 		select o.merchant_uid, a.pname, o.member_id, o.paid_at, o.status 
 		from product_orders po join orders o on po.merchant_uid = o.merchant_uid join product a on po.pcode=a.pcode
-		<where>
-			<if test="to != null and from != null">
-			 	o.paid_at between to_date(#{toDate},'yyyy/mm/dd') and to_date(#{fromDate},'yyyy/mm/dd')
-			</if>
-		</where>
+		where o.paid_at between to_date(#{toDate},'yyyy/mm/dd') and to_date(#{fromDate},'yyyy/mm/dd')
 		order by paid_at desc
 	</select>
 	
