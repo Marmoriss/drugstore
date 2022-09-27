@@ -54,8 +54,8 @@
 	          src="${pageContext.request.contextPath}/resources/images/product-img-slide1.jpg"
 	          alt="First slide">
 	          <div class="carousel-caption d-none d-md-block">
-	              <h3>TEST</h3>
-	              <p>testtesttest</p>
+	              <h2>면역을 위한 맞춤형 선택</h2>
+	              <p>하루에 하나씩 에너지 충전</p>
 	        </div>
 	      </div>
 	      <div class="carousel-item">
