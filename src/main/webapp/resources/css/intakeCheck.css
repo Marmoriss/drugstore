@@ -144,6 +144,8 @@ input[id="intakeN"]:checked + label{
 
 #btn-add{
 	margin-bottom: 15px;
+	height: 40px;
+    font-size: 18px;
 }
 
 .empty{

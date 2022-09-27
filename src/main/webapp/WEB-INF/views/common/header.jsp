@@ -79,6 +79,7 @@
                <li class="header-nav-item"><a href="${pageContext.request.contextPath}/member/memberLogin.do" class="header-nav-text">로그인</a></li>
                </sec:authorize>               
                <sec:authorize access="isAuthenticated()">
+               <li class="header-nav-item"><a class="header-nav-text" href="${pageContext.request.contextPath}/intakeCheck/intakeCheck.do">섭취체크</a></li>
                      <%-- <sec:authentication property="principal.username"/> --%>
                      <%-- <sec:authentication property="authorities"/> --%>
                   <li class="header-nav-item" name="logoutLink"><a href="#" class="header-nav-text" >로그아웃</a></li>
