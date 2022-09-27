@@ -56,12 +56,15 @@ public class FaqController {
 	public String faqInsert(Faq faq, RedirectAttributes redirectAttr) {
 		int result = faqService.insertFaq(faq);
 		redirectAttr.addFlashAttribute("msg", "FAQ를 등록하였습니다.");
-		return "redirect:/faq/faqList";
+		return "redirect:/faq/faqList.do";
 	}
 	
 	// 관리자 페이지 -> 버튼 누르면 -> deleteForm
 	@RequestMapping(path = "/admin/faq/faqDeleteForm.do", method = RequestMethod.GET)
-	public void faqDeleteForm(Faq faq, RedirectAttributes redirectAttr) {
+	public void faqDeleteForm(Model model, Faq faq, RedirectAttributes redirectAttr) {
+		List<Faq> list = faqService.selectFaqList();
+		log.info("list = {}", list);
+		model.addAttribute("list", list);
 		
 	}
 	

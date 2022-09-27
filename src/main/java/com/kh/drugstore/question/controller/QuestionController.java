@@ -54,6 +54,12 @@ public class QuestionController {
 		return "redirect:/question/questionList.do";
 	}
 	
+	@GetMapping("/questionDetail.do")
+	public void questionDetail(@RequestParam int no, Question question, Model model) {
+		log.debug("no = ", no);
+		model.addAttribute("question", questionService.oneQuestion(no));
+	}
+	
 	// 1:1문의 게시글보기 -> 비밀번호 입력 후 본인 확인 거치기 -> 주말에 구현해야하남?
 	@GetMapping("/questionUpdate.do")
 	public void questionUpdate(@RequestParam int no, Model model) {
@@ -71,10 +77,13 @@ public class QuestionController {
 		
 	}
 	
+
+	
 	// 1:1문의 삭제하기
-	@PostMapping("/questionDelete.do")
-	public String questionDelete(@RequestParam int no) {
+	@GetMapping("/questionDelete.do")
+	public String questionDelete(@RequestParam int no, RedirectAttributes redirectAttr) {
 		int result = questionService.deleteQuestion(no);
+		redirectAttr.addFlashAttribute("msg", "문의글을 삭제하였습니다.");
 		return "redirect:/question/questionList.do";
 	}
 	

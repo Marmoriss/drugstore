@@ -13,7 +13,7 @@
   				question
   		values (
   				seq_question_no.nextval,
-  				null,
+  				default,
   				#{writer},
   				default,
   				default,
@@ -31,22 +31,23 @@
   	
   	<update id="updateQuestion">
   		update
-  			notice
+  			question
   		set
-  			comment_ref = #{commentRef},
+  			comment_ref = default,
   			writer = #{writer},
-  			answered = #{answered},
-  			reg_date = #{regDate},
+  			answered = default,
+  			reg_date = default,
   			content = #{content},
   			title = #{title},
-  			comment_level = #{commentLevel},
-  			category = #{questionCategory} 
+  			comment_level = default,
+  			category = null,
+  			secret = default
   		where
   			no = #{no}
   	
   	</update>
   	
-  	<delete id="deleteQuestioln">
+  	<delete id="deleteQuestion">
   		delete from
   			question
   		where
@@ -64,6 +65,7 @@
         <result column="title" property="title"></result>
         <result column="comment_level" property="commentLevel"></result>
         <result column="category" property="questionCategory"></result>
+        <result column="secret" property="secret"></result>
     </resultMap>
 
 
