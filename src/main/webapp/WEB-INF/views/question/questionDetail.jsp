@@ -20,31 +20,42 @@
 				<div class="border-bot"></div><br />
 				<ul class=space_list>
 					<li class="menu-list"><a href="${pageContext.request.contextPath}/notice/noticeList.do">공지사항</a></li>
-					<li class="menu-list"><a href="${pageContext.request.contextPath}/question/quesitonList.do">1:1 문의하기</a></li>
+					<li class="menu-list"><a href="${pageContext.request.contextPath}/question/questionList.do">1:1 문의하기</a></li>
 					<li class="menu-list"><a href="${pageContext.request.contextPath}/faq/faqList.do">FAQ</a></li>
 				</ul>
 		</section>
 		
 		<section class="right-menu">
-			<h4>1 : 1 문의글 등록하기</h4>
-			<div class="right-menu-up-form"></div>
+			<h4>1 : 1 문의글 세부 내용</h4>
+			<div class="right-menu-up"></div>
 			
-			<section class="questionInsert">
-			<form action="${pageContext.request.contextPath}/question/questionInsert.do" method="POST" >
+			<section class="questionDetail">
    				<fieldset>
     				<div class="crud-bot"></div>
-        				<label id="label-title" for="title">제목 : </label><br>
-        					<textarea name="title" id="title" cols="100" rows="3"></textarea><br/>
+        				
+        				<input type="hidden" name="no" value="${question.no}"/>
+        				
+        				<label for="title">제목 : ${question.title} </label><br>
+        					<input type="hidden" name="title" value="${question.title}"/>
+        					
         					<div class="form-blank"></div>
-    					<label for="content">세부 내용 : </label><br>
-        					<textarea name="content" id="content" cols="100" rows="10"></textarea><br>
+    					<label for="content">세부 내용 : ${question.content} </label><br>
+        					<input type="hidden" name="content" value="${question.content}"/>
+        					
         					<input type="hidden" name="writer" value="${memberId}"/>
+        					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         				
         					<br><br>
-        					<input id="insert-submit" type="submit" value="문의글 등록하기">
-        					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        					
+ 							<button type="button" onclick="location.href='${pageContext.request.contextPath}/question/questionUpdate.do?no=${question.no}'">1:1 문의 수정하기</button>
+ 							<button class="qdelete" type="button" >1:1 문의 삭제하기</button>
+ 								
+ 							<!--  onclick="location.href='${pageContext.request.contextPath}/question/questionDelete.do?no=${question.no}'"	-->
+							
+        					
     			</fieldset>
- 			</form> 
+			
+ 			
  			<br /><br /><br /><br /><br />
 			</section>
 			
@@ -53,7 +64,13 @@
 	
 	
 	</section>
+<script>
+document.querySelector(".qdelete").addEventListener('click', (e) =>{
+	if(!confirm('해당 질문을 삭제하시겠습니까?')) return;
 	
+	location.href="${pageContext.request.contextPath}/question/questionDelete.do?no=${question.no}";
+});
+</script>	
 	
 	
 	

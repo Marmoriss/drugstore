@@ -29,30 +29,31 @@
 				
 				<a href="${pageContext.request.contextPath}/question/questionForm.do"><input type="submit" value="문의글 쓰기" /></a>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<input type="hidden" name="no" value="${question.no}"/>
 				
 				<div class="right-menu-up"></div>
 				
-					<table class="questionList">
+					<table id="qtable" class="table table-hover">
 						<thead>
 							<tr class="questionList-head">
 								<td>번호</td>
 								<td>제목</td>
 								<td>작성자</td>
 								<td>작성일</td>
-								<td>답변 여부</td>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${list}" var="question">
-								<tr class="questionList-body">
+								<tr data-no="${question.no}">
 									<td>${question.no}</td>
-									<td>${question.title}</td>
+									<td>
+										<a href="${pageContext.request.contextPath}/question/questionDetail.do?no=${question.no}">${question.title}</a>
+									</td>
 									<td>${question.writer}</td>
 									<td>
 										<fmt:parseDate value="${question.regDate}" pattern="yyyy-MM-dd'T'HH:mm" var="regDate"/>
 										<fmt:formatDate value="${regDate}" pattern="YYYY/MM/dd"/>
 									</td>
-									<td>${question.answered}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -60,5 +61,19 @@
 			</section>
 	</section>
 	
+	
+<script>
+document.querySelectorAll("tr[data-no]").forEach((tr) => {
+	tr.addEventListener('click', (e) => {
+		const tr = e.target.parentElement;
+		const no = tr.dataset.no;
+		if(no){
+			location.href = "${pageContext.request.contextPath}/question/questionDetail.do?no=" + ${question.no};
+		}
+	});
+	
+});
+
+</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

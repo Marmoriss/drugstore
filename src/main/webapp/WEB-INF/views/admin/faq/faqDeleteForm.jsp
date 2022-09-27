@@ -30,30 +30,30 @@
 		</section>
 		
 		<section class="faqList">
-			<table class="table">
-					<thead>
+			<table class="table table-hover">
+					
 						<tr>
-							<th>번호</th>
-							<th>FAQ 제목</th>
-							<th>FAQ 답변</th>
+							<td class="th-1">번호</td>
+							<td class="th-2">FAQ 제목</td>
+							<td class="th-3">FAQ 답변</td>
 						</tr>
-					</thead>
-						<tbody>
-							<tr>
-								<c:forEach items="${list}" var="faq">
-									<td>${faq.no}</td>
-									<td>${faq.question}</td>
-									<td>${faq.answer}</td>
-								</c:forEach>
-							</tr>
-						</tbody>
+					
+					
+						<tr>
+							<c:forEach items="${list}" var="faq">
+								<td class="td-1">${faq.no}</td>
+								<td class="td-2">${faq.question}</td>
+								<td class="td-3">${faq.answer}</td>
+							</c:forEach>
+						</tr>
+					
 				
 				
 				
 			</table>
 		
 		</section>
-		
+
 		
 		<section class="faqDelete">
 			<form action="${pageContext.request.contextPath}/admin/faq/faqDelete.do" method="POST" >
@@ -62,7 +62,7 @@
     				<div class="crud-bot"></div>
         				<label for="no">삭제할 FAQ 번호 입력 : </label><br>
         					<textarea name="no" id="no" cols="3" rows="2" value="${faq.no}"></textarea><br/>
-        					<input type="submit" value="번호 찾기">
+        					<input type="submit" value="삭제하기">
         					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     			</fieldset>
  			</form> 

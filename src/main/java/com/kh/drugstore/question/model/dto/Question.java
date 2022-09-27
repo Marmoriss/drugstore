@@ -26,6 +26,7 @@ public class Question {
 	private String title; // 제목
 	private int commentLevel; // 코멘트레벨
 	private QuestionCategory questionCategory; // 문의 종류
+	private int secret;
 }
 
 

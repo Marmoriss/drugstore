@@ -21,13 +21,13 @@ section.left-menu{
 div.border-top{
 	background-color: lightgray;
 	width: 170px;
-	height: 3px;
+	height: 1.7px;
 }
 
 div.border-bot{
 	background-color: lightgray;
 	width: 170px;
-	height: 3px;
+	height: 1.7px;
 }
 
 section.left-menu h6{
@@ -35,16 +35,8 @@ section.left-menu h6{
 	margin-right: 120px;
 }
 
-table, thead, tbody, tr, td{
-	text-align: center;
-}
-
-table{
-	border: 1px solid black;
-}
-
 section.right-menu{
-	margin-left: 480px;
+	margin-left: 500px;
 	margin-top: -200px;
 	margin-bottom: 200px;
 }
@@ -52,24 +44,96 @@ section.right-menu{
 div.right-menu-up{
 	background-color: lightgray;
 	width: 800px;
-	height: 1.7px;
-	margin-top: 30px;
+	height: 1.3px;
+	margin-top: -20px;
 	margin-bottom: 30px;
 }
 
-table{
+div.right-menu-up-form{
+	background-color: lightgray;
 	width: 800px;
+	height: 1.3px;
+	margin-top: 20px;
+	margin-bottom: 30px;
 }
 
+table, thead, tbody, td{
+	text-align: center;
+}
+
+table{
+	width: 100%;
+	max-width: 77%;
+}
+
+thead{
+	text-align: left;
+	border-bottom: 1px solid black;
+}
+
+tr.questionList-head{
+	font-weight: bold;
+}
+
+
+
+#qtable{
+	width : 800px;
+	height : 100px; 
+}
+
+
+tr.questionList-body{
+	border-bottom: 1px solid black;
+}
+
+
 td{
-	font-size: 17px;
+	font-size: 12px;
 	padding: 10px;
 }
 
 input[type=submit]{
-	margin-left: 240px;
+	margin-top: -32px;
+	margin-left: 690px;
+	margin-bottom: 45px;
+	background-color: white;
+	border: 1px solid #415865;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
+
+input[type=submit]:hover {
+	background-color: #415865;
+	color: white;
+}
+
 
 div.form-blank{
 	height: 35px;
+}
+
+h4{
+	margin-top: 40px;
+}
+
+#title, #content{
+	margin-left: 70px;
+	margin-top: -25px;
+}
+
+label #label-title{
+	margin-left: -10px;
+}
+
+#insert-submit{
+	background-color: white;
+	border: 1px solid #415865;
+	margin-left: 345px;
+	margin-top: 30px;
+}
+
+#insert-submit:hover{
+	background-color: #415865;
+	color: white;
 }
