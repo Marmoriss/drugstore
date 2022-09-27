@@ -377,15 +377,14 @@ em{
     margin: 5px;
 }
 
-.counter > input{
+.counter .count{
     width: 50px;
     height: 50px;
     border: 0;
-    vertical-align: top;
     color: #333333;
     font-size: 20px;
     font-weight: bold;
-    line-height: 34px;
+    line-height: 45px;
     text-align: center;
     vertical-align: middle;
 }
