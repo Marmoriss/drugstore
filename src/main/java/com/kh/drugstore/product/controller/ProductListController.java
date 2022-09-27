@@ -130,13 +130,14 @@ public class ProductListController {
 		
 		List<Qna> qnaList = qnaService.selectQnaListByPcode(pcode);
 		log.debug("qnaList = {}", qnaList);
-		
-		String memberId = authentication.getName();
+		if(authentication != null) {
+			String memberId = authentication.getName();
+			model.addAttribute("memberId", memberId);
+		}
 		
 //		List<Review> reviewList = reviewService.selectReviewListByPcode(pcode);
 		model.addAttribute("product", product);
 		model.addAttribute("qnaList", qnaList);
-		model.addAttribute("memberId", memberId);
 	}
 
 	@GetMapping("/autocompletePname.do")

@@ -61,8 +61,8 @@
    <div id="header-container">
       <!-- 띠 배너 -->
       <div class="header-line">
-         <a href="#">
-            <p class="header-line-text">이벤트 페이지 등 넣고싶은 페이지 넣으세요~!</p>
+         <a href="${pageContext.request.contextPath}">
+            <p class="header-line-text">약한 팀의 DRUGSTORE에 오신 것을 환영합니다!🥰🎉🥰🎉</p>
          </a>
       </div>
       <!-- 상단 메뉴 -->

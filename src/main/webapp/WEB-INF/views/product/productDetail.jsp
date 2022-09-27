@@ -42,8 +42,7 @@
 						</div>
 					</dt>
 					<dd class="product-view__info">
-						<form:form name="productForm" method="post" action=""
-							id="productForm">
+						<form:form name="productForm" method="post" action="" id="productForm">
 							<input type="hidden" name="pcode" value="${product.pcode}" />
 							<ul>
 								<li>
@@ -98,7 +97,7 @@
 											<div class="btn-minus">
 												<span class="icon icon-product-minus"></span>
 											</div>
-											<input class="count" value="1"></input>
+											<div class="count">1</div>
 											<div class="btn-plus">
 												<span class="icon icon-product-plus"></span>
 											</div>
@@ -581,7 +580,7 @@
 												<div class="product-qna__top">
 													<div class="board_info_top">
 														<p>배송, 주문(취소/교환/환불)관련 문의는 고객센터 1:1 고객상담에 남겨주세요.</p>
-														<a href="#">1:1 문의하기</a>
+														<a href="">1:1 문의하기</a>
 													</div>
 													<div class="product-qna__top_btn_wrapper">
 														<span>제품 문의</span>
@@ -717,6 +716,10 @@
 	</div>
 </body>
 <script>
+document.querySelector('#product_qna_write_btn').addEventListener('click', (e) => {
+	location.href = "${pageContext.request.contextPath}/qna/qnaForm.do";
+});
+
     document.querySelector('.tab_01').addEventListener('click', (e) => {
         document.querySelector('#product_description').style.display = "inline-block";
         document.querySelector('#product_review').style.display = "none";
@@ -813,29 +816,35 @@ document.querySelectorAll('[name=qnaDeleteForm]').forEach((form) => {
 	});
 });
 // 수량 변경
-document.querySelector('.btn-minus').addEventListener('click', (e) => {
+let count = 1;
+const counter = document.querySelector('.count');
+document.querySelector('.icon-product-minus').addEventListener('click', (e) => {
     // 수량 마이너스 처리
-    let count = document.querySelector('.count').value;
-    count = parseInt(count);
-    document.querySelector('.count').value = count - 1;
-    if (count < 0) count = 0;
+    count--;
+    if(count == 0){
+    	counter.innerHTML = 1;
+    	alert('최소 1개 이상 구매 가능합니다.');
+    	return;
+    } else {
+    	counter.innerHTML = count;
+    }
     // 총 금액
     const totalPrice = document.querySelector('#total_product_price');
     const productPrice = ${ product.price };
     const discount = ${ product.discount };
-    let price = (productPrice - discount) * count;
-    totalPrice.innerHTML = price;
+    let price = ${ product.price - product.discount };
+    totalPrice.innerHTML = price * count;
 });
-document.querySelector('.btn-plus').addEventListener('click', (e) => {
-    let count = document.querySelector('.count').value;
-    count = parseInt(count);
-    document.querySelector('.count').value = count + 1;
+document.querySelector('.icon-product-plus').addEventListener('click', (e) => {
+	count++;
+	counter.innerHTML = count;
     // 총 금액
     const totalPrice = document.querySelector('#total_product_price');
     const productPrice = ${ product.price };
     const discount = ${ product.discount };
-    let price = (productPrice - discount) * count;
-    totalPrice.innerHTML = price;
+    let price = ${ product.price - product.discount };
+    totalPrice.innerHTML = price * count;
+    
 });
 $(document).ready(function () {
     // 상품 정보 토글
