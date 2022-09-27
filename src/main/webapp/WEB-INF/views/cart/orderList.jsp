@@ -51,7 +51,7 @@
 													value="${cart.product.price}" type="number" /></span>원</span></td>
 									<td><span>${cart.amount}</span> <input type="hidden"
 										name="cartAmount" value="${cart.amount}" /></td>
-									<td><span>기본</span></td>
+									<td><span>일반/택배배송</span></td>
 									<td><span><span id="productPrice"><fmt:formatNumber
 													value="${cart.product.price*cart.amount}" type="number" /></span>원</span></td>
 								</tr>
@@ -69,7 +69,7 @@
 						</tfoot>
 					</table>
 				</div>
-				<div class="delivery-info-header">배송정보</div>
+				<div class="delivery-info-header">배송지 정보</div>
 				<div class="delivery-info-wrap">
 					<table class="delivery-product">
 						<tbody>
@@ -93,10 +93,9 @@
 				<div class="addressInfo_div">
 					<div class="addressInfo_button_div">
 						<button type="button" class="address_btn address_btn_1"
-							onclick="showAdress('1')" style="background-color: #3c3838;">기존
-							정보</button>
+							onclick="showAdress('1')" style="background-color: #3c3838;">기존 배송지</button>
 						<button type="button" class="address_btn address_btn_2"
-							onclick="showAdress('2')">직접 입력</button>
+							onclick="showAdress('2')">신규 배송지</button>
 					</div>
 					<div class="addressInfo_input_div_wrap">
 						<div class="addressInfo_input_div addressInfo_input_div_1"
@@ -143,22 +142,22 @@
 									<tr>
 										<th>이름</th>
 										<td><input name="recipient" id="recipient"
-											class="addressee_input" value="김건우"></td>
+											class="addressee_input" ></td>
 									</tr>
 									<tr>
 										<th>주소</th>
 										<td><input class="selectAddress" value="F" type="hidden">
 											<input name="postcode" class="address1_input"
-											readonly="readonly" value="65535"> <a
+											readonly="readonly" > <a
 											class="address_search_btn" onclick="execution_daum_address()">주소
 												찾기</a><br> <input name="address" class="address2_input"
-											readonly="readonly" value="주소"><br> <input
-											name="detailAddress" class="address3_input" value="집">
+											readonly="readonly" ><br> <input
+											name="detailAddress" class="address3_input" >
 										</td>
 									</tr>
 									<tr>
 										<th>요청사항</th>
-										<td><input name="memo" class="memo" value="집"></td>
+										<td><input name="memo" class="memo"></td>
 									</tr>
 								</tbody>
 							</table>
@@ -182,7 +181,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<div class="payment-info-header">결제수단</div>
+						<div class="payment-info-header">Payment info</div>
 						<div class="total-wrap">
 							<div>
 								<div class="paymentSelect">
@@ -211,20 +210,25 @@
 										</tbody>
 									</table>
 									<div id="card-info" class="info">
-										<p>결제금액에서 배송비 3000원 제외 최소 결제 가능한 금액입니다.</p>
+										<p>환불은 환불 받으신 날짜 기준으로 3~5일(주말 제외) 후 <br/>
+										결제대행사에서 직접 고객님의 계좌로 환불 처리됩니다</p>
 									</div>
 								</div>
 							</div>
 							<div class="final-wrap">
-								<span class="final-wrap-header">최종결제금액</span>
-								<div class="flex">
+								<span class="final-wrap-header">결제안내</span>
+								<p>고액결제의 경우 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다.<br/>
+								확인과정에서 도난 카드의 사용이나 타인 명의의 주문등 정상적인 주문이 <br/>
+								아니라고 판단될 경우 임의로 주문을 보류 또는 취소할 수 있습니다.  </p>
+								
+								<!--  <div class="flex">
 									<div id="total" class="strong"></div>
 									원
-								</div>
+								</div>-->
 								<input type="hidden" name="finalPayment" /> <input
 									type="hidden" name="finalPrice" />
 									
-								<button id="orderBtn" type="button">결제</button>
+								<button id="orderBtn" type="button">결제하기</button>
 							</div>
 						</div>
 					</div>
@@ -479,10 +483,9 @@ document.querySelector("#orderBtn").addEventListener('click', (e) => {
 					contentType : 'application/json; charset=utf-8',
 					success(response, textStatus, jqxhr){
 						console.log(response, textStatus, jqxhr);
+						location.href = "${pageContext.request.contextPath}/member/memberOrder.do";
 						// 응답헤더에 Location확인
-						const location = jqxhr.getResponseHeader('Location');
 						console.log(cartOrder);
-						
 					},
 					error : console.log
 				});

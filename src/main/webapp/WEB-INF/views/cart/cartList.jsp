@@ -21,7 +21,7 @@
 		<table class="cart-product">
 			<thead>
 				<tr>
-					<th class="checkbox">
+					<th class="checkbox2">
 						<input type="checkbox" name="allCheck" id="allOrder" />
 					</th>
 					<th>이미지</th>
@@ -36,14 +36,14 @@
 		
 			  	<c:if test="${empty list}">
 					<tr>
-						<td colspan="8" class="text-center">장바구니에 상품이 없습니다.<br><button type='button'>쇼핑하러 가기</button></td>
+						<td colspan="8" class="text-center">장바구니에 상품이 없습니다.<br> <a class="gorder" href="${pageContext.request.contextPath}/product/productList.do?categoryId=350001">주문하러가기</a></td>
 					</tr>
 				</c:if>
 				<c:if test="${not empty list}">
 					
 					<c:forEach items="${list}" var="cartlist">
 						<tr>
-							<td class="checkbox">
+							<td class="checkbox2">
 									<span>
 										<input type="checkbox" name="checkbox" id="selectOrder" value="${cartlist.cartNo}"/>
 									</span>						
@@ -89,7 +89,7 @@
 												</span> 
 								<input type="hidden" name="cartAmount" value="${cartlist.amount}" />
 							</td>
-							<td><span>기본</span></td>
+							<td><span>일반/택배배송</span></td>
 							<td>  <span><span id="productPrice"><fmt:formatNumber value="${cartlist.product.price*cartlist.amount}" type="number"/></span>원</span></td>
 						</tr>
 					</c:forEach>
