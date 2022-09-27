@@ -104,7 +104,9 @@
 		            								</p>
 		            							</div>
 		            							<div class="cart_goods_sum product-recently__btn-wrap">
-		            								<button name="cart" id="" class="wishcart product-recently__btn">장바구니</button>
+		            								<input type="hidden" name="cartPcode" id="cartPcode" value="${wish.pcode}" />
+                                  					<input type="hidden" name="cartAmount" id="cartAmount" value="1" />
+		            								<button name="cart" id="addCart" class="wishcart product-recently__btn">장바구니</button>
 		            							</div>
 		            						</li>
 		            					</ul>
@@ -136,6 +138,49 @@ document.querySelector('#allChk').addEventListener('click', (e) => {
 	}
 });
 
-
+const headers = {};
+headers['${_csrf.headerName}'] = '${_csrf.token}';
+document.querySelector("#addCart").addEventListener('click', (e) => {
+	e.preventDefault(); // 제출방지
+	const pcode = document.querySelector("[name=cartPcode]").value;
+	const amount = document.querySelector("[name=cartAmount]").value;
+	console.log(pcode);
+	console.log(amount);
+	const cartList = {pcode, amount};
+	console.log(cartList);
+	$.ajax({
+		url : "${pageContext.request.contextPath}/cart/findCart.do",
+		type : "GET",
+		headers,
+		data : {pcode},
+		success(response) {
+			if(response) {
+				console.log(response);
+				if(confirm('장바구니에 존재하는 상품입니다. 그래도 추가하시겠습니까?')) {
+					addCart(cartList);
+				} else return;
+			} else {
+				addCart(cartList);
+			}
+		},
+		error : console.log
+		});
+	});
+const addCart = (cartList) => {
+	$.ajax({
+	url : "${pageContext.request.contextPath}/cart/addCart.do",
+	type : "POST",
+	headers,
+	data : JSON.stringify(cartList),
+	contentType : 'application/json; charset=utf-8',
+	success(response) {
+		if(confirm('장바구니로 이동하시겠습니까?')){
+			location.href = "${pageContext.request.contextPath}/cart/cartList.do";
+			return;
+		}
+	},
+	error : console.log
+	});
+};
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

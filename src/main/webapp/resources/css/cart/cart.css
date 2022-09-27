@@ -74,8 +74,8 @@ table {
    justify-content: center;
    align-items: center;
 }
-.checkbox {
-   width:40px;
+.checkbox2{
+   width:20px;
 
 }
 #product-img-wrap{
@@ -112,6 +112,7 @@ table {
 }
 #delBtn:hover {
    background-color: #415865;
+   transition-duration : 0.2s;
    border:none;
    color:white;
 }
@@ -154,6 +155,7 @@ table {
 #order-btn:hover {
    background-color: #415865;
    border:1px solid rgb(65, 88, 101);
+   transition-duration : 0.4s;
    color:#ffff;
 }
 
@@ -171,4 +173,10 @@ table {
 }
 .total th{
 	text-align : center;
+}
+
+.gorder{
+	color : #415865;
+	font-size : 20px;
+	font-weight : 20px;
 }

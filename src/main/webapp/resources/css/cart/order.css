@@ -88,14 +88,17 @@ table {
 #orderProductPrice {
 	text-align: center;
 }
-.delivery-info-header, .fee-info-header,  .payment-info-header {
+.delivery-info-header, .payment-info-header {
 	height:25px;
 	margin-top: 50px;
 	margin-bottom: 30px;
 	font-size: 20px;
 }
 .fee-info-header{
-	
+	height:25px;
+	margin-top: 70px;
+	margin-bottom: 30px;
+	font-size: 20px;
 }
 .delivery-product th {
 	height:40px;
@@ -149,25 +152,53 @@ table {
 }
 .final-wrap {
 	width:40%;
-	border: 1px solid black;
 }
 .total-wrap {
 	display:flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
+/*
 #orderBtn {
-	width:70%;
+	width:40%;
 	height:45px;
 	background-color:rgb(122, 158, 177);
 	border:none;
 	cursor: pointer;
 }
+*/
 #orderBtn:hover {
 	background-color: white;
 	border: 1px solid rgb(65, 88, 101);
 	color:gray;
 }
+#orderBtn {
+	background: #415865;
+    color: #ffff;
+	width: 50%;
+    height: 57px;
+    border: 2px solid #415865;
+    line-height: 53px;
+    text-align: center;
+    background: #ffff;
+    font-family: 'SpoqaHanSans Neo';
+    font-size: 18px;
+    font-weight: 500 !important;
+    letter-spacing: -0.02em;
+    color: #415865;
+    margin: 0 0 0 12px;
+    padding: 0;
+    flex: 0 1 auto;
+    border-radius: 8px;
+   cursor: pointer;
+}
+#orderBtn:hover {
+   background-color: #415865;
+   border:1px solid rgb(65, 88, 101);
+   transition-duration : 0.4s;
+   color:#ffff;
+}
+
 .display {
 	display:flex;
 	justify-content: center;
@@ -229,6 +260,7 @@ th {
 #card-info > *{
 	font-size:14px;
 	margin-top: 24px;
+	font-weight : 700;
 }
 #card-info {
 	display: none;
@@ -299,4 +331,38 @@ th {
 .addressInfo_div input{
 	width : 200px;
 	height : 30px;
+}
+/* radio css*/
+.paymentSelect {
+    padding: 15px 10px;
+}
+.paymentSelect input[type=radio]{
+    display: none;
+}
+.paymentSelect input[type=radio]+label{
+    display: inline-block;
+    cursor: pointer;
+    height: 24px;
+    width: 90px;
+    border: 1px solid #333;
+    line-height: 24px;
+    text-align: center;
+    font-weight:bold;
+    font-size:13px;
+}
+.paymentSelect input[type=radio]+label{
+    background-color: #fff;
+    color: #333;
+}
+.paymentSelect input[type=radio]:checked+label{
+    background-color: #333;
+    color: #fff;
+}
+.card-wrap{
+	margin-left : 10px;
+}
+.final-wrap p{
+	font-size:12px;
+	font-weight : 700;
+	font-family: 'SpoqaHanSans Neo';
 }
