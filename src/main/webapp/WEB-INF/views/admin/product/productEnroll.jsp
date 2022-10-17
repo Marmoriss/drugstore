@@ -19,7 +19,7 @@
 
 <c:if test="${not empty msg}">
 	<script>
-		alert("msg");
+		alert(msg);
 	</script>
 </c:if>
 <!-- admin content 시작 -->
@@ -86,12 +86,6 @@
 										<div class="form-group">
 											<label for="discount-price">할인 금액</label>
 											<input type="text" name="discount" required/>
-										</div>
-										<div class="form-group">
-											<div class="control-label discount-price">할인가</div>
-											<div class="text">
-												<strong>0원</strong> <em>(0원 할인)</em>
-											</div>
 										</div>
 									</div>
 								</li>

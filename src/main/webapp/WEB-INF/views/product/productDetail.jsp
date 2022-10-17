@@ -7,8 +7,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
@@ -22,10 +21,6 @@
 <!-- 사용자 작성 css -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/product/product-detail.css" />
-
-<script>
-	const memberId = ${memberId};
-</script>
 
 <body>
 	<div id="layout-config">
@@ -138,11 +133,11 @@
 									<div
 										class="product-view__review-wrap product-view__review-wrap--grade">
 										<div class="product-view__review-img-wrap">
-											<!-- i태그 별 넣기 -->
+											<i class="fa-solid fa-star"></i>
 										</div>
-										<p class="product-view__review-grade">4.8</p>
+										<p class="product-view__review-grade">${avgStar}</p>
 									</div>
-									<div class="product-view__review-wrap">리뷰 1,426</div>
+									<div class="product-view__review-wrap">리뷰 ${fn:length(reviewList)}</div>
 							</a></li>
 							<li class="product-view__detail-tab-item"><a
 								class="tab_03 product-view__detail-tab-title">문의
@@ -340,223 +335,133 @@
 							<div class="layout_body">
 								<div style="margin: auto;">
 									<div class="boardlayout">
-										<p class="product-view__detail-title">상콤 비타민</p>
+										<p class="product-view__detail-title">${product.pname}</p>
 										<div class="bbslist product-review pd0">
-											<form:form action="" name="reviewboardsearch"
-												id="reviewboardsearch">
-												<!-- 리뷰 검색시 필요한 정보를 hidden으로 넣기 현재 아래는 예시임 -->
-												<input type="hidden" name="pcode" value="" />
-												<input type="hidden" name="star" value="" />
-												<input type="hidden" name="perpage" value="10" />
-												<input type="hidden" name="page" id="page" value="" />
-												<input type="hidden" name="categoryId" value="categoryId" />
+											<form:form action="${pageContext.request.contextPath}/review/reviewEnroll.do" name="reviewboardsearch" id="reviewboardsearch" method="POST">
+												<input type="hidden" name="pcode" value="${product.pcode}"/>
+												<input type="hidden" name="memberId" value="${memberId}"/>
 												<ul class="bbsbtn_wrap product-review__top">
+													<li class="product-review__top-item"></li>
 													<li class="product-review__top-item">
-														<ul class="product-review__type-list">
-															<li class="product-review__type-item">
-																<button
-																	class="product-review__type-title product-review__type-title--active">전체리뷰</button>
-															</li>
-															<li class="product-review__type-item">
-																<button
-																	class="product-review__type-title product-review__type-title--active">텍스트리뷰</button>
-															</li>
-															<li class="product-review__type-item">
-																<button
-																	class="product-review__type-title product-review__type-title--active">사진리뷰</button>
-															</li>
-														</ul>
-													</li>
-													<li class="product-review__top-item"><input
+														<input
 														type="button" value="리뷰작성" name="board_write_btn"
 														id="product_review_write_btn"
-														class="btn_chg product-review__write-btn" /></li>
+														class="btn_chg product-review__write-btn" />
+													</li>
 												</ul>
 											</form:form>
-											<!-- // 검색폼 -->
 											<table class="bbslist_table_style product-review__table">
 												<tbody>
 													<!-- 반복문 시작 -->
+													<c:if test="${empty reviewList}">
+														<div style="width: 100%; text-align: center; font-size: 20px; margin: 50px;">
+															아직 작성된 리뷰가 없습니다.</div>
+													</c:if>
+													<c:if test="${not empty reviewList}">
+														<c:forEach items="${reviewList}" var="review" varStatus="vs">
+															<tr class="product-review__item-header datalist review">
+																<td class="sbj product-review__item-header-contents relative">
+																	<div class="product-review__item-header-box hand boad_view_btn">
+																		<div class="product-review__item-header-top">
+																			<div class="product-review__item-header-top-wrapper">
+																				<div class="product-review__star">
+																					<i class="fa-solid fa-star"></i>
+																				</div>
+																				<div class="memberId product-review__writer">
+																					${review.memberId}
+																				</div>
+																			</div>
+																			<div class="product-review__arrow-btn">
+																				<img
+																					src="${pageContext.request.contextPath}/resources/css/images/angle-down-solid.svg"
+																					class="product-review__arrow-btn-img">
+																			</div>
+																		</div>
+																		<!-- 토글 열리면 #productview는 display="none"-->
+																		<div id="productview" class="productviewbox product-review__view-box">
+																			<c:if test="${not empty review.attachments}">
+																				<div class="pic product-review__img-wrap">
+																					<c:forEach items="${review.attachments}" var="attach" varStatus="vs">
+																						<span>
+																							<img src="${pageContext.request.contextPath}/resources/upload/review/${attach.originalFilename}" class="hand small_product_img pic product-review__img">
+																						</span>
+																					</c:forEach>
+																				</div>
+																			</c:if>
+																			<div class="info product-review__subject-wrap">
+																				<div class="board-cont product-review__subject-btn">
+																					<p class="product-review__subject">
+																						${review.content}
+																					</p>
+																				</div>
+																			</div>
+																			<div class="date product-review__date">
+																				${review.regDate}
+																			</div>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+															<!-- // 리뷰 미리보기 -->
+															<!-- 토글 누르면 나오는 리뷰 디테일 -->
+															<!-- 토글 누르면 style="display: none에서 table-row;로 변경"-->
+															<tr class="hide productviewer product-review__item-viewer review">
+																<td
+																	class="pd0 product-review__item-viewer-contents-wrap relative" style="display: table-row">
+																	<p class="product-review_viewer-date">${review.regDate}</p>
+																	<div class="product-review__viewer-img-list">
+																		<c:if test="${not empty review.attachments}">
+																			<div class="pic product-review__img-wrap">
+																				<c:forEach items="${review.attachments}" var="attach" varStatus="vs">
+																					<span>
+																						<img src="${pageContext.request.contextPath}/resources/upload/review/${attach.originalFilename}" class="hand small_product_img pic product-review__img">
+																					</span>
+																				</c:forEach>
+																			</div>
+																		</c:if>
+																	</div>
+																	<div class="productviewer product-review__viewer">
+																		<div class="boardlayout">
+																			<div class="bbsview">
+																				<div class="viewbox">
+																					<form:form action="${pageContext.request.contextPath}/review/updateReview.do" name="update-review-form${vs.count}" id="update-review-form${vs.count}" method="POST">
+																						<!-- 리뷰 수정/삭제에 필요한 정보들 hidden으로 넣어주세요 -->
+																						<input type="hidden" name="pcode" id="pcode" value="${product.pcode}"/>
+																						<input type="hidden" name="no" id="no" value="${review.no}"/>
+																						<input type="hidden" name="memberId" id="memberId" value="${review.memberId}"/>
+																						<table style="width: 100%;">
+																							<tbody>
+																								<tr>
+																									<td colspan="2"
+																										class="relative product-review__viewer-td">
+																										<div class="content hand viewerlay_close_btn product-review__viewer-contents">
+																											${review.content}
+																										</div>
+																										<div class="product-review__viewer-btn-wrap">
+																											<input type="button" value="수정" id="review-update-btn" class="product-review__update-btn" />
+																											<form:form action="${pageContext.request.contextPath}/review/deleteReview.do" name="delete-review-form${vs.count}" id="delete-review-form${vs.count}" method="POST">
+																												<input type="hidden" name="pcode" id="pcode" value="${product.pcode}"/>
+																												<input type="hidden" name="no" id="no" value="${review.no}"/>
+																												<input type="hidden" name="memberId" id="memberId" value="${review.memberId}"/>
+																												<input type="button" value="삭제" id="review-delete-btn" class="product-review__delete-btn" />
+																											</form:form>
+																										</div>
+																									</td>
+																								</tr>
+																							</tbody>
+																						</table>
+																					</form:form>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+														</c:forEach>
+													</c:if>
 													<!-- 리뷰 미리보기 -->
-													<tr class="product-review__item-header datalist review">
-														<td
-															class="sbj product-review__item-header-contents relative">
-															<div
-																class="product-review__item-header-box hand boad_view_btn">
-																<div class="product-review__item-header-top">
-																	<div class="product-review__item-header-top-wrapper">
-																		<div class="product-review__star">
-																			<!-- 별점 개수에 따라서 별 i태그 넣기 -->
-																		</div>
-																		<div class="memberId product-review__writer">
-																			pota**</div>
-																	</div>
-																	<div class="product-review__arrow-btn">
-																		<img
-																			src="${pageContext.request.contextPath}/resources/css/images/angle-down-solid.svg"
-																			class="product-review__arrow-btn-img">
-																	</div>
-																</div>
-																<!-- 토글 열리면 #productview는 display="none"-->
-																<div id="productview"
-																	class="productviewbox product-review__view-box">
-																	<div class="pic product-review__img-wrap">
-																		<span> <img src="" alt=""
-																			class="hand small_product_img pic product-review__img">
-																		</span>
-																	</div>
-																	<div class="info product-review__subject-wrap">
-																		<div class="board-cont product-review__subject-btn">
-																			<p class="product-review__subject">
-																				<!-- 리뷰 제목 넣기 -->
-																			</p>
-																		</div>
-																	</div>
-																	<div class="date product-review__date">
-																		<!-- 리뷰 작성일자 넣기 -->
-																	</div>
-																</div>
-															</div>
-														</td>
-													</tr>
+													
 													<!-- // 리뷰 미리보기 -->
-													<!-- 토글 누르면 나오는 리뷰 디테일 -->
-													<!-- 토글 누르면 style="display: none에서 table-row;로 변경"-->
-													<tr
-														class="hide productviewer product-review__item-viewer review">
-														<td
-															class="pd0 product-review__item-viewer-contents-wrap relative">
-															<p class="product-review_viewer-date">2022.09.18</p>
-															<div class="product-review__viewer-img-list">
-																<div class="product-review__viewer-img-wrap">
-																	<img src="" alt="" class="product-review__viewer-img">
-																</div>
-															</div>
-															<div class="productviewer product-review__viewer">
-																<div class="boardlayout">
-																	<div class="bbsview">
-																		<div class="viewbox">
-																			<form:form action="#" name="review-form1"
-																				id="review-form1" method="POST">
-																				<!-- 리뷰 수정/삭제에 필요한 정보들 hidden으로 넣어주세요 -->
-																				<input type="hidden" name="pcode" id="pcode" />
-																				<table style="width: 100%;">
-																					<tbody>
-																						<tr>
-																							<td colspan="2"
-																								class="relative product-review__viewer-td">
-																								<div
-																									class="content hand viewerlay_close_btn product-review__viewer-contents">
-																									이게 바로 말로만 듣던 소매넣기 인가요?</div>
-																								<div class="product-review__viewer-btn-wrap">
-																									<input type="button" value="수정"
-																										id="review-update-btn"
-																										class="product-review__update-btn" /> <input
-																										type="button" value="삭제"
-																										id="review-delete-btn"
-																										class="product-review__delete-btn" />
-																								</div>
-																							</td>
-																						</tr>
-																					</tbody>
-																				</table>
-																			</form:form>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</td>
-													</tr>
-													<tr class="product-review__item-header datalist review">
-														<td
-															class="sbj product-review__item-header-contents relative">
-															<div
-																class="product-review__item-header-box hand boad_view_btn">
-																<div class="product-review__item-header-top">
-																	<div class="product-review__item-header-top-wrapper">
-																		<div class="product-review__star">
-																			<!-- 별점 개수에 따라서 별 i태그 넣기 -->
-																		</div>
-																		<div class="memberId product-review__writer">
-																			pota**</div>
-																	</div>
-																	<div class="product-review__arrow-btn">
-																		<img
-																			src="${pageContext.request.contextPath}/resources/css/images/angle-down-solid.svg"
-																			class="product-review__arrow-btn-img">
-																	</div>
-																</div>
-																<!-- 토글 열리면 #productview는 display="none"-->
-																<div id="productview"
-																	class="productviewbox product-review__view-box">
-																	<div class="pic product-review__img-wrap">
-																		<span> <img src="" alt=""
-																			class="hand small_product_img pic product-review__img">
-																		</span>
-																	</div>
-																	<div class="info product-review__subject-wrap">
-																		<div class="board-cont product-review__subject-btn">
-																			<p class="product-review__subject">
-																				<!-- 리뷰 제목 넣기 -->
-																			</p>
-																		</div>
-																	</div>
-																	<div class="date product-review__date">
-																		<!-- 리뷰 작성일자 넣기 -->
-																	</div>
-																</div>
-															</div>
-														</td>
-													</tr>
-													<tr
-														class="hide productviewer product-review__item-viewer review">
-														<td
-															class="pd0 product-review__item-viewer-contents-wrap relative">
-															<p class="product-review_viewer-date">2022.09.18</p>
-															<div class="product-review__viewer-img-list">
-																<div class="product-review__viewer-img-wrap">
-																	<img src="" alt="" class="product-review__viewer-img">
-																</div>
-															</div>
-															<div class="productviewer product-review__viewer">
-																<div class="boardlayout">
-																	<div class="bbsview">
-																		<div class="viewbox">
-																			<form:form action="#" name="review-form1"
-																				id="review-form1" method="POST">
-																				<!-- 리뷰 수정/삭제에 필요한 정보들 hidden으로 넣어주세요 -->
-																				<input type="hidden" name="pcode" id="pcode" />
-																				<table style="width: 100%;">
-																					<tbody>
-																						<tr>
-																							<td colspan="2"
-																								class="relative product-review__viewer-td">
-																								<div
-																									class="content hand viewerlay_close_btn product-review__viewer-contents">
-																									이게 바로 말로만 듣던 소매넣기 인가요?</div>
-																								<div class="product-review__viewer-btn-wrap">
-																									<input type="button" value="수정"
-																										id="review-update-btn"
-																										class="product-review__update-btn" /> <input
-																										type="button" value="삭제"
-																										id="review-delete-btn"
-																										class="product-review__delete-btn" />
-																								</div>
-																							</td>
-																						</tr>
-																					</tbody>
-																				</table>
-																			</form:form>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</td>
-													</tr>
-													<!-- // 리뷰 미리보기 -->
-													<!-- 토글 누르면 나오는 리뷰 디테일 -->
-													<!-- 토글 누르면 style="display: none에서 table-row;로 변경"-->
-													<!-- // 리뷰 디테일 -->
 													<!-- // 반복문 -->
 												</tbody>
 											</table>
@@ -716,27 +621,32 @@
 	</div>
 </body>
 <script>
+// 리뷰 작성시 로그인 상태 아니면 알림 띄우기
+document.querySelector('#product_review_write_btn').addEventListener('click', (e) => {
+	if(memberId == null)
+		alert('로그인 후 이용 가능합니다.');
+});
+
 document.querySelector('#product_qna_write_btn').addEventListener('click', (e) => {
 	location.href = "${pageContext.request.contextPath}/qna/qnaForm.do";
 });
 
-    document.querySelector('.tab_01').addEventListener('click', (e) => {
-        document.querySelector('#product_description').style.display = "inline-block";
-        document.querySelector('#product_review').style.display = "none";
-        document.querySelector('#product_qna').style.displqy = "none";
-    });
-    document.querySelector('.tab_02').addEventListener('click', (e) => {
-        document.querySelector('#product_description').style.display = "none";
-        document.querySelector('#product_review').style.display = "inline-block";
-        document.querySelector('#product_qna').style.displqy = "none";
-    });
-    document.querySelector('.tab_03').addEventListener('click', (e) => {
-        document.querySelector('#product_description').style.display = "none";
-        document.querySelector('#product_review').style.display = "none";
-        document.querySelector('#product_qna').style.display = "inline-block";
-    });
-</script>
-<script>
+document.querySelector('.tab_01').addEventListener('click', (e) => {
+    document.querySelector('#product_description').style.display = "inline-block";
+    document.querySelector('#product_review').style.display = "none";
+    document.querySelector('#product_qna').style.displqy = "none";
+});
+document.querySelector('.tab_02').addEventListener('click', (e) => {
+    document.querySelector('#product_description').style.display = "none";
+    document.querySelector('#product_review').style.display = "inline-block";
+    document.querySelector('#product_qna').style.displqy = "none";
+});
+document.querySelector('.tab_03').addEventListener('click', (e) => {
+    document.querySelector('#product_description').style.display = "none";
+    document.querySelector('#product_review').style.display = "none";
+    document.querySelector('#product_qna').style.display = "inline-block";
+});
+
 const headers = {};
 headers['${_csrf.headerName}'] = '${_csrf.token}';
 document.querySelector("#addCart").addEventListener('click', (e) => {
@@ -876,34 +786,34 @@ $(document).ready(function () {
         }
     });
     // 리뷰 토글
-    const trs = document.querySelectorAll('.review');
-    trs.forEach(function (tr, item) {
-        $(tr).on('click', function () {
-            console.log(this);
-            const $headerBox = $(this).children().first().children().first();
-            const $headerTop = $headerBox.children().first();
-            const $nextTr = $(this).next();
-            const $reviewViewer = $nextTr.children('.product-review__viewer');
-            console.log($reviewViewer);
-            if ($headerBox.hasClass('boad_view_btn') == true) {
-                // 토글 열기
-                console.log("닫힘 -> 열림");
-                $headerBox.removeClass('boad_view_btn');
-                $headerTop.children('.product-review__arrow-btn').addClass('product-review__arrow-btn--active');
-                $nextTr.css("display", 'table-row');
-                $reviewViewer.css('display', 'block');
-                $headerTop.next().css('display', 'none');
-            } else {
-                // 토글 닫기
-                console.log("열림 -> 닫힘");
-                $headerBox.addClass('boad_view_btn');
-                $headerTop.children('.product-review__arrow-btn').removeClass('product-review__arrow-btn--active');
-                $nextTr.css("display", 'none');
-                $reviewViewer.css('display', 'none');
-                $headerTop.next().css('display', 'flex');
-            }
-        });
-    });
+//     const trs = document.querySelectorAll('.review');
+//     trs.forEach(function (tr, item) {
+//         $(tr).on('click', function () {
+//             console.log(this);
+//             const $headerBox = $(this).children().first().children().first();
+//             const $headerTop = $headerBox.children().first();
+//             const $nextTr = $(this).next();
+//             const $reviewViewer = $nextTr.children('.product-review__viewer');
+//             console.log($reviewViewer);
+//             if ($headerBox.hasClass('boad_view_btn') == true) {
+//                 // 토글 열기
+//                 console.log("닫힘 -> 열림");
+//                 $headerBox.removeClass('boad_view_btn');
+//                 $headerTop.children('.product-review__arrow-btn').addClass('product-review__arrow-btn--active');
+//                 $nextTr.css("display", 'table-row');
+//                 $reviewViewer.css('display', 'block');
+//                 $headerTop.next().css('display', 'none');
+//             } else {
+//                 // 토글 닫기
+//                 console.log("열림 -> 닫힘");
+//                 $headerBox.addClass('boad_view_btn');
+//                 $headerTop.children('.product-review__arrow-btn').removeClass('product-review__arrow-btn--active');
+//                 $nextTr.css("display", 'none');
+//                 $reviewViewer.css('display', 'none');
+//                 $headerTop.next().css('display', 'flex');
+//             }
+//         });
+//     });
     // 문의 토글
     const qnaTrs = document.querySelectorAll('.product-qna__item-header');
     qnaTrs.forEach(function (qnaTr, item) {
@@ -957,6 +867,7 @@ $(document).ready(function () {
     document.querySelector('.boad_view_btn_mbno').addEventListener('click', (e) => {
     	alert("작성자만 확인 가능합니다.");
     });
+    
 });
 </script>
 

@@ -28,7 +28,7 @@ public interface AdminDao {
 	@Select("select * from category where category_parent_lev = #{categoryId} order by category_id")
 	List<Category> selectCategoryList(int categoryId);
 	
-	@Select("select manu from product where manu like '%' || #{menu} || '%' ")
+	@Select("select distinct manu from product where manu like '%' || #{menu} || '%' ")
 	List<String> autocompleteManu(String manu);
 	
 	@Insert("insert into product(pcode, category_id, pname, manu, price, amount) values(seq_product_no.nextval, #{categoryId}, #{pname}, #{manu}, #{price}, #{amount})")
