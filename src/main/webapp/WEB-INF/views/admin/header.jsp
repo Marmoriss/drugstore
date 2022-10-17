@@ -44,7 +44,9 @@
 		<div>
 			<nav class="navbar">
 				<div class="navbar-header">
-					<span class="admin-logo">DRUG STORE ADMIN PAGE</span>
+					<a href="${pageContext.request.contextPath}/">
+						<span class="admin-logo">DRUG STORE ADMIN PAGE</span>
+					</a>
 				</div>
 			</nav>
 		</div>

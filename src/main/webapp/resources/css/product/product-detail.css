@@ -1109,6 +1109,9 @@ table.bbslist_table_style>tbody>tr>td:first-child {
 	line-height: 1.75;
 	letter-spacing: -0.02em;
 	color: #222;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .product-review__date {

@@ -1,10 +1,6 @@
 package com.kh.drugstore.product.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -21,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.drugstore.cart.model.dto.Cart;
 import com.kh.drugstore.cart.model.service.CartService;
-import com.kh.drugstore.common.DrugstoreUtils;
 import com.kh.drugstore.product.model.dto.Product;
 import com.kh.drugstore.product.model.service.ProductService;
 import com.kh.drugstore.qna.model.dto.Qna;
 import com.kh.drugstore.qna.model.service.QnaService;
+import com.kh.drugstore.review.model.dto.Review;
+import com.kh.drugstore.review.model.service.ReviewService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,35 +40,13 @@ public class ProductListController {
 	@Autowired
 	QnaService qnaService;
 	
-//	@Autowired
-//	ReviewService reviewService;
+	@Autowired
+	ReviewService reviewService;
 	
-	// 전체 조회
 	@GetMapping("/productList.do")
-	public void productListByCategory(@RequestParam(defaultValue = "1") int cPage,
-								HttpServletRequest request,
-								Model model) {
-		
-		Map<String, Integer> param = new HashMap<>();
-		
-		int limit = 12;
-		param.put("cPage", cPage);
-		param.put("limit", limit);
-		
+	public void productList(Model model) {
 		List<Product> list = productService.selectAllProduct();
-//		log.debug("list = {}", list);
 		model.addAttribute("list", list);
-		
-		// 페이지바
-		int totalContent = productService.getTotalContent();
-//		log.debug("totalContent = {}", totalContent);
-		String url = request.getRequestURI();
-		String pagebar = DrugstoreUtils.getPagebar(cPage, limit, totalContent, url);
-		model.addAttribute("pagebar", pagebar);
-		
-		//카테고리 리스트 시작
-//		log.debug("categoryId = {}", categoryId);	
-		
 	}
 	
 	// 카테고리 아이디별 상품 조회
@@ -103,6 +78,7 @@ public class ProductListController {
 		log.debug("recentList = {}", recentList);
 		return ResponseEntity.ok(recentList);
 	}
+	
 	@GetMapping("/priceList.do")
 	//낮은 가격순
 	public ResponseEntity<?> priceList(@RequestParam int categoryId) {
@@ -117,7 +93,6 @@ public class ProductListController {
 		List<Product> priceListDesc = productService.sortProductByPriceDesc(categoryId);
 		log.debug("priceListDesc = {}", priceListDesc);
 		return ResponseEntity.ok(priceListDesc);
-		
 	}
 	
 	// 주희 코드 시작
@@ -135,9 +110,32 @@ public class ProductListController {
 			model.addAttribute("memberId", memberId);
 		}
 		
-//		List<Review> reviewList = reviewService.selectReviewListByPcode(pcode);
+		List<Review> reviewList = reviewService.selectReviewListByPcode(pcode);
+		log.debug("reviewList = {}", reviewList);
+		
+		// 리뷰 별점 평균 구하기
+		int starPoint = 0;
+		int index = 0;
+		for(Review review : reviewList) {
+			starPoint += review.getStar();
+			index++;
+		}
+		double avgStar = (double) starPoint / index;
+		log.debug("avgStar = {}", avgStar);
+		
+		// 리뷰 작성자 ID 끝 3자리 *로 가리기
+		for(Review review : reviewList) {
+			String reMemberId = review.getMemberId();
+			int length = reMemberId.length();
+			String first = reMemberId.substring(0, length - 3);
+			log.debug(first + "***");
+			review.setMemberId(first + "***");
+		}
+		
 		model.addAttribute("product", product);
 		model.addAttribute("qnaList", qnaList);
+		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("avgStar", avgStar);
 	}
 
 	@GetMapping("/autocompletePname.do")

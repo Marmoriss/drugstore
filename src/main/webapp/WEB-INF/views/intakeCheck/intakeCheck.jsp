@@ -161,6 +161,8 @@ $('#input-add-pname').autocomplete({
 	},
 	focus(e, selected){return false;}
 });
+
+
 window.onload = () => {
 	
 	// 섭취 여부 Y체크
