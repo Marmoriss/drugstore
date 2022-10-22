@@ -1,0 +1,777 @@
+@charset "UTF-8";
+/* 전체 적용 */
+body, input, textarea, select, button, table {
+	font-size: 12px;
+	color: #333;
+}
+
+div {
+	display: block;
+}
+
+* {
+	color: #222;
+	box-sizing: border-box;
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
+}
+
+img, fieldset {
+	border: 0;
+	vertical-align: middle;
+}
+
+img {
+	max-width: 100%;
+}
+
+button {
+	cursor: pointer;
+	border: none;
+}
+
+input, select, textarea, button, ul, oi, li, dl, dt, dd {
+	vertical-align: middle;
+}
+
+a {
+	outline: none;
+}
+
+ul, ol {
+	list-style: none;
+}
+
+table {
+	margin: 0 auto;
+}
+
+th, td {
+	word-wrap: break-word;
+	word-break: break-all;
+	vertical-align: middle;
+	line-height: 1.4;
+}
+
+em{
+    font-weight: normal;
+    font-style: normal;
+}
+
+* { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
+
+/** css 시작 **/
+
+#layout_body{
+    position: relative;
+    overflow: hidden;
+    width: 1016px;
+    margin: 0 auto;
+}
+
+#boardlayout{
+	padding-top: 350px;
+}
+
+.products-review__top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 19px;
+  margin-bottom: 0px;
+  border-bottom: 2px solid #222;
+}
+.products-review__top::after {
+  display: none;
+}
+#boardlayout .products-review__top .products-review__top-item {
+  float: none;
+  width: auto;
+  font-size: 0;
+}
+.products-review__type-list {
+  display: inline-block;
+  font-size: 0;
+}
+.products-review__type-item {
+  display: inline-block;
+  vertical-align: middle;
+}
+.products-review__type-item ~ .products-review__type-item {
+  border-left: 2px solid #ddd;
+}
+.products-review__type-title {
+  display: inline-block;
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #999;
+  padding: 0 12px;
+  background: none;
+}
+.products-review__type-title--active {
+  color: #222;
+  font-weight: bold;
+}
+.products-review__search-form {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+}
+.products-review__search-input {
+  display: inline-block;
+  width: 240px;
+  height: 44px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  padding: 0 36px 0 18px;
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #999;
+}
+.products-review__search-btn {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: none;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background: url('../images/products/pc_ic_review_search.svg') no-repeat;
+  background-size: cover;
+  font-size: 0;
+  min-width: auto;
+  padding: 0;
+}
+.products-review__write-btn {
+  display: inline-block;
+  vertical-align: middle;
+  width: 120px;
+  height: 44px;
+  border-radius: 4px;
+  background: #b80120;
+  text-align: center;
+  line-height: 44px;
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 20px;
+  font-weight: 500 !important;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  border: 0;
+  padding: 0;
+  margin-left: 20px;
+}
+.products-review__write-btn:hover {
+  background: #b80120;
+  border: 0;
+}
+#bbslist .products-review__table {
+  border-top: 0;
+}
+.products-review__img-all {
+  width: 100%;
+  padding: 36px 60px 40px;
+}
+.products-review__img-all-list {
+  width: 100%;
+}
+.products-review__img-all-item:not(:last-child) {
+  margin-right: 23px;
+}
+.products-review__img-all-list .products-review__img-all-item {
+  width: 128px;
+  height: 128px;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.products-review__img-all-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.products-review__img-all-btn {
+  display: inline-block;
+  width: 17px;
+  height: 32px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.products-review__img-all-btn--prev {
+  left: 13px;
+  background: url('../images/products/pc_ic_review_arrow_left.svg') no-repeat;
+  background-size: cover;
+}
+.products-review__img-all-btn--next {
+  right: 13px;
+  background: url('../images/products/pc_ic_review_arrow_right.svg') no-repeat;
+  background-size: cover;
+}
+#bbslist .products-review__table .products-review__item-header {
+  padding: 0;
+}
+#bbslist .products-review__table .products-review__item-header-contents {
+  padding: 35px 17px 0 12px;
+  border-top: 2px solid #ddd;
+}
+#bbslist
+  .products-review__table
+  .products-review__item-header-box.boad_view_btn {
+  padding-bottom: 36px;
+}
+#bbslist .products-review__table .products-review__item-header-top {
+  width: 100%;
+  font-size: 0;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#bbslist .products-review__table .products-review__item-viewer-contents-wrap {
+  border: 0;
+}
+.products-review__viewer-img-list + .products-review__viewer {
+  margin-top: 24px;
+}
+#boardlayout #bbsview .products-review__viewer-contents {
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 16px;
+  line-height: 1.75;
+  letter-spacing: -0.02em;
+  padding: 0 95px 40px 12px;
+  min-height: auto;
+  text-align: left;
+}
+.products-review__viewer-date {
+  position: absolute;
+  right: 17px;
+  top: 0;
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #999;
+}
+.products-review__viewer-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  object-fit: cover;
+}
+.products-review__viewer-img-wrap {
+  width: 160px;
+  height: 160px;
+}
+.products-review__viewer-img-wrap ~ .products-review__viewer-img-wrap {
+  margin-left: 24px;
+}
+.products-review__viewer-img-list {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+}
+.products-review__viewer-btn {
+  display: inline-block;
+  vertical-align: middle;
+  font-family: 'SpoqaHanSans Neo' !important;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #999;
+  border: 0;
+  border-bottom: 1px solid #999;
+  padding: 0 0 1px;
+}
+.products-review__viewer-btn:hover {
+  border: 0;
+  border-bottom: 1px solid #999;
+}
+.products-review__viewer-btn ~ .products-review__viewer-btn {
+  margin-left: 11px;
+}
+.products-review__viewer-btn-wrap {
+  position: absolute;
+  right: 0;
+  bottom: 31px;
+  font-size: 0;
+}
+.products-review__score {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 0;
+}
+.products-review__score-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 17px;
+  height: 17px;
+}
+.products-review__score-icon ~ .products-review__score-icon {
+  margin-left: 3px;
+}
+.products-review__writer {
+  display: inline-block;
+  vertical-align: middle;
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-left: 12px;
+}
+.products-review__view-box {
+  display: flex;
+  align-items: center;
+}
+.products-review .products-review__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  float: none;
+  margin: 0;
+}
+.products-review .products-review__img-wrap {
+  float: none;
+  margin-right: 24px;
+  width: 80px;
+  height: 80px;
+  border: 0;
+  flex: 0 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.products-review__arrow-btn {
+  width: 16px;
+}
+.products-review__arrow-btn-img {
+  width: 100%;
+}
+.products-review__arrow-btn--active {
+  transform: rotateZ(180deg);
+}
+#bbslist .products-review__subject-wrap .products-review__subject {
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 16px;
+  line-height: 1.75;
+  letter-spacing: -0.02em;
+  color: #222;
+}
+#bbslist .products-review__subject-wrap .products-review__subject:hover {
+  text-decoration: none;
+}
+#bbslist .products-review__subject-wrap .products-review__subject-btn:hover {
+  text-decoration: none;
+}
+#bbslist .products-review__subject-wrap {
+  line-height: 1;
+  float: none;
+  width: 100%;
+  flex: 0 1 auto;
+}
+.products-review__date {
+  position: absolute;
+  right: 17px;
+  bottom: 36px;
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #999;
+}
+.products-review#bbslist .products-review__paging {
+  float: none;
+  width: 100%;
+  padding: 0;
+  text-align: center;
+}
+
+.review-popup#reviewPopup {
+  padding: 60px 95px;
+  position: relative;
+}
+.review-popup__close {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  background: url('../images/common/pc_ic_close_black.svg') no-repeat;
+  background-size: cover;
+  outline: none;
+}
+.review-popup__slide-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 59px;
+  height: 59px;
+  z-index: 10;
+}
+.review-popup__slide-btn--prev {
+  background: url('../images/common/pc_ic_slide_prev.svg') no-repeat;
+  background-size: 17px 32px;
+  background-position: center center;
+  left: 15px;
+}
+.review-popup__slide-btn--next {
+  background: url('../images/common/pc_ic_slide_next.svg') no-repeat;
+  background-size: 17px 32px;
+  background-position: center center;
+  right: 15px;
+}
+.review-popup__item {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+.review-popup__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.review-popup__img-wrap {
+  width: 393px;
+  height: 480px;
+  flex: 0 0 auto;
+}
+.review-popup__info {
+  flex: 0 1 auto;
+  padding: 39px 24px;
+}
+.review-popup__info-top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.review-popup__info-top-left {
+  display: inline-block;
+  font-size: 0;
+}
+.review-popup__star {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 0;
+}
+.review-popup__star-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 17px;
+  height: 17px;
+  background: url('../images/products/pc_ic_review_star_black.svg') no-repeat;
+  background-size: cover;
+}
+.review-popup__star-icon ~ .review-popup__star-icon {
+  margin-left: 4px;
+}
+.review-popup__writer {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 12px;
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.review-popup__date {
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #999;
+}
+.review-popup__contents {
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 16px;
+  line-height: 1.75;
+  letter-spacing: -0.02em;
+  margin-top: 39px;
+  word-break: break-all;
+}
+
+.products__star {
+  display: inline-block;
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 24px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.16em;
+  text-align: left;
+  color: #222;
+  margin-bottom: 20px;
+}
+.products__score--checkbox {
+  display: block;
+  margin-bottom: 38px;
+}
+.products__contents {
+  display: inline-block;
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 24px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.16em;
+  text-align: left;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+.mobile-file-name {
+  display: inline-block;
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 24px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.01em;
+  text-align: left;
+  color: #222;
+}
+.mobile-file-info {
+  display: inline-block;
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 16px;
+  margin-left: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.01em;
+  text-align: left;
+  color: #999;
+}
+.mobile-file--button {
+  width: 184px;
+  height: 44px;
+  padding: 4px 49px 5px 48px;
+  border-radius: 4px;
+  border: solid 2px #222;
+  background: none;
+}
+.mobile-file--button p {
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 20px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.65;
+  letter-spacing: -0.1em;
+  text-align: left;
+  color: #222;
+}
+
+.btn_wrap__cancel {
+  width: 288px;
+  height: 56px;
+  border-radius: 8px;
+  border: solid 2px #b80120;
+  background-color: #fff;
+}
+.btn_wrap__cancel--text1 {
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 20px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.38;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #b80120;
+  margin: 0;
+}
+.btn_wrap__register {
+  width: 288px;
+  height: 56px;
+  border-radius: 8px;
+  background-color: #b80120;
+  margin-left: 24px;
+}
+.btn_wrap__register--text2 {
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 20px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.38;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #fff;
+  margin: 0;
+}
+
+.contents-textarea {
+  width: 100%;
+  height: 300px;
+  resize: none;
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 16px;
+  border-radius: 8px;
+  border: solid 2px #ddd;
+  margin-bottom: 40px;
+  padding-left: 17px;
+  padding-top: 22px;
+  color: #222;
+}
+
+.score {
+  display: inline-block;
+  vertical-align: middle;
+  width: 25px;
+  height: 24px;
+  border-radius: 100%;
+  background: url(../images/star-regular.svg);
+  background-size: cover;
+  margin-left: 3px;
+}
+.star:last-child {
+  margin-left: 0;
+}
+.score-wrap {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.star-input:checked ~ .score {
+  background: url(../images/star-solid.svg);
+  background-size: cover;
+}
+
+#img_viewer {
+  width: 100%;
+  padding: 19px 20px 0 18px;
+  background-color: #f5f5f5;
+  margin-left: 24px;
+  margin-top: 20px;
+  flex: 0 1 auto;
+}
+
+.filelistlay-wrap {
+  display: flex;
+}
+
+.highlight-link-change {
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.1em;
+  text-align: left;
+  color: #999;
+}
+
+.boardfileliststyle-change {
+  display: flex;
+  margin: -1px;
+  flex: 0 0 auto;
+}
+
+.mypage-img-viewer__item {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 14px;
+}
+.mypage-img-viewer__name {
+  font-family: 'SpoqaHanSans Neo';
+  font-size: 16px;
+  font-weight: 400;
+  color: #999999;
+}
+.mypage-img-viewer__btn {
+  width: 16px;
+  height: 16px;
+  background: url(/data/skin/manyo/images/buttons/products_review_btn_close.svg)
+    no-repeat;
+  background-size: cover;
+  border: 0;
+}
+
+.products-view__wrapper {
+  margin-top: 100px;
+}
+.products-view__board-products {
+  margin-bottom: 59px;
+  display: flex;
+}
+.products-view__board-products-img {
+  width: 128px;
+  height: 128px;
+  border-radius: 20px;
+  margin-right: 20px;
+}
+.products-view__board-products-title {
+  font-size: 20px;
+  color: #222222;
+  letter-spacing: -0.4px;
+  margin-top: 19px;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  width: 15px;
+  height: 15px;
+  vertical-align: middle !important;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.custom-file{
+	height: 50px;
+	cursor: pointer;
+}
+
+.custom-file-label{
+	height: 100%;
+    font-size: 15px;
+    line-height: 2.5;
+}
+
+.custom-file-label::after{
+	content: inherit;
+}
+
+.custom-file-input{
+	height: 50px;
+	cursor: pointer;
+}
+
+.form-group label{
+	margin-right: 15px;
+}
+.form-group input{
+	margin-left: 10px;
+}
+
+.input-group-text{
+	font-size: 15px;
+}
+
+.input-group{
+	width: 100%;
+	height: 50px;
+}
+
+.mt40{
+	margin-top: 40px !important;
+}
+
+.btn_wrap{
+	text-align: center;
+}

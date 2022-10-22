@@ -207,8 +207,8 @@ public class AdminController {
 				// a. 서버 컴퓨터에 저장
 				String saveDirectory = application.getRealPath("/resources/upload/product");
 				String renamedFilename = DrugstoreUtils.getRenamedFilename(upFile.getOriginalFilename());
-				File destFilt = new File(saveDirectory, renamedFilename);
-				upFile.transferTo(destFilt);
+				File destFile = new File(saveDirectory, renamedFilename);
+				upFile.transferTo(destFile);
 				
 				// b. DB저장을 위해 Attachment 객체 생성
 				ProductAttachment attach = new ProductAttachment(upFile.getOriginalFilename(), renamedFilename);

@@ -33,16 +33,18 @@
 		
 		<intercept-url pattern="/servey/**" access="isAuthenticated()"/>
 		<intercept-url pattern="/subscription/product.do" access="permitAll"/>
-		
 				
 		<intercept-url pattern="/admin/**" access="hasRole('ADMIN')"/>
 		
 		<intercept-url pattern="/product/**" access="permitAll"/>
 		
+		<intercept-url pattern="/review/**" access="isAuthenticated()"/>
+		
 		<intercept-url pattern="/notice/noticeForm.do" access="hasRole('ADMIN')"/>
 		<intercept-url pattern="/notice/noticeUpdate.do" access="hasRole('ADMIN')"/>
 		<intercept-url pattern="/notice/noticeDelete.do" access="hasRole('ADMIN')"/>
 
+		
 		<intercept-url pattern="/**" access="isAuthenticated()"/>
 		
 		<form-login 

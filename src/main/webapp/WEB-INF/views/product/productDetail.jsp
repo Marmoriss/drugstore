@@ -337,18 +337,10 @@
 									<div class="boardlayout">
 										<p class="product-view__detail-title">${product.pname}</p>
 										<div class="bbslist product-review pd0">
-											<form:form action="${pageContext.request.contextPath}/review/reviewEnroll.do" name="reviewboardsearch" id="reviewboardsearch" method="POST">
+											<form:form action="${pageContext.request.contextPath}/review/reviewEnrollPage.do" name="reviewboardsearch" id="reviewboardsearch" method="GET">
 												<input type="hidden" name="pcode" value="${product.pcode}"/>
-												<input type="hidden" name="memberId" value="${memberId}"/>
-												<ul class="bbsbtn_wrap product-review__top">
-													<li class="product-review__top-item"></li>
-													<li class="product-review__top-item">
-														<input
-														type="button" value="리뷰작성" name="board_write_btn"
-														id="product_review_write_btn"
-														class="btn_chg product-review__write-btn" />
-													</li>
-												</ul>
+												<button type="submit" id="product_review_write_btn"
+													class="btn_chg product-review__write-btn">리뷰작성</button>
 											</form:form>
 											<table class="bbslist_table_style product-review__table">
 												<tbody>
@@ -383,7 +375,7 @@
 																				<div class="pic product-review__img-wrap">
 																					<c:forEach items="${review.attachments}" var="attach" varStatus="vs">
 																						<span>
-																							<img src="${pageContext.request.contextPath}/resources/upload/review/${attach.originalFilename}" class="hand small_product_img pic product-review__img">
+																							<img src="${pageContext.request.contextPath}/resources/upload/review/${attach.renamedFilename}" class="hand small_product_img pic product-review__img">
 																						</span>
 																					</c:forEach>
 																				</div>
@@ -414,7 +406,7 @@
 																			<div class="pic product-review__img-wrap">
 																				<c:forEach items="${review.attachments}" var="attach" varStatus="vs">
 																					<span>
-																						<img src="${pageContext.request.contextPath}/resources/upload/review/${attach.originalFilename}" class="hand small_product_img pic product-review__img">
+																						<img src="${pageContext.request.contextPath}/resources/upload/review/${attach.renamedFilename}" class="hand small_product_img pic product-review__img">
 																					</span>
 																				</c:forEach>
 																			</div>
@@ -460,7 +452,6 @@
 														</c:forEach>
 													</c:if>
 													<!-- 리뷰 미리보기 -->
-													
 													<!-- // 리뷰 미리보기 -->
 													<!-- // 반복문 -->
 												</tbody>
@@ -621,25 +612,36 @@
 	</div>
 </body>
 <script>
-// 리뷰 작성시 로그인 상태 아니면 알림 띄우기
-document.querySelector('#product_review_write_btn').addEventListener('click', (e) => {
-	if(memberId == null)
-		alert('로그인 후 이용 가능합니다.');
+// 리뷰 토글
+let before = document.querySelectorAll('.product-review__item-header');
+
+before.forEach((tr) => {
+	tr.addEventListener('click', (e) => {
+		let after = tr.nextElementSibling;
+		after.classList.toggle('hide');
+		$(tr).addClass('hide');
+	});
 });
+
+// // 리뷰 작성시 로그인 상태 아니면 알림 띄우기
+// document.querySelector('#product_review_write_btn').addEventListener('click', (e) => {
+// 	location.href = "${pageContext.request.contextPath}/review/reviewEnrollPage.do";
+// });
 
 document.querySelector('#product_qna_write_btn').addEventListener('click', (e) => {
 	location.href = "${pageContext.request.contextPath}/qna/qnaForm.do";
 });
 
+
 document.querySelector('.tab_01').addEventListener('click', (e) => {
     document.querySelector('#product_description').style.display = "inline-block";
     document.querySelector('#product_review').style.display = "none";
-    document.querySelector('#product_qna').style.displqy = "none";
+    document.querySelector('#product_qna').style.display = "none";
 });
 document.querySelector('.tab_02').addEventListener('click', (e) => {
     document.querySelector('#product_description').style.display = "none";
     document.querySelector('#product_review').style.display = "inline-block";
-    document.querySelector('#product_qna').style.displqy = "none";
+    document.querySelector('#product_qna').style.display = "none";
 });
 document.querySelector('.tab_03').addEventListener('click', (e) => {
     document.querySelector('#product_description').style.display = "none";
@@ -785,35 +787,7 @@ $(document).ready(function () {
             $('.product-view__guide-item-arrow:eq(2)').removeClass('product-view__guide-item-arrow--active');
         }
     });
-    // 리뷰 토글
-//     const trs = document.querySelectorAll('.review');
-//     trs.forEach(function (tr, item) {
-//         $(tr).on('click', function () {
-//             console.log(this);
-//             const $headerBox = $(this).children().first().children().first();
-//             const $headerTop = $headerBox.children().first();
-//             const $nextTr = $(this).next();
-//             const $reviewViewer = $nextTr.children('.product-review__viewer');
-//             console.log($reviewViewer);
-//             if ($headerBox.hasClass('boad_view_btn') == true) {
-//                 // 토글 열기
-//                 console.log("닫힘 -> 열림");
-//                 $headerBox.removeClass('boad_view_btn');
-//                 $headerTop.children('.product-review__arrow-btn').addClass('product-review__arrow-btn--active');
-//                 $nextTr.css("display", 'table-row');
-//                 $reviewViewer.css('display', 'block');
-//                 $headerTop.next().css('display', 'none');
-//             } else {
-//                 // 토글 닫기
-//                 console.log("열림 -> 닫힘");
-//                 $headerBox.addClass('boad_view_btn');
-//                 $headerTop.children('.product-review__arrow-btn').removeClass('product-review__arrow-btn--active');
-//                 $nextTr.css("display", 'none');
-//                 $reviewViewer.css('display', 'none');
-//                 $headerTop.next().css('display', 'flex');
-//             }
-//         });
-//     });
+    
     // 문의 토글
     const qnaTrs = document.querySelectorAll('.product-qna__item-header');
     qnaTrs.forEach(function (qnaTr, item) {

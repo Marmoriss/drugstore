@@ -59,6 +59,9 @@
 <!-- include summernote-ko-KR -->
 <script src="/resources/js/summernote-ko-KR.js"></script>
 
+<!-- 폰트 -->
+<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+
 <!-- alert 띄우기 -->
 <c:if test="${not empty msg}">
 	<script>

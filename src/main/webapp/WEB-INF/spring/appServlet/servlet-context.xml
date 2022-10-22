@@ -37,15 +37,6 @@
 	<!-- #13.1 jackson message converter bean 등록 -->
 	<beans:bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 	
-	<interceptors>
-		<interceptor>
-			<mapping path="/member/**"/>
-			<mapping path="/review/**"/>
-			<mapping path="/qna/**"/>
-			<beans:bean id="LoginInterceptor" class="com.kh.drugstore.common.interceptor.LoginInterceptor"/>
-		</interceptor>
-	</interceptors>
-	
 	<aop:aspectj-autoproxy/>
 	
 	<websocket:message-broker application-destination-prefix="/app">

@@ -110,7 +110,7 @@
 										</div>
 										<div class="custom-file">
 											<input type="file" class="custom-file-input" name="upFile" id="upFile1" multiple>
-												<label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
+											<label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
 										</div>
 									</div>
 									<div class="input-group mb-3" style="padding: 0px;">
@@ -119,7 +119,7 @@
 										</div>
 										<div class="custom-file">
 											<input type="file" class="custom-file-input" name="upFile" id="upFile2" multiple> 
-												<label class="custom-file-label" for="upFile2">파일을 선택하세요</label>
+											<label class="custom-file-label" for="upFile2">파일을 선택하세요</label>
 										</div>
 									</div>
 								</li>
