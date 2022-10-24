@@ -88,4 +88,35 @@ public class ReviewController {
 		return "redirect:/product/productDetail.do?pcode=" + review.getPcode();
 	}
 	
+	@GetMapping("updateReviewPage.do")
+	public void updateReviewPage(Review review,
+								Model model) {
+		
+		log.debug("pcode = {}", review.getPcode());
+		log.debug("memberId = {}", review.getMemberId());
+		
+		Product product = productService.selectOneProductCollection(review.getPcode());
+		String renamedFilename = product.getAttachments().get(0).getRenamedFilename();
+		
+		log.debug("renamedFilename = {}", renamedFilename);
+		
+		review = reviewService.getOneReview(review.getNo());
+		log.debug("review = {}", review);
+		
+		model.addAttribute("review", review);
+		model.addAttribute("product", product);
+		model.addAttribute("renamedFilename", renamedFilename);
+		model.addAttribute("memberId", review.getMemberId());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

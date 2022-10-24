@@ -21,7 +21,10 @@
 <!-- 사용자 작성 css -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/product/product-detail.css" />
-
+<sec:authentication property="principal" var="prc"/>
+<script>
+	console.log("${prc.username}");
+</script>
 <body>
 	<div id="layout-config">
 		<div id="layout-config-full">
@@ -360,7 +363,7 @@
 																					<i class="fa-solid fa-star"></i>
 																				</div>
 																				<div class="memberId product-review__writer">
-																					${review.memberId}
+																					<c:out value="${fn:substring(review.memberId, 0, fn:length(review.memberId) - 3)}"/>***
 																				</div>
 																			</div>
 																			<div class="product-review__arrow-btn">
@@ -369,7 +372,6 @@
 																					class="product-review__arrow-btn-img">
 																			</div>
 																		</div>
-																		<!-- 토글 열리면 #productview는 display="none"-->
 																		<div id="productview" class="productviewbox product-review__view-box">
 																			<c:if test="${not empty review.attachments}">
 																				<div class="pic product-review__img-wrap">
@@ -397,16 +399,16 @@
 															<!-- // 리뷰 미리보기 -->
 															<!-- 토글 누르면 나오는 리뷰 디테일 -->
 															<!-- 토글 누르면 style="display: none에서 table-row;로 변경"-->
-															<tr class="hide productviewer product-review__item-viewer review">
+															<tr class="hide productviewer product-review__item-viewer review"  style="display: table-row">
 																<td
-																	class="pd0 product-review__item-viewer-contents-wrap relative" style="display: table-row">
-																	<p class="product-review_viewer-date">${review.regDate}</p>
+																	class="pd0 product-review__item-viewer-contents-wrap relative">
+																	<p class="product-review__viewer-date">${review.regDate}</p>
 																	<div class="product-review__viewer-img-list">
 																		<c:if test="${not empty review.attachments}">
-																			<div class="pic product-review__img-wrap">
+																			<div class="product-review__viewer-img-wrap">
 																				<c:forEach items="${review.attachments}" var="attach" varStatus="vs">
 																					<span>
-																						<img src="${pageContext.request.contextPath}/resources/upload/review/${attach.renamedFilename}" class="hand small_product_img pic product-review__img">
+																						<img src="${pageContext.request.contextPath}/resources/upload/review/${attach.renamedFilename}" class="product-review__viewer-img">
 																					</span>
 																				</c:forEach>
 																			</div>
@@ -416,11 +418,11 @@
 																		<div class="boardlayout">
 																			<div class="bbsview">
 																				<div class="viewbox">
-																					<form:form action="${pageContext.request.contextPath}/review/updateReview.do" name="update-review-form${vs.count}" id="update-review-form${vs.count}" method="POST">
+																					<form:form action="${pageContext.request.contextPath}/review/updateReviewPage.do" name="update-review-form${vs.count}" id="update-review-form${vs.count}" method="GET">
 																						<!-- 리뷰 수정/삭제에 필요한 정보들 hidden으로 넣어주세요 -->
 																						<input type="hidden" name="pcode" id="pcode" value="${product.pcode}"/>
 																						<input type="hidden" name="no" id="no" value="${review.no}"/>
-																						<input type="hidden" name="memberId" id="memberId" value="${review.memberId}"/>
+																						<input type="hidden" name="memberId" id="memberId" value="${prc.username}"/>
 																						<table style="width: 100%;">
 																							<tbody>
 																								<tr>
@@ -429,15 +431,14 @@
 																										<div class="content hand viewerlay_close_btn product-review__viewer-contents">
 																											${review.content}
 																										</div>
-																										<div class="product-review__viewer-btn-wrap">
-																											<input type="button" value="수정" id="review-update-btn" class="product-review__update-btn" />
-																											<form:form action="${pageContext.request.contextPath}/review/deleteReview.do" name="delete-review-form${vs.count}" id="delete-review-form${vs.count}" method="POST">
-																												<input type="hidden" name="pcode" id="pcode" value="${product.pcode}"/>
-																												<input type="hidden" name="no" id="no" value="${review.no}"/>
-																												<input type="hidden" name="memberId" id="memberId" value="${review.memberId}"/>
-																												<input type="button" value="삭제" id="review-delete-btn" class="product-review__delete-btn" />
-																											</form:form>
-																										</div>
+																										<c:if test="${prc.username eq review.memberId}">
+																											<div class="product-review__viewer-btn-wrap">
+																												<button type="submit"id="review-update-btn" class="product-review__update-btn">수정</button>
+																												<form:form action="${pageContext.request.contextPath}/review/deleteReview.do" name="delete-review-form${vs.count}" id="delete-review-form${vs.count}" method="POST">
+																													<input type="button" value="삭제" id="review-delete-btn" class="product-review__delete-btn" />
+																												</form:form>
+																											</div>
+																										</c:if>
 																									</td>
 																								</tr>
 																							</tbody>
@@ -617,9 +618,18 @@ let before = document.querySelectorAll('.product-review__item-header');
 
 before.forEach((tr) => {
 	tr.addEventListener('click', (e) => {
-		let after = tr.nextElementSibling;
-		after.classList.toggle('hide');
-		$(tr).addClass('hide');
+		let nextTr = $(tr).next();
+		let after = $(tr).find(".productviewbox");
+		
+		if(nextTr.hasClass('hide')){
+			$(after).css('display', 'none');
+			$(tr).next().removeClass('hide');
+		} else {
+			$(after).css('display', 'flex');
+			$(tr).next().addClass('hide');
+		}
+		
+		
 	});
 });
 

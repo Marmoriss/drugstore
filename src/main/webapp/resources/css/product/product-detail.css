@@ -6,6 +6,8 @@ body, input, textarea, select, button, table {
 	color: #333;
 }
 
+* { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
+
 div {
 	display: block;
 }
@@ -1009,11 +1011,6 @@ table.bbslist_table_style>tbody>tr>td:first-child {
 	cursor: pointer !important;
 }
 
-.bbslist .product-review__table .product-review__item-header-box.boad_view_btn
-	{
-	padding-bottom: 36px;
-}
-
 .product-review__item-header-top {
 	width: 100%;
 	font-size: 0;
@@ -1054,6 +1051,7 @@ table.bbslist_table_style>tbody>tr>td:first-child {
 .product-review__view-box {
 	display: flex;
 	align-items: center;
+	margin-bottom: 25px;
 }
 
 .productviewbox .pic {
@@ -1131,7 +1129,7 @@ table.bbslist_table_style>tbody>tr>td:first-child {
 	border: 0;
 }
 
-.product-review_viewer-date {
+.product-review__viewer-date {
 	position: absolute;
 	right: 17px;
 	top: 0;

@@ -41,4 +41,9 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		return result;
 	}
+	
+	@Override
+	public Review getOneReview(int reviewNo) {
+		return reviewDao.getOneReview(reviewNo);
+	}
 }

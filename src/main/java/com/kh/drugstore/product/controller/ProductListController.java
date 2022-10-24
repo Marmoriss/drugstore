@@ -124,18 +124,20 @@ public class ProductListController {
 		log.debug("avgStar = {}", avgStar);
 		
 		// 리뷰 작성자 ID 끝 3자리 *로 가리기
+		String writer = "";
 		for(Review review : reviewList) {
 			String reMemberId = review.getMemberId();
 			int length = reMemberId.length();
 			String first = reMemberId.substring(0, length - 3);
 			log.debug(first + "***");
-			review.setMemberId(first + "***");
+			writer = first + "***";
 		}
 		
 		model.addAttribute("product", product);
 		model.addAttribute("qnaList", qnaList);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("avgStar", avgStar);
+		model.addAttribute("writer", writer);
 	}
 
 	@GetMapping("/autocompletePname.do")

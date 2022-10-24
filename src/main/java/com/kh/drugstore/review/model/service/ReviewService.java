@@ -10,4 +10,6 @@ public interface ReviewService {
 
 	int insertReview(Review review);
 
+	Review getOneReview(int no);
+
 }

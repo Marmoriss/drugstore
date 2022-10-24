@@ -22,4 +22,6 @@ public interface ReviewDao {
 	@Insert("insert into review_attachment values(seq_review_attach_no.nextval, #{reviewNo}, #{originalFilename}, #{renamedFilename}, default)")
 	int insertAttachment(ReviewAttachment attach);
 
+	Review getOneReview(int reviewNo);
+
 }

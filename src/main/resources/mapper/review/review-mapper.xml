@@ -32,4 +32,16 @@
 		where
 			r.pcode = #{pcode}
 	</select>
+	
+	<select id="getOneReview" resultMap="reviewCollectionMap">
+		select
+			*
+		from
+			review r
+				left join review_attachment a
+					on r.no = a.review_no
+		where
+			r.no = #{reviewNo}
+	</select>
+	
 </mapper>
