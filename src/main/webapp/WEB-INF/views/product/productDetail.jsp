@@ -375,11 +375,9 @@
 																		<div id="productview" class="productviewbox product-review__view-box">
 																			<c:if test="${not empty review.attachments}">
 																				<div class="pic product-review__img-wrap">
-																					<c:forEach items="${review.attachments}" var="attach" varStatus="vs">
-																						<span>
-																							<img src="${pageContext.request.contextPath}/resources/upload/review/${attach.renamedFilename}" class="hand small_product_img pic product-review__img">
-																						</span>
-																					</c:forEach>
+																					<span>
+																						<img src="${pageContext.request.contextPath}/resources/upload/review/${review.attachments[0].renamedFilename}" class="hand small_product_img pic product-review__img">
+																					</span>
 																				</div>
 																			</c:if>
 																			<div class="info product-review__subject-wrap">
@@ -405,45 +403,41 @@
 																	<p class="product-review__viewer-date">${review.regDate}</p>
 																	<div class="product-review__viewer-img-list">
 																		<c:if test="${not empty review.attachments}">
-																			<div class="product-review__viewer-img-wrap">
-																				<c:forEach items="${review.attachments}" var="attach" varStatus="vs">
+																			<c:forEach items="${review.attachments}" var="attach" varStatus="vs">
+																				<div class="product-review__viewer-img-wrap">
 																					<span>
 																						<img src="${pageContext.request.contextPath}/resources/upload/review/${attach.renamedFilename}" class="product-review__viewer-img">
 																					</span>
-																				</c:forEach>
-																			</div>
+																				</div>
+																			</c:forEach>
 																		</c:if>
 																	</div>
 																	<div class="productviewer product-review__viewer">
 																		<div class="boardlayout">
 																			<div class="bbsview">
 																				<div class="viewbox">
-																					<form:form action="${pageContext.request.contextPath}/review/updateReviewPage.do" name="update-review-form${vs.count}" id="update-review-form${vs.count}" method="GET">
-																						<!-- 리뷰 수정/삭제에 필요한 정보들 hidden으로 넣어주세요 -->
-																						<input type="hidden" name="pcode" id="pcode" value="${product.pcode}"/>
-																						<input type="hidden" name="no" id="no" value="${review.no}"/>
-																						<input type="hidden" name="memberId" id="memberId" value="${prc.username}"/>
-																						<table style="width: 100%;">
-																							<tbody>
-																								<tr>
-																									<td colspan="2"
-																										class="relative product-review__viewer-td">
-																										<div class="content hand viewerlay_close_btn product-review__viewer-contents">
-																											${review.content}
+																					<!-- 리뷰 수정/삭제에 필요한 정보들 hidden으로 넣어주세요 -->
+																					<input type="hidden" name="pcode" id="pcode" value="${product.pcode}"/>
+																					<input type="hidden" name="no" id="no" value="${review.no}"/>
+																					<input type="hidden" name="memberId" id="memberId" value="${prc.username}"/>
+																					<table style="width: 100%;">
+																						<tbody>
+																							<tr>
+																								<td colspan="2"
+																									class="relative product-review__viewer-td">
+																									<div class="content hand viewerlay_close_btn product-review__viewer-contents">
+																										${review.content}
+																									</div>
+																									<c:if test="${prc.username eq review.memberId}">
+																										<div class="product-review__viewer-btn-wrap">
+																											<button type="button" id="review-update-btn" class="product-review__update-btn" onclick="updateReview(this)" value="${review.no}">수정</button>
+																											<button type="button" id="review-delete-btn" class="product-review__delete-btn" onclick="deleteReview(${review.no}, ${review.memberId});">삭제</button>
 																										</div>
-																										<c:if test="${prc.username eq review.memberId}">
-																											<div class="product-review__viewer-btn-wrap">
-																												<button type="submit"id="review-update-btn" class="product-review__update-btn">수정</button>
-																												<form:form action="${pageContext.request.contextPath}/review/deleteReview.do" name="delete-review-form${vs.count}" id="delete-review-form${vs.count}" method="POST">
-																													<input type="button" value="삭제" id="review-delete-btn" class="product-review__delete-btn" />
-																												</form:form>
-																											</div>
-																										</c:if>
-																									</td>
-																								</tr>
-																							</tbody>
-																						</table>
-																					</form:form>
+																									</c:if>
+																								</td>
+																							</tr>
+																						</tbody>
+																					</table>
 																				</div>
 																			</div>
 																		</div>
@@ -451,6 +445,10 @@
 																</td>
 															</tr>
 														</c:forEach>
+														<form:form id="deleteReviewForm" name="deleteReviewForm" action="${pageContext.request.contextPath}/review/deleteReview.do" method="POST">
+															<input type="hidden" name="no" value=""/>
+															<input type="hidden" name="memberId" value=""/>
+														</form:form>
 													</c:if>
 													<!-- 리뷰 미리보기 -->
 													<!-- // 리뷰 미리보기 -->
@@ -558,17 +556,11 @@
 																													</div>
 																													<c:if test="${qna.writer eq memberId}">
 																														<div class="product-qna__viewer-btn-wrap">
-																															<button id="qna-update-btn"
-																																class="product-qna__update-btn"
-																																onclick="updateQna(this);" value="${qna.qnaId}">수정</button>
-																															<form:form name="qnaDeleteForm"
-																																	action="${pageContext.request.contextPath}/qna/deleteQna.do"> 
-																																<input type="hidden" name="qnaId"
-																																	value="${qna.qnaId}" />
-																																<input type="hidden" name="pcode"
-																																	value="${product.pcode}" />
-																																<button id="qna-delete-btn"
-																																	class="product-qna__delete-btn">삭제</button>
+																															<button id="qna-update-btn" class="product-qna__update-btn" onclick="updateQna(this);" value="${qna.qnaId}">수정</button>
+																															<form:form name="qnaDeleteForm" action="${pageContext.request.contextPath}/qna/deleteQna.do"> 
+																																<input type="hidden" name="qnaId" value="${qna.qnaId}" />
+																																<input type="hidden" name="pcode" value="${product.pcode}" />
+																																<button id="qna-delete-btn" class="product-qna__delete-btn">삭제</button>
 																															</form:form>
 																														</div>
 																													</c:if>
@@ -633,10 +625,14 @@ before.forEach((tr) => {
 	});
 });
 
-// // 리뷰 작성시 로그인 상태 아니면 알림 띄우기
-// document.querySelector('#product_review_write_btn').addEventListener('click', (e) => {
-// 	location.href = "${pageContext.request.contextPath}/review/reviewEnrollPage.do";
-// });
+const deleteReview = (no, memberId) => {
+	if(confirm("리뷰를 정말 삭제하시겠습니까?")){
+		const frm = document.deleteReviewForm;
+		frm.no.value = no;
+		frm.memberId.value = memberId;
+		frm.submit();
+	}
+}
 
 document.querySelector('#product_qna_write_btn').addEventListener('click', (e) => {
 	location.href = "${pageContext.request.contextPath}/qna/qnaForm.do";
@@ -725,6 +721,12 @@ document.querySelector('.product-view__whish').addEventListener('click', (e) => 
 const updateQna = (e) => {
     const qnaId = e.value;
     location.href = "${pageContext.request.contextPath}/qna/qnaUpdateForm.do?qnaId=" + qnaId;
+}
+
+// 리뷰 수정 폼 연결
+const updateReview = (e) => {
+	const no = e.value;
+	location.href = "${pageContext.request.contextPath}/review/reviewUpdateForm.do?no=" + no;
 }
 // 문의 삭제 전 확인 메세지
 document.querySelectorAll('[name=qnaDeleteForm]').forEach((form) => {

@@ -2,10 +2,12 @@ package com.kh.drugstore.review.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 
 import com.kh.drugstore.review.model.dto.Review;
 import com.kh.drugstore.review.model.dto.ReviewAttachment;
@@ -24,4 +26,12 @@ public interface ReviewDao {
 
 	Review getOneReview(int reviewNo);
 
+	@Select("select * from review_attachment where attach_no = #{attachNo}")
+	ReviewAttachment selectOneAttachment(int attachNo);
+
+	@Delete("delete from review_attachment where attach_no = #{attachNo}")
+	int deleteAttachment(int attachNo);
+
+	int updateReview(Review review);
+	
 }

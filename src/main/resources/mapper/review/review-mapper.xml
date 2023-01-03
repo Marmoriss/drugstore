@@ -44,4 +44,14 @@
 			r.no = #{reviewNo}
 	</select>
 	
+	<update id="updateReview">
+		update
+			review
+		set
+			content = #{content},
+			star = #{star}
+		where
+			no = #{no}
+	</update>
+	
 </mapper>

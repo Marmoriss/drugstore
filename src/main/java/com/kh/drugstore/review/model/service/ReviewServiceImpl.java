@@ -46,4 +46,46 @@ public class ReviewServiceImpl implements ReviewService {
 	public Review getOneReview(int reviewNo) {
 		return reviewDao.getOneReview(reviewNo);
 	}
+	
+	@Override
+	public ReviewAttachment selectOneAttachment(int attachNo) {
+		return reviewDao.selectOneAttachment(attachNo);
+	}
+	
+	@Override
+	public int deleteAttachment(int attachNo) {
+		return reviewDao.deleteAttachment(attachNo);
+	}
+	
+	@Override
+	public int updateReview(Review review) {
+		int result = 0;
+		// 리뷰 업데이트
+		result = reviewDao.updateReview(review);
+		
+		// 첨부파일 업데이트
+		if(!review.getAttachments().isEmpty()) {
+			for(ReviewAttachment attach : review.getAttachments()) {
+				reviewDao.insertAttachment(attach);
+			}
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

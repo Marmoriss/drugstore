@@ -88,7 +88,7 @@ public class ReviewController {
 		return "redirect:/product/productDetail.do?pcode=" + review.getPcode();
 	}
 	
-	@GetMapping("updateReviewPage.do")
+	@GetMapping("/updateReviewPage.do")
 	public void updateReviewPage(Review review,
 								Model model) {
 		
@@ -110,6 +110,53 @@ public class ReviewController {
 	}
 	
 	
+	@PostMapping("/reviewUpdate.do")
+	public String reviewUpdate(Review review,
+							@RequestParam(name = "upFile") List<MultipartFile> upFileList,
+							@RequestParam(name = "delFile", required = false) int[] delFiles,
+							RedirectAttributes redirectAttr) throws IllegalStateException, IOException {
+		
+		String saveDirectory = application.getRealPath("/resources/upload/review");
+		int result = 0;
+		
+		// 첨부파일 삭제(파일 삭제 && review_attachment row 제거)
+		if(delFiles != null) {
+			for(int attachNo : delFiles) {
+				// 파일 삭제
+				ReviewAttachment attach = reviewService.selectOneAttachment(attachNo);
+				File delFile = new File(saveDirectory, attach.getRenamedFilename());
+				boolean deleted = delFile.delete();
+				log.debug("{} 파일 삭제 : {}", attach.getRenamedFilename(), deleted);
+				
+				// review_attachment row 삭제
+				result = reviewService.deleteAttachment(attachNo);
+				log.debug("{}번 review_attachment recored 삭제 완료!", attachNo);
+			}
+		}
+		
+		// 첨부파일 추가
+		for(MultipartFile upFile : upFileList) {
+			if(!upFile.isEmpty()) {
+				// 서버 컴퓨터에 저장
+				String renamedFilename = DrugstoreUtils.getRenamedFilename(upFile.getOriginalFilename());
+				File destFile = new File(saveDirectory, renamedFilename);
+				upFile.transferTo(destFile);
+				
+				// DB 저장을 위해 ReviewAttachment 객체 생성
+				ReviewAttachment attach = new ReviewAttachment(upFile.getOriginalFilename(), renamedFilename);
+				attach.setReviewNo(review.getNo());
+				review.add(attach);
+			}
+		}
+		
+		// 게시글 수정
+		result = reviewService.updateReview(review);
+
+		redirectAttr.addFlashAttribute("msg", "리뷰를 성공적으로 수정하였습니다.");
+		
+		return "redirect:/product/productDetail.do?pcode=" + review.getPcode();
+		
+	}
 	
 	
 	

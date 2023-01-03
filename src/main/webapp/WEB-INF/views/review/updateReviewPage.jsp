@@ -52,11 +52,12 @@
 		                </div>
 		                <p class="products-view__board-products-title">${product.pname}</p>
 		            </div>
-		            <form:form name="writeform" action="${pageContext.request.contextPath}/review/reviewEnroll.do" id="writeform"
+		            <form:form name="writeform" action="${pageContext.request.contextPath}/review/reviewUpdate.do" id="writeform"
 		                method="POST" enctype="multipart/form-data">
 		                <div class="table-wrap">
 		                    <input type="hidden" name="memberId" id="memberId" value="${review.memberId}">
 		                    <input type="hidden" name="pcode" id="pcode" value="${product.pcode}">
+		                    <input type="hidden" name="no" id="no" value="${review.no}">
 		                    <div>
 		                        <p scope="row" class="products__star">별점</p>
 		                        <div class="products__star--checkbox">
@@ -108,7 +109,7 @@
 		                        <p class="btn_wrap__cancel--text1">취소</p>
 		                    </button>
 		                    <button type="submit" class="btn_wrap__register" name="data_save_btn" id="data_save_btn">
-		                        <p class="btn_wrap__register--text2">등록</p>
+		                        <p class="btn_wrap__register--text2">수정</p>
 		                    </button>
 		                </div>
 		            </form:form>
